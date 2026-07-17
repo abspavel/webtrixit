@@ -330,34 +330,75 @@ function Services() {
   );
 }
 
-/* ---------- SUCCESS STORIES ---------- */
+/* ---------- SUCCESS STORIES (auto-slider) ---------- */
 function SuccessStories() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % stories.length), 5000);
+    return () => clearInterval(t);
+  }, []);
+  const prev = () => setI((v) => (v - 1 + stories.length) % stories.length);
+  const next = () => setI((v) => (v + 1) % stories.length);
+
   return (
     <section className="py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5">
+      <div className="mx-auto max-w-5xl px-5">
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {stories.map((s) => (
-            <div key={s.name} className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-              <div className="flex gap-1 text-neon">
-                {Array.from({ length: s.rating }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
-              </div>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground">"{s.quote}"</p>
-              <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full font-display font-semibold" style={{ background: "var(--gradient-hero)" }}>
-                  {s.name[0]}
+
+        <div className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10">
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${i * 100}%)` }}
+          >
+            {stories.map((s) => (
+              <div key={s.name} className="w-full shrink-0 px-1">
+                <div className="flex gap-1 text-neon">
+                  {Array.from({ length: s.rating }).map((_, k) => (
+                    <Star key={k} className="h-4 w-4 fill-current" />
+                  ))}
                 </div>
-                <div className="min-w-0">
-                  <div className="truncate text-sm font-semibold">{s.name}</div>
-                  <div className="truncate text-xs text-muted-foreground">{s.role}</div>
+                <p className="mt-5 text-lg leading-relaxed text-foreground md:text-xl">"{s.quote}"</p>
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                  <div
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full font-display font-semibold text-brand"
+                    style={{ background: "var(--gradient-hero)" }}
+                  >
+                    {s.name[0]}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-semibold">{s.name}</div>
+                    <div className="truncate text-xs text-muted-foreground">{s.role}</div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between">
+            <div className="flex gap-2">
+              {stories.map((_, k) => (
+                <button
+                  key={k}
+                  onClick={() => setI(k)}
+                  aria-label={`স্টোরি ${k + 1}`}
+                  className={`h-2 rounded-full transition-all ${k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
+                />
+              ))}
             </div>
-          ))}
+            <div className="flex gap-2">
+              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
+}
 }
 
 /* ---------- PORTFOLIO ---------- */
