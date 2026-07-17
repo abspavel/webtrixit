@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
-  Phone, Mail, MapPin, TrendingUp, Zap,
+  Phone, Mail, MapPin, TrendingUp, Zap, ChevronLeft, ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
