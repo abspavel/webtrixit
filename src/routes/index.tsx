@@ -184,7 +184,7 @@ function ClientLogos() {
     <section className="border-y border-border/60 bg-surface/40 py-10">
       <div className="mx-auto max-w-7xl px-5">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          বিশ্বজুড়ে অ্যাম্বিশাস টিমের বিশ্বস্ত পার্টনার
+          দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
         </p>
         <div className="mt-6 overflow-hidden">
           <div className="animate-marquee flex w-max items-center gap-10">
