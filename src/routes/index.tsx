@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, Check, X, MessageCircle,
-  Star, ShieldCheck, Menu, Phone, Mail, MapPin,
+  ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
+  Phone, Mail, MapPin, TrendingUp, Zap,
 } from "lucide-react";
 import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
