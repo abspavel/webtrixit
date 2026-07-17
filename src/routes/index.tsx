@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 
 const WHATSAPP_NUMBER = "8801700000000"; // update to real number
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
