@@ -177,17 +177,33 @@ function Hero() {
   );
 }
 
-/* ---------- CLIENT LOGOS ---------- */
+/* ---------- CLIENT LOGOS (logo-marks, not text names) ---------- */
 function ClientLogos() {
-  const row = [...clients, ...clients];
+  const row = [...clientLogos, ...clientLogos];
   return (
     <section className="border-y border-border/60 bg-surface/40 py-10">
       <div className="mx-auto max-w-7xl px-5">
-        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">বিশ্বজুড়ে অ্যাম্বিশাস টিমের বিশ্বস্ত পার্টনার</p>
+        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          বিশ্বজুড়ে অ্যাম্বিশাস টিমের বিশ্বস্ত পার্টনার
+        </p>
         <div className="mt-6 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center gap-14">
+          <div className="animate-marquee flex w-max items-center gap-10">
             {row.map((c, i) => (
-              <span key={i} className="whitespace-nowrap font-display text-2xl font-semibold text-muted-foreground/70">{c}</span>
+              <div
+                key={i}
+                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
+              >
+                <span
+                  className="grid h-10 w-10 place-items-center rounded-xl font-display text-lg font-bold text-white shadow-md"
+                  style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}
+                  aria-hidden="true"
+                >
+                  {c.symbol}
+                </span>
+                <span className="font-display text-lg font-semibold tracking-tight text-foreground/85">
+                  {c.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
