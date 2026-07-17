@@ -399,7 +399,6 @@ function SuccessStories() {
     </section>
   );
 }
-}
 
 /* ---------- PORTFOLIO ---------- */
 function Portfolio() {
