@@ -187,7 +187,7 @@ function MiniNav() {
           <img
             src={logoAsset.url}
             alt="Webtrix IT Solution"
-            className="h-10 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1"
+            className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]"
           />
         </Link>
         <Link

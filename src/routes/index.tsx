@@ -2,12 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
   Phone, Mail, MapPin, TrendingUp, Zap, ChevronLeft, ChevronRight,
+  AlertTriangle, Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
 import { services } from "@/lib/services-data";
+import { useReveal, useActiveSection } from "@/hooks/use-reveal";
+
 
 const WHATSAPP_NUMBER = "8801835985730";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -91,21 +94,33 @@ function HomePage() {
 function Nav() {
   const [open, setOpen] = useState(false);
   const links = [
-    { href: "#services", label: "সার্ভিস" },
-    { href: "#work", label: "পোর্টফোলিও" },
-    { href: "#results", label: "রেজাল্ট" },
-    { href: "#compare", label: "কেন আমরা" },
-    { href: "#contact", label: "যোগাযোগ" },
+    { href: "services", label: "সার্ভিস" },
+    { href: "work", label: "পোর্টফোলিও" },
+    { href: "results", label: "রেজাল্ট" },
+    { href: "compare", label: "কেন আমরা" },
+    { href: "contact", label: "যোগাযোগ" },
   ];
+  const active = useActiveSection(links.map((l) => l.href));
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
         <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Webtrix IT Solution হোম">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
+          <img
+            src={logoAsset.url}
+            alt="Webtrix IT Solution"
+            className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
+          />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{l.label}</a>
+            <a
+              key={l.href}
+              href={`#${l.href}`}
+              data-active={active === l.href}
+              className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground"
+            >
+              {l.label}
+            </a>
           ))}
           <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
             ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
@@ -117,11 +132,23 @@ function Nav() {
       </div>
       {open && (
         <div className="border-t border-border/60 md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-4">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
             {links.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-sm font-medium text-muted-foreground">{l.label}</a>
+              <a
+                key={l.href}
+                href={`#${l.href}`}
+                onClick={() => setOpen(false)}
+                data-active={active === l.href}
+                className={`rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                  active === l.href
+                    ? "bg-electric/15 text-foreground"
+                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                }`}
+              >
+                {l.label}
+              </a>
             ))}
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground">
               ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -130,6 +157,7 @@ function Nav() {
     </header>
   );
 }
+
 
 /* ---------- HERO ---------- */
 function Hero() {
@@ -215,51 +243,92 @@ function ClientLogos() {
 /* ---------- PROBLEM → SOLUTION ---------- */
 function ProblemSolution() {
   const problems = [
-    "ওয়েবসাইট পুরনো দেখায় ও ভিজিটরকে কাস্টমারে কনভার্ট করতে পারছে না।",
-    "স্লো লোড টাইম আপনার অ্যাড পারফরম্যান্স ও SEO নষ্ট করছে।",
-    "বিজনেস স্কেল করার মতো ঠিকঠাক ই-কমার্স, LMS বা সফটওয়্যার নেই।",
-    "অ্যাড চলছে কিন্তু ফানেল লিক করছে — pixel বা tracking সেট করা নেই।",
+    { t: "পুরনো ডিজাইন, হারানো বিশ্বাস", d: "ভিজিটর ৩ সেকেন্ডেই সাইট দেখে সিদ্ধান্ত নেয় — পুরনো লুক মানেই হারানো কাস্টমার।" },
+    { t: "স্লো লোড, নষ্ট বাজেট", d: "প্রতি ১ সেকেন্ড দেরিতে কনভার্সন ৭% কমে — আপনার অ্যাড বাজেটও তখন গলে যায়।" },
+    { t: "স্কেল করার মতো সিস্টেম নেই", d: "অগোছালো ই-কমার্স, LMS বা অ্যাডমিন প্যানেল — বিজনেস বাড়ালেই ভেঙে পড়ে।" },
+    { t: "ট্র্যাকিং ছাড়া মার্কেটিং", d: "Pixel/CAPI ঠিকমতো বসানো নেই বলেই ফানেল লিক করছে, ROAS পড়ে যাচ্ছে।" },
   ];
   const solutions = [
-    "আপনার ব্র্যান্ডের জন্য প্রিমিয়াম, কনভার্সন-ফোকাসড ডিজাইন।",
-    "লাইটনিং-ফাস্ট, মোবাইল-অপটিমাইজড বিল্ড — ২ সেকেন্ডের মধ্যে লোড।",
-    "শুরু থেকে শেষ পর্যন্ত ফুল-স্ট্যাক ই-কমার্স, LMS ও কাস্টম সফটওয়্যার।",
-    "Pixel, CAPI ও analytics সঠিকভাবে ইনস্টল — প্রতিটি ইভেন্ট ট্র্যাকড।",
+    { t: "প্রিমিয়াম, কনভার্সন-ফোকাসড ডিজাইন", d: "প্রথম দর্শনেই আস্থা তৈরি করে এমন ব্র্যান্ড-লেভেল UI — যেটা ভিজিটরকে বাটনে ক্লিক করায়।" },
+    { t: "২ সেকেন্ডের নিচে লোড, মোবাইল-ফার্স্ট", d: "লাইটনিং-ফাস্ট বিল্ড, অপ্টিমাইজড ইমেজ ও কোড — SEO ও অ্যাড দুটোই উপকৃত হয়।" },
+    { t: "স্কেলেবল ই-কমার্স, LMS ও সফটওয়্যার", d: "১০০ থেকে ১ লাখ ইউজার পর্যন্ত ভাঙে না — পেমেন্ট, ইনভেন্টরি, রোল, রিপোর্ট সব বিল্ট-ইন।" },
+    { t: "নিখুঁত ট্র্যাকিং ও অ্যানালিটিক্স", d: "Pixel, CAPI, GA4, ইভেন্ট ট্র্যাকিং সঠিকভাবে সেট — প্রতিটি টাকার ROI মাপা যায়।" },
   ];
+  const head = useReveal<HTMLDivElement>();
+  const left = useReveal<HTMLDivElement>();
+  const right = useReveal<HTMLDivElement>();
   return (
-    <section className="py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5">
-        <SectionHeader eyebrow="আমরা যে গ্যাপ পূরণ করি" title="আপনার আছে বিজনেস। আমরা বানাই ডিজিটাল ইঞ্জিন।" />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <Card className="border-destructive/20">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1 text-xs font-semibold text-destructive">
-              <X className="h-3.5 w-3.5" /> সমস্যা
+    <section className="py-14 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-5">
+        <div ref={head.ref} data-visible={head.visible} className="reveal">
+          <SectionHeader
+            eyebrow="আমরা যে গ্যাপ পূরণ করি"
+            title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
+          />
+        </div>
+        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
+          <div
+            ref={left.ref}
+            data-visible={left.visible}
+            className="reveal-l rounded-3xl border border-destructive/25 bg-card p-6 sm:p-8"
+          >
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1.5 text-xs font-semibold text-destructive">
+              <AlertTriangle className="h-3.5 w-3.5" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
             </div>
-            <ul className="space-y-3">
-              {problems.map((p) => (
-                <li key={p} className="flex gap-3 text-sm text-muted-foreground">
-                  <X className="mt-0.5 h-4 w-4 shrink-0 text-destructive" /> {p}
+            <ul className="space-y-4">
+              {problems.map((p, i) => (
+                <li
+                  key={p.t}
+                  className="reveal flex gap-3 rounded-2xl border border-destructive/10 bg-destructive/5 p-3.5 sm:p-4"
+                  data-visible={left.visible}
+                  style={{ animationDelay: `${120 + i * 90}ms` }}
+                >
+                  <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-destructive/15 text-destructive">
+                    <X className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-foreground">{p.t}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-          </Card>
-          <Card className="border-neon/30">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-neon/10 px-3 py-1 text-xs font-semibold text-neon">
-              <Check className="h-3.5 w-3.5" /> আমাদের সমাধান
+          </div>
+
+          <div
+            ref={right.ref}
+            data-visible={right.visible}
+            className="reveal-r rounded-3xl border border-neon/30 bg-card p-6 sm:p-8"
+            style={{ boxShadow: "var(--shadow-neon)" }}
+          >
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1.5 text-xs font-semibold text-neon">
+              <Sparkles className="h-3.5 w-3.5" /> আমাদের সমাধান — যা আপনি আসলেই পাবেন
             </div>
-            <ul className="space-y-3">
-              {solutions.map((p) => (
-                <li key={p} className="flex gap-3 text-sm text-foreground">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-neon" /> {p}
+            <ul className="space-y-4">
+              {solutions.map((s, i) => (
+                <li
+                  key={s.t}
+                  className="reveal flex gap-3 rounded-2xl border border-neon/15 bg-neon/5 p-3.5 sm:p-4"
+                  data-visible={right.visible}
+                  style={{ animationDelay: `${120 + i * 90}ms` }}
+                >
+                  <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-neon/20 text-neon">
+                    <Check className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-foreground">{s.t}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-          </Card>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------- WHATSAPP BANNER ---------- */
 function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
@@ -296,7 +365,7 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
 /* ---------- SERVICES ---------- */
 function Services() {
   return (
-    <section id="services" className="py-20 md:py-28">
+    <section id="services" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের সার্ভিস" title="আমাদের সার্ভিস সমূহ" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -341,7 +410,7 @@ function SuccessStories() {
   const next = () => setI((v) => (v + 1) % stories.length);
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-5">
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
 
@@ -432,7 +501,7 @@ function Portfolio() {
     });
 
   return (
-    <section id="work" className="py-20 md:py-28">
+    <section id="work" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের কাজ" title="ওয়েব, কমার্স ও সফটওয়্যার জুড়ে বাছাইকৃত প্রজেক্ট।" />
 
@@ -506,7 +575,7 @@ function Portfolio() {
 /* ---------- BEFORE & AFTER ---------- */
 function BeforeAfter() {
   return (
-    <section id="results" className="py-20 md:py-28">
+    <section id="results" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আগে ও পরে" title="প্রিমিয়াম বিল্ড আসলে কী ডেলিভার করে।" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -538,7 +607,7 @@ function BeforeAfter() {
 /* ---------- VERSUS OTHERS ---------- */
 function VersusOthers() {
   return (
-    <section id="compare" className="py-20 md:py-28">
+    <section id="compare" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমরা বনাম অন্যরা" title="কেন টিমগুলো ফ্রিল্যান্সার বা সাধারণ এজেন্সির বদলে Webtrix বেছে নেয়।" />
         <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card">
@@ -567,7 +636,7 @@ function VersusOthers() {
 /* ---------- FINAL CTA + CONTACT ---------- */
 function FinalCTA() {
   return (
-    <section id="contact" className="px-5 py-20 md:py-28">
+    <section id="contact" className="px-4 py-14 sm:px-5 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-3xl border border-border p-10 md:p-16" style={{ background: "var(--gradient-brand)" }}>
           <div className="grid-bg absolute inset-0 opacity-30" />
@@ -635,7 +704,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. সর্বস্বত্ব সংরক্ষিত।</p>
       </div>

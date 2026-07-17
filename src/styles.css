@@ -163,3 +163,61 @@
 @utility animate-marquee {
   animation: marquee 30s linear infinite;
 }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes soft-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--electric) 30%, transparent); }
+  50%      { box-shadow: 0 0 0 10px color-mix(in oklab, var(--electric) 0%, transparent); }
+}
+
+/* Reveal-on-scroll: elements start hidden, animate in when [data-visible="true"] */
+.reveal { opacity: 0; }
+.reveal[data-visible="true"] { animation: rise-in 0.7s ease-out both; }
+.reveal-l { opacity: 0; }
+.reveal-l[data-visible="true"] { animation: slide-in-left 0.7s ease-out both; }
+.reveal-r { opacity: 0; }
+.reveal-r[data-visible="true"] { animation: slide-in-right 0.7s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-l, .reveal-r { opacity: 1 !important; animation: none !important; }
+  .animate-marquee { animation: none !important; }
+}
+
+/* Nav link — active/scroll highlight */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gradient-hero);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
+}
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after { transform: scaleX(1); }
+.nav-link[data-active="true"] { color: var(--foreground); }
+
+/* Global focus ring for keyboard accessibility */
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+  outline: 2px solid var(--electric);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
