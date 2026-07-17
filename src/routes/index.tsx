@@ -1,13 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, Check, X, MessageCircle, Rocket, ShoppingCart, GraduationCap,
-  Code2, Layers, Cpu, Server, Video, Facebook, Target, Palette, Star,
-  Sparkles, ShieldCheck, Zap, TrendingUp, Menu, Phone, Mail, MapPin,
+  ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
+  Phone, Mail, MapPin, TrendingUp, Zap,
 } from "lucide-react";
 import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
+import { services } from "@/lib/services-data";
 
 const WHATSAPP_NUMBER = "8801700000000"; // update to real number
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -18,19 +18,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const services = [
-  { icon: Rocket, title: "Landing Page Design", desc: "High-converting single-page sites built for launches, ads and lead capture." },
-  { icon: ShoppingCart, title: "E-commerce Website Design", desc: "Custom online stores with cart, checkout and payment gateways done right." },
-  { icon: Layers, title: "Readymade E-commerce Website", desc: "Launch fast with a proven, ready-to-go store template — configured for you." },
-  { icon: GraduationCap, title: "LMS Site Development", desc: "Full-featured learning platforms with courses, quizzes, students and payments." },
-  { icon: Code2, title: "Other Custom Websites", desc: "Portfolios, business sites, directories, booking systems — built to spec." },
-  { icon: Cpu, title: "Software Development", desc: "Web apps, dashboards and internal tools tailored to your workflow." },
-  { icon: Server, title: "SMM Panel Website", desc: "Full SMM panel with services, orders, API providers and payment integration." },
-  { icon: Video, title: "AI Video Creation / Ads", desc: "Scroll-stopping AI-generated video ads for Facebook, Instagram and TikTok." },
-  { icon: Facebook, title: "Facebook Business Page Setup", desc: "Professional page setup, branding, sections and optimisation from scratch." },
-  { icon: Target, title: "Facebook Pixel Setup", desc: "Pixel, events, conversions API and audience tracking — installed correctly." },
-  { icon: Palette, title: "Logo, Cover & Poster Design", desc: "Business logo, Facebook cover and social media poster design that stands out." },
-];
 
 const clients = ["Acme", "Nexlify", "Orbit", "Pulse", "Vantage", "Kairo", "Northwind", "Lumen", "Zephyr", "Halcyon"];
 
@@ -287,14 +274,22 @@ function Services() {
             const bg = ["bg-electric/10", "bg-neon/10", "bg-lavender/10"];
             const c = i % 3;
             return (
-              <div key={s.title} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40">
+              <Link
+                key={s.title}
+                to="/services/$slug"
+                params={{ slug: s.slug }}
+                className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40"
+              >
                 <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${bg[c]} ${accents[c]}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 font-display text-lg font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-electric">
+                  বিস্তারিত দেখুন <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                </span>
                 <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100`} />
-              </div>
+              </Link>
             );
           })}
         </div>
