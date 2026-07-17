@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 
 const WHATSAPP_NUMBER = "8801700000000"; // update to real number
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -97,11 +98,8 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
-        <a href="#top" className="flex min-w-0 items-center gap-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg" style={{ background: "var(--gradient-hero)" }}>
-            <Sparkles className="h-5 w-5 text-brand-foreground" />
-          </span>
-          <span className="truncate font-display text-lg font-bold">Webtrix IT Solution</span>
+        <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Webtrix IT Solution home">
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
@@ -490,10 +488,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg" style={{ background: "var(--gradient-hero)" }}>
-            <Sparkles className="h-4 w-4 text-brand-foreground" />
-          </span>
-          <span className="truncate font-display font-semibold">Webtrix IT Solution</span>
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
         </div>
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. All rights reserved.</p>
       </div>
