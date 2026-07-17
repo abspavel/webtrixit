@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
   ArrowLeft, ArrowRight, Check, ExternalLink, MessageCircle, ShieldCheck,
-  Sparkles, Target, TrendingUp, Wrench, ListChecks,
+  Sparkles, Target, TrendingUp, Wrench, ListChecks, HelpCircle, Plus, Minus, Star,
+  ChevronLeft, ChevronRight, Send,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { services, getService } from "@/lib/services-data";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
