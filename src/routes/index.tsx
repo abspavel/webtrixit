@@ -365,7 +365,7 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
 /* ---------- SERVICES ---------- */
 function Services() {
   return (
-    <section id="services" className="py-20 md:py-28">
+    <section id="services" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের সার্ভিস" title="আমাদের সার্ভিস সমূহ" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -410,7 +410,7 @@ function SuccessStories() {
   const next = () => setI((v) => (v + 1) % stories.length);
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-5">
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
 
@@ -501,7 +501,7 @@ function Portfolio() {
     });
 
   return (
-    <section id="work" className="py-20 md:py-28">
+    <section id="work" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের কাজ" title="ওয়েব, কমার্স ও সফটওয়্যার জুড়ে বাছাইকৃত প্রজেক্ট।" />
 
@@ -575,7 +575,7 @@ function Portfolio() {
 /* ---------- BEFORE & AFTER ---------- */
 function BeforeAfter() {
   return (
-    <section id="results" className="py-20 md:py-28">
+    <section id="results" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আগে ও পরে" title="প্রিমিয়াম বিল্ড আসলে কী ডেলিভার করে।" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -607,7 +607,7 @@ function BeforeAfter() {
 /* ---------- VERSUS OTHERS ---------- */
 function VersusOthers() {
   return (
-    <section id="compare" className="py-20 md:py-28">
+    <section id="compare" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমরা বনাম অন্যরা" title="কেন টিমগুলো ফ্রিল্যান্সার বা সাধারণ এজেন্সির বদলে Webtrix বেছে নেয়।" />
         <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card">
@@ -636,7 +636,7 @@ function VersusOthers() {
 /* ---------- FINAL CTA + CONTACT ---------- */
 function FinalCTA() {
   return (
-    <section id="contact" className="px-5 py-20 md:py-28">
+    <section id="contact" className="px-4 py-14 sm:px-5 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-3xl border border-border p-10 md:p-16" style={{ background: "var(--gradient-brand)" }}>
           <div className="grid-bg absolute inset-0 opacity-30" />
@@ -704,7 +704,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. সর্বস্বত্ব সংরক্ষিত।</p>
       </div>
