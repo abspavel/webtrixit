@@ -36,8 +36,8 @@
   --color-lavender: var(--lavender);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Hind Siliguri", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hind Siliguri", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
