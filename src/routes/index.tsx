@@ -82,6 +82,8 @@ function HomePage() {
       <FinalCTA />
       <Footer />
       <FloatingWhatsApp />
+      <ReadingControls />
+
     </div>
   );
 }
