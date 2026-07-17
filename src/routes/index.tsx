@@ -19,7 +19,19 @@ export const Route = createFileRoute("/")({
 });
 
 
-const clients = ["Acme", "Nexlify", "Orbit", "Pulse", "Vantage", "Kairo", "Northwind", "Lumen", "Zephyr", "Halcyon"];
+/* Client logo marks — SVG-based branded chips (name-এর পরিবর্তে "logo" চিহ্ন) */
+const clientLogos: { name: string; symbol: string; from: string; to: string }[] = [
+  { name: "Acme",       symbol: "◆", from: "#3B82F6", to: "#8B5CF6" },
+  { name: "Nexlify",    symbol: "▲", from: "#10B981", to: "#3B82F6" },
+  { name: "Orbit",      symbol: "◉", from: "#8B5CF6", to: "#10B981" },
+  { name: "Pulse",      symbol: "❤", from: "#F43F5E", to: "#8B5CF6" },
+  { name: "Vantage",    symbol: "⬢", from: "#3B82F6", to: "#10B981" },
+  { name: "Kairo",      symbol: "✦", from: "#F59E0B", to: "#8B5CF6" },
+  { name: "Northwind",  symbol: "❄", from: "#38BDF8", to: "#3B82F6" },
+  { name: "Lumen",      symbol: "☀", from: "#F59E0B", to: "#F43F5E" },
+  { name: "Zephyr",     symbol: "≋", from: "#10B981", to: "#38BDF8" },
+  { name: "Halcyon",    symbol: "◐", from: "#8B5CF6", to: "#3B82F6" },
+];
 
 const stories = [
   { name: "রাশেদ আহমেদ", role: "প্রতিষ্ঠাতা, ShopKart BD", quote: "Webtrix আমাদের স্টোর রিবিল্ড করার পর মাত্র দুই মাসে সেল ৩.২ গুণ বেড়েছে। এদের টিম কনভার্সন ভালো বোঝে।", rating: 5 },
