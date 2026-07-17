@@ -1,13 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, Check, X, MessageCircle, Rocket, ShoppingCart, GraduationCap,
-  Code2, Layers, Cpu, Server, Video, Facebook, Target, Palette, Star,
-  Sparkles, ShieldCheck, Zap, TrendingUp, Menu, Phone, Mail, MapPin,
+  ArrowRight, Check, X, MessageCircle,
+  Star, ShieldCheck, Menu, Phone, Mail, MapPin,
 } from "lucide-react";
 import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
+import { services } from "@/lib/services-data";
 
 const WHATSAPP_NUMBER = "8801700000000"; // update to real number
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
