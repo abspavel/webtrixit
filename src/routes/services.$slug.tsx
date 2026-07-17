@@ -111,7 +111,7 @@ function ServiceDetail() {
       </section>
 
       {/* Why use */}
-      <Section eyebrow="কেন প্রয়োজন?" title="এই সার্ভিসটি কেন ব্যবহার করা উচিত" icon={Sparkles} accent="text-electric" bg="bg-electric/10">
+      <Section eyebrow="কেন প্রয়োজন?" title={`${service.subject} কেন ব্যবহার করা উচিত`} icon={Sparkles} accent="text-electric" bg="bg-electric/10">
         <ul className="grid gap-4 md:grid-cols-2">
           {service.why.map((w) => (
             <li key={w} className="flex gap-3 rounded-2xl border border-border bg-card p-5">
@@ -123,7 +123,7 @@ function ServiceDetail() {
       </Section>
 
       {/* Effectiveness */}
-      <Section eyebrow="কার্যকারিতা" title="এই সার্ভিসের কার্যকারিতা ও ফিচার" icon={Target} accent="text-lavender" bg="bg-lavender/10">
+      <Section eyebrow="কার্যকারিতা" title={`${service.subject}-এর কার্যকারিতা`} icon={Target} accent="text-lavender" bg="bg-lavender/10">
         <ul className="grid gap-4 md:grid-cols-2">
           {service.effectiveness.map((f) => (
             <li key={f} className="flex gap-3 rounded-2xl border border-border bg-card p-5">
@@ -135,7 +135,7 @@ function ServiceDetail() {
       </Section>
 
       {/* Benefits */}
-      <Section eyebrow="লাভ কী" title="এই সার্ভিস ব্যবহারে আপনার লাভ" icon={TrendingUp} accent="text-neon" bg="bg-neon/10">
+      <Section eyebrow="উপকারিতা" title={`${service.subject} ব্যবহারের উপকারিতা`} icon={TrendingUp} accent="text-neon" bg="bg-neon/10">
         <ul className="grid gap-4 md:grid-cols-3">
           {service.benefits.map((b) => (
             <li key={b} className="rounded-2xl border border-neon/30 bg-card p-6 shadow-[var(--shadow-card)]">
@@ -147,6 +147,55 @@ function ServiceDetail() {
           ))}
         </ul>
       </Section>
+
+      {/* How we build + Features */}
+      <section className="border-y border-border/60 bg-surface/40 py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-electric/10 text-electric">
+              <Wrench className="h-4 w-4" />
+            </span>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">প্রসেস ও ফিচার</p>
+          </div>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+            আমরা কীভাবে আপনার <span className="text-gradient">{service.subject}</span> তৈরি করি
+          </h2>
+          <p className="mt-3 max-w-3xl text-muted-foreground">
+            প্রতিটি ধাপে আপনার সাথে আলোচনা করে, স্বচ্ছভাবে কাজ এগিয়ে নিই — যাতে ফাইনাল প্রোডাক্ট ঠিক আপনার কল্পনার মতোই হয়।
+          </p>
+
+          <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {service.process.map((step, i) => (
+              <li key={step.title} className="relative rounded-2xl border border-border bg-card p-6">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary/15 font-display text-sm font-bold text-electric">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-4 font-display text-lg font-semibold">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-12 rounded-3xl border border-border bg-card p-6 md:p-8">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-neon/15 text-neon">
+                <ListChecks className="h-4 w-4" />
+              </span>
+              <h3 className="font-display text-xl font-bold sm:text-2xl">
+                {service.subject}-এ যে যে ফিচার থাকবে
+              </h3>
+            </div>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {service.features.map((f) => (
+                <li key={f} className="flex items-start gap-2.5 rounded-xl border border-border/60 bg-surface/50 p-3.5">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-neon" />
+                  <span className="text-sm leading-relaxed text-foreground">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* Use cases */}
       <section className="border-y border-border/60 bg-surface/40 py-16">
