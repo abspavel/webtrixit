@@ -274,14 +274,22 @@ function Services() {
             const bg = ["bg-electric/10", "bg-neon/10", "bg-lavender/10"];
             const c = i % 3;
             return (
-              <div key={s.title} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40">
+              <Link
+                key={s.title}
+                to="/services/$slug"
+                params={{ slug: s.slug }}
+                className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40"
+              >
                 <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${bg[c]} ${accents[c]}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 font-display text-lg font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-electric">
+                  বিস্তারিত দেখুন <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                </span>
                 <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100`} />
-              </div>
+              </Link>
             );
           })}
         </div>
