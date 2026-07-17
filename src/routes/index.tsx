@@ -276,8 +276,12 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
               <div className="inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1 text-xs font-semibold text-neon">
                 <MessageCircle className="h-3.5 w-3.5" /> সরাসরি WhatsApp
               </div>
-              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">আগামী ৫ মিনিটের মধ্যে একজন স্ট্র্যাটেজিস্টের সাথে কথা বলুন।</h3>
-              <p className="mt-2 text-sm text-muted-foreground">WhatsApp-এ আপনার প্রজেক্ট আইডিয়া পাঠান — আজই ফ্রি কোটেশন, টাইমলাইন ও রোডম্যাপ পান।</p>
+              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+                আপনার আইডিয়া, আমাদের এক্সপার্টিজ — চলুন একসাথে বসে আপনার পরবর্তী প্রজেক্টটি সাজিয়ে ফেলি।
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                WhatsApp-এ একটি মেসেজেই শুরু — কোনো ফর্ম, কোনো ঝামেলা নেই। আমাদের টিম আপনার প্রয়োজন বুঝে ফ্রি পরামর্শ, কাস্টম রোডম্যাপ ও ট্রান্সপারেন্ট কোটেশন পাঠাবে।
+              </p>
             </div>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90">
               <MessageCircle className="h-4 w-4" /> WhatsApp-এ চ্যাট করুন
