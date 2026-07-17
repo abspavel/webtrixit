@@ -402,25 +402,101 @@ function SuccessStories() {
 
 /* ---------- PORTFOLIO ---------- */
 function Portfolio() {
+  const [i, setI] = useState(0);
+  const [perView, setPerView] = useState(3);
+
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      setPerView(w >= 1024 ? 3 : w >= 640 ? 2 : 1);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const maxIndex = Math.max(0, portfolio.length - perView);
+  const safeI = Math.min(i, maxIndex);
+
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1 > maxIndex ? 0 : v + 1)), 4500);
+    return () => clearInterval(t);
+  }, [maxIndex]);
+
+  const go = (dir: -1 | 1) =>
+    setI((v) => {
+      const n = v + dir;
+      if (n < 0) return maxIndex;
+      if (n > maxIndex) return 0;
+      return n;
+    });
+
   return (
     <section id="work" className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের কাজ" title="ওয়েব, কমার্স ও সফটওয়্যার জুড়ে বাছাইকৃত প্রজেক্ট।" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {portfolio.map((p) => (
-            <div key={p.title} className="group overflow-hidden rounded-2xl border border-border bg-card">
-              <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.gradient}`}>
-                <div className="grid-bg absolute inset-0 opacity-40" />
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="font-display text-2xl font-bold text-brand-foreground drop-shadow">{p.title}</span>
+
+        <div className="relative mt-12">
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${(safeI * 100) / perView}%)` }}
+            >
+              {portfolio.map((p) => (
+                <div
+                  key={p.title}
+                  className="shrink-0 px-2.5"
+                  style={{ width: `${100 / perView}%` }}
+                >
+                  <div className="group overflow-hidden rounded-2xl border border-border bg-card">
+                    <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.gradient}`}>
+                      <div className="grid-bg absolute inset-0 opacity-40" />
+                      <div className="absolute inset-0 grid place-items-center px-4 text-center">
+                        <span className="font-display text-2xl font-bold text-brand-foreground drop-shadow">
+                          {p.title}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-4">
+                      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        {p.tag}
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-primary transition group-hover:translate-x-1" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between p-4">
-                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{p.tag}</span>
-                <ArrowRight className="h-4 w-4 text-primary transition group-hover:translate-x-1" />
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <button
+              onClick={() => go(-1)}
+              aria-label="আগের প্রজেক্ট"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:bg-surface-2"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <div className="flex gap-2">
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setI(idx)}
+                  aria-label={`স্লাইড ${idx + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    idx === safeI ? "w-6 bg-electric" : "w-2 bg-border"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={() => go(1)}
+              aria-label="পরের প্রজেক্ট"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:bg-surface-2"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
