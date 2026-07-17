@@ -9,7 +9,7 @@ import { services, getService } from "@/lib/services-data";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
 
-const WHATSAPP_NUMBER = "8801700000000";
+const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `আসসালামু আলাইকুম, আমি "${title}" সার্ভিসটি সম্পর্কে জানতে চাই।`,
