@@ -9,7 +9,7 @@ import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
 import { services } from "@/lib/services-data";
 
-const WHATSAPP_NUMBER = "8801700000000"; // update to real number
+const WHATSAPP_NUMBER = "8801835985730";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "আসসালামু আলাইকুম, Webtrix — আমি একটি প্রজেক্ট নিয়ে আলোচনা করতে চাই।",
 )}`;
