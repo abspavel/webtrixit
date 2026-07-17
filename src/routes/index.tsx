@@ -94,21 +94,33 @@ function HomePage() {
 function Nav() {
   const [open, setOpen] = useState(false);
   const links = [
-    { href: "#services", label: "সার্ভিস" },
-    { href: "#work", label: "পোর্টফোলিও" },
-    { href: "#results", label: "রেজাল্ট" },
-    { href: "#compare", label: "কেন আমরা" },
-    { href: "#contact", label: "যোগাযোগ" },
+    { href: "services", label: "সার্ভিস" },
+    { href: "work", label: "পোর্টফোলিও" },
+    { href: "results", label: "রেজাল্ট" },
+    { href: "compare", label: "কেন আমরা" },
+    { href: "contact", label: "যোগাযোগ" },
   ];
+  const active = useActiveSection(links.map((l) => l.href));
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
         <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Webtrix IT Solution হোম">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
+          <img
+            src={logoAsset.url}
+            alt="Webtrix IT Solution"
+            className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
+          />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{l.label}</a>
+            <a
+              key={l.href}
+              href={`#${l.href}`}
+              data-active={active === l.href}
+              className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground"
+            >
+              {l.label}
+            </a>
           ))}
           <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
             ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
@@ -120,11 +132,23 @@ function Nav() {
       </div>
       {open && (
         <div className="border-t border-border/60 md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-4">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
             {links.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-sm font-medium text-muted-foreground">{l.label}</a>
+              <a
+                key={l.href}
+                href={`#${l.href}`}
+                onClick={() => setOpen(false)}
+                data-active={active === l.href}
+                className={`rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                  active === l.href
+                    ? "bg-electric/15 text-foreground"
+                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                }`}
+              >
+                {l.label}
+              </a>
             ))}
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground">
               ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -133,6 +157,7 @@ function Nav() {
     </header>
   );
 }
+
 
 /* ---------- HERO ---------- */
 function Hero() {
