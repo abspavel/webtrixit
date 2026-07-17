@@ -254,6 +254,15 @@ function ServiceDetail() {
         </div>
       </section>
 
+      {/* Reviews slider */}
+      <ReviewsSlider subject={service.subject} />
+
+      {/* Service FAQ */}
+      <ServiceFAQ subject={service.subject} />
+
+      {/* Lead form */}
+      <ServiceLeadForm serviceTitle={service.titleBn} />
+
       {/* CTA */}
       <section className="border-t border-border/60 py-16">
         <div className="mx-auto max-w-4xl px-5 text-center">
