@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesReadymadeEcommerceWebsiteRouteImport } from './routes/services.readymade-ecommerce-website'
+import { Route as ServicesFacebookBusinessPageSetupRouteImport } from './routes/services.facebook-business-page-setup'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,6 +25,12 @@ const ServicesReadymadeEcommerceWebsiteRoute =
     path: '/services/readymade-ecommerce-website',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ServicesFacebookBusinessPageSetupRoute =
+  ServicesFacebookBusinessPageSetupRouteImport.update({
+    id: '/services/facebook-business-page-setup',
+    path: '/services/facebook-business-page-setup',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
@@ -33,34 +40,47 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/facebook-business-page-setup': typeof ServicesFacebookBusinessPageSetupRoute
   '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/facebook-business-page-setup': typeof ServicesFacebookBusinessPageSetupRoute
   '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/facebook-business-page-setup': typeof ServicesFacebookBusinessPageSetupRoute
   '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/services/$slug' | '/services/readymade-ecommerce-website'
+  fullPaths:
+    | '/'
+    | '/services/$slug'
+    | '/services/facebook-business-page-setup'
+    | '/services/readymade-ecommerce-website'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/services/$slug' | '/services/readymade-ecommerce-website'
+  to:
+    | '/'
+    | '/services/$slug'
+    | '/services/facebook-business-page-setup'
+    | '/services/readymade-ecommerce-website'
   id:
     | '__root__'
     | '/'
     | '/services/$slug'
+    | '/services/facebook-business-page-setup'
     | '/services/readymade-ecommerce-website'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  ServicesFacebookBusinessPageSetupRoute: typeof ServicesFacebookBusinessPageSetupRoute
   ServicesReadymadeEcommerceWebsiteRoute: typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 
@@ -80,6 +100,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesReadymadeEcommerceWebsiteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/facebook-business-page-setup': {
+      id: '/services/facebook-business-page-setup'
+      path: '/services/facebook-business-page-setup'
+      fullPath: '/services/facebook-business-page-setup'
+      preLoaderRoute: typeof ServicesFacebookBusinessPageSetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/services/$slug'
@@ -93,6 +120,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  ServicesFacebookBusinessPageSetupRoute:
+    ServicesFacebookBusinessPageSetupRoute,
   ServicesReadymadeEcommerceWebsiteRoute:
     ServicesReadymadeEcommerceWebsiteRoute,
 }
