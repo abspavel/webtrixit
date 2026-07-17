@@ -18,19 +18,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const services = [
-  { icon: Rocket, title: "Landing Page Design", desc: "High-converting single-page sites built for launches, ads and lead capture." },
-  { icon: ShoppingCart, title: "E-commerce Website Design", desc: "Custom online stores with cart, checkout and payment gateways done right." },
-  { icon: Layers, title: "Readymade E-commerce Website", desc: "Launch fast with a proven, ready-to-go store template — configured for you." },
-  { icon: GraduationCap, title: "LMS Site Development", desc: "Full-featured learning platforms with courses, quizzes, students and payments." },
-  { icon: Code2, title: "Other Custom Websites", desc: "Portfolios, business sites, directories, booking systems — built to spec." },
-  { icon: Cpu, title: "Software Development", desc: "Web apps, dashboards and internal tools tailored to your workflow." },
-  { icon: Server, title: "SMM Panel Website", desc: "Full SMM panel with services, orders, API providers and payment integration." },
-  { icon: Video, title: "AI Video Creation / Ads", desc: "Scroll-stopping AI-generated video ads for Facebook, Instagram and TikTok." },
-  { icon: Facebook, title: "Facebook Business Page Setup", desc: "Professional page setup, branding, sections and optimisation from scratch." },
-  { icon: Target, title: "Facebook Pixel Setup", desc: "Pixel, events, conversions API and audience tracking — installed correctly." },
-  { icon: Palette, title: "Logo, Cover & Poster Design", desc: "Business logo, Facebook cover and social media poster design that stands out." },
-];
 
 const clients = ["Acme", "Nexlify", "Orbit", "Pulse", "Vantage", "Kairo", "Northwind", "Lumen", "Zephyr", "Halcyon"];
 
