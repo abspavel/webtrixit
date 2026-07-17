@@ -9,7 +9,7 @@ import { services, getService } from "@/lib/services-data";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
 
-const WHATSAPP_NUMBER = "8801700000000";
+const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `আসসালামু আলাইকুম, আমি "${title}" সার্ভিসটি সম্পর্কে জানতে চাই।`,
@@ -226,29 +226,52 @@ function ServiceDetail() {
           </p>
 
           <div
-            className="mt-8 overflow-hidden rounded-3xl border border-border p-8 md:p-10"
+            className="mt-8 overflow-hidden rounded-3xl border border-border"
             style={{ background: "var(--gradient-brand)", boxShadow: "var(--shadow-glow)" }}
           >
-            <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-col items-start gap-4 p-6 md:flex-row md:items-center md:justify-between md:p-8">
               <div className="min-w-0">
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-xs font-semibold text-neon">
-                  <span className="h-2 w-2 rounded-full bg-neon" /> লাইভ প্রিভিউ
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> লাইভ প্রিভিউ
                 </div>
                 <h3 className="font-display text-2xl font-bold sm:text-3xl">{service.demoLabel}</h3>
-                <p className="mt-2 break-all text-sm text-muted-foreground">{service.demoUrl}</p>
+                <p className="mt-2 break-all text-xs text-muted-foreground">{service.demoUrl}</p>
               </div>
               <a
                 href={service.demoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-5 py-2.5 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
               >
-                ডেমো দেখুন <ExternalLink className="h-4 w-4" />
+                নতুন ট্যাবে খুলুন <ExternalLink className="h-4 w-4" />
               </a>
             </div>
-            <p className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
+
+            {/* Browser chrome + live embed */}
+            <div className="mx-4 mb-4 overflow-hidden rounded-2xl border border-border bg-background md:mx-6 md:mb-6">
+              <div className="flex items-center gap-2 border-b border-border bg-surface-2 px-4 py-2.5">
+                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                <div className="ml-3 flex-1 truncate rounded-md bg-background/60 px-3 py-1 text-[11px] text-muted-foreground">
+                  {service.demoUrl}
+                </div>
+              </div>
+              <div className="relative aspect-[16/10] w-full bg-background md:aspect-[16/9]">
+                <iframe
+                  src={service.demoUrl}
+                  title={`${service.titleBn} — লাইভ ডেমো`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  className="absolute inset-0 h-full w-full border-0"
+                />
+              </div>
+            </div>
+
+            <p className="flex items-center gap-2 px-6 pb-6 text-xs text-muted-foreground md:px-8 md:pb-8">
               <ShieldCheck className="h-3.5 w-3.5 text-neon" />
-              Demo শুধু preview-এর জন্য — আপনার সাইট আপনার ব্র্যান্ড ও প্রয়োজন অনুযায়ী বানানো হবে।
+              কিছু সাইট নিরাপত্তার কারণে embed-এ লোড নাও হতে পারে — সেক্ষেত্রে "নতুন ট্যাবে খুলুন" বাটনে ক্লিক করুন।
             </p>
           </div>
         </div>
