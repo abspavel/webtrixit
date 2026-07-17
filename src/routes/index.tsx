@@ -243,51 +243,92 @@ function ClientLogos() {
 /* ---------- PROBLEM → SOLUTION ---------- */
 function ProblemSolution() {
   const problems = [
-    "ওয়েবসাইট পুরনো দেখায় ও ভিজিটরকে কাস্টমারে কনভার্ট করতে পারছে না।",
-    "স্লো লোড টাইম আপনার অ্যাড পারফরম্যান্স ও SEO নষ্ট করছে।",
-    "বিজনেস স্কেল করার মতো ঠিকঠাক ই-কমার্স, LMS বা সফটওয়্যার নেই।",
-    "অ্যাড চলছে কিন্তু ফানেল লিক করছে — pixel বা tracking সেট করা নেই।",
+    { t: "পুরনো ডিজাইন, হারানো বিশ্বাস", d: "ভিজিটর ৩ সেকেন্ডেই সাইট দেখে সিদ্ধান্ত নেয় — পুরনো লুক মানেই হারানো কাস্টমার।" },
+    { t: "স্লো লোড, নষ্ট বাজেট", d: "প্রতি ১ সেকেন্ড দেরিতে কনভার্সন ৭% কমে — আপনার অ্যাড বাজেটও তখন গলে যায়।" },
+    { t: "স্কেল করার মতো সিস্টেম নেই", d: "অগোছালো ই-কমার্স, LMS বা অ্যাডমিন প্যানেল — বিজনেস বাড়ালেই ভেঙে পড়ে।" },
+    { t: "ট্র্যাকিং ছাড়া মার্কেটিং", d: "Pixel/CAPI ঠিকমতো বসানো নেই বলেই ফানেল লিক করছে, ROAS পড়ে যাচ্ছে।" },
   ];
   const solutions = [
-    "আপনার ব্র্যান্ডের জন্য প্রিমিয়াম, কনভার্সন-ফোকাসড ডিজাইন।",
-    "লাইটনিং-ফাস্ট, মোবাইল-অপটিমাইজড বিল্ড — ২ সেকেন্ডের মধ্যে লোড।",
-    "শুরু থেকে শেষ পর্যন্ত ফুল-স্ট্যাক ই-কমার্স, LMS ও কাস্টম সফটওয়্যার।",
-    "Pixel, CAPI ও analytics সঠিকভাবে ইনস্টল — প্রতিটি ইভেন্ট ট্র্যাকড।",
+    { t: "প্রিমিয়াম, কনভার্সন-ফোকাসড ডিজাইন", d: "প্রথম দর্শনেই আস্থা তৈরি করে এমন ব্র্যান্ড-লেভেল UI — যেটা ভিজিটরকে বাটনে ক্লিক করায়।" },
+    { t: "২ সেকেন্ডের নিচে লোড, মোবাইল-ফার্স্ট", d: "লাইটনিং-ফাস্ট বিল্ড, অপ্টিমাইজড ইমেজ ও কোড — SEO ও অ্যাড দুটোই উপকৃত হয়।" },
+    { t: "স্কেলেবল ই-কমার্স, LMS ও সফটওয়্যার", d: "১০০ থেকে ১ লাখ ইউজার পর্যন্ত ভাঙে না — পেমেন্ট, ইনভেন্টরি, রোল, রিপোর্ট সব বিল্ট-ইন।" },
+    { t: "নিখুঁত ট্র্যাকিং ও অ্যানালিটিক্স", d: "Pixel, CAPI, GA4, ইভেন্ট ট্র্যাকিং সঠিকভাবে সেট — প্রতিটি টাকার ROI মাপা যায়।" },
   ];
+  const head = useReveal<HTMLDivElement>();
+  const left = useReveal<HTMLDivElement>();
+  const right = useReveal<HTMLDivElement>();
   return (
-    <section className="py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5">
-        <SectionHeader eyebrow="আমরা যে গ্যাপ পূরণ করি" title="আপনার আছে বিজনেস। আমরা বানাই ডিজিটাল ইঞ্জিন।" />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <Card className="border-destructive/20">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1 text-xs font-semibold text-destructive">
-              <X className="h-3.5 w-3.5" /> সমস্যা
+    <section className="py-14 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-5">
+        <div ref={head.ref} data-visible={head.visible} className="reveal">
+          <SectionHeader
+            eyebrow="আমরা যে গ্যাপ পূরণ করি"
+            title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
+          />
+        </div>
+        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
+          <div
+            ref={left.ref}
+            data-visible={left.visible}
+            className="reveal-l rounded-3xl border border-destructive/25 bg-card p-6 sm:p-8"
+          >
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1.5 text-xs font-semibold text-destructive">
+              <AlertTriangle className="h-3.5 w-3.5" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
             </div>
-            <ul className="space-y-3">
-              {problems.map((p) => (
-                <li key={p} className="flex gap-3 text-sm text-muted-foreground">
-                  <X className="mt-0.5 h-4 w-4 shrink-0 text-destructive" /> {p}
+            <ul className="space-y-4">
+              {problems.map((p, i) => (
+                <li
+                  key={p.t}
+                  className="reveal flex gap-3 rounded-2xl border border-destructive/10 bg-destructive/5 p-3.5 sm:p-4"
+                  data-visible={left.visible}
+                  style={{ animationDelay: `${120 + i * 90}ms` }}
+                >
+                  <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-destructive/15 text-destructive">
+                    <X className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-foreground">{p.t}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-          </Card>
-          <Card className="border-neon/30">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-neon/10 px-3 py-1 text-xs font-semibold text-neon">
-              <Check className="h-3.5 w-3.5" /> আমাদের সমাধান
+          </div>
+
+          <div
+            ref={right.ref}
+            data-visible={right.visible}
+            className="reveal-r rounded-3xl border border-neon/30 bg-card p-6 sm:p-8"
+            style={{ boxShadow: "var(--shadow-neon)" }}
+          >
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1.5 text-xs font-semibold text-neon">
+              <Sparkles className="h-3.5 w-3.5" /> আমাদের সমাধান — যা আপনি আসলেই পাবেন
             </div>
-            <ul className="space-y-3">
-              {solutions.map((p) => (
-                <li key={p} className="flex gap-3 text-sm text-foreground">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-neon" /> {p}
+            <ul className="space-y-4">
+              {solutions.map((s, i) => (
+                <li
+                  key={s.t}
+                  className="reveal flex gap-3 rounded-2xl border border-neon/15 bg-neon/5 p-3.5 sm:p-4"
+                  data-visible={right.visible}
+                  style={{ animationDelay: `${120 + i * 90}ms` }}
+                >
+                  <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-neon/20 text-neon">
+                    <Check className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-foreground">{s.t}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-          </Card>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ---------- WHATSAPP BANNER ---------- */
 function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
