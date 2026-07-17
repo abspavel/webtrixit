@@ -1,8 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
   ArrowLeft, ArrowRight, Check, ExternalLink, MessageCircle, ShieldCheck,
-  Sparkles, Target, TrendingUp, Wrench, ListChecks,
+  Sparkles, Target, TrendingUp, Wrench, ListChecks, HelpCircle, Plus, Minus, Star,
+  ChevronLeft, ChevronRight, Send,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { services, getService } from "@/lib/services-data";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
@@ -252,6 +254,15 @@ function ServiceDetail() {
         </div>
       </section>
 
+      {/* Reviews slider */}
+      <ReviewsSlider subject={service.subject} />
+
+      {/* Service FAQ */}
+      <ServiceFAQ subject={service.subject} />
+
+      {/* Lead form */}
+      <ServiceLeadForm serviceTitle={service.titleBn} />
+
       {/* CTA */}
       <section className="border-t border-border/60 py-16">
         <div className="mx-auto max-w-4xl px-5 text-center">
@@ -348,5 +359,262 @@ function Section({
         <div className="mt-8">{children}</div>
       </div>
     </section>
+  );
+}
+
+/* ---------- REVIEWS SLIDER (auto-advancing) ---------- */
+function ReviewsSlider({ subject }: { subject: string }) {
+  const reviews = [
+    { name: "সাদিয়া রহমান", role: "প্রতিষ্ঠাতা, Bloom Boutique", rating: 5,
+      quote: `Webtrix-এর ${subject} নেওয়ার পর আমাদের অর্ডার আগের চেয়ে ৩ গুণ বেড়েছে। ডিজাইন ও সাপোর্ট — দুটোই দারুণ।` },
+    { name: "আরিফুল ইসলাম", role: "CEO, TechNova BD", rating: 5,
+      quote: `এদের ${subject} সলিউশন নেওয়ার পর আমাদের কাজের গতি ও কনভার্সন দুটোই আকাশছোঁয়া। প্রতিটি ধাপে স্বচ্ছ যোগাযোগ ছিল।` },
+    { name: "মেহনাজ সুলতানা", role: "Founder, Glow Studio", rating: 5,
+      quote: `${subject}-এর জন্য অনেক জায়গায় খোঁজ নিয়েছি — Webtrix-ই সবচেয়ে প্রিমিয়াম কাজ ও সময়মতো ডেলিভারি দিয়েছে।` },
+    { name: "রাকিবুল হাসান", role: "মালিক, ShopEase", rating: 5,
+      quote: `প্রথম দিন থেকেই ${subject}-এ ROI পেয়েছি। টিমটা টেকনিক্যাল ও মার্কেটিং — দুটোই বোঝে, তাই কাজ সহজ হয়েছে।` },
+    { name: "ফারহানা আক্তার", role: "ডিরেক্টর, EduSpark", rating: 5,
+      quote: `${subject} সেটআপের পর আমাদের ব্র্যান্ড আরও প্রফেশনাল লাগছে, কাস্টমার ট্রাস্টও অনেক বেড়েছে।` },
+  ];
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % reviews.length), 5000);
+    return () => clearInterval(t);
+  }, [reviews.length]);
+
+  const prev = () => setI((v) => (v - 1 + reviews.length) % reviews.length);
+  const next = () => setI((v) => (v + 1) % reviews.length);
+
+  return (
+    <section className="border-y border-border/60 bg-surface/40 py-16 md:py-20">
+      <div className="mx-auto max-w-5xl px-5">
+        <div className="flex items-center gap-3">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-lavender/10 text-lavender">
+            <Star className="h-4 w-4" />
+          </span>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lavender">ক্লায়েন্ট রিভিউ</p>
+        </div>
+        <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          {subject}-এর জন্য বাস্তব ক্লায়েন্টদের মতামত
+        </h2>
+
+        <div className="relative mt-8 overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-10">
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${i * 100}%)` }}
+          >
+            {reviews.map((r) => (
+              <div key={r.name} className="w-full shrink-0 px-1">
+                <div className="flex gap-1 text-neon">
+                  {Array.from({ length: r.rating }).map((_, k) => (
+                    <Star key={k} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+                <p className="mt-5 text-lg leading-relaxed text-foreground md:text-xl">"{r.quote}"</p>
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                  <div
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full font-display font-semibold text-brand"
+                    style={{ background: "var(--gradient-hero)" }}
+                  >
+                    {r.name[0]}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-semibold">{r.name}</div>
+                    <div className="truncate text-xs text-muted-foreground">{r.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between">
+            <div className="flex gap-2">
+              {reviews.map((_, k) => (
+                <button
+                  key={k}
+                  onClick={() => setI(k)}
+                  aria-label={`রিভিউ ${k + 1}`}
+                  className={`h-2 rounded-full transition-all ${k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
+                />
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- SERVICE FAQ ---------- */
+function ServiceFAQ({ subject }: { subject: string }) {
+  const faqs = [
+    { q: `${subject} বানাতে কত সময় লাগে?`,
+      a: `স্কোপ অনুযায়ী সাধারণত ৭–২১ কার্যদিবসের মধ্যে ${subject} ডেলিভারি করা হয়। ছোট প্রজেক্ট আরও দ্রুত সম্ভব।` },
+    { q: `${subject}-এর খরচ কেমন হবে?`,
+      a: `প্রয়োজনীয় ফিচার, ডিজাইন লেভেল ও ইন্টিগ্রেশনের উপর নির্ভর করে ${subject}-এর কোটেশন দেওয়া হয়। WhatsApp-এ যোগাযোগ করলে ২৪ ঘণ্টার মধ্যে ফ্রি কোটেশন পাবেন।` },
+    { q: `লঞ্চের পরে সাপোর্ট পাবো?`,
+      a: `হ্যাঁ। প্রথম ৩০ দিন ফ্রি bug-fix সাপোর্ট এবং এরপর ইচ্ছেমতো মাসিক মেইনটেন্যান্স প্ল্যান নেওয়া যাবে।` },
+    { q: `আমার নিজস্ব ব্র্যান্ড কালার ও লোগো ব্যবহার করা যাবে?`,
+      a: `অবশ্যই। ${subject} সম্পূর্ণভাবে আপনার ব্র্যান্ড গাইডলাইন — কালার, ফন্ট, লোগো — অনুযায়ী কাস্টমাইজ করা হবে।` },
+    { q: `পেমেন্ট প্রসেস কীভাবে?`,
+      a: `৫০% অ্যাডভান্স এবং বাকি ৫০% ডেলিভারির আগে। bKash, Nagad, ব্যাংক ট্রান্সফার — সব পেমেন্ট অপশন সাপোর্ট করি।` },
+    { q: `সোর্স কোড / ফাইলের মালিকানা কি আমার থাকবে?`,
+      a: `হ্যাঁ, ফাইনাল ডেলিভারির পর ${subject}-এর সোর্স ফাইল, কোড ও অ্যাডমিন অ্যাক্সেস সম্পূর্ণভাবে আপনার হাতে হস্তান্তর করা হবে।` },
+  ];
+  const [open, setOpen] = useState<number | null>(0);
+
+  return (
+    <section className="py-16 md:py-20">
+      <div className="mx-auto max-w-4xl px-5">
+        <div className="flex items-center gap-3">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-electric/10 text-electric">
+            <HelpCircle className="h-4 w-4" />
+          </span>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">সচরাচর প্রশ্ন</p>
+        </div>
+        <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          {subject} সম্পর্কে যা মানুষ প্রায়ই জিজ্ঞেস করে
+        </h2>
+        <div className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
+          {faqs.map((f, k) => {
+            const isOpen = open === k;
+            return (
+              <div key={f.q}>
+                <button
+                  onClick={() => setOpen(isOpen ? null : k)}
+                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-surface/40"
+                  aria-expanded={isOpen}
+                >
+                  <span className="font-display text-base font-semibold text-foreground sm:text-lg">{f.q}</span>
+                  <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition ${isOpen ? "bg-electric text-brand" : "bg-surface-2 text-muted-foreground"}`}>
+                    {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    {f.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- SERVICE LEAD FORM ---------- */
+function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", budget: "", message: "" });
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = encodeURIComponent(
+      `আসসালামু আলাইকুম Webtrix,\n\nআমি "${serviceTitle}" সার্ভিসটি নিতে চাই।\n\nনামঃ ${form.name}\nফোনঃ ${form.phone}\nইমেইলঃ ${form.email}\nবাজেটঃ ${form.budget}\n\nবিস্তারিতঃ ${form.message}`,
+    );
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    setSent(true);
+  };
+
+  return (
+    <section className="border-y border-border/60 bg-surface/40 py-16 md:py-20">
+      <div className="mx-auto max-w-5xl px-5">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-neon/10 text-neon">
+                <Send className="h-4 w-4" />
+              </span>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">লিড ফর্ম</p>
+            </div>
+            <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+              {serviceTitle}-এর জন্য <span className="text-gradient">ফ্রি কোটেশন</span> নিন
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              নিচের ফর্মটি পূরণ করুন — আমাদের স্ট্র্যাটেজিস্ট ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করে কাস্টম প্ল্যান, টাইমলাইন ও কোটেশন পাঠাবেন। কোনো hidden ফি নেই, কমিটমেন্টও নয়।
+            </p>
+            <ul className="mt-6 space-y-3 text-sm text-foreground">
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> আপনার তথ্য ১০০% গোপন থাকবে</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> ফ্রি কনসালটেশন ও প্রজেক্ট রোডম্যাপ</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> কোটেশনে সম্মতি হলে তবেই কাজ শুরু</li>
+            </ul>
+          </div>
+
+          <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-card p-6 md:p-8">
+            <div className="grid gap-4">
+              <LeadField label="আপনার নাম *" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="যেমনঃ রফিকুল ইসলাম" required />
+              <LeadField label="ফোন / WhatsApp *" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="+৮৮০ ১XXX XXXXXX" required />
+              <LeadField label="ইমেইল" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} placeholder="you@company.com" />
+              <label className="text-xs font-medium text-muted-foreground">
+                বাজেট রেঞ্জ
+                <select
+                  value={form.budget}
+                  onChange={(e) => setForm({ ...form, budget: e.target.value })}
+                  className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none"
+                >
+                  <option value="">বাজেট বেছে নিন</option>
+                  <option>৳ ১০,০০০ – ৩০,০০০</option>
+                  <option>৳ ৩০,০০০ – ১,০০,০০০</option>
+                  <option>৳ ১,০০,০০০ – ৫,০০,০০০</option>
+                  <option>৳ ৫,০০,০০০+</option>
+                </select>
+              </label>
+              <label className="text-xs font-medium text-muted-foreground">
+                বিস্তারিত বলুন
+                <textarea
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder={`${serviceTitle} সম্পর্কে আপনার প্রয়োজন লিখুন...`}
+                  className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+                />
+              </label>
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]"
+              >
+                <Send className="h-4 w-4" /> কোটেশনের জন্য পাঠান
+              </button>
+              {sent && (
+                <p className="rounded-xl border border-neon/30 bg-neon/10 px-4 py-3 text-xs text-neon">
+                  ধন্যবাদ! আপনার তথ্য WhatsApp-এ পাঠানো হয়েছে — আমরা শীঘ্রই যোগাযোগ করব।
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LeadField({
+  label, value, onChange, placeholder, type = "text", required,
+}: {
+  label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; type?: string; required?: boolean;
+}) {
+  return (
+    <label className="text-xs font-medium text-muted-foreground">
+      {label}
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required={required}
+        className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+      />
+    </label>
   );
 }

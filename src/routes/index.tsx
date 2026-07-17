@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
-  Phone, Mail, MapPin, TrendingUp, Zap,
+  Phone, Mail, MapPin, TrendingUp, Zap, ChevronLeft, ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
@@ -19,7 +19,19 @@ export const Route = createFileRoute("/")({
 });
 
 
-const clients = ["Acme", "Nexlify", "Orbit", "Pulse", "Vantage", "Kairo", "Northwind", "Lumen", "Zephyr", "Halcyon"];
+/* Client logo marks — SVG-based branded chips (name-এর পরিবর্তে "logo" চিহ্ন) */
+const clientLogos: { name: string; symbol: string; from: string; to: string }[] = [
+  { name: "Acme",       symbol: "◆", from: "#3B82F6", to: "#8B5CF6" },
+  { name: "Nexlify",    symbol: "▲", from: "#10B981", to: "#3B82F6" },
+  { name: "Orbit",      symbol: "◉", from: "#8B5CF6", to: "#10B981" },
+  { name: "Pulse",      symbol: "❤", from: "#F43F5E", to: "#8B5CF6" },
+  { name: "Vantage",    symbol: "⬢", from: "#3B82F6", to: "#10B981" },
+  { name: "Kairo",      symbol: "✦", from: "#F59E0B", to: "#8B5CF6" },
+  { name: "Northwind",  symbol: "❄", from: "#38BDF8", to: "#3B82F6" },
+  { name: "Lumen",      symbol: "☀", from: "#F59E0B", to: "#F43F5E" },
+  { name: "Zephyr",     symbol: "≋", from: "#10B981", to: "#38BDF8" },
+  { name: "Halcyon",    symbol: "◐", from: "#8B5CF6", to: "#3B82F6" },
+];
 
 const stories = [
   { name: "রাশেদ আহমেদ", role: "প্রতিষ্ঠাতা, ShopKart BD", quote: "Webtrix আমাদের স্টোর রিবিল্ড করার পর মাত্র দুই মাসে সেল ৩.২ গুণ বেড়েছে। এদের টিম কনভার্সন ভালো বোঝে।", rating: 5 },
@@ -165,17 +177,33 @@ function Hero() {
   );
 }
 
-/* ---------- CLIENT LOGOS ---------- */
+/* ---------- CLIENT LOGOS (logo-marks, not text names) ---------- */
 function ClientLogos() {
-  const row = [...clients, ...clients];
+  const row = [...clientLogos, ...clientLogos];
   return (
     <section className="border-y border-border/60 bg-surface/40 py-10">
       <div className="mx-auto max-w-7xl px-5">
-        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">বিশ্বজুড়ে অ্যাম্বিশাস টিমের বিশ্বস্ত পার্টনার</p>
+        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          বিশ্বজুড়ে অ্যাম্বিশাস টিমের বিশ্বস্ত পার্টনার
+        </p>
         <div className="mt-6 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center gap-14">
+          <div className="animate-marquee flex w-max items-center gap-10">
             {row.map((c, i) => (
-              <span key={i} className="whitespace-nowrap font-display text-2xl font-semibold text-muted-foreground/70">{c}</span>
+              <div
+                key={i}
+                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
+              >
+                <span
+                  className="grid h-10 w-10 place-items-center rounded-xl font-display text-lg font-bold text-white shadow-md"
+                  style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}
+                  aria-hidden="true"
+                >
+                  {c.symbol}
+                </span>
+                <span className="font-display text-lg font-semibold tracking-tight text-foreground/85">
+                  {c.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
@@ -248,8 +276,12 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
               <div className="inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1 text-xs font-semibold text-neon">
                 <MessageCircle className="h-3.5 w-3.5" /> সরাসরি WhatsApp
               </div>
-              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">আগামী ৫ মিনিটের মধ্যে একজন স্ট্র্যাটেজিস্টের সাথে কথা বলুন।</h3>
-              <p className="mt-2 text-sm text-muted-foreground">WhatsApp-এ আপনার প্রজেক্ট আইডিয়া পাঠান — আজই ফ্রি কোটেশন, টাইমলাইন ও রোডম্যাপ পান।</p>
+              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+                আপনার আইডিয়া, আমাদের এক্সপার্টিজ — চলুন একসাথে বসে আপনার পরবর্তী প্রজেক্টটি সাজিয়ে ফেলি।
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                WhatsApp-এ একটি মেসেজেই শুরু — কোনো ফর্ম, কোনো ঝামেলা নেই। আমাদের টিম আপনার প্রয়োজন বুঝে ফ্রি পরামর্শ, কাস্টম রোডম্যাপ ও ট্রান্সপারেন্ট কোটেশন পাঠাবে।
+              </p>
             </div>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90">
               <MessageCircle className="h-4 w-4" /> WhatsApp-এ চ্যাট করুন
@@ -298,30 +330,70 @@ function Services() {
   );
 }
 
-/* ---------- SUCCESS STORIES ---------- */
+/* ---------- SUCCESS STORIES (auto-slider) ---------- */
 function SuccessStories() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % stories.length), 5000);
+    return () => clearInterval(t);
+  }, []);
+  const prev = () => setI((v) => (v - 1 + stories.length) % stories.length);
+  const next = () => setI((v) => (v + 1) % stories.length);
+
   return (
     <section className="py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5">
+      <div className="mx-auto max-w-5xl px-5">
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {stories.map((s) => (
-            <div key={s.name} className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-              <div className="flex gap-1 text-neon">
-                {Array.from({ length: s.rating }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
-              </div>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground">"{s.quote}"</p>
-              <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full font-display font-semibold" style={{ background: "var(--gradient-hero)" }}>
-                  {s.name[0]}
+
+        <div className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10">
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${i * 100}%)` }}
+          >
+            {stories.map((s) => (
+              <div key={s.name} className="w-full shrink-0 px-1">
+                <div className="flex gap-1 text-neon">
+                  {Array.from({ length: s.rating }).map((_, k) => (
+                    <Star key={k} className="h-4 w-4 fill-current" />
+                  ))}
                 </div>
-                <div className="min-w-0">
-                  <div className="truncate text-sm font-semibold">{s.name}</div>
-                  <div className="truncate text-xs text-muted-foreground">{s.role}</div>
+                <p className="mt-5 text-lg leading-relaxed text-foreground md:text-xl">"{s.quote}"</p>
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                  <div
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full font-display font-semibold text-brand"
+                    style={{ background: "var(--gradient-hero)" }}
+                  >
+                    {s.name[0]}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-semibold">{s.name}</div>
+                    <div className="truncate text-xs text-muted-foreground">{s.role}</div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between">
+            <div className="flex gap-2">
+              {stories.map((_, k) => (
+                <button
+                  key={k}
+                  onClick={() => setI(k)}
+                  aria-label={`স্টোরি ${k + 1}`}
+                  className={`h-2 rounded-full transition-all ${k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
+                />
+              ))}
             </div>
-          ))}
+            <div className="flex gap-2">
+              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
