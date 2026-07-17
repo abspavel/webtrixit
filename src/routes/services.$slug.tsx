@@ -23,13 +23,13 @@ export const Route = createFileRoute("/services/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Service not found — Webtrix IT Solution" },
+          { title: "সার্ভিসটি পাওয়া যায়নি — Webtrix IT Solution" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     const { service } = loaderData;
-    const title = `${service.title} — Webtrix IT Solution`;
+    const title = `${service.titleBn} — Webtrix IT Solution`;
     return {
       meta: [
         { title },
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/services/$slug")({
         <h1 className="font-display text-3xl font-bold">সার্ভিসটি খুঁজে পাওয়া যায়নি</h1>
         <p className="mt-3 text-muted-foreground">এই লিঙ্কটি সম্ভবত ভুল বা সরানো হয়েছে।</p>
         <Link to="/" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
-          <ArrowLeft className="h-4 w-4" /> Home-এ ফিরে যান
+          <ArrowLeft className="h-4 w-4" /> হোমে ফিরে যান
         </Link>
       </div>
     </div>
@@ -74,11 +74,11 @@ function ServiceDetail() {
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
-          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="Home">
+          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="হোম">
             <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
           </Link>
           <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-surface-2 sm:text-sm">
-            <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">All Services</span><span className="sm:hidden">Back</span>
+            <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">সব সার্ভিস</span><span className="sm:hidden">ব্যাক</span>
           </Link>
         </div>
       </header>
@@ -88,24 +88,23 @@ function ServiceDetail() {
         <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
         <div className="mx-auto max-w-5xl px-5 py-16 md:py-24">
           <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-3.5 w-3.5" /> Services
+            <ArrowLeft className="h-3.5 w-3.5" /> সার্ভিস
           </Link>
           <div className="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-electric/15 text-electric">
             <Icon className="h-7 w-7" />
           </div>
           <h1 className="mt-5 font-display text-4xl font-bold leading-[1.1] sm:text-5xl">
-            {service.title}
+            {service.titleBn}
           </h1>
-          <p className="mt-2 text-lg font-medium text-electric">{service.titleBn}</p>
           <p className="mt-6 max-w-3xl text-base text-muted-foreground sm:text-lg">
             {service.tagline}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href={waUrl(service.title)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
+            <a href={waUrl(service.titleBn)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
               <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
             </a>
             <a href="#demo" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-              Live Demo দেখুন <ArrowRight className="h-4 w-4" />
+              লাইভ ডেমো দেখুন <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -152,7 +151,7 @@ function ServiceDetail() {
       {/* Use cases */}
       <section className="border-y border-border/60 bg-surface/40 py-16">
         <div className="mx-auto max-w-5xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Use cases</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">ইউজ কেস</p>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">কাদের জন্য উপযুক্ত</h2>
           <div className="mt-8 flex flex-wrap gap-3">
             {service.useCases.map((u) => (
@@ -167,9 +166,9 @@ function ServiceDetail() {
       {/* Demo */}
       <section id="demo" className="py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Live demo</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">লাইভ ডেমো</p>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-            আপনার জন্য <span className="text-gradient">Live Demo</span>
+            আপনার জন্য <span className="text-gradient">লাইভ ডেমো</span>
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
             নিচের লিঙ্কে ক্লিক করে আমাদের বানানো একটি সম্পূর্ণ demo দেখুন। প্রতিটি অংশ কীভাবে কাজ করে, তার বাস্তব অভিজ্ঞতা নিতে পারবেন।
@@ -182,7 +181,7 @@ function ServiceDetail() {
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
               <div className="min-w-0">
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-xs font-semibold text-neon">
-                  <span className="h-2 w-2 rounded-full bg-neon" /> Live Preview
+                  <span className="h-2 w-2 rounded-full bg-neon" /> লাইভ প্রিভিউ
                 </div>
                 <h3 className="font-display text-2xl font-bold sm:text-3xl">{service.demoLabel}</h3>
                 <p className="mt-2 break-all text-sm text-muted-foreground">{service.demoUrl}</p>
@@ -193,7 +192,7 @@ function ServiceDetail() {
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
               >
-                Demo দেখুন <ExternalLink className="h-4 w-4" />
+                ডেমো দেখুন <ExternalLink className="h-4 w-4" />
               </a>
             </div>
             <p className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
@@ -211,10 +210,10 @@ function ServiceDetail() {
             আজই শুরু করুন আপনার <span className="text-gradient">{service.titleBn}</span> প্রজেক্ট
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            WhatsApp-এ মেসেজ দিন — free consultation, timeline ও quote পাবেন ২৪ ঘণ্টার মধ্যে।
+            WhatsApp-এ মেসেজ দিন — ফ্রি কনসালটেশন, টাইমলাইন ও কোটেশন পাবেন ২৪ ঘণ্টার মধ্যে।
           </p>
           <a
-            href={waUrl(service.title)}
+            href={waUrl(service.titleBn)}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]"
@@ -227,7 +226,7 @@ function ServiceDetail() {
       {/* Related services */}
       <section className="border-t border-border/60 bg-surface/40 py-16">
         <div className="mx-auto max-w-6xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">More services</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">আরও সার্ভিস</p>
           <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">অন্যান্য সার্ভিস</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((r) => {
@@ -242,7 +241,7 @@ function ServiceDetail() {
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-electric/10 text-electric">
                     <RIcon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold">{r.title}</h3>
+                  <h3 className="mt-4 font-display text-lg font-semibold">{r.titleBn}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{r.desc}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-electric">
                     বিস্তারিত দেখুন <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
@@ -263,10 +262,10 @@ function ServiceDetail() {
 
       {/* Floating WhatsApp */}
       <a
-        href={waUrl(service.title)}
+        href={waUrl(service.titleBn)}
         target="_blank"
         rel="noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label="WhatsApp-এ চ্যাট করুন"
         className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-neon text-brand shadow-[var(--shadow-neon)] transition hover:scale-105"
       >
         <MessageCircle className="h-6 w-6" />
