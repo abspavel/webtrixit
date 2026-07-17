@@ -511,14 +511,15 @@ function FinalCTA() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90">
                   <MessageCircle className="h-4 w-4" /> WhatsApp করুন
                 </a>
-                <a href="mailto:hello@webtrixit.com" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
+                <a href="mailto:webtrixofficial@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
                   <Mail className="h-4 w-4" /> ইমেইল করুন
                 </a>
               </div>
               <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
-                <div className="flex items-center gap-3"><Phone className="h-4 w-4 text-electric" /> +৮৮০ ১৭০০ ০০০ ০০০</div>
-                <div className="flex items-center gap-3"><Mail className="h-4 w-4 text-neon" /> hello@webtrixit.com</div>
-                <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> ঢাকা, বাংলাদেশ · বিশ্বজুড়ে সার্ভিস</div>
+                <a href="tel:+8801835985730" className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4 text-electric" /> মোবাইল: 01835985730</a>
+                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-foreground"><MessageCircle className="h-4 w-4 text-neon" /> WhatsApp: 01835985730</a>
+                <a href="mailto:webtrixofficial@gmail.com" className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4 text-neon" /> webtrixofficial@gmail.com</a>
+                <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Karnafully, Chattogram, Bangladesh</div>
               </div>
             </div>
             <form onSubmit={(e) => e.preventDefault()} className="rounded-2xl border border-border bg-surface/70 p-6 backdrop-blur">
