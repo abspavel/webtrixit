@@ -488,10 +488,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg" style={{ background: "var(--gradient-hero)" }}>
-            <Sparkles className="h-4 w-4 text-brand-foreground" />
-          </span>
-          <span className="truncate font-display font-semibold">Webtrix IT Solution</span>
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto shrink-0 rounded-md bg-white/95 px-2 py-1" />
         </div>
         <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. All rights reserved.</p>
       </div>
