@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Webtrix IT Solution — Websites, Software & Digital Marketing" },
+      { name: "description", content: "Webtrix IT Solution designs premium websites, e-commerce, LMS platforms and custom software, plus AI video ads and social media creatives." },
+      { name: "author", content: "Webtrix IT Solution" },
+      { property: "og:title", content: "Webtrix IT Solution — Digital Agency" },
+      { property: "og:description", content: "Landing pages, e-commerce, LMS, custom software, AI video ads and digital marketing built to convert." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -104,6 +103,9 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" />
         <HeadContent />
       </head>
       <body>
