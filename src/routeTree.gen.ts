@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesReadymadeEcommerceWebsiteRouteImport } from './routes/services.readymade-ecommerce-website'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -17,6 +18,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesReadymadeEcommerceWebsiteRoute =
+  ServicesReadymadeEcommerceWebsiteRouteImport.update({
+    id: '/services/readymade-ecommerce-website',
+    path: '/services/readymade-ecommerce-website',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
@@ -26,27 +33,35 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/services/$slug'
+  fullPaths: '/' | '/services/$slug' | '/services/readymade-ecommerce-website'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/services/$slug'
-  id: '__root__' | '/' | '/services/$slug'
+  to: '/' | '/services/$slug' | '/services/readymade-ecommerce-website'
+  id:
+    | '__root__'
+    | '/'
+    | '/services/$slug'
+    | '/services/readymade-ecommerce-website'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  ServicesReadymadeEcommerceWebsiteRoute: typeof ServicesReadymadeEcommerceWebsiteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -56,6 +71,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/readymade-ecommerce-website': {
+      id: '/services/readymade-ecommerce-website'
+      path: '/services/readymade-ecommerce-website'
+      fullPath: '/services/readymade-ecommerce-website'
+      preLoaderRoute: typeof ServicesReadymadeEcommerceWebsiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$slug': {
@@ -71,6 +93,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  ServicesReadymadeEcommerceWebsiteRoute:
+    ServicesReadymadeEcommerceWebsiteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
