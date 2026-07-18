@@ -4,9 +4,10 @@ import { toast } from "sonner";
 import { getSupabase } from "@/integrations/supabase/client";
 import {
   Loader2, LogOut, Search, RefreshCw, Trash2, Phone, MessageCircle, Mail,
-  ShieldCheck, Inbox,
+  ShieldCheck, Inbox, Link2, Save,
 } from "lucide-react";
 import logoUrl from "@/assets/webtrix-logo.svg";
+import { services } from "@/lib/services-data";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin Dashboard — Webtrix" }, { name: "robots", content: "noindex" }] }),
@@ -319,8 +320,124 @@ function AdminPage() {
             </>
           )}
         </div>
+
+        <ServiceLinksPanel />
       </div>
     </main>
+  );
+}
+
+type ServiceLinkRow = { service_slug: string; demo_url: string | null; sale_url: string | null };
+
+function ServiceLinksPanel() {
+  const [rows, setRows] = useState<Record<string, { demo_url: string; sale_url: string }>>({});
+  const [loading, setLoading] = useState(false);
+  const [savingSlug, setSavingSlug] = useState<string | null>(null);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    try {
+      const supabase = getSupabase();
+      const { data, error } = await supabase.from("service_links").select("service_slug, demo_url, sale_url");
+      if (error) throw error;
+      const map: Record<string, { demo_url: string; sale_url: string }> = {};
+      for (const s of services) map[s.slug] = { demo_url: "", sale_url: "" };
+      for (const r of (data ?? []) as ServiceLinkRow[]) {
+        map[r.service_slug] = { demo_url: r.demo_url ?? "", sale_url: r.sale_url ?? "" };
+      }
+      setRows(map);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "লিংক লোড হয়নি");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  async function save(slug: string) {
+    const row = rows[slug];
+    if (!row) return;
+    setSavingSlug(slug);
+    try {
+      const supabase = getSupabase();
+      const { error } = await supabase.from("service_links").upsert(
+        { service_slug: slug, demo_url: row.demo_url || null, sale_url: row.sale_url || null, updated_at: new Date().toISOString() },
+        { onConflict: "service_slug" },
+      );
+      if (error) throw error;
+      toast.success("লিংক সেভ হয়েছে");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "সেভ ব্যর্থ");
+    } finally {
+      setSavingSlug(null);
+    }
+  }
+
+  return (
+    <section className="mt-10">
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 className="flex items-center gap-2 text-xl font-bold text-foreground sm:text-2xl">
+            <Link2 className="h-5 w-5 text-electric" /> সার্ভিস ডেমো / সেল লিংক
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            প্রতিটি সার্ভিসের জন্য লাইভ ডেমো URL ও কেনার/অর্ডার পেজ URL এখান থেকে আপডেট করুন। খালি রাখলে ডিফল্ট ব্যবহার হবে।
+          </p>
+        </div>
+        <button
+          onClick={load}
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface"
+        >
+          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
+        </button>
+      </div>
+
+      <div className="overflow-hidden rounded-2xl border border-border bg-surface/50">
+        {services.map((s) => {
+          const row = rows[s.slug] ?? { demo_url: "", sale_url: "" };
+          return (
+            <div key={s.slug} className="border-b border-border/60 p-4 last:border-0 sm:p-5">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="font-semibold text-foreground">{s.titleBn}</div>
+                  <div className="text-[11px] text-muted-foreground">/services/{s.slug}</div>
+                </div>
+                <button
+                  onClick={() => save(s.slug)}
+                  disabled={savingSlug === s.slug}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition hover:opacity-90 disabled:opacity-60"
+                >
+                  {savingSlug === s.slug ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />} সেভ
+                </button>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="block">
+                  <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ডেমো URL</span>
+                  <input
+                    type="url"
+                    value={row.demo_url}
+                    onChange={(e) => setRows((prev) => ({ ...prev, [s.slug]: { ...row, demo_url: e.target.value } }))}
+                    placeholder="https://... বা /demo/..."
+                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">সেল / অর্ডার URL</span>
+                  <input
+                    type="url"
+                    value={row.sale_url}
+                    onChange={(e) => setRows((prev) => ({ ...prev, [s.slug]: { ...row, sale_url: e.target.value } }))}
+                    placeholder="https://..."
+                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-neon focus:outline-none"
+                  />
+                </label>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
