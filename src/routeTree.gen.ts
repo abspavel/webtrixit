@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSoftwareDevelopmentRouteImport } from './routes/services.software-development'
 import { Route as ServicesSmmPanelWebsiteRouteImport } from './routes/services.smm-panel-website'
@@ -31,6 +33,16 @@ import { Route as DemoFreshcartGroceryRouteImport } from './routes/demo.freshcar
 import { Route as DemoEduprimeLmsRouteImport } from './routes/demo.eduprime-lms'
 import { Route as DemoBrandkitDesignRouteImport } from './routes/demo.brandkit-design'
 
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -147,6 +159,8 @@ const DemoBrandkitDesignRoute = DemoBrandkitDesignRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/demo/brandkit-design': typeof DemoBrandkitDesignRoute
   '/demo/eduprime-lms': typeof DemoEduprimeLmsRoute
   '/demo/freshcart-grocery': typeof DemoFreshcartGroceryRoute
@@ -170,6 +184,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/demo/brandkit-design': typeof DemoBrandkitDesignRoute
   '/demo/eduprime-lms': typeof DemoEduprimeLmsRoute
   '/demo/freshcart-grocery': typeof DemoFreshcartGroceryRoute
@@ -194,6 +210,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/demo/brandkit-design': typeof DemoBrandkitDesignRoute
   '/demo/eduprime-lms': typeof DemoEduprimeLmsRoute
   '/demo/freshcart-grocery': typeof DemoFreshcartGroceryRoute
@@ -219,6 +237,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/auth'
     | '/demo/brandkit-design'
     | '/demo/eduprime-lms'
     | '/demo/freshcart-grocery'
@@ -242,6 +262,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
+    | '/auth'
     | '/demo/brandkit-design'
     | '/demo/eduprime-lms'
     | '/demo/freshcart-grocery'
@@ -265,6 +287,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/auth'
     | '/demo/brandkit-design'
     | '/demo/eduprime-lms'
     | '/demo/freshcart-grocery'
@@ -289,6 +313,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   DemoBrandkitDesignRoute: typeof DemoBrandkitDesignRoute
   DemoEduprimeLmsRoute: typeof DemoEduprimeLmsRoute
   DemoFreshcartGroceryRoute: typeof DemoFreshcartGroceryRoute
@@ -313,6 +339,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -465,6 +505,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   DemoBrandkitDesignRoute: DemoBrandkitDesignRoute,
   DemoEduprimeLmsRoute: DemoEduprimeLmsRoute,
   DemoFreshcartGroceryRoute: DemoFreshcartGroceryRoute,
