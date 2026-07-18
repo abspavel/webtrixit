@@ -21,7 +21,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
-  const [demoUrl, setDemoUrl] = useState<string>(demoUrl);
+  const [demoUrl, setDemoUrl] = useState<string>(service.demoUrl);
   const [saleUrl, setSaleUrl] = useState<string>("");
 
   useEffect(() => {
