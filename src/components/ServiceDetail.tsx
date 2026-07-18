@@ -583,13 +583,19 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
               </label>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]"
+                disabled={saving}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px] disabled:opacity-60"
               >
-                <Send className="h-4 w-4" /> কোটেশনের জন্য পাঠান
+                <Send className="h-4 w-4" /> {saving ? "পাঠানো হচ্ছে..." : "কোটেশনের জন্য পাঠান"}
               </button>
-              {sent && (
+              {errorMsg && (
+                <p className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">
+                  {errorMsg}
+                </p>
+              )}
+              {sent && !errorMsg && (
                 <p className="rounded-xl border border-neon/30 bg-neon/10 px-4 py-3 text-xs text-neon">
-                  ধন্যবাদ! আপনার তথ্য WhatsApp-এ পাঠানো হয়েছে — আমরা শীঘ্রই যোগাযোগ করব।
+                  ধন্যবাদ! আপনার তথ্য সেভ হয়েছে এবং WhatsApp-এ পাঠানো হয়েছে — আমরা শীঘ্রই যোগাযোগ করব।
                 </p>
               )}
             </div>
