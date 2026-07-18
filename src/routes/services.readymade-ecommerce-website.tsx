@@ -54,7 +54,7 @@ const templates: Template[] = [
     gradient: "from-electric to-lavender",
     emoji: "👗",
     features: ["ভ্যারিয়েন্ট (সাইজ/কালার)", "লুকবুক গ্যালারি", "bKash / Nagad / COD"],
-    demoUrl: "https://example.com/demo-luxefash",
+    demoUrl: "/demo/kartplus-ecommerce",
   },
   {
     id: "gadgetzone",
@@ -64,7 +64,7 @@ const templates: Template[] = [
     gradient: "from-neon to-electric",
     emoji: "📱",
     features: ["Compare প্রোডাক্ট", "রিভিউ সিস্টেম", "কুরিয়ার API"],
-    demoUrl: "https://example.com/demo-gadgetzone",
+    demoUrl: "/demo/kartplus-ecommerce",
   },
   {
     id: "freshcart",
@@ -75,7 +75,7 @@ const templates: Template[] = [
     gradient: "from-neon to-lavender",
     emoji: "🛒",
     features: ["জোন-ভিত্তিক ডেলিভারি", "টাইম স্লট বুকিং", "লাইভ অর্ডার ট্র্যাকিং"],
-    demoUrl: "https://example.com/demo-freshcart",
+    demoUrl: "/demo/freshcart-grocery",
   },
   {
     id: "beautybox",
@@ -85,7 +85,7 @@ const templates: Template[] = [
     gradient: "from-lavender to-electric",
     emoji: "💄",
     features: ["শেড সিলেক্টর", "বান্ডেল অফার", "লয়্যালটি পয়েন্ট"],
-    demoUrl: "https://example.com/demo-beautybox",
+    demoUrl: "/demo/kartplus-ecommerce",
   },
   {
     id: "furnicraft",
@@ -95,7 +95,7 @@ const templates: Template[] = [
     gradient: "from-electric to-neon",
     emoji: "🛋️",
     features: ["3D-ভিউ রেডি", "কাস্টম অর্ডার ফর্ম", "EMI পেমেন্ট"],
-    demoUrl: "https://example.com/demo-furnicraft",
+    demoUrl: "/demo/kartplus-ecommerce",
   },
   {
     id: "bookshelf",
@@ -105,7 +105,7 @@ const templates: Template[] = [
     gradient: "from-lavender to-neon",
     emoji: "📚",
     features: ["ক্যাটাগরি ফিল্টার", "প্রি-অর্ডার", "লেখক পেজ"],
-    demoUrl: "https://example.com/demo-bookshelf",
+    demoUrl: "/demo/kartplus-ecommerce",
   },
   {
     id: "kidsland",
@@ -115,7 +115,7 @@ const templates: Template[] = [
     gradient: "from-neon to-electric",
     emoji: "🧸",
     features: ["এজ-গ্রুপ ফিল্টার", "গিফট র‍্যাপ অপশন", "সেফটি ব্যাজ"],
-    demoUrl: "https://example.com/demo-kidsland",
+    demoUrl: "/demo/kartplus-ecommerce",
   },
   {
     id: "healthplus",
@@ -125,7 +125,7 @@ const templates: Template[] = [
     gradient: "from-electric to-lavender",
     emoji: "💊",
     features: ["প্রেসক্রিপশন আপলোড", "সাবস্ক্রিপশন অর্ডার", "24/7 চ্যাট"],
-    demoUrl: "https://example.com/demo-healthplus",
+    demoUrl: "/demo/freshcart-grocery",
   },
 ];
 
