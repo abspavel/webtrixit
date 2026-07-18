@@ -342,19 +342,19 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
           className="relative overflow-hidden rounded-3xl border border-border p-8 md:p-10"
           style={{ background: isNeon ? "linear-gradient(120deg, oklch(0.19 0.04 265), oklch(0.22 0.05 165))" : "linear-gradient(120deg, oklch(0.19 0.04 265), oklch(0.22 0.05 258))" }}
         >
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 sm:flex sm:justify-between">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1 text-xs font-semibold text-neon">
                 <MessageCircle className="h-3.5 w-3.5" /> সরাসরি WhatsApp
               </div>
-              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+              <h3 className="mt-3 font-display text-xl font-bold sm:text-3xl">
                 আপনার আইডিয়া, আমাদের এক্সপার্টিজ — চলুন একসাথে বসে আপনার পরবর্তী প্রজেক্টটি সাজিয়ে ফেলি।
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 WhatsApp-এ একটি মেসেজেই শুরু — কোনো ফর্ম, কোনো ঝামেলা নেই। আমাদের টিম আপনার প্রয়োজন বুঝে ফ্রি পরামর্শ, কাস্টম রোডম্যাপ ও ট্রান্সপারেন্ট কোটেশন পাঠাবে।
               </p>
             </div>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90">
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90 sm:w-auto">
               <MessageCircle className="h-4 w-4" /> WhatsApp-এ চ্যাট করুন
             </a>
           </div>
