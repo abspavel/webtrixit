@@ -1,28 +1,46 @@
 ## লক্ষ্য
-আপনার নিজের Supabase project কানেক্ট করা এবং leads + admin panel-এর ভিত্তি তৈরি করা।
+১) হোমপেজের contact form-ও Supabase-এ save করানো
+২) `/auth` login + `/admin` protected dashboard বানানো যেখানে সব leads দেখা, filter, status update, delete করা যাবে
 
 ## ধাপসমূহ
 
-1. **Secure form open করা** — নিচের ৪টি secret-এর জন্য একটি secure form open করব যেখানে আপনি Supabase dashboard থেকে value গুলো paste করবেন:
-   - `SUPABASE_URL` — Project URL (https://xxxxx.supabase.co)
-   - `SUPABASE_ANON_KEY` — anon/public key
-   - `SUPABASE_SERVICE_ROLE_KEY` — service role key (secret — কখনো frontend-এ যাবে না)
-   - `SUPABASE_PROJECT_ID` — project reference id
+### ধাপ ১ — Browser-side Supabase client
+Browser থেকে login করতে হবে, তাই URL + **anon key** browser bundle-এ দরকার (এই দুটো public-safe)। যেহেতু আপনার saved secrets `MY_SUPABASE_*` server-only, একটা secure form খুলব যেখানে **একই দুটো value** `VITE_MY_SUPABASE_URL` ও `VITE_MY_SUPABASE_ANON_KEY` নামে paste করবেন — এগুলো browser-এ available হবে।
 
-2. **Supabase client সেটআপ** — `src/integrations/supabase/client.ts` (browser, anon key) এবং `src/integrations/supabase/client.server.ts` (server-only, service role) তৈরি করব। Env variables wire করব।
+তারপর তৈরি করব:
+- `src/integrations/supabase/client.ts` — browser client (anon key, session persist)
+- `src/integrations/supabase/types.ts` — টেবিল type
 
-3. **Database schema (migration)** — তৈরি করব:
-   - `leads` টেবিল (name, phone, service, message, source_page, status, created_at)
-   - `app_role` enum + `user_roles` টেবিল + `has_role()` security definer function
-   - RLS policies: anonymous users leads insert করতে পারবে; শুধু admin role read/update করতে পারবে
-   - GRANT statements (anon: INSERT on leads; authenticated: SELECT/UPDATE via policy)
+### ধাপ ২ — হোমপেজ contact form wiring
+`src/routes/index.tsx`-এ `Contact` section-এর form-কে state-driven করব, `submitLead` server fn call করব, success/error toast দেখাব (existing `ServiceLeadForm` pattern-এ), তারপর WhatsApp-এ redirect করব।
 
-4. **Lead form wiring** — সব service page-এর form (এবং homepage contact form) Supabase-এ save করবে, তারপর WhatsApp-এ redirect করবে (বর্তমান UX অক্ষুণ্ণ রেখে)।
+### ধাপ ৩ — Auth পেজ
+`src/routes/auth.tsx` — email + password login form। `supabase.auth.signInWithPassword` → success হলে `/admin` এ navigate। এটা public route।
 
-5. **Auth + Admin panel (পরের ধাপে চাইলে)** — email/password login, `/admin` protected route, leads dashboard (list, filter, status update)। এটি আপনি চাইলে পরে একই session-এ এগোতে পারি।
+### ধাপ ৪ — Admin dashboard (protected)
+- `src/routes/admin.tsx` — client-side gate:
+  - `supabase.auth.getUser()` → না থাকলে `/auth` redirect
+  - `has_role(uid, 'admin')` RPC call → না হলে "Access denied"
+- Dashboard content:
+  - সব leads table (name, phone, email, service, source_page, status, created_at)
+  - Status filter (all / new / contacted / won / lost)
+  - Search (name/phone)
+  - প্রতিটি row-এ: status dropdown update, WhatsApp/Call/Email link, delete button
+  - Real-time: `supabase.channel('leads').on('postgres_changes', ...)` — নতুন lead এলে auto-append
+- Top-right এ signed-in email + Logout button
 
-## এখন approve করলে
-প্রথমে secure form open করে ৪টি credential চাইব। আপনি paste করে save করার পর বাকি ধাপ (client, schema, wiring) implement করব।
+### ধাপ ৫ — Nav-এ ছোট Admin link
+Footer-এ discreet "Admin" লিংক যাতে সহজে `/auth` খোলা যায়।
 
-## নোট
-আপনার SMS/OAuth-এর মতো auth provider এখন লাগছে না — শুধু email/password admin login-এই admin panel চালানো যাবে। Admin কে হবে (আপনি একা, নাকি একাধিক), সেটি step 5-এ ঢোকার আগে জানাবেন।
+## টেকনিক্যাল বিস্তারিত
+- Reads/writes সবই anon key দিয়ে RLS-এর মাধ্যমে হবে (ইতিমধ্যে migration-এ policies আছে: admin role read/update/delete করতে পারে)।
+- Service role key server-only-ই থাকবে (`submitLead` server fn insert-এ ব্যবহার করে)।
+- Session Supabase JS SDK-এর default localStorage-এ persist হবে।
+- Toast জন্য existing shadcn `useToast` (`ServiceDetail.tsx`-এ ব্যবহৃত pattern) reuse করব।
+
+## Approve করলে যা লাগবে
+Secure form-এ **শুধু ২টি value** paste করবেন (আপনার Supabase dashboard → Settings → API থেকে — এগুলোই আগে দিয়েছিলেন, শুধু আবার VITE_ prefix-এ দরকার):
+- `VITE_MY_SUPABASE_URL`
+- `VITE_MY_SUPABASE_ANON_KEY`
+
+তারপর সব code আমি সাজিয়ে দেব — আপনি `/auth` এ গিয়ে যেই admin user বানিয়েছেন সেটা দিয়ে login করলে `/admin`-এ সব leads দেখতে পাবেন।
