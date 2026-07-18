@@ -17,6 +17,14 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
       setVisible(true);
       return;
     }
+    // If already in viewport on mount (e.g. above the fold), reveal immediately
+    // so the page never appears to load "from the bottom".
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
