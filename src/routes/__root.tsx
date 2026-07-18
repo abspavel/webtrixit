@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Toaster } from "@/components/ui/sonner";
+
 
 function NotFoundComponent() {
   return (
@@ -100,6 +102,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const supabaseConfig = {
+    url: process.env.MY_SUPABASE_URL ?? "",
+    anonKey: process.env.MY_SUPABASE_ANON_KEY ?? "",
+  };
   return (
     <html lang="bn">
       <head>
@@ -116,14 +122,21 @@ function RootShell({ children }: { children: ReactNode }) {
           media="all"
         />
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__SUPABASE_CONFIG=${JSON.stringify(supabaseConfig)};`,
+          }}
+        />
       </head>
       <body>
         {children}
+        <Toaster />
         <Scripts />
       </body>
     </html>
   );
 }
+
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
