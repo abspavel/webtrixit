@@ -9,6 +9,7 @@ import { services, type ServiceItem } from "@/lib/services-data";
 import logoUrl from "@/assets/webtrix-logo.svg";
 import { ReadingControls } from "@/components/ReadingControls";
 import { submitLead } from "@/lib/leads.functions";
+import { getSupabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
@@ -19,6 +20,29 @@ const waUrl = (title: string) =>
 export function ServiceDetail({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+
+  const [demoUrl, setDemoUrl] = useState<string>(service.demoUrl);
+  const [saleUrl, setSaleUrl] = useState<string>("");
+
+  useEffect(() => {
+    setDemoUrl(service.demoUrl);
+    setSaleUrl("");
+    let cancelled = false;
+    (async () => {
+      try {
+        const supabase = getSupabase();
+        const { data } = await supabase
+          .from("service_links")
+          .select("demo_url, sale_url")
+          .eq("service_slug", service.slug)
+          .maybeSingle();
+        if (cancelled || !data) return;
+        if (data.demo_url) setDemoUrl(data.demo_url);
+        if (data.sale_url) setSaleUrl(data.sale_url);
+      } catch { /* silent — fallback to defaults */ }
+    })();
+    return () => { cancelled = true; };
+  }, [service.slug, service.demoUrl]);
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
@@ -52,6 +76,11 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
             <a href={waUrl(service.titleBn)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
               <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
             </a>
+            {saleUrl && (
+              <a href={saleUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:translate-y-[-1px]">
+                কিনুন / অর্ডার করুন <ArrowRight className="h-4 w-4" />
+              </a>
+            )}
             <a href="#demo" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
               লাইভ ডেমো দেখুন <ArrowRight className="h-4 w-4" />
             </a>
