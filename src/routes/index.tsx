@@ -5,11 +5,13 @@ import {
   AlertTriangle, Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
+import { submitLead } from "@/lib/leads.functions";
 
 
 const WHATSAPP_NUMBER = "8801835985730";
