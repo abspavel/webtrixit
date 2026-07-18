@@ -6,7 +6,7 @@ import {
   Loader2, LogOut, Search, RefreshCw, Trash2, Phone, MessageCircle, Mail,
   ShieldCheck, Inbox,
 } from "lucide-react";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+import logoUrl from "@/assets/webtrix-logo.svg";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin Dashboard — Webtrix" }, { name: "robots", content: "noindex" }] }),
@@ -166,7 +166,7 @@ function AdminPage() {
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoAsset.url} alt="Webtrix" className="h-8 w-auto" />
+            <img src={logoUrl} alt="Webtrix" className="h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-2 text-xs sm:text-sm">
             <span className="hidden items-center gap-1.5 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-neon sm:inline-flex">
