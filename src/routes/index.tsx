@@ -677,22 +677,8 @@ function FinalCTA() {
                 <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Karnafully, Chattogram, Bangladesh</div>
               </div>
             </div>
-            <form onSubmit={(e) => e.preventDefault()} className="rounded-2xl border border-border bg-surface/70 p-6 backdrop-blur">
-              <div className="grid gap-4">
-                <Field label="আপনার নাম" placeholder="যেমনঃ রফিকুল ইসলাম" />
-                <Field label="ইমেইল" type="email" placeholder="you@company.com" />
-                <Field label="কী দরকার?" placeholder="যেমনঃ ২০০ প্রোডাক্টের ই-কমার্স সাইট" />
-                <label className="text-xs font-medium text-muted-foreground">মেসেজ
-                  <textarea rows={4} placeholder="আপনার প্রজেক্ট সম্পর্কে বিস্তারিত লিখুন..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
-                </label>
-                <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:opacity-90">
-                  ফ্রি কোটেশন নিন <ArrowRight className="h-4 w-4" />
-                </button>
-                <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-neon" /> আমরা ২৪ ঘণ্টার মধ্যে উত্তর দিই। আপনার তথ্য গোপন থাকবে।
-                </p>
-              </div>
-            </form>
+            <ContactForm />
+
           </div>
         </div>
       </div>
