@@ -43,12 +43,14 @@ const stories = [
 ];
 
 const portfolio = [
-  { title: "Luxe Landing Page", tag: "ল্যান্ডিং পেজ", gradient: "from-electric to-lavender" },
-  { title: "Kart+ E-commerce", tag: "ই-কমার্স", gradient: "from-lavender to-neon" },
-  { title: "EduPrime LMS", tag: "এলএমএস", gradient: "from-neon to-electric" },
-  { title: "Panel Pro SMM", tag: "এসএমএম প্যানেল", gradient: "from-electric to-neon" },
-  { title: "Orbit CRM", tag: "কাস্টম সফটওয়্যার", gradient: "from-lavender to-electric" },
-  { title: "PulseAds Video", tag: "AI ভিডিও", gradient: "from-neon to-lavender" },
+  { title: "Luxe Landing Page", tag: "ল্যান্ডিং পেজ", gradient: "from-electric to-lavender", demo: "/demo/luxe-landing" },
+  { title: "Kart+ E-commerce", tag: "ই-কমার্স", gradient: "from-lavender to-neon", demo: "/demo/kartplus-ecommerce" },
+  { title: "FreshCart Grocery", tag: "গ্রোসারি", gradient: "from-neon to-lavender", demo: "/demo/freshcart-grocery" },
+  { title: "EduPrime LMS", tag: "এলএমএস", gradient: "from-neon to-electric", demo: "/demo/eduprime-lms" },
+  { title: "PanelPro SMM", tag: "এসএমএম প্যানেল", gradient: "from-electric to-neon", demo: "/demo/panelpro-smm" },
+  { title: "Orbit CRM", tag: "কাস্টম সফটওয়্যার", gradient: "from-lavender to-electric", demo: "/demo/orbit-crm" },
+  { title: "PulseAds Video", tag: "AI ভিডিও", gradient: "from-neon to-lavender", demo: "/demo/pulseads-video" },
+  { title: "BrandKit Design", tag: "লোগো ও পোস্টার", gradient: "from-electric to-lavender", demo: "/demo/brandkit-design" },
 ];
 
 const beforeAfter = [
@@ -517,7 +519,10 @@ function Portfolio() {
                   className="shrink-0 px-2.5"
                   style={{ width: `${100 / perView}%` }}
                 >
-                  <div className="group overflow-hidden rounded-2xl border border-border bg-card">
+                  <Link
+                    to={p.demo}
+                    className="group block overflow-hidden rounded-2xl border border-border bg-card transition hover:border-electric/50 hover:shadow-lg hover:shadow-electric/10"
+                  >
                     <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.gradient}`}>
                       <div className="grid-bg absolute inset-0 opacity-40" />
                       <div className="absolute inset-0 grid place-items-center px-4 text-center">
@@ -525,6 +530,9 @@ function Portfolio() {
                           {p.title}
                         </span>
                       </div>
+                      <span className="absolute right-3 top-3 rounded-full bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur">
+                        ডেমো দেখুন
+                      </span>
                     </div>
                     <div className="flex items-center justify-between p-4">
                       <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -532,7 +540,7 @@ function Portfolio() {
                       </span>
                       <ArrowRight className="h-4 w-4 text-primary transition group-hover:translate-x-1" />
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
