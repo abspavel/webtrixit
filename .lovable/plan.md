@@ -1,44 +1,42 @@
-## বর্তমান অবস্থা
+## লক্ষ্য
+"আমাদের কাজ" (Portfolio) ও প্রতিটি সার্ভিসের "লাইভ ডেমো" সেকশনে বাইরের `example.com` লিংকের বদলে আমাদের নিজস্ব তৈরি করা কয়েকটি ডেমো টেমপ্লেট পেজ দেখানো হবে। এই পেজগুলো শুধু দেখার জন্য — কোনো বাটন বা ফর্ম আসলে কাজ করবে না, শুধু UI/UX প্রদর্শন।
 
-মোট ১১টি সার্ভিসের মধ্যে **২টির** আলাদা ডেডিকেটেড পেজ আছে:
-- ✅ `/services/readymade-ecommerce-website` — `services.readymade-ecommerce-website.tsx`
-- ✅ `/services/facebook-business-page-setup` — `services.facebook-business-page-setup.tsx`
+## যা তৈরি হবে
 
-বাকি **৯টি** সার্ভিস এখন dynamic template `services.$slug.tsx` দিয়ে render হচ্ছে (আলাদা ফাইল নেই)।
+নতুন route folder: `src/routes/demo.*` (হেডার/ফুটার ছাড়া, পুরো ভিন্ন লে-আউটে যেন আসল সাইটের মতো দেখায়)।
 
-## প্ল্যান
+৮টি ডেমো টেমপ্লেট পেজ:
 
-নিচের ৯টি সার্ভিসের জন্য আলাদা ডেডিকেটেড route file তৈরি করব:
+1. `demo.luxe-landing.tsx` — ল্যান্ডিং পেজ (কোর্স/প্রোডাক্ট লঞ্চ)
+2. `demo.kartplus-ecommerce.tsx` — ফ্যাশন ই-কমার্স হোম (প্রোডাক্ট গ্রিড, কার্ট আইকন)
+3. `demo.freshcart-grocery.tsx` — গ্রোসারি স্টোর (ক্যাটাগরি + ডিল)
+4. `demo.eduprime-lms.tsx` — LMS কোর্স ক্যাটালগ + লেসন প্রিভিউ
+5. `demo.panelpro-smm.tsx` — SMM প্যানেল ড্যাশবোর্ড (অর্ডার/সার্ভিস তালিকা)
+6. `demo.orbit-crm.tsx` — কাস্টম সফটওয়্যার ড্যাশবোর্ড (KPI কার্ড, চার্ট mockup)
+7. `demo.pulseads-video.tsx` — AI ভিডিও অ্যাড শোকেস (থাম্বনেইল গ্রিড)
+8. `demo.brandkit-design.tsx` — লোগো/কভার/পোস্টার শোকেস
 
-1. `services.landing-page-design.tsx`
-2. `services.ecommerce-website-design.tsx`
-3. `services.lms-site-development.tsx`
-4. `services.custom-websites.tsx`
-5. `services.software-development.tsx`
-6. `services.smm-panel-website.tsx`
-7. `services.ai-video-ads.tsx`
-8. `services.facebook-pixel-setup.tsx`
-9. `services.logo-cover-poster-design.tsx`
+প্রতিটি পেজে থাকবে:
+- নিজস্ব mini-nav, hero, কনটেন্ট সেকশন, footer — সম্পূর্ণ ভিন্ন ভিজ্যুয়াল স্টাইল
+- সব বাটন `type="button"` + `onClick={(e)=>e.preventDefault()}` অথবা শুধু visual (কোনো নেভিগেশন নেই)
+- উপরে ছোট একটি "Demo Preview by Webtrix" ব্যানার (fixed, dismissable নয়) — যাতে ভিজিটর বোঝে এটি ডেমো
+- `head()`-এ `robots: noindex`
 
-### প্রতিটি ফাইলের গঠন
+## Wiring
 
-প্রতিটি ফাইল হবে thin wrapper — `services-data.ts` থেকে সেই সার্ভিসের ডেটা নিয়ে বর্তমান dynamic template-এর মতোই সেকশন render করবে (hero, why/effectiveness/benefits, process + features, live demo embed, service-specific FAQ, lead form, WhatsApp CTA)। ফলে content ও design একই থাকবে, শুধু URL ও route আলাদা হবে — future-এ কোনো নির্দিষ্ট সার্ভিসের জন্য custom section/package/pricing যোগ করা সহজ হবে (যেমনটা readymade-ecommerce ও facebook-page-setup পেজে করা হয়েছে)।
+- `src/lib/services-data.ts` — প্রতিটি সার্ভিসের `demoUrl` internal path-এ বদলে দেওয়া হবে (যেমন `/demo/luxe-landing`)
+- `src/components/ServiceDetail.tsx` — iframe এখন internal demo route load করবে (same-origin, তাই নিশ্চিত embed হবে)
+- `src/routes/services.readymade-ecommerce-website.tsx` — ৮টি টেমপ্লেট কার্ডের `demoUrl` আপডেট
+- `src/routes/index.tsx` Portfolio — প্রতিটি কার্ডে `<Link to="/demo/...">` যোগ, "ডেমো দেখুন" বাটন
 
-### Route precedence
+## টেকনিক্যাল
 
-TanStack Router-এ static route (`/services/landing-page-design`) dynamic route (`/services/$slug`) কে overrides করে, তাই `services.$slug.tsx` fallback হিসেবে থেকে যাবে — কোনো conflict হবে না, `routeTree.gen.ts` auto-regenerate হবে।
+- প্রতিটি demo route standalone — `__root.tsx`-এর Outlet-এ render হবে, কিন্তু হেডার/ফুটার নেই (root এ কোনো global chrome নেই, ঠিক আছে)
+- iframe embed করার সময় same-origin হওয়ায় CSP/X-Frame issue নেই
+- সবগুলো Tailwind + inline SVG দিয়ে — কোনো নতুন dependency নেই
+- সব text বাংলায়, Hind Siliguri font inherit করবে
 
-### Shared component
+## নয়
 
-Code duplication এড়াতে একটি shared component `src/components/ServiceDetail.tsx` তৈরি করব যেটা `services.$slug.tsx`-এর বর্তমান UI ধারণ করবে। প্রতিটি নতুন dedicated route file এই component-কে সেই সার্ভিসের slug দিয়ে render করবে। এতে ১টি জায়গায় edit করলেই সব পেজে reflect হবে।
-
-### Nav ও index পেজে কোনো পরিবর্তন লাগবে না
-
-`Link to="/services/$slug" params={{ slug }}` type-safe থাকবে — dynamic route এখনো registered।
-
-## ফাইল পরিবর্তনের তালিকা
-
-- **নতুন:** `src/components/ServiceDetail.tsx` (existing `services.$slug.tsx` UI extracted)
-- **নতুন:** উপরের ৯টি route file
-- **আপডেট:** `src/routes/services.$slug.tsx` → নতুন `<ServiceDetail slug={slug} />` ব্যবহার করবে
-- **অটো-জেনারেটেড:** `src/routeTree.gen.ts` (Vite plugin regenerate করবে)
+- কোনো backend/DB, কোনো real form submission, কোনো auth
+- বিদ্যমান হোমপেজ কনটেন্ট বা স্টাইল পরিবর্তন — শুধু Portfolio কার্ডে link যোগ
