@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
+import { submitLead } from "@/lib/leads.functions";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
@@ -493,10 +494,33 @@ function ServiceFAQ({ subject }: { subject: string }) {
 
 function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
   const [sent, setSent] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", phone: "", email: "", budget: "", message: "" });
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSaving(true);
+    setErrorMsg(null);
+    try {
+      const res = await submitLead({
+        data: {
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          service: serviceTitle,
+          budget: form.budget,
+          message: form.message,
+          source_page: typeof window !== "undefined" ? window.location.pathname : "",
+        },
+      });
+      if (!res.ok) setErrorMsg("সেভ করতে সমস্যা হয়েছে — আপাতত WhatsApp-এ পাঠানো হচ্ছে।");
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("সেভ করতে সমস্যা হয়েছে — আপাতত WhatsApp-এ পাঠানো হচ্ছে।");
+    } finally {
+      setSaving(false);
+    }
     const text = encodeURIComponent(
       `আসসালামু আলাইকুম Webtrix,\n\nআমি "${serviceTitle}" সার্ভিসটি নিতে চাই।\n\nনামঃ ${form.name}\nফোনঃ ${form.phone}\nইমেইলঃ ${form.email}\nবাজেটঃ ${form.budget}\n\nবিস্তারিতঃ ${form.message}`,
     );
