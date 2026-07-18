@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+import logoUrl from "@/assets/webtrix-logo.svg";
 import { ReadingControls } from "@/components/ReadingControls";
 import { submitLead } from "@/lib/leads.functions";
 
@@ -25,7 +25,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
       <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="হোম">
-            <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+            <img src={logoUrl} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
           </Link>
           <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-surface-2 sm:text-sm">
             <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">সব সার্ভিস</span><span className="sm:hidden">ব্যাক</span>
@@ -271,7 +271,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <footer className="border-t border-border bg-surface/40 py-10">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoUrl} alt="Webtrix IT Solution" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
           <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution</p>
         </div>
       </footer>
