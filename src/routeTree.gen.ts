@@ -22,6 +22,14 @@ import { Route as ServicesEcommerceWebsiteDesignRouteImport } from './routes/ser
 import { Route as ServicesCustomWebsitesRouteImport } from './routes/services.custom-websites'
 import { Route as ServicesAiVideoAdsRouteImport } from './routes/services.ai-video-ads'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as DemoPulseadsVideoRouteImport } from './routes/demo.pulseads-video'
+import { Route as DemoPanelproSmmRouteImport } from './routes/demo.panelpro-smm'
+import { Route as DemoOrbitCrmRouteImport } from './routes/demo.orbit-crm'
+import { Route as DemoLuxeLandingRouteImport } from './routes/demo.luxe-landing'
+import { Route as DemoKartplusEcommerceRouteImport } from './routes/demo.kartplus-ecommerce'
+import { Route as DemoFreshcartGroceryRouteImport } from './routes/demo.freshcart-grocery'
+import { Route as DemoEduprimeLmsRouteImport } from './routes/demo.eduprime-lms'
+import { Route as DemoBrandkitDesignRouteImport } from './routes/demo.brandkit-design'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -96,9 +104,57 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoPulseadsVideoRoute = DemoPulseadsVideoRouteImport.update({
+  id: '/demo/pulseads-video',
+  path: '/demo/pulseads-video',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoPanelproSmmRoute = DemoPanelproSmmRouteImport.update({
+  id: '/demo/panelpro-smm',
+  path: '/demo/panelpro-smm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoOrbitCrmRoute = DemoOrbitCrmRouteImport.update({
+  id: '/demo/orbit-crm',
+  path: '/demo/orbit-crm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLuxeLandingRoute = DemoLuxeLandingRouteImport.update({
+  id: '/demo/luxe-landing',
+  path: '/demo/luxe-landing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoKartplusEcommerceRoute = DemoKartplusEcommerceRouteImport.update({
+  id: '/demo/kartplus-ecommerce',
+  path: '/demo/kartplus-ecommerce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoFreshcartGroceryRoute = DemoFreshcartGroceryRouteImport.update({
+  id: '/demo/freshcart-grocery',
+  path: '/demo/freshcart-grocery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoEduprimeLmsRoute = DemoEduprimeLmsRouteImport.update({
+  id: '/demo/eduprime-lms',
+  path: '/demo/eduprime-lms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoBrandkitDesignRoute = DemoBrandkitDesignRouteImport.update({
+  id: '/demo/brandkit-design',
+  path: '/demo/brandkit-design',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/demo/brandkit-design': typeof DemoBrandkitDesignRoute
+  '/demo/eduprime-lms': typeof DemoEduprimeLmsRoute
+  '/demo/freshcart-grocery': typeof DemoFreshcartGroceryRoute
+  '/demo/kartplus-ecommerce': typeof DemoKartplusEcommerceRoute
+  '/demo/luxe-landing': typeof DemoLuxeLandingRoute
+  '/demo/orbit-crm': typeof DemoOrbitCrmRoute
+  '/demo/panelpro-smm': typeof DemoPanelproSmmRoute
+  '/demo/pulseads-video': typeof DemoPulseadsVideoRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
   '/services/custom-websites': typeof ServicesCustomWebsitesRoute
@@ -114,6 +170,14 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/demo/brandkit-design': typeof DemoBrandkitDesignRoute
+  '/demo/eduprime-lms': typeof DemoEduprimeLmsRoute
+  '/demo/freshcart-grocery': typeof DemoFreshcartGroceryRoute
+  '/demo/kartplus-ecommerce': typeof DemoKartplusEcommerceRoute
+  '/demo/luxe-landing': typeof DemoLuxeLandingRoute
+  '/demo/orbit-crm': typeof DemoOrbitCrmRoute
+  '/demo/panelpro-smm': typeof DemoPanelproSmmRoute
+  '/demo/pulseads-video': typeof DemoPulseadsVideoRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
   '/services/custom-websites': typeof ServicesCustomWebsitesRoute
@@ -130,6 +194,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/demo/brandkit-design': typeof DemoBrandkitDesignRoute
+  '/demo/eduprime-lms': typeof DemoEduprimeLmsRoute
+  '/demo/freshcart-grocery': typeof DemoFreshcartGroceryRoute
+  '/demo/kartplus-ecommerce': typeof DemoKartplusEcommerceRoute
+  '/demo/luxe-landing': typeof DemoLuxeLandingRoute
+  '/demo/orbit-crm': typeof DemoOrbitCrmRoute
+  '/demo/panelpro-smm': typeof DemoPanelproSmmRoute
+  '/demo/pulseads-video': typeof DemoPulseadsVideoRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
   '/services/custom-websites': typeof ServicesCustomWebsitesRoute
@@ -147,6 +219,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/demo/brandkit-design'
+    | '/demo/eduprime-lms'
+    | '/demo/freshcart-grocery'
+    | '/demo/kartplus-ecommerce'
+    | '/demo/luxe-landing'
+    | '/demo/orbit-crm'
+    | '/demo/panelpro-smm'
+    | '/demo/pulseads-video'
     | '/services/$slug'
     | '/services/ai-video-ads'
     | '/services/custom-websites'
@@ -162,6 +242,14 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/demo/brandkit-design'
+    | '/demo/eduprime-lms'
+    | '/demo/freshcart-grocery'
+    | '/demo/kartplus-ecommerce'
+    | '/demo/luxe-landing'
+    | '/demo/orbit-crm'
+    | '/demo/panelpro-smm'
+    | '/demo/pulseads-video'
     | '/services/$slug'
     | '/services/ai-video-ads'
     | '/services/custom-websites'
@@ -177,6 +265,14 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/demo/brandkit-design'
+    | '/demo/eduprime-lms'
+    | '/demo/freshcart-grocery'
+    | '/demo/kartplus-ecommerce'
+    | '/demo/luxe-landing'
+    | '/demo/orbit-crm'
+    | '/demo/panelpro-smm'
+    | '/demo/pulseads-video'
     | '/services/$slug'
     | '/services/ai-video-ads'
     | '/services/custom-websites'
@@ -193,6 +289,14 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DemoBrandkitDesignRoute: typeof DemoBrandkitDesignRoute
+  DemoEduprimeLmsRoute: typeof DemoEduprimeLmsRoute
+  DemoFreshcartGroceryRoute: typeof DemoFreshcartGroceryRoute
+  DemoKartplusEcommerceRoute: typeof DemoKartplusEcommerceRoute
+  DemoLuxeLandingRoute: typeof DemoLuxeLandingRoute
+  DemoOrbitCrmRoute: typeof DemoOrbitCrmRoute
+  DemoPanelproSmmRoute: typeof DemoPanelproSmmRoute
+  DemoPulseadsVideoRoute: typeof DemoPulseadsVideoRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesAiVideoAdsRoute: typeof ServicesAiVideoAdsRoute
   ServicesCustomWebsitesRoute: typeof ServicesCustomWebsitesRoute
@@ -300,11 +404,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/pulseads-video': {
+      id: '/demo/pulseads-video'
+      path: '/demo/pulseads-video'
+      fullPath: '/demo/pulseads-video'
+      preLoaderRoute: typeof DemoPulseadsVideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/panelpro-smm': {
+      id: '/demo/panelpro-smm'
+      path: '/demo/panelpro-smm'
+      fullPath: '/demo/panelpro-smm'
+      preLoaderRoute: typeof DemoPanelproSmmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/orbit-crm': {
+      id: '/demo/orbit-crm'
+      path: '/demo/orbit-crm'
+      fullPath: '/demo/orbit-crm'
+      preLoaderRoute: typeof DemoOrbitCrmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/luxe-landing': {
+      id: '/demo/luxe-landing'
+      path: '/demo/luxe-landing'
+      fullPath: '/demo/luxe-landing'
+      preLoaderRoute: typeof DemoLuxeLandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/kartplus-ecommerce': {
+      id: '/demo/kartplus-ecommerce'
+      path: '/demo/kartplus-ecommerce'
+      fullPath: '/demo/kartplus-ecommerce'
+      preLoaderRoute: typeof DemoKartplusEcommerceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/freshcart-grocery': {
+      id: '/demo/freshcart-grocery'
+      path: '/demo/freshcart-grocery'
+      fullPath: '/demo/freshcart-grocery'
+      preLoaderRoute: typeof DemoFreshcartGroceryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/eduprime-lms': {
+      id: '/demo/eduprime-lms'
+      path: '/demo/eduprime-lms'
+      fullPath: '/demo/eduprime-lms'
+      preLoaderRoute: typeof DemoEduprimeLmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/brandkit-design': {
+      id: '/demo/brandkit-design'
+      path: '/demo/brandkit-design'
+      fullPath: '/demo/brandkit-design'
+      preLoaderRoute: typeof DemoBrandkitDesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DemoBrandkitDesignRoute: DemoBrandkitDesignRoute,
+  DemoEduprimeLmsRoute: DemoEduprimeLmsRoute,
+  DemoFreshcartGroceryRoute: DemoFreshcartGroceryRoute,
+  DemoKartplusEcommerceRoute: DemoKartplusEcommerceRoute,
+  DemoLuxeLandingRoute: DemoLuxeLandingRoute,
+  DemoOrbitCrmRoute: DemoOrbitCrmRoute,
+  DemoPanelproSmmRoute: DemoPanelproSmmRoute,
+  DemoPulseadsVideoRoute: DemoPulseadsVideoRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesAiVideoAdsRoute: ServicesAiVideoAdsRoute,
   ServicesCustomWebsitesRoute: ServicesCustomWebsitesRoute,
