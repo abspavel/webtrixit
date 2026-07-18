@@ -5,11 +5,13 @@ import {
   AlertTriangle, Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import heroBg from "@/assets/hero-bg.jpg";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
 import { ReadingControls } from "@/components/ReadingControls";
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
+import { submitLead } from "@/lib/leads.functions";
 
 
 const WHATSAPP_NUMBER = "8801835985730";
@@ -675,22 +677,8 @@ function FinalCTA() {
                 <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Karnafully, Chattogram, Bangladesh</div>
               </div>
             </div>
-            <form onSubmit={(e) => e.preventDefault()} className="rounded-2xl border border-border bg-surface/70 p-6 backdrop-blur">
-              <div className="grid gap-4">
-                <Field label="আপনার নাম" placeholder="যেমনঃ রফিকুল ইসলাম" />
-                <Field label="ইমেইল" type="email" placeholder="you@company.com" />
-                <Field label="কী দরকার?" placeholder="যেমনঃ ২০০ প্রোডাক্টের ই-কমার্স সাইট" />
-                <label className="text-xs font-medium text-muted-foreground">মেসেজ
-                  <textarea rows={4} placeholder="আপনার প্রজেক্ট সম্পর্কে বিস্তারিত লিখুন..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
-                </label>
-                <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:opacity-90">
-                  ফ্রি কোটেশন নিন <ArrowRight className="h-4 w-4" />
-                </button>
-                <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-neon" /> আমরা ২৪ ঘণ্টার মধ্যে উত্তর দিই। আপনার তথ্য গোপন থাকবে।
-                </p>
-              </div>
-            </form>
+            <ContactForm />
+
           </div>
         </div>
       </div>
@@ -706,6 +694,60 @@ function Field({ label, ...props }: { label: string } & React.InputHTMLAttribute
   );
 }
 
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [service, setService] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (loading) return;
+    if (!name.trim() || !phone.trim()) {
+      toast.error("নাম ও ফোন নাম্বার দিন।");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await submitLead({
+        data: {
+          name, phone, email, service, message,
+          source_page: typeof window !== "undefined" ? window.location.pathname : "/",
+        },
+      });
+      if (!res.ok) throw new Error(res.error || "Submit failed");
+      toast.success("ধন্যবাদ! আমরা শীঘ্রই যোগাযোগ করব।");
+      setName(""); setPhone(""); setEmail(""); setService(""); setMessage("");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "সাবমিট ব্যর্থ হয়েছে");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-surface/70 p-6 backdrop-blur">
+      <div className="grid gap-4">
+        <Field label="আপনার নাম" placeholder="যেমনঃ রফিকুল ইসলাম" value={name} onChange={(e) => setName(e.target.value)} required />
+        <Field label="ফোন / WhatsApp" placeholder="01XXXXXXXXX" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        <Field label="ইমেইল (ঐচ্ছিক)" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Field label="কী দরকার?" placeholder="যেমনঃ ২০০ প্রোডাক্টের ই-কমার্স সাইট" value={service} onChange={(e) => setService(e.target.value)} />
+        <label className="text-xs font-medium text-muted-foreground">মেসেজ
+          <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="আপনার প্রজেক্ট সম্পর্কে বিস্তারিত লিখুন..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
+        </label>
+        <button type="submit" disabled={loading} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:opacity-90 disabled:opacity-60">
+          {loading ? "সাবমিট হচ্ছে..." : <>ফ্রি কোটেশন নিন <ArrowRight className="h-4 w-4" /></>}
+        </button>
+        <p className="flex items-center gap-2 text-xs text-muted-foreground">
+          <ShieldCheck className="h-3.5 w-3.5 text-neon" /> আমরা ২৪ ঘণ্টার মধ্যে উত্তর দিই। আপনার তথ্য গোপন থাকবে।
+        </p>
+      </div>
+    </form>
+  );
+}
+
 /* ---------- FOOTER ---------- */
 function Footer() {
   return (
@@ -714,7 +756,10 @@ function Footer() {
         <div className="flex min-w-0 items-center gap-2">
           <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. সর্বস্বত্ব সংরক্ষিত।</p>
+        <div className="flex items-center gap-4">
+          <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
       </div>
     </footer>
   );
