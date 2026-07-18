@@ -25,7 +25,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   const [saleUrl, setSaleUrl] = useState<string>("");
 
   useEffect(() => {
-    setDemoUrl(demoUrl);
+    setDemoUrl(service.demoUrl);
     setSaleUrl("");
     let cancelled = false;
     (async () => {
@@ -42,7 +42,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
       } catch { /* silent — fallback to defaults */ }
     })();
     return () => { cancelled = true; };
-  }, [service.slug, demoUrl]);
+  }, [service.slug, service.demoUrl]);
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
