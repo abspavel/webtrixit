@@ -71,7 +71,7 @@ export const services: ServiceItem[] = [
       "A/B টেস্টিং রেডি স্ট্রাকচার",
       "ফ্রি SSL ও হোস্টিং গাইড",
     ],
-    demoUrl: "https://example.com/demo-landing",
+    demoUrl: "/demo/luxe-landing",
     demoLabel: "লাইভ ল্যান্ডিং পেজ ডেমো",
   },
   {
@@ -120,7 +120,7 @@ export const services: ServiceItem[] = [
       "অ্যাডমিন ড্যাশবোর্ড ও রিপোর্ট",
       "Facebook Pixel + GA4 + Catalog",
     ],
-    demoUrl: "https://example.com/demo-ecommerce",
+    demoUrl: "/demo/kartplus-ecommerce",
     demoLabel: "লাইভ ই-কমার্স ডেমো",
   },
   {
@@ -166,7 +166,7 @@ export const services: ServiceItem[] = [
       "অ্যাডমিন প্যানেল",
       "ফ্রি সেটআপ ও ট্রেনিং",
     ],
-    demoUrl: "https://example.com/demo-readymade",
+    demoUrl: "/demo/kartplus-ecommerce",
     demoLabel: "রেডিমেড স্টোর ডেমো",
   },
   {
@@ -214,7 +214,7 @@ export const services: ServiceItem[] = [
       "ডিসকাশন ও Q&A সেকশন",
       "মোবাইল রেসপন্সিভ",
     ],
-    demoUrl: "https://example.com/demo-lms",
+    demoUrl: "/demo/eduprime-lms",
     demoLabel: "LMS প্ল্যাটফর্ম ডেমো",
   },
   {
@@ -262,7 +262,7 @@ export const services: ServiceItem[] = [
       "সিকিউর অথেন্টিকেশন",
       "স্কেলেবল ক্লাউড হোস্টিং",
     ],
-    demoUrl: "https://example.com/demo-custom",
+    demoUrl: "/demo/orbit-crm",
     demoLabel: "কাস্টম ওয়েবসাইট ডেমো",
   },
   {
@@ -310,7 +310,7 @@ export const services: ServiceItem[] = [
       "মোবাইল রেসপন্সিভ / PWA",
       "স্কেলেবল ক্লাউড ইনফ্রা",
     ],
-    demoUrl: "https://example.com/demo-software",
+    demoUrl: "/demo/orbit-crm",
     demoLabel: "সফটওয়্যার ডেমো",
   },
   {
@@ -357,7 +357,7 @@ export const services: ServiceItem[] = [
       "bKash / Nagad / ক্রিপ্টো পেমেন্ট",
       "টিকিট ও সাপোর্ট সিস্টেম",
     ],
-    demoUrl: "https://example.com/demo-smm",
+    demoUrl: "/demo/panelpro-smm",
     demoLabel: "SMM প্যানেল ডেমো",
   },
   {
@@ -404,7 +404,7 @@ export const services: ServiceItem[] = [
       "২–৩টি ভ্যারিয়েন্ট",
       "অ্যাড কপি সাজেশন",
     ],
-    demoUrl: "https://example.com/demo-ai-video",
+    demoUrl: "/demo/pulseads-video",
     demoLabel: "AI ভিডিও স্যাম্পল",
   },
   {
@@ -498,7 +498,7 @@ export const services: ServiceItem[] = [
       "কাস্টম অডিয়েন্স সেটআপ",
       "টেস্টিং রিপোর্ট",
     ],
-    demoUrl: "https://example.com/demo-pixel-report",
+    demoUrl: "/demo/orbit-crm",
     demoLabel: "স্যাম্পল পিক্সেল রিপোর্ট",
   },
   {
@@ -545,7 +545,7 @@ export const services: ServiceItem[] = [
       "সোশ্যাল মিডিয়া টেমপ্লেট",
       "দ্রুত ডেলিভারি",
     ],
-    demoUrl: "https://example.com/demo-design-portfolio",
+    demoUrl: "/demo/brandkit-design",
     demoLabel: "ডিজাইন পোর্টফোলিও",
   },
 ];
