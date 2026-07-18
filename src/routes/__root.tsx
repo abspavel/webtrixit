@@ -82,10 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Webtrix IT Solution — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
       { name: "description", content: "Webtrix IT Solution ডিজাইন করে প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS প্ল্যাটফর্ম ও কাস্টম সফটওয়্যার — সাথে AI ভিডিও অ্যাড ও সোশ্যাল মিডিয়া ক্রিয়েটিভ।" },
       { name: "author", content: "Webtrix IT Solution" },
-      { property: "og:title", content: "Webtrix IT Solution — ডিজিটাল এজেন্সি" },
-      { property: "og:description", content: "ল্যান্ডিং পেজ, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং — কনভার্সনের জন্য তৈরি।" },
+      { property: "og:title", content: "Webtrix IT Solution — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { property: "og:description", content: "Webtrix IT Solution ডিজাইন করে প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS প্ল্যাটফর্ম ও কাস্টম সফটওয়্যার — সাথে AI ভিডিও অ্যাড ও সোশ্যাল মিডিয়া ক্রিয়েটিভ।" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Webtrix IT Solution — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { name: "twitter:description", content: "Webtrix IT Solution ডিজাইন করে প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS প্ল্যাটফর্ম ও কাস্টম সফটওয়্যার — সাথে AI ভিডিও অ্যাড ও সোশ্যাল মিডিয়া ক্রিয়েটিভ।" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1784358296797-Screenshot_20260716-231015.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1784358296797-Screenshot_20260716-231015.webp" },
     ],
     links: [
       {
