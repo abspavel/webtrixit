@@ -1,42 +1,28 @@
 ## লক্ষ্য
-"আমাদের কাজ" (Portfolio) ও প্রতিটি সার্ভিসের "লাইভ ডেমো" সেকশনে বাইরের `example.com` লিংকের বদলে আমাদের নিজস্ব তৈরি করা কয়েকটি ডেমো টেমপ্লেট পেজ দেখানো হবে। এই পেজগুলো শুধু দেখার জন্য — কোনো বাটন বা ফর্ম আসলে কাজ করবে না, শুধু UI/UX প্রদর্শন।
+আপনার নিজের Supabase project কানেক্ট করা এবং leads + admin panel-এর ভিত্তি তৈরি করা।
 
-## যা তৈরি হবে
+## ধাপসমূহ
 
-নতুন route folder: `src/routes/demo.*` (হেডার/ফুটার ছাড়া, পুরো ভিন্ন লে-আউটে যেন আসল সাইটের মতো দেখায়)।
+1. **Secure form open করা** — নিচের ৪টি secret-এর জন্য একটি secure form open করব যেখানে আপনি Supabase dashboard থেকে value গুলো paste করবেন:
+   - `SUPABASE_URL` — Project URL (https://xxxxx.supabase.co)
+   - `SUPABASE_ANON_KEY` — anon/public key
+   - `SUPABASE_SERVICE_ROLE_KEY` — service role key (secret — কখনো frontend-এ যাবে না)
+   - `SUPABASE_PROJECT_ID` — project reference id
 
-৮টি ডেমো টেমপ্লেট পেজ:
+2. **Supabase client সেটআপ** — `src/integrations/supabase/client.ts` (browser, anon key) এবং `src/integrations/supabase/client.server.ts` (server-only, service role) তৈরি করব। Env variables wire করব।
 
-1. `demo.luxe-landing.tsx` — ল্যান্ডিং পেজ (কোর্স/প্রোডাক্ট লঞ্চ)
-2. `demo.kartplus-ecommerce.tsx` — ফ্যাশন ই-কমার্স হোম (প্রোডাক্ট গ্রিড, কার্ট আইকন)
-3. `demo.freshcart-grocery.tsx` — গ্রোসারি স্টোর (ক্যাটাগরি + ডিল)
-4. `demo.eduprime-lms.tsx` — LMS কোর্স ক্যাটালগ + লেসন প্রিভিউ
-5. `demo.panelpro-smm.tsx` — SMM প্যানেল ড্যাশবোর্ড (অর্ডার/সার্ভিস তালিকা)
-6. `demo.orbit-crm.tsx` — কাস্টম সফটওয়্যার ড্যাশবোর্ড (KPI কার্ড, চার্ট mockup)
-7. `demo.pulseads-video.tsx` — AI ভিডিও অ্যাড শোকেস (থাম্বনেইল গ্রিড)
-8. `demo.brandkit-design.tsx` — লোগো/কভার/পোস্টার শোকেস
+3. **Database schema (migration)** — তৈরি করব:
+   - `leads` টেবিল (name, phone, service, message, source_page, status, created_at)
+   - `app_role` enum + `user_roles` টেবিল + `has_role()` security definer function
+   - RLS policies: anonymous users leads insert করতে পারবে; শুধু admin role read/update করতে পারবে
+   - GRANT statements (anon: INSERT on leads; authenticated: SELECT/UPDATE via policy)
 
-প্রতিটি পেজে থাকবে:
-- নিজস্ব mini-nav, hero, কনটেন্ট সেকশন, footer — সম্পূর্ণ ভিন্ন ভিজ্যুয়াল স্টাইল
-- সব বাটন `type="button"` + `onClick={(e)=>e.preventDefault()}` অথবা শুধু visual (কোনো নেভিগেশন নেই)
-- উপরে ছোট একটি "Demo Preview by Webtrix" ব্যানার (fixed, dismissable নয়) — যাতে ভিজিটর বোঝে এটি ডেমো
-- `head()`-এ `robots: noindex`
+4. **Lead form wiring** — সব service page-এর form (এবং homepage contact form) Supabase-এ save করবে, তারপর WhatsApp-এ redirect করবে (বর্তমান UX অক্ষুণ্ণ রেখে)।
 
-## Wiring
+5. **Auth + Admin panel (পরের ধাপে চাইলে)** — email/password login, `/admin` protected route, leads dashboard (list, filter, status update)। এটি আপনি চাইলে পরে একই session-এ এগোতে পারি।
 
-- `src/lib/services-data.ts` — প্রতিটি সার্ভিসের `demoUrl` internal path-এ বদলে দেওয়া হবে (যেমন `/demo/luxe-landing`)
-- `src/components/ServiceDetail.tsx` — iframe এখন internal demo route load করবে (same-origin, তাই নিশ্চিত embed হবে)
-- `src/routes/services.readymade-ecommerce-website.tsx` — ৮টি টেমপ্লেট কার্ডের `demoUrl` আপডেট
-- `src/routes/index.tsx` Portfolio — প্রতিটি কার্ডে `<Link to="/demo/...">` যোগ, "ডেমো দেখুন" বাটন
+## এখন approve করলে
+প্রথমে secure form open করে ৪টি credential চাইব। আপনি paste করে save করার পর বাকি ধাপ (client, schema, wiring) implement করব।
 
-## টেকনিক্যাল
-
-- প্রতিটি demo route standalone — `__root.tsx`-এর Outlet-এ render হবে, কিন্তু হেডার/ফুটার নেই (root এ কোনো global chrome নেই, ঠিক আছে)
-- iframe embed করার সময় same-origin হওয়ায় CSP/X-Frame issue নেই
-- সবগুলো Tailwind + inline SVG দিয়ে — কোনো নতুন dependency নেই
-- সব text বাংলায়, Hind Siliguri font inherit করবে
-
-## নয়
-
-- কোনো backend/DB, কোনো real form submission, কোনো auth
-- বিদ্যমান হোমপেজ কনটেন্ট বা স্টাইল পরিবর্তন — শুধু Portfolio কার্ডে link যোগ
+## নোট
+আপনার SMS/OAuth-এর মতো auth provider এখন লাগছে না — শুধু email/password admin login-এই admin panel চালানো যাবে। Admin কে হবে (আপনি একা, নাকি একাধিক), সেটি step 5-এ ঢোকার আগে জানাবেন।
