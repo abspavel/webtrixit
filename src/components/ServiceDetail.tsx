@@ -21,11 +21,11 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
-  const [demoUrl, setDemoUrl] = useState<string>(service.demoUrl);
+  const [demoUrl, setDemoUrl] = useState<string>(demoUrl);
   const [saleUrl, setSaleUrl] = useState<string>("");
 
   useEffect(() => {
-    setDemoUrl(service.demoUrl);
+    setDemoUrl(demoUrl);
     setSaleUrl("");
     let cancelled = false;
     (async () => {
@@ -42,7 +42,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
       } catch { /* silent — fallback to defaults */ }
     })();
     return () => { cancelled = true; };
-  }, [service.slug, service.demoUrl]);
+  }, [service.slug, demoUrl]);
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
@@ -205,10 +205,10 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                   <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> লাইভ প্রিভিউ
                 </div>
                 <h3 className="font-display text-2xl font-bold sm:text-3xl">{service.demoLabel}</h3>
-                <p className="mt-2 break-all text-xs text-muted-foreground">{service.demoUrl}</p>
+                <p className="mt-2 break-all text-xs text-muted-foreground">{demoUrl}</p>
               </div>
               <a
-                href={service.demoUrl}
+                href={demoUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-5 py-2.5 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
@@ -223,12 +223,12 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
                 <span className="h-3 w-3 rounded-full bg-[#28c840]" />
                 <div className="ml-3 flex-1 truncate rounded-md bg-background/60 px-3 py-1 text-[11px] text-muted-foreground">
-                  {service.demoUrl}
+                  {demoUrl}
                 </div>
               </div>
               <div className="relative aspect-[16/10] w-full bg-background md:aspect-[16/9]">
                 <iframe
-                  src={service.demoUrl}
+                  src={demoUrl}
                   title={`${service.titleBn} — লাইভ ডেমো`}
                   loading="lazy"
                   referrerPolicy="no-referrer"
