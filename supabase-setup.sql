@@ -86,3 +86,48 @@ CREATE POLICY "users read own roles" ON public.user_roles FOR SELECT TO authenti
 -- INSERT INTO public.user_roles (user_id, role)
 -- VALUES ('YOUR-USER-UUID', 'admin');
 -- =========================================================================
+
+
+-- =========================================================================
+-- service_links: প্রতিটি সার্ভিসের জন্য admin-controlled demo ও sale URL
+-- =========================================================================
+CREATE TABLE IF NOT EXISTS public.service_links (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  service_slug text NOT NULL UNIQUE,
+  demo_url text,
+  sale_url text,
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  updated_by uuid REFERENCES auth.users(id) ON DELETE SET NULL
+);
+
+GRANT SELECT ON public.service_links TO anon, authenticated;
+GRANT INSERT, UPDATE, DELETE ON public.service_links TO authenticated;
+GRANT ALL ON public.service_links TO service_role;
+
+ALTER TABLE public.service_links ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "public read service_links" ON public.service_links;
+DROP POLICY IF EXISTS "admins write service_links" ON public.service_links;
+DROP POLICY IF EXISTS "admins update service_links" ON public.service_links;
+DROP POLICY IF EXISTS "admins delete service_links" ON public.service_links;
+
+CREATE POLICY "public read service_links"
+  ON public.service_links FOR SELECT
+  TO anon, authenticated
+  USING (true);
+
+CREATE POLICY "admins write service_links"
+  ON public.service_links FOR INSERT
+  TO authenticated
+  WITH CHECK (public.has_role(auth.uid(), 'admin'));
+
+CREATE POLICY "admins update service_links"
+  ON public.service_links FOR UPDATE
+  TO authenticated
+  USING (public.has_role(auth.uid(), 'admin'))
+  WITH CHECK (public.has_role(auth.uid(), 'admin'));
+
+CREATE POLICY "admins delete service_links"
+  ON public.service_links FOR DELETE
+  TO authenticated
+  USING (public.has_role(auth.uid(), 'admin'));

@@ -6,9 +6,10 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+import logoUrl from "@/assets/webtrix-logo.svg";
 import { ReadingControls } from "@/components/ReadingControls";
 import { submitLead } from "@/lib/leads.functions";
+import { getSupabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
@@ -20,12 +21,35 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
+  const [demoUrl, setDemoUrl] = useState<string>(service.demoUrl);
+  const [saleUrl, setSaleUrl] = useState<string>("");
+
+  useEffect(() => {
+    setDemoUrl(service.demoUrl);
+    setSaleUrl("");
+    let cancelled = false;
+    (async () => {
+      try {
+        const supabase = getSupabase();
+        const { data } = await supabase
+          .from("service_links")
+          .select("demo_url, sale_url")
+          .eq("service_slug", service.slug)
+          .maybeSingle();
+        if (cancelled || !data) return;
+        if (data.demo_url) setDemoUrl(data.demo_url);
+        if (data.sale_url) setSaleUrl(data.sale_url);
+      } catch { /* silent — fallback to defaults */ }
+    })();
+    return () => { cancelled = true; };
+  }, [service.slug, service.demoUrl]);
+
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="হোম">
-            <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+            <img src={logoUrl} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
           </Link>
           <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-surface-2 sm:text-sm">
             <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">সব সার্ভিস</span><span className="sm:hidden">ব্যাক</span>
@@ -52,6 +76,11 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
             <a href={waUrl(service.titleBn)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
               <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
             </a>
+            {saleUrl && (
+              <a href={saleUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:translate-y-[-1px]">
+                কিনুন / অর্ডার করুন <ArrowRight className="h-4 w-4" />
+              </a>
+            )}
             <a href="#demo" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
               লাইভ ডেমো দেখুন <ArrowRight className="h-4 w-4" />
             </a>
@@ -176,10 +205,10 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                   <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> লাইভ প্রিভিউ
                 </div>
                 <h3 className="font-display text-2xl font-bold sm:text-3xl">{service.demoLabel}</h3>
-                <p className="mt-2 break-all text-xs text-muted-foreground">{service.demoUrl}</p>
+                <p className="mt-2 break-all text-xs text-muted-foreground">{demoUrl}</p>
               </div>
               <a
-                href={service.demoUrl}
+                href={demoUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-5 py-2.5 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
@@ -194,12 +223,12 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
                 <span className="h-3 w-3 rounded-full bg-[#28c840]" />
                 <div className="ml-3 flex-1 truncate rounded-md bg-background/60 px-3 py-1 text-[11px] text-muted-foreground">
-                  {service.demoUrl}
+                  {demoUrl}
                 </div>
               </div>
               <div className="relative aspect-[16/10] w-full bg-background md:aspect-[16/9]">
                 <iframe
-                  src={service.demoUrl}
+                  src={demoUrl}
                   title={`${service.titleBn} — লাইভ ডেমো`}
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -271,7 +300,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <footer className="border-t border-border bg-surface/40 py-10">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoUrl} alt="Webtrix IT Solution" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
           <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution</p>
         </div>
       </footer>
