@@ -7,8 +7,8 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import heroBg from "@/assets/hero-bg.jpg";
-import logoUrl from "@/assets/webtrix-logo.svg";
-import { ReadingControls } from "@/components/ReadingControls";
+import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
 import { submitLead } from "@/lib/leads.functions";
