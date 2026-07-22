@@ -134,9 +134,10 @@ function MiniNav() {
         <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="হোম">
           <img
             src={logoAsset.url}
-            alt="Webtrix IT Solution"
-            className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]"
+            alt="Webtrixit"
+            className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-10"
           />
+          <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">Webtrixit</span>
         </Link>
         <Link
           to="/"
