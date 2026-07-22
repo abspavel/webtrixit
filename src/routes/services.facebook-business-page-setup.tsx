@@ -5,7 +5,6 @@ import {
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import logoAsset from "@/assets/webtrix-logo.png.asset.json";
-import { ReadingControls } from "@/components/ReadingControls";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (msg: string) =>
@@ -124,7 +123,6 @@ function FacebookPageSetup() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <ReadingControls />
     </div>
   );
 }
