@@ -7,8 +7,8 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import heroBg from "@/assets/hero-bg.jpg";
-import logoUrl from "@/assets/webtrix-logo.svg";
-import { ReadingControls } from "@/components/ReadingControls";
+import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
 import { submitLead } from "@/lib/leads.functions";
@@ -88,7 +88,6 @@ function HomePage() {
       <FinalCTA />
       <Footer />
       <FloatingWhatsApp />
-      <ReadingControls />
 
     </div>
   );
@@ -110,7 +109,7 @@ function Nav() {
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
         <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Webtrix IT Solution হোম">
           <img
-            src={logoUrl}
+            src={logoAsset.url}
             alt="Webtrix IT Solution"
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
@@ -754,7 +753,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoUrl} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>

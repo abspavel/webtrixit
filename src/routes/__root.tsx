@@ -144,15 +144,6 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    const unsub = router.subscribe("onResolved", () => {
-      if (typeof window !== "undefined") window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    });
-    return () => unsub();
-  }, [router]);
-
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
