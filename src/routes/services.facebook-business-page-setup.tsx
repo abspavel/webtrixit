@@ -4,7 +4,7 @@ import {
   Facebook, Clock, Sparkles, ShieldCheck, Send,
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+const logoAsset = { url: "/webtrix-logo.png" };
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (msg: string) =>

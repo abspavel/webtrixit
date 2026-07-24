@@ -7,7 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import heroBg from "@/assets/hero-bg.jpg";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+const logoAsset = { url: "/webtrix-logo.png" };
 
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";

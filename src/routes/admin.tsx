@@ -6,7 +6,7 @@ import {
   Loader2, LogOut, Search, RefreshCw, Trash2, Phone, MessageCircle, Mail,
   ShieldCheck, Inbox, Link2, Save,
 } from "lucide-react";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+const logoAsset = { url: "/webtrix-logo.png" };
 import { services } from "@/lib/services-data";
 
 export const Route = createFileRoute("/admin")({

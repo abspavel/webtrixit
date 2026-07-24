@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getSupabase } from "@/integrations/supabase/client";
 import { ShieldCheck, ArrowRight, Loader2 } from "lucide-react";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+const logoAsset = { url: "/webtrix-logo.png" };
 
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Admin Login — Webtrix IT Solution" }] }),
