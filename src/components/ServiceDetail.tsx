@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
-import logoAsset from "@/assets/webtrix-logo.png.asset.json";
+const logoAsset = { url: "/webtrix-logo.png" };
 import { submitLead } from "@/lib/leads.functions";
 import { getSupabase } from "@/integrations/supabase/client";
 
