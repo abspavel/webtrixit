@@ -24,6 +24,11 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   const [saleUrl, setSaleUrl] = useState<string>("");
 
   useEffect(() => {
+    // Ensure the service page always opens from the top, not restored/mid-scroll.
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
+  }, [service.slug]);
+
+  useEffect(() => {
     setDemoUrl(service.demoUrl);
     setSaleUrl("");
     let cancelled = false;

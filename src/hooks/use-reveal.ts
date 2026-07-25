@@ -1,27 +1,38 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
  * Sets data-visible="true" on the returned ref when the element enters the viewport.
  * Pair with `.reveal` / `.reveal-l` / `.reveal-r` classes in styles.css.
+ *
+ * If the element is already in the viewport on mount (above the fold on route
+ * entry), it is marked visible synchronously before paint AND flagged with
+ * data-instant so no rise-in animation plays — otherwise the hero would
+ * appear to "load from the bottom" on every service page.
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>(
   options: IntersectionObserverInit = { threshold: 0.15, rootMargin: "0px 0px -80px 0px" },
 ) {
   const ref = useRef<T | null>(null);
   const [visible, setVisible] = useState(false);
+  const [instant, setInstant] = useState(false);
+
+  useIsoLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < vh && rect.bottom > 0) {
+      setInstant(true);
+      setVisible(true);
+    }
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || visible) return;
     if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
-    // If already in viewport on mount (e.g. above the fold), reveal immediately
-    // so the page never appears to load "from the bottom".
-    const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    if (rect.top < vh && rect.bottom > 0) {
       setVisible(true);
       return;
     }
@@ -39,9 +50,9 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [visible]);
 
-  return { ref, visible } as const;
+  return { ref, visible, instant } as const;
 }
 
 /**

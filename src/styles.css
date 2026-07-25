@@ -188,6 +188,10 @@
 .reveal-l[data-visible="true"] { animation: slide-in-left 0.7s ease-out both; }
 .reveal-r { opacity: 0; }
 .reveal-r[data-visible="true"] { animation: slide-in-right 0.7s ease-out both; }
+/* Above-the-fold on route entry: show instantly, no rise-from-bottom */
+.reveal[data-instant="true"],
+.reveal-l[data-instant="true"],
+.reveal-r[data-instant="true"] { opacity: 1 !important; animation: none !important; transform: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-l, .reveal-r { opacity: 1 !important; animation: none !important; }
