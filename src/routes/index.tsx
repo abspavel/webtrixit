@@ -7,6 +7,14 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import heroBg from "@/assets/hero-bg.jpg";
+import client1 from "@/assets/client-1.jpg";
+import client2 from "@/assets/client-2.jpg";
+import client3 from "@/assets/client-3.jpg";
+import client4 from "@/assets/client-4.jpg";
+import client5 from "@/assets/client-5.jpg";
+import client6 from "@/assets/client-6.jpg";
+import client7 from "@/assets/client-7.jpg";
+import client8 from "@/assets/client-8.jpg";
 const logoAsset = { url: "/webtrix-logo.png" };
 
 import { services } from "@/lib/services-data";
@@ -24,19 +32,18 @@ export const Route = createFileRoute("/")({
 });
 
 
-/* Client logo marks — SVG-based branded chips (name-এর পরিবর্তে "logo" চিহ্ন) */
-const clientLogos: { name: string; symbol: string; from: string; to: string }[] = [
-  { name: "Acme",       symbol: "◆", from: "#3B82F6", to: "#8B5CF6" },
-  { name: "Nexlify",    symbol: "▲", from: "#10B981", to: "#3B82F6" },
-  { name: "Orbit",      symbol: "◉", from: "#8B5CF6", to: "#10B981" },
-  { name: "Pulse",      symbol: "❤", from: "#F43F5E", to: "#8B5CF6" },
-  { name: "Vantage",    symbol: "⬢", from: "#3B82F6", to: "#10B981" },
-  { name: "Kairo",      symbol: "✦", from: "#F59E0B", to: "#8B5CF6" },
-  { name: "Northwind",  symbol: "❄", from: "#38BDF8", to: "#3B82F6" },
-  { name: "Lumen",      symbol: "☀", from: "#F59E0B", to: "#F43F5E" },
-  { name: "Zephyr",     symbol: "≋", from: "#10B981", to: "#38BDF8" },
-  { name: "Halcyon",    symbol: "◐", from: "#8B5CF6", to: "#3B82F6" },
+/* সন্তুষ্ট ক্লায়েন্ট — বাংলাদেশী মানুষের ছবি ও নাম */
+const clientPeople: { name: string; role: string; photo: string }[] = [
+  { name: "রাকিবুল হাসান", role: "স্বত্বাধিকারী, রাকিব ফ্যাশন", photo: client1 },
+  { name: "সুমাইয়া আক্তার", role: "ফাউন্ডার, নীলাঞ্জনা বুটিক", photo: client2 },
+  { name: "আব্দুল করিম", role: "এমডি, করিম ট্রেডার্স", photo: client3 },
+  { name: "নুসরাত জাহান", role: "ডিরেক্টর, জাহান কসমেটিকস", photo: client4 },
+  { name: "তানভীর আহমেদ", role: "সিইও, টেকভিশন বিডি", photo: client5 },
+  { name: "ফারজানা ইয়াসমিন", role: "প্রিন্সিপাল, ব্রাইট একাডেমি", photo: client6 },
+  { name: "মাহবুব আলম", role: "চেয়ারম্যান, আলম গ্রুপ", photo: client7 },
+  { name: "সাদিয়া রহমান", role: "মার্কেটিং হেড, রহমান মার্ট", photo: client8 },
 ];
+
 
 const stories = [
   { name: "রাশেদ আহমেদ", role: "প্রতিষ্ঠাতা, ShopKart BD", quote: "Webtrix আমাদের স্টোর রিবিল্ড করার পর মাত্র দুই মাসে সেল ৩.২ গুণ বেড়েছে। এদের টিম কনভার্সন ভালো বোঝে।", rating: 5 },
@@ -224,9 +231,9 @@ function Hero() {
   );
 }
 
-/* ---------- CLIENT LOGOS (logo-marks, not text names) ---------- */
+/* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function ClientLogos() {
-  const row = [...clientLogos, ...clientLogos];
+  const row = [...clientPeople, ...clientPeople];
   return (
     <section className="border-y border-border/60 bg-surface/40 py-10">
       <div className="mx-auto max-w-7xl px-5">
@@ -234,21 +241,25 @@ function ClientLogos() {
           দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
         </p>
         <div className="mt-6 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center gap-10">
+          <div className="animate-marquee flex w-max items-center gap-8">
             {row.map((c, i) => (
               <div
                 key={i}
                 className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
               >
-                <span
-                  className="grid h-10 w-10 place-items-center rounded-xl font-display text-lg font-bold text-white shadow-md"
-                  style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}
-                  aria-hidden="true"
-                >
-                  {c.symbol}
-                </span>
-                <span className="font-display text-lg font-semibold tracking-tight text-foreground/85">
-                  {c.name}
+                <img
+                  src={c.photo}
+                  alt={c.name}
+                  width={512}
+                  height={512}
+                  loading="lazy"
+                  className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-electric/40"
+                />
+                <span className="flex flex-col">
+                  <span className="font-display text-sm font-semibold tracking-tight text-foreground/90 sm:text-base">
+                    {c.name}
+                  </span>
+                  <span className="text-[11px] text-muted-foreground">{c.role}</span>
                 </span>
               </div>
             ))}
@@ -258,6 +269,7 @@ function ClientLogos() {
     </section>
   );
 }
+
 
 /* ---------- PROBLEM → SOLUTION ---------- */
 function ProblemSolution() {
