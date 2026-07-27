@@ -231,9 +231,9 @@ function Hero() {
   );
 }
 
-/* ---------- CLIENT LOGOS (logo-marks, not text names) ---------- */
+/* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function ClientLogos() {
-  const row = [...clientLogos, ...clientLogos];
+  const row = [...clientPeople, ...clientPeople];
   return (
     <section className="border-y border-border/60 bg-surface/40 py-10">
       <div className="mx-auto max-w-7xl px-5">
@@ -241,21 +241,25 @@ function ClientLogos() {
           দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
         </p>
         <div className="mt-6 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center gap-10">
+          <div className="animate-marquee flex w-max items-center gap-8">
             {row.map((c, i) => (
               <div
                 key={i}
                 className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
               >
-                <span
-                  className="grid h-10 w-10 place-items-center rounded-xl font-display text-lg font-bold text-white shadow-md"
-                  style={{ background: `linear-gradient(135deg, ${c.from}, ${c.to})` }}
-                  aria-hidden="true"
-                >
-                  {c.symbol}
-                </span>
-                <span className="font-display text-lg font-semibold tracking-tight text-foreground/85">
-                  {c.name}
+                <img
+                  src={c.photo}
+                  alt={c.name}
+                  width={512}
+                  height={512}
+                  loading="lazy"
+                  className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-electric/40"
+                />
+                <span className="flex flex-col">
+                  <span className="font-display text-sm font-semibold tracking-tight text-foreground/90 sm:text-base">
+                    {c.name}
+                  </span>
+                  <span className="text-[11px] text-muted-foreground">{c.role}</span>
                 </span>
               </div>
             ))}
@@ -265,6 +269,7 @@ function ClientLogos() {
     </section>
   );
 }
+
 
 /* ---------- PROBLEM → SOLUTION ---------- */
 function ProblemSolution() {
