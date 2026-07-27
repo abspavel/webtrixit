@@ -194,7 +194,7 @@ function Hero() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,15,29,0.4) 0%, rgba(10,15,29,0.95) 100%)" }} />
       </div>
       <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
-      <div className="mx-auto max-w-7xl px-5 py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 pt-16 pb-10 md:pt-24 md:pb-14">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
@@ -213,7 +213,7 @@ function Hero() {
               আমাদের কাজ দেখুন
             </a>
           </div>
-          <div className="mt-10 grid grid-cols-3 gap-4 text-center">
+          <div className="mt-8 grid grid-cols-3 gap-4 text-center">
             {[
               { k: "২৫০+", v: "ডেলিভার্ড প্রজেক্ট" },
               { k: "৪.৯/৫", v: "ক্লায়েন্ট রেটিং" },
@@ -235,7 +235,7 @@ function Hero() {
 function ClientLogos() {
   const row = [...clientPeople, ...clientPeople];
   return (
-    <section className="border-y border-border/60 bg-surface/40 py-10">
+    <section className="border-y border-border/60 bg-surface/40 py-7">
       <div className="mx-auto max-w-7xl px-5">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
           দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
