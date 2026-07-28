@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
   Phone, Mail, MapPin, TrendingUp, Zap, ChevronLeft, ChevronRight,
-  AlertTriangle, Sparkles,
+  AlertTriangle, Sparkles, ExternalLink,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -20,6 +20,7 @@ const logoAsset = { url: "/webtrix-logo.png" };
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
 import { submitLead } from "@/lib/leads.functions";
+import { getSupabase } from "@/integrations/supabase/client";
 
 
 const WHATSAPP_NUMBER = "8801835985730";
@@ -28,6 +29,30 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 )}`;
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      {
+        name: "description",
+        content:
+          "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
+      },
+      { property: "og:title", content: "Webtrixit — প্রিমিয়াম ডিজিটাল এজেন্সি" },
+      {
+        property: "og:description",
+        content:
+          "বাংলাদেশ থেকে দেশ-বিদেশের ব্র্যান্ডের জন্য দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক ডিজিটাল সলিউশন।",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Webtrixit — প্রিমিয়াম ডিজিটাল এজেন্সি" },
+      {
+        name: "twitter:description",
+        content:
+          "ওয়েবসাইট, সফটওয়্যার, ই-কমার্স, LMS ও ডিজিটাল মার্কেটিং — সবকিছু এক জায়গায়।",
+      },
+    ],
+  }),
   component: HomePage,
 });
 
@@ -64,7 +89,17 @@ const stories = [
   { name: "জান্নাতুল ফেরদৌস", role: "মালিক, StyleNest", quote: "শুরু থেকে ডেলিভারি — পুরো প্রসেসটাই smooth ছিল। প্রথমবার অনলাইন ব্যবসা শুরু করেও কোনো ঝামেলা হয়নি।", rating: 5 },
 ];
 
-const portfolio = [
+type PortfolioProject = {
+  id?: string;
+  title: string;
+  category: string;
+  description?: string | null;
+  demo_url: string;
+  image_url?: string | null;
+  sort_order?: number | null;
+};
+
+const fallbackPortfolio: PortfolioProject[] = [
   { title: "Luxe Landing Page", tag: "ল্যান্ডিং পেজ", gradient: "from-electric to-lavender", demo: "/demo/luxe-landing" },
   { title: "Kart+ E-commerce", tag: "ই-কমার্স", gradient: "from-lavender to-neon", demo: "/demo/kartplus-ecommerce" },
   { title: "FreshCart Grocery", tag: "গ্রোসারি", gradient: "from-neon to-lavender", demo: "/demo/freshcart-grocery" },
@@ -73,6 +108,22 @@ const portfolio = [
   { title: "Orbit CRM", tag: "কাস্টম সফটওয়্যার", gradient: "from-lavender to-electric", demo: "/demo/orbit-crm" },
   { title: "PulseAds Video", tag: "AI ভিডিও", gradient: "from-neon to-lavender", demo: "/demo/pulseads-video" },
   { title: "BrandKit Design", tag: "লোগো ও পোস্টার", gradient: "from-electric to-lavender", demo: "/demo/brandkit-design" },
+].map((item, index) => ({
+  id: `fallback-${index}`,
+  title: item.title,
+  category: item.tag,
+  demo_url: item.demo,
+  image_url: null,
+  sort_order: index,
+}));
+
+const portfolioGradients = [
+  "from-electric to-lavender",
+  "from-lavender to-neon",
+  "from-neon to-lavender",
+  "from-neon to-electric",
+  "from-electric to-neon",
+  "from-lavender to-electric",
 ];
 
 const beforeAfter = [
@@ -504,6 +555,27 @@ function SuccessStories() {
 function Portfolio() {
   const [i, setI] = useState(0);
   const [perView, setPerView] = useState(3);
+  const [projects, setProjects] = useState<PortfolioProject[]>(fallbackPortfolio);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const supabase = getSupabase();
+        const { data, error } = await supabase
+          .from("portfolio_projects")
+          .select("id, title, category, description, demo_url, image_url, sort_order")
+          .eq("is_active", true)
+          .order("sort_order", { ascending: true })
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        if (!cancelled && data && data.length > 0) setProjects(data as PortfolioProject[]);
+      } catch {
+        // Supabase না থাকলে/টেবিল সেটআপ না হলে স্ট্যাটিক পোর্টফোলিও দেখাবে।
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     const update = () => {
@@ -515,7 +587,7 @@ function Portfolio() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const maxIndex = Math.max(0, portfolio.length - perView);
+  const maxIndex = Math.max(0, projects.length - perView);
   const safeI = Math.min(i, maxIndex);
 
   useEffect(() => {
@@ -542,36 +614,53 @@ function Portfolio() {
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${(safeI * 100) / perView}%)` }}
             >
-              {portfolio.map((p) => (
+              {projects.map((p, idx) => {
+                const gradient = portfolioGradients[idx % portfolioGradients.length];
+                const isExternal = /^https?:\/\//i.test(p.demo_url);
+                return (
                 <div
-                  key={p.title}
+                  key={p.id ?? p.title}
                   className="shrink-0 px-2.5"
                   style={{ width: `${100 / perView}%` }}
                 >
-                  <Link
-                    to={p.demo}
+                  <a
+                    href={p.demo_url}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noreferrer" : undefined}
                     className="group block overflow-hidden rounded-2xl border border-border bg-card transition hover:border-electric/50 hover:shadow-lg hover:shadow-electric/10"
                   >
-                    <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.gradient}`}>
+                    <div className={`relative aspect-[4/3] bg-gradient-to-br ${gradient}`}>
+                      {p.image_url && (
+                        <img
+                          src={p.image_url}
+                          alt={`${p.title} প্রজেক্ট প্রিভিউ`}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      )}
+                      {p.image_url && <div className="absolute inset-0 bg-brand/45" />}
                       <div className="grid-bg absolute inset-0 opacity-40" />
                       <div className="absolute inset-0 grid place-items-center px-4 text-center">
                         <span className="font-display text-2xl font-bold text-brand-foreground drop-shadow">
                           {p.title}
                         </span>
                       </div>
-                      <span className="absolute right-3 top-3 rounded-full bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur">
-                        ডেমো দেখুন
+                      <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur">
+                        ডেমো দেখুন {isExternal && <ExternalLink className="h-3 w-3" />}
                       </span>
                     </div>
                     <div className="flex items-center justify-between p-4">
-                      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                        {p.tag}
-                      </span>
+                      <div className="min-w-0">
+                        <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                          {p.category}
+                        </span>
+                        {p.description && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{p.description}</p>}
+                      </div>
                       <ArrowRight className="h-4 w-4 text-primary transition group-hover:translate-x-1" />
                     </div>
-                  </Link>
+                  </a>
                 </div>
-              ))}
+              );})}
             </div>
           </div>
 
