@@ -4,13 +4,24 @@ import { toast } from "sonner";
 import { getSupabase } from "@/integrations/supabase/client";
 import {
   Loader2, LogOut, Search, RefreshCw, Trash2, Phone, MessageCircle, Mail,
-  ShieldCheck, Inbox, Link2, Save,
+  ShieldCheck, Inbox, Link2, Save, BriefcaseBusiness, Plus, Pencil, X, ExternalLink,
 } from "lucide-react";
 const logoAsset = { url: "/webtrix-logo.png" };
 import { services } from "@/lib/services-data";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin Dashboard — Webtrix" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [
+      { title: "Admin Dashboard — Webtrixit" },
+      { name: "description", content: "Webtrixit admin dashboard for leads, service links, and portfolio projects." },
+      { property: "og:title", content: "Admin Dashboard — Webtrixit" },
+      { property: "og:description", content: "Manage Webtrixit leads, demo links, sale links, and portfolio projects." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminPage,
 });
 
@@ -322,12 +333,45 @@ function AdminPage() {
         </div>
 
         <ServiceLinksPanel />
+        <PortfolioProjectsPanel />
       </div>
     </main>
   );
 }
 
 type ServiceLinkRow = { service_slug: string; demo_url: string | null; sale_url: string | null };
+
+type PortfolioProject = {
+  id: string;
+  title: string;
+  category: string | null;
+  description: string | null;
+  demo_url: string;
+  image_url: string | null;
+  sort_order: number | null;
+  is_active: boolean;
+  created_at: string;
+};
+
+type PortfolioForm = {
+  title: string;
+  category: string;
+  description: string;
+  demo_url: string;
+  image_url: string;
+  sort_order: string;
+  is_active: boolean;
+};
+
+const emptyPortfolioForm: PortfolioForm = {
+  title: "",
+  category: "",
+  description: "",
+  demo_url: "",
+  image_url: "",
+  sort_order: "0",
+  is_active: true,
+};
 
 function ServiceLinksPanel() {
   const [rows, setRows] = useState<Record<string, { demo_url: string; sale_url: string }>>({});
@@ -436,6 +480,246 @@ function ServiceLinksPanel() {
             </div>
           );
         })}
+      </div>
+    </section>
+  );
+}
+
+function PortfolioProjectsPanel() {
+  const [projects, setProjects] = useState<PortfolioProject[]>([]);
+  const [form, setForm] = useState<PortfolioForm>(emptyPortfolioForm);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    try {
+      const supabase = getSupabase();
+      const { data, error } = await supabase
+        .from("portfolio_projects")
+        .select("id, title, category, description, demo_url, image_url, sort_order, is_active, created_at")
+        .order("sort_order", { ascending: true })
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      setProjects((data ?? []) as PortfolioProject[]);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "প্রজেক্ট লোড হয়নি");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  function resetForm() {
+    setEditingId(null);
+    setForm(emptyPortfolioForm);
+  }
+
+  function editProject(project: PortfolioProject) {
+    setEditingId(project.id);
+    setForm({
+      title: project.title,
+      category: project.category ?? "",
+      description: project.description ?? "",
+      demo_url: project.demo_url,
+      image_url: project.image_url ?? "",
+      sort_order: String(project.sort_order ?? 0),
+      is_active: project.is_active,
+    });
+  }
+
+  async function saveProject() {
+    if (!form.title.trim() || !form.demo_url.trim()) {
+      toast.error("প্রজেক্টের নাম ও ডেমো URL দিন");
+      return;
+    }
+    setSaving(true);
+    try {
+      const supabase = getSupabase();
+      const order = Number.parseInt(form.sort_order, 10);
+      const payload = {
+        title: form.title.trim(),
+        category: form.category.trim() || null,
+        description: form.description.trim() || null,
+        demo_url: form.demo_url.trim(),
+        image_url: form.image_url.trim() || null,
+        sort_order: Number.isFinite(order) ? order : 0,
+        is_active: form.is_active,
+        updated_at: new Date().toISOString(),
+      };
+      const query = editingId
+        ? supabase.from("portfolio_projects").update(payload).eq("id", editingId)
+        : supabase.from("portfolio_projects").insert(payload);
+      const { error } = await query;
+      if (error) throw error;
+      toast.success(editingId ? "প্রজেক্ট আপডেট হয়েছে" : "নতুন প্রজেক্ট যোগ হয়েছে");
+      resetForm();
+      await load();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "সেভ ব্যর্থ");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function deleteProject(id: string) {
+    if (!confirm("এই portfolio project delete করবেন?")) return;
+    try {
+      const supabase = getSupabase();
+      const { error } = await supabase.from("portfolio_projects").delete().eq("id", id);
+      if (error) throw error;
+      setProjects((prev) => prev.filter((project) => project.id !== id));
+      if (editingId === id) resetForm();
+      toast.success("প্রজেক্ট ডিলিট হয়েছে");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Delete ব্যর্থ");
+    }
+  }
+
+  return (
+    <section className="mt-10">
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 className="flex items-center gap-2 text-xl font-bold text-foreground sm:text-2xl">
+            <BriefcaseBusiness className="h-5 w-5 text-neon" /> পোর্টফোলিও / আমাদের কাজ
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            হোমপেজের “আমাদের কাজ” সেকশনে দেখানোর জন্য প্রজেক্ট বা ওয়েবসাইট যোগ, এডিট ও hide করুন।
+          </p>
+        </div>
+        <Button type="button" variant="outline" size="sm" onClick={load} className="rounded-full bg-surface/70 text-foreground hover:bg-surface">
+          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
+        </Button>
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-[minmax(320px,0.8fr)_minmax(0,1.2fr)]">
+        <div className="rounded-2xl border border-border bg-surface/50 p-4 sm:p-5">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <h3 className="font-semibold text-foreground">{editingId ? "প্রজেক্ট এডিট" : "নতুন প্রজেক্ট"}</h3>
+            {editingId && (
+              <Button type="button" variant="ghost" size="sm" onClick={resetForm} className="rounded-full text-muted-foreground hover:text-foreground">
+                <X className="h-4 w-4" /> বাতিল
+              </Button>
+            )}
+          </div>
+          <div className="space-y-3">
+            <label className="block">
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্টের নাম</span>
+              <input
+                value={form.title}
+                onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
+                placeholder="যেমন: Modern Ecommerce Website"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ক্যাটাগরি</span>
+              <input
+                value={form.category}
+                onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+                placeholder="ই-কমার্স / LMS / সফটওয়্যার"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ডেমো / ওয়েবসাইট URL</span>
+              <input
+                type="url"
+                value={form.demo_url}
+                onChange={(e) => setForm((prev) => ({ ...prev, demo_url: e.target.value }))}
+                placeholder="https://... বা /demo/..."
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-neon focus:outline-none"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রিভিউ ইমেজ URL</span>
+              <input
+                type="url"
+                value={form.image_url}
+                onChange={(e) => setForm((prev) => ({ ...prev, image_url: e.target.value }))}
+                placeholder="https://.../screenshot.jpg (optional)"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-lavender focus:outline-none"
+              />
+            </label>
+            <label className="block">
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ছোট বর্ণনা</span>
+              <textarea
+                value={form.description}
+                onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
+                placeholder="প্রজেক্ট সম্পর্কে ১-২ লাইনের বর্ণনা"
+                rows={3}
+                className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
+              />
+            </label>
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+              <label className="block">
+                <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">সিরিয়াল</span>
+                <input
+                  type="number"
+                  value={form.sort_order}
+                  onChange={(e) => setForm((prev) => ({ ...prev, sort_order: e.target.value }))}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-electric focus:outline-none"
+                />
+              </label>
+              <label className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground">
+                <input
+                  type="checkbox"
+                  checked={form.is_active}
+                  onChange={(e) => setForm((prev) => ({ ...prev, is_active: e.target.checked }))}
+                  className="h-4 w-4 accent-primary"
+                />
+                Active
+              </label>
+            </div>
+            <Button type="button" onClick={saveProject} disabled={saving} className="w-full rounded-full font-semibold">
+              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : editingId ? <Save className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+              {editingId ? "আপডেট করুন" : "প্রজেক্ট যোগ করুন"}
+            </Button>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border border-border bg-surface/50">
+          {projects.length === 0 ? (
+            <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
+              <Inbox className="h-10 w-10 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">এখনো কোনো portfolio project নেই।</p>
+            </div>
+          ) : (
+            <div className="divide-y divide-border/60">
+              {projects.map((project) => (
+                <div key={project.id} className="p-4 sm:p-5">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-semibold text-foreground">{project.title}</h3>
+                        <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${project.is_active ? "border-neon/30 bg-neon/10 text-neon" : "border-border bg-background text-muted-foreground"}`}>
+                          {project.is_active ? "Active" : "Hidden"}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {project.category || "ক্যাটাগরি নেই"} · সিরিয়াল {project.sort_order ?? 0}
+                      </p>
+                      {project.description && <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>}
+                      <a href={project.demo_url} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1.5 break-all text-xs text-electric hover:opacity-80">
+                        <ExternalLink className="h-3 w-3" /> {project.demo_url}
+                      </a>
+                    </div>
+                    <div className="flex shrink-0 gap-2">
+                      <Button type="button" variant="outline" size="icon" onClick={() => editProject(project)} aria-label="প্রজেক্ট এডিট" className="rounded-full bg-background">
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                      <Button type="button" variant="outline" size="icon" onClick={() => deleteProject(project.id)} aria-label="প্রজেক্ট ডিলিট" className="rounded-full border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -4,10 +4,11 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -144,10 +145,49 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!("scrollRestoration" in window.history)) return;
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    return () => { window.history.scrollRestoration = previous; };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollReset />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );
+}
+
+function ScrollReset() {
+  const locationKey = useRouterState({
+    select: (state) => `${state.location.pathname}${state.location.hash ?? ""}`,
+  });
+
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+    const path = window.location.pathname;
+    if (!path.startsWith("/services")) return;
+    if (window.location.hash) return;
+
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+
+    const reset = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    reset();
+    const frame = window.requestAnimationFrame(reset);
+    const timer = window.setTimeout(reset, 120);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+      root.style.scrollBehavior = previousBehavior;
+    };
+  }, [locationKey]);
+
+  return null;
 }
