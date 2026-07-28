@@ -164,7 +164,7 @@ function RootComponent() {
 
 function ScrollReset() {
   const locationKey = useRouterState({
-    select: (state) => `${state.location.pathname}${state.location.search}${state.location.hash}`,
+    select: (state) => `${state.location.pathname}${state.location.hash ?? ""}`,
   });
 
   useLayoutEffect(() => {
