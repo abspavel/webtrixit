@@ -100,22 +100,15 @@ type PortfolioProject = {
 };
 
 const fallbackPortfolio: PortfolioProject[] = [
-  { title: "Luxe Landing Page", tag: "ল্যান্ডিং পেজ", gradient: "from-electric to-lavender", demo: "/demo/luxe-landing" },
-  { title: "Kart+ E-commerce", tag: "ই-কমার্স", gradient: "from-lavender to-neon", demo: "/demo/kartplus-ecommerce" },
-  { title: "FreshCart Grocery", tag: "গ্রোসারি", gradient: "from-neon to-lavender", demo: "/demo/freshcart-grocery" },
-  { title: "EduPrime LMS", tag: "এলএমএস", gradient: "from-neon to-electric", demo: "/demo/eduprime-lms" },
-  { title: "PanelPro SMM", tag: "এসএমএম প্যানেল", gradient: "from-electric to-neon", demo: "/demo/panelpro-smm" },
-  { title: "Orbit CRM", tag: "কাস্টম সফটওয়্যার", gradient: "from-lavender to-electric", demo: "/demo/orbit-crm" },
-  { title: "PulseAds Video", tag: "AI ভিডিও", gradient: "from-neon to-lavender", demo: "/demo/pulseads-video" },
-  { title: "BrandKit Design", tag: "লোগো ও পোস্টার", gradient: "from-electric to-lavender", demo: "/demo/brandkit-design" },
-].map((item, index) => ({
-  id: `fallback-${index}`,
-  title: item.title,
-  category: item.tag,
-  demo_url: item.demo,
-  image_url: null,
-  sort_order: index,
-}));
+  { id: "fallback-0", title: "Luxe Landing Page", category: "ল্যান্ডিং পেজ", demo_url: "/demo/luxe-landing", image_url: null, sort_order: 0 },
+  { id: "fallback-1", title: "Kart+ E-commerce", category: "ই-কমার্স", demo_url: "/demo/kartplus-ecommerce", image_url: null, sort_order: 1 },
+  { id: "fallback-2", title: "FreshCart Grocery", category: "গ্রোসারি", demo_url: "/demo/freshcart-grocery", image_url: null, sort_order: 2 },
+  { id: "fallback-3", title: "EduPrime LMS", category: "এলএমএস", demo_url: "/demo/eduprime-lms", image_url: null, sort_order: 3 },
+  { id: "fallback-4", title: "PanelPro SMM", category: "এসএমএম প্যানেল", demo_url: "/demo/panelpro-smm", image_url: null, sort_order: 4 },
+  { id: "fallback-5", title: "Orbit CRM", category: "কাস্টম সফটওয়্যার", demo_url: "/demo/orbit-crm", image_url: null, sort_order: 5 },
+  { id: "fallback-6", title: "PulseAds Video", category: "AI ভিডিও", demo_url: "/demo/pulseads-video", image_url: null, sort_order: 6 },
+  { id: "fallback-7", title: "BrandKit Design", category: "লোগো ও পোস্টার", demo_url: "/demo/brandkit-design", image_url: null, sort_order: 7 },
+];
 
 const portfolioGradients = [
   "from-electric to-lavender",
