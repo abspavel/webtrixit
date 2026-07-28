@@ -37,19 +37,19 @@ export const Route = createFileRoute("/")({
         content:
           "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
       },
-      { property: "og:title", content: "Webtrixit — প্রিমিয়াম ডিজিটাল এজেন্সি" },
+      { property: "og:title", content: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
       {
         property: "og:description",
         content:
-          "বাংলাদেশ থেকে দেশ-বিদেশের ব্র্যান্ডের জন্য দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক ডিজিটাল সলিউশন।",
+          "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Webtrixit — প্রিমিয়াম ডিজিটাল এজেন্সি" },
+      { name: "twitter:title", content: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
       {
         name: "twitter:description",
         content:
-          "ওয়েবসাইট, সফটওয়্যার, ই-কমার্স, LMS ও ডিজিটাল মার্কেটিং — সবকিছু এক জায়গায়।",
+          "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
       },
     ],
   }),
