@@ -145,6 +145,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!("scrollRestoration" in window.history)) return;
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    return () => { window.history.scrollRestoration = previous; };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ScrollReset />
@@ -163,6 +171,7 @@ function ScrollReset() {
     if (typeof window === "undefined") return;
     const path = window.location.pathname;
     if (!path.startsWith("/services")) return;
+    if (window.location.hash) return;
 
     const root = document.documentElement;
     const previousBehavior = root.style.scrollBehavior;
