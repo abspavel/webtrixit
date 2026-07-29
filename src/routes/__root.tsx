@@ -169,9 +169,8 @@ function ScrollReset() {
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
-    const path = window.location.pathname;
-    if (!path.startsWith("/services")) return;
     if (window.location.hash) return;
+
 
     const root = document.documentElement;
     const previousBehavior = root.style.scrollBehavior;
