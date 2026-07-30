@@ -455,11 +455,11 @@ function Services() {
             const bg = ["bg-electric/10", "bg-neon/10", "bg-lavender/10"];
             const c = i % 3;
             return (
+              <PopIn key={s.title} delay={(i % 3) * 0.06} className="h-full">
               <Link
-                key={s.title}
                 to="/services/$slug"
                 params={{ slug: s.slug }}
-                className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40"
+                className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40"
               >
                 <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${bg[c]} ${accents[c]}`}>
                   <Icon className="h-5 w-5" />
@@ -471,7 +471,9 @@ function Services() {
                 </span>
                 <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100`} />
               </Link>
+              </PopIn>
             );
+
           })}
         </div>
       </div>
