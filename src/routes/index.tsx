@@ -268,9 +268,11 @@ function Hero() {
                 <div className="mt-1 text-xs text-muted-foreground">{s.v}</div>
               </div>
             ))}
+          </div>
         </div>
         <Hero3DStack />
       </div>
+
 
     </section>
   );
