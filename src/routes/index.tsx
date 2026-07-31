@@ -491,9 +491,14 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
 /* ---------- SERVICES ---------- */
 function Services() {
   return (
-    <section id="services" className="section-light py-14 sm:py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-5">
+    <section id="services" className="section-light section-mint relative overflow-hidden py-14 sm:py-20 md:py-28">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+        <div className="orb animate-orb-a absolute -left-24 top-0 h-72 w-72 opacity-20" />
+        <div className="orb orb-2 animate-orb-b absolute -right-24 bottom-0 h-80 w-80 opacity-20" />
+      </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের সার্ভিস" title="আমাদের সার্ভিস সমূহ" />
+
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
             const Icon = s.icon;
