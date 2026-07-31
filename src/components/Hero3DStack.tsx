@@ -12,7 +12,7 @@ export function Hero3DStack() {
   const ref = useRef<HTMLDivElement | null>(null);
   const prefersReduced = useReducedMotion();
   const isMobile = useIsMobile();
-  const reduced = prefersReduced || isMobile;
+  const reduced = prefersReduced;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -21,17 +21,20 @@ export function Hero3DStack() {
 
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 22, mass: 0.4 });
 
-  const rotateX = useTransform(smooth, [0, 0.5, 1], [22, 6, -10]);
-  const rotateY = useTransform(smooth, [0, 0.5, 1], [-16, 0, 14]);
+  const k = isMobile ? 0.55 : 1;
+  const rotateX = useTransform(smooth, [0, 0.5, 1], [22 * k, 6 * k, -10 * k]);
+  const rotateY = useTransform(smooth, [0, 0.5, 1], [-16 * k, 0, 14 * k]);
   const scale = useTransform(smooth, [0, 0.5, 1], [0.92, 1, 0.95]);
   const perspective = useTransform(smooth, [0, 1], [1400, 900]);
-  const zBack = useTransform(smooth, [0, 1], [-140, -40]);
-  const zMid = useTransform(smooth, [0, 1], [-60, 10]);
-  const zFront = useTransform(smooth, [0, 1], [40, 120]);
-  const floatY = useTransform(smooth, [0, 1], [24, -24]);
+  const zBack = useTransform(smooth, [0, 1], [-140 * k, -40 * k]);
+  const zMid = useTransform(smooth, [0, 1], [-60 * k, 10 * k]);
+  const zFront = useTransform(smooth, [0, 1], [40 * k, 120 * k]);
+  const floatY = useTransform(smooth, [0, 1], [24 * k, -24 * k]);
 
   const still = { rotateX: 0, rotateY: 0, scale: 1 };
-  const blur = reduced ? "" : " backdrop-blur";
+  // blur is the expensive part — keep it off on mobile only
+  const blur = prefersReduced || isMobile ? "" : " backdrop-blur";
+
 
   return (
     <div ref={ref} className="mx-auto mt-12 w-full max-w-4xl [transform-style:preserve-3d]">
