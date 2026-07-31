@@ -1,13 +1,18 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * Pure CSS/Tailwind 3D composition of layered "website mockup" panels.
  * Rotation, scale and perspective are bound to scroll progress.
+ * On mobile (and with reduced motion) the heavy 3D transforms and blurs are
+ * skipped so scrolling stays at 60fps.
  */
 export function Hero3DStack() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const reduced = useReducedMotion();
+  const prefersReduced = useReducedMotion();
+  const isMobile = useIsMobile();
+  const reduced = prefersReduced || isMobile;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -26,6 +31,7 @@ export function Hero3DStack() {
   const floatY = useTransform(smooth, [0, 1], [24, -24]);
 
   const still = { rotateX: 0, rotateY: 0, scale: 1 };
+  const blur = reduced ? "" : " backdrop-blur";
 
   return (
     <div ref={ref} className="mx-auto mt-12 w-full max-w-4xl [transform-style:preserve-3d]">
@@ -38,6 +44,7 @@ export function Hero3DStack() {
         {...(reduced ? { animate: still } : {})}
         className="relative mx-auto aspect-[16/10] w-full [transform-style:preserve-3d]"
       >
+
         {/* back panel */}
         <motion.div
           style={reduced ? undefined : { translateZ: zBack, y: floatY }}
