@@ -117,8 +117,10 @@
     --muted-foreground: oklch(0.92 0.02 258);
   }
   body {
-    background: var(--background);
+    background: var(--gradient-brand) fixed;
+    background-color: var(--background);
     color: var(--foreground);
+
     font-family: var(--font-sans);
     font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
     line-height: 1.75;
