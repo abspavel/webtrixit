@@ -120,20 +120,22 @@ export function PopIn({
   const prefersReduced = useReducedMotion();
   const isMobile = useIsMobile();
   if (prefersReduced) return <div className={className}>{children}</div>;
-  // On mobile: opacity-only tween (no transform/spring) to keep FPS stable.
+  // On mobile: lighter spring (smaller travel) but still a visible pop-in.
   if (isMobile) {
     return (
       <motion.div
         className={className}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 18, scale: 0.98 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.35, ease: "easeOut", delay: delay * 0.5 }}
+        transition={{ type: "spring", stiffness: 200, damping: 24, mass: 0.5, delay: delay * 0.5 }}
+        style={{ willChange: "transform, opacity" }}
       >
         {children}
       </motion.div>
     );
   }
+
   return (
     <motion.div
       className={className}
