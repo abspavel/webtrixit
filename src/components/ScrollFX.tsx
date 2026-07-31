@@ -60,12 +60,16 @@ export function Scroll3DSection({
   const ref = useRef<HTMLDivElement | null>(null);
   const prefersReduced = useReducedMotion();
   const isMobile = useIsMobile();
-  const reduced = prefersReduced || isMobile;
+  const reduced = prefersReduced;
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const smooth = useSpring(scrollYProgress, { stiffness: 80, damping: 24, mass: 0.4 });
 
-  const d = DEPTH[depth];
+  const base = DEPTH[depth];
+  // Mobile: same effect, softer amplitude (cheap GPU transforms only).
+  const d = isMobile
+    ? { rot: base.rot * 0.5, z: base.z * 0.4, y: base.y * 0.5, scale: (1 + base.scale) / 2 }
+    : base;
   const rotateX = useTransform(smooth, [0, 0.45, 0.6, 1], [d.rot, 0, 0, -d.rot * 0.6]);
   const translateZ = useTransform(smooth, [0, 0.45, 0.6, 1], [d.z, 0, 0, d.z * 0.5]);
   const y = useTransform(smooth, [0, 0.45, 0.6, 1], [d.y, 0, 0, -d.y * 0.5]);
@@ -86,6 +90,7 @@ export function Scroll3DSection({
       </motion.div>
     );
   }
+
 
   return (
     <div ref={ref} className={`[perspective:1400px] ${className}`}>
