@@ -6,17 +6,7 @@ import { ShieldCheck, ArrowRight, Loader2 } from "lucide-react";
 const logoAsset = { url: "/webtrix-logo.png" };
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({
-    meta: [
-      { title: "Admin Login — Webtrix IT Solution" },
-      { name: "description", content: "Webtrix IT Solution অ্যাডমিন প্যানেলে লগইন করুন।" },
-      { property: "og:title", content: "Admin Login — Webtrix IT Solution" },
-      { property: "og:description", content: "Webtrix IT Solution অ্যাডমিন প্যানেলে লগইন করুন।" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
-  }),
+  head: () => ({ meta: [{ title: "Admin Login — Webtrix IT Solution" }] }),
   component: AuthPage,
 });
 

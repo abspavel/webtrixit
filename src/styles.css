@@ -36,113 +36,48 @@
   --color-lavender: var(--lavender);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
-  --font-display: "Hind Siliguri", "Poppins", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Hind Siliguri", "Poppins", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Playfair Display", "Hind Siliguri", Georgia, serif;
+  --font-display: "Hind Siliguri", "Space Grotesk", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Hind Siliguri", "Inter", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Webtrix palette — neon lime on deep black-green */
-  --brand: oklch(0.16 0.03 150);            /* #0A0F0A deep black-green */
+  /* Webtrix palette */
+  --brand: oklch(0.16 0.04 265);            /* #0A0F1D deep navy */
   --brand-foreground: oklch(1 0 0);
-  --electric: oklch(0.93 0.22 122);         /* #D4FF3D neon lime */
-  --neon: oklch(0.93 0.22 122);
-  --lavender: oklch(0.82 0.16 140);
-  --surface: oklch(0.24 0.05 148);          /* #1A2E1A */
-  --surface-2: oklch(0.3 0.05 148);
+  --electric: oklch(0.65 0.19 258);         /* #3B82F6 */
+  --neon: oklch(0.72 0.17 165);             /* #10B981 */
+  --lavender: oklch(0.68 0.18 296);         /* #8B5CF6 */
+  --surface: oklch(0.19 0.04 265);
+  --surface-2: oklch(0.24 0.04 265);
 
-  --background: oklch(0.16 0.03 150);
+  --background: oklch(0.16 0.04 265);
   --foreground: oklch(1 0 0);
-  --card: oklch(0.22 0.04 148);
+  --card: oklch(0.19 0.04 265);
   --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.22 0.04 148);
+  --popover: oklch(0.19 0.04 265);
   --popover-foreground: oklch(1 0 0);
-  --primary: oklch(0.93 0.22 122);
-  --primary-foreground: oklch(0.16 0.03 150);
-  --secondary: oklch(0.3 0.05 148);
+  --primary: oklch(0.65 0.19 258);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.24 0.04 265);
   --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.3 0.05 148);
-  --muted-foreground: oklch(0.76 0 0);       /* #B0B0B0 */
-  --accent: oklch(0.93 0.22 122);
-  --accent-foreground: oklch(0.16 0.03 150);
+  --muted: oklch(0.24 0.04 265);
+  --muted-foreground: oklch(0.72 0.03 258);  /* slate #94A3B8 */
+  --accent: oklch(0.72 0.17 165);
+  --accent-foreground: oklch(0.16 0.04 265);
   --destructive: oklch(0.6 0.24 27);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.93 0.22 122);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.65 0.19 258);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.93 0.22 122) 0%, oklch(0.88 0.19 135) 55%, oklch(0.82 0.16 150) 100%);
-  --gradient-brand: linear-gradient(180deg, #0A0F0A 0%, #1A2E1A 100%);
+  --gradient-hero: linear-gradient(135deg, var(--electric) 0%, var(--lavender) 60%, var(--neon) 100%);
+  --gradient-brand: linear-gradient(180deg, oklch(0.16 0.04 265) 0%, oklch(0.13 0.05 265) 100%);
   --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--electric) 55%, transparent);
-  --shadow-neon: 0 0 0 1px color-mix(in oklab, var(--electric) 35%, transparent), 0 18px 50px -18px color-mix(in oklab, var(--electric) 60%, transparent);
+  --shadow-neon: 0 20px 60px -20px color-mix(in oklab, var(--neon) 55%, transparent);
   --shadow-card: 0 10px 30px -12px oklch(0 0 0 / 0.6);
 }
-
-/* Light sections: override tokens on a wrapper to invert the palette */
-.section-light {
-  --background: oklch(0.985 0 0);            /* #FAFAFA */
-  --foreground: oklch(0.2 0.01 150);         /* dark charcoal */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.01 150);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.01 150);
-  --surface: oklch(1 0 0);
-  --surface-2: oklch(0.96 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.2 0.01 150);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0.01 150);
-  --border: oklch(0.2 0.01 150 / 12%);
-  --input: oklch(0.2 0.01 150 / 14%);
-  --brand-foreground: oklch(0.2 0.01 150);
-  /* darker accents so lime stays legible on off-white */
-  --electric: oklch(0.55 0.15 135);
-  --neon: oklch(0.55 0.15 145);
-  --lavender: oklch(0.5 0.13 150);
-  --gradient-hero: linear-gradient(135deg, oklch(0.55 0.15 135) 0%, oklch(0.48 0.13 148) 100%);
-
-  background: var(--background);
-  color: var(--foreground);
-}
-
-/* Services & friends: soft mint→off-white canvas instead of flat dark */
-.section-mint {
-  background:
-    radial-gradient(900px 500px at 12% -10%, color-mix(in oklab, var(--electric) 18%, transparent) 0%, transparent 60%),
-    radial-gradient(800px 480px at 92% 8%, color-mix(in oklab, var(--lavender) 16%, transparent) 0%, transparent 62%),
-    linear-gradient(180deg, oklch(0.99 0.01 150) 0%, oklch(0.955 0.02 150) 55%, oklch(0.985 0.008 150) 100%);
-}
-
-/* Animated background layer */
-.orb {
-  border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.28;
-  background: radial-gradient(circle at 30% 30%, var(--electric), transparent 70%);
-}
-.orb-2 { background: radial-gradient(circle at 60% 40%, var(--lavender), transparent 70%); opacity: 0.22; }
-.orb-3 { background: radial-gradient(circle at 50% 50%, var(--neon), transparent 70%); opacity: 0.18; }
-
-@keyframes orb-a { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(80px,-60px,0) scale(1.12); } }
-@keyframes orb-b { 0%,100% { transform: translate3d(0,0,0) scale(1.05); } 50% { transform: translate3d(-90px,50px,0) scale(0.95); } }
-@keyframes orb-c { 0%,100% { transform: translate3d(0,0,0) scale(0.95); } 50% { transform: translate3d(40px,-80px,0) scale(1.1); } }
-@keyframes grid-drift { from { background-position: 0 0, 0 0; } to { background-position: 48px 48px, 48px 48px; } }
-
-@utility animate-orb-a { animation: orb-a 18s ease-in-out infinite; }
-@utility animate-orb-b { animation: orb-b 22s ease-in-out infinite; }
-@utility animate-orb-c { animation: orb-c 26s ease-in-out infinite; }
-@utility animate-grid-drift { animation: grid-drift 12s linear infinite; }
-
-/* Edge fade mask for marquees */
-@utility marquee-mask {
-  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-}
-
-
-
 
 @layer base {
   * { border-color: var(--color-border); }
@@ -159,10 +94,8 @@
     --muted-foreground: oklch(0.92 0.02 258);
   }
   body {
-    background: var(--gradient-brand) fixed;
-    background-color: var(--background);
+    background: var(--background);
     color: var(--foreground);
-
     font-family: var(--font-sans);
     font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
     line-height: 1.75;
@@ -215,29 +148,6 @@
 @utility glow-ring {
   box-shadow: var(--shadow-glow);
 }
-
-/* Elegant italic serif for highlighted heading words */
-@utility serif-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-/* Neon lime CTA with soft glow on hover */
-@utility btn-lime {
-  background: var(--primary);
-  color: var(--primary-foreground);
-  box-shadow: 0 8px 24px -10px color-mix(in oklab, var(--primary) 60%, transparent);
-  transition: box-shadow 0.3s ease, transform 0.2s ease, filter 0.2s ease;
-  &:hover {
-    filter: brightness(1.05);
-    box-shadow:
-      0 0 0 1px color-mix(in oklab, var(--primary) 45%, transparent),
-      0 12px 40px -8px color-mix(in oklab, var(--primary) 75%, transparent);
-  }
-}
-
 
 @utility grid-bg {
   background-image:

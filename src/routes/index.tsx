@@ -20,8 +20,6 @@ const logoAsset = { url: "/webtrix-logo.png" };
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
 import { Hero3DStack, PopIn } from "@/components/Hero3DStack";
-import { AnimatedBackground, Scroll3DSection, ScrollProgress } from "@/components/ScrollFX";
-
 
 import { submitLead } from "@/lib/leads.functions";
 import { getSupabase } from "@/integrations/supabase/client";
@@ -54,30 +52,6 @@ export const Route = createFileRoute("/")({
         name: "twitter:description",
         content:
           "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
-      },
-      { property: "og:url", content: "https://webtrixit.lovable.app/" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://webtrixit.lovable.app/" },
-      { rel: "preload", as: "image", href: heroBg, fetchpriority: "high" },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Webtrix IT Solution",
-          url: "https://webtrixit.lovable.app/",
-          logo: "https://webtrixit.lovable.app/webtrix-logo.png",
-          email: "webtrixofficial@gmail.com",
-          telephone: "+8801835985730",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "কর্ণফুলী, চট্টগ্রাম",
-            addressCountry: "BD",
-          },
-        }),
       },
     ],
   }),
@@ -166,27 +140,24 @@ const comparison = [
 function HomePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <ScrollProgress />
-      <AnimatedBackground />
       <Nav />
       <Hero />
-      <Scroll3DSection depth="soft"><ClientLogos /></Scroll3DSection>
-      <Scroll3DSection depth="medium"><ProblemSolution /></Scroll3DSection>
-      <Scroll3DSection depth="soft"><WhatsAppBanner variant="primary" /></Scroll3DSection>
-      <Scroll3DSection depth="strong"><Services /></Scroll3DSection>
-      <Scroll3DSection depth="soft"><WhatsAppBanner variant="neon" /></Scroll3DSection>
-      <Scroll3DSection depth="medium"><SuccessStories /></Scroll3DSection>
-      <Scroll3DSection depth="strong"><Portfolio /></Scroll3DSection>
-      <Scroll3DSection depth="medium"><BeforeAfter /></Scroll3DSection>
-      <Scroll3DSection depth="medium"><VersusOthers /></Scroll3DSection>
-      <Scroll3DSection depth="soft"><FinalCTA /></Scroll3DSection>
+      <ClientLogos />
+      <ProblemSolution />
+      <WhatsAppBanner variant="primary" />
+      <Services />
+      <WhatsAppBanner variant="neon" />
+      <SuccessStories />
+      <Portfolio />
+      <BeforeAfter />
+      <VersusOthers />
+      <FinalCTA />
       <Footer />
       <FloatingWhatsApp />
 
     </div>
   );
 }
-
 
 /* ---------- NAV ---------- */
 function Nav() {
@@ -206,10 +177,6 @@ function Nav() {
           <img
             src={logoAsset.url}
             alt="Webtrixit"
-            width={160}
-            height={160}
-            decoding="async"
-            fetchPriority="high"
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
           <span className="font-display text-lg font-bold tracking-tight text-foreground sm:text-xl">
@@ -269,16 +236,7 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <img
-          src={heroBg}
-          alt=""
-          width={1024}
-          height={1024}
-          decoding="async"
-          fetchPriority="high"
-          className="h-full w-full object-cover opacity-40"
-        />
-
+        <img src={heroBg} alt="" width={1024} height={1024} className="h-full w-full object-cover opacity-40" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,15,29,0.4) 0%, rgba(10,15,29,0.95) 100%)" }} />
       </div>
       <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
@@ -288,7 +246,7 @@ function Hero() {
             <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
           </span>
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
-            প্রিমিয়াম <span className="serif-accent text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা ভিজিটরকে কাস্টমারে পরিণত করে।
+            প্রিমিয়াম <span className="text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা ভিজিটরকে কাস্টমারে পরিণত করে।
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Webtrix IT Solution বানায় ল্যান্ডিং পেজ, ই-কমার্স স্টোর, LMS প্ল্যাটফর্ম, কাস্টম সফটওয়্যার এবং AI-পাওয়ার্ড মার্কেটিং — দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক।
@@ -326,25 +284,17 @@ function Hero() {
 function ClientLogos() {
   const row = [...clientPeople, ...clientPeople];
   return (
-    <section className="relative overflow-hidden border-y border-border/60 bg-surface/40 py-10">
+    <section className="border-y border-border/60 bg-surface/40 py-7">
       <div className="mx-auto max-w-7xl px-5">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-            <ShieldCheck className="h-3.5 w-3.5" /> বিশ্বস্ততা
-          </span>
-          <h2 className="mt-3 font-display text-xl font-bold leading-snug sm:text-2xl md:text-3xl">
-            দেশ-বিদেশের <span className="serif-accent text-gradient">১০০+ ব্র্যান্ড</span> আমাদের ওপর আস্থা রেখেছে
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            ছোট উদ্যোক্তা থেকে প্রতিষ্ঠিত প্রতিষ্ঠান — সবাই তাদের ডিজিটাল যাত্রা আমাদের হাতেই তুলে দিয়েছেন।
-          </p>
-        </div>
-        <div className="marquee-mask group mt-8 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center group-hover:[animation-play-state:paused]">
+        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
+        </p>
+        <div className="mt-6 overflow-hidden">
+          <div className="animate-marquee flex w-max items-center gap-8">
             {row.map((c, i) => (
               <div
                 key={i}
-                className="mr-4 flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-primary/40 sm:mr-6"
+                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
               >
                 <img
                   src={c.photo}
@@ -354,11 +304,11 @@ function ClientLogos() {
                   loading="lazy"
                   className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-electric/40"
                 />
-                <span className="flex flex-col text-left">
-                  <span className="font-display text-sm font-semibold tracking-tight text-foreground sm:text-[15px]">
+                <span className="flex flex-col">
+                  <span className="font-display text-sm font-semibold tracking-tight text-foreground/90 sm:text-base">
                     {c.name}
                   </span>
-                  <span className="text-[11px] leading-snug text-muted-foreground">{c.role}</span>
+                  <span className="text-[11px] text-muted-foreground">{c.role}</span>
                 </span>
               </div>
             ))}
@@ -368,7 +318,6 @@ function ClientLogos() {
     </section>
   );
 }
-
 
 
 /* ---------- PROBLEM → SOLUTION ---------- */
@@ -496,14 +445,9 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
 /* ---------- SERVICES ---------- */
 function Services() {
   return (
-    <section id="services" className="section-light section-mint relative overflow-hidden py-14 sm:py-20 md:py-28">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
-        <div className="orb animate-orb-a absolute -left-24 top-0 h-72 w-72 opacity-20" />
-        <div className="orb orb-2 animate-orb-b absolute -right-24 bottom-0 h-80 w-80 opacity-20" />
-      </div>
-      <div className="relative z-10 mx-auto max-w-7xl px-5">
+    <section id="services" className="py-14 sm:py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের সার্ভিস" title="আমাদের সার্ভিস সমূহ" />
-
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
             const Icon = s.icon;
@@ -757,7 +701,7 @@ function Portfolio() {
 /* ---------- BEFORE & AFTER ---------- */
 function BeforeAfter() {
   return (
-    <section id="results" className="section-light py-14 sm:py-20 md:py-28">
+    <section id="results" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আগে ও পরে" title="প্রিমিয়াম বিল্ড আসলে কী ডেলিভার করে।" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -829,7 +773,7 @@ function FinalCTA() {
                 <Zap className="h-3.5 w-3.5 text-neon" /> এই কোয়ার্টারের জন্য বুকিং চলছে
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-                চলুন তৈরি করি আপনার <span className="serif-accent text-gradient">ডিজিটাল ইঞ্জিন</span>।
+                চলুন তৈরি করি আপনার <span className="text-gradient">ডিজিটাল ইঞ্জিন</span>।
               </h2>
               <p className="mt-4 max-w-lg text-muted-foreground">
                 আপনার প্রজেক্ট সম্পর্কে বলুন। ২৪ ঘণ্টার মধ্যে ফ্রি স্ট্র্যাটেজি কল, কোটেশন ও টাইমলাইন পান।
@@ -926,7 +870,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" width={160} height={160} loading="lazy" decoding="async" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>

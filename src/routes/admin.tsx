@@ -18,7 +18,6 @@ export const Route = createFileRoute("/admin")({
       { property: "og:title", content: "Admin Dashboard — Webtrixit" },
       { property: "og:description", content: "Manage Webtrixit leads, demo links, sale links, and portfolio projects." },
       { property: "og:type", content: "website" },
-      { name: "robots", content: "noindex, nofollow" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],

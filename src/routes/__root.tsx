@@ -119,14 +119,13 @@ function RootShell({ children }: { children: ReactNode }) {
         <link
           rel="preload"
           as="style"
-          href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
           media="all"
         />
-
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{

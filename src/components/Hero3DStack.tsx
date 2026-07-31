@@ -1,18 +1,13 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * Pure CSS/Tailwind 3D composition of layered "website mockup" panels.
  * Rotation, scale and perspective are bound to scroll progress.
- * On mobile (and with reduced motion) the heavy 3D transforms and blurs are
- * skipped so scrolling stays at 60fps.
  */
 export function Hero3DStack() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const prefersReduced = useReducedMotion();
-  const isMobile = useIsMobile();
-  const reduced = prefersReduced;
+  const reduced = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -21,20 +16,16 @@ export function Hero3DStack() {
 
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 22, mass: 0.4 });
 
-  const k = isMobile ? 0.55 : 1;
-  const rotateX = useTransform(smooth, [0, 0.5, 1], [22 * k, 6 * k, -10 * k]);
-  const rotateY = useTransform(smooth, [0, 0.5, 1], [-16 * k, 0, 14 * k]);
+  const rotateX = useTransform(smooth, [0, 0.5, 1], [22, 6, -10]);
+  const rotateY = useTransform(smooth, [0, 0.5, 1], [-16, 0, 14]);
   const scale = useTransform(smooth, [0, 0.5, 1], [0.92, 1, 0.95]);
   const perspective = useTransform(smooth, [0, 1], [1400, 900]);
-  const zBack = useTransform(smooth, [0, 1], [-140 * k, -40 * k]);
-  const zMid = useTransform(smooth, [0, 1], [-60 * k, 10 * k]);
-  const zFront = useTransform(smooth, [0, 1], [40 * k, 120 * k]);
-  const floatY = useTransform(smooth, [0, 1], [24 * k, -24 * k]);
+  const zBack = useTransform(smooth, [0, 1], [-140, -40]);
+  const zMid = useTransform(smooth, [0, 1], [-60, 10]);
+  const zFront = useTransform(smooth, [0, 1], [40, 120]);
+  const floatY = useTransform(smooth, [0, 1], [24, -24]);
 
   const still = { rotateX: 0, rotateY: 0, scale: 1 };
-  // blur is the expensive part — keep it off on mobile only
-  const blur = prefersReduced || isMobile ? "" : " backdrop-blur";
-
 
   return (
     <div ref={ref} className="mx-auto mt-12 w-full max-w-4xl [transform-style:preserve-3d]">
@@ -47,11 +38,10 @@ export function Hero3DStack() {
         {...(reduced ? { animate: still } : {})}
         className="relative mx-auto aspect-[16/10] w-full [transform-style:preserve-3d]"
       >
-
         {/* back panel */}
         <motion.div
           style={reduced ? undefined : { translateZ: zBack, y: floatY }}
-          className={"absolute left-[8%] top-0 h-[72%] w-[64%] rounded-2xl border border-border/70 bg-surface/70 p-3 shadow-[var(--shadow-card)]" + blur}
+          className="absolute left-[8%] top-0 h-[72%] w-[64%] rounded-2xl border border-border/70 bg-surface/70 p-3 shadow-[var(--shadow-card)] backdrop-blur"
         >
           <MockBar />
           <div className="mt-3 grid grid-cols-3 gap-2">
@@ -66,7 +56,7 @@ export function Hero3DStack() {
         {/* mid panel */}
         <motion.div
           style={reduced ? undefined : { translateZ: zMid }}
-          className={"absolute right-[6%] top-[14%] h-[70%] w-[52%] rounded-2xl border border-border bg-card/85 p-3 shadow-[var(--shadow-glow)]" + blur}
+          className="absolute right-[6%] top-[14%] h-[70%] w-[52%] rounded-2xl border border-border bg-card/85 p-3 shadow-[var(--shadow-glow)] backdrop-blur"
         >
           <MockBar />
           <div className="mt-3 space-y-2">
@@ -79,7 +69,7 @@ export function Hero3DStack() {
         {/* front floating card */}
         <motion.div
           style={reduced ? undefined : { translateZ: zFront, y: floatY }}
-          className={"absolute bottom-[4%] left-[22%] w-[46%] rounded-2xl border border-primary/30 bg-card/95 p-4 shadow-[var(--shadow-neon)]" + blur}
+          className="absolute bottom-[4%] left-[22%] w-[46%] rounded-2xl border border-primary/30 bg-card/95 p-4 shadow-[var(--shadow-neon)] backdrop-blur"
         >
           <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
             কনভার্সন রেট
@@ -117,25 +107,8 @@ export function PopIn({
   delay?: number;
   className?: string;
 }) {
-  const prefersReduced = useReducedMotion();
-  const isMobile = useIsMobile();
-  if (prefersReduced) return <div className={className}>{children}</div>;
-  // On mobile: lighter spring (smaller travel) but still a visible pop-in.
-  if (isMobile) {
-    return (
-      <motion.div
-        className={className}
-        initial={{ opacity: 0, y: 18, scale: 0.98 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ type: "spring", stiffness: 200, damping: 24, mass: 0.5, delay: delay * 0.5 }}
-        style={{ willChange: "transform, opacity" }}
-      >
-        {children}
-      </motion.div>
-    );
-  }
-
+  const reduced = useReducedMotion();
+  if (reduced) return <div className={className}>{children}</div>;
   return (
     <motion.div
       className={className}
@@ -149,4 +122,3 @@ export function PopIn({
     </motion.div>
   );
 }
-
