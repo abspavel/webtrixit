@@ -492,6 +492,53 @@ function ReviewsSlider({ subject }: { subject: string }) {
   );
 }
 
+/* ---------- অন্যরা vs আমরা ---------- */
+function VersusOthers({ subject }: { subject: string }) {
+  const rows = [
+    { point: `${subject}-এর জন্য স্ট্র্যাটেজি ও প্ল্যানিং`, us: true, them: false },
+    { point: "মোবাইল-ফার্স্ট ও দ্রুত লোডিং ডিজাইন", us: true, them: false },
+    { point: "নির্ধারিত সময়ে ডেলিভারি (SLA সহ)", us: true, them: false },
+    { point: "SEO ও কনভার্শন অপ্টিমাইজেশন", us: true, them: false },
+    { point: "ডেলিভারির পর ফ্রি সাপোর্ট ও ট্রেনিং", us: true, them: false },
+    { point: "স্বচ্ছ প্রাইসিং — কোনো hidden চার্জ নেই", us: true, them: false },
+    { point: "সাধারণ টেমপ্লেট কপি-পেস্ট", us: false, them: true },
+    { point: "কাজ শেষে যোগাযোগ বন্ধ", us: false, them: true },
+  ];
+
+  return (
+    <section className="py-16 md:py-20">
+      <div className="mx-auto max-w-4xl px-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">অন্যরা বনাম আমরা</p>
+        <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          কেন ক্লায়েন্টরা <span className="serif-accent text-gradient">Webtrix</span> বেছে নেন
+        </h2>
+        <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card">
+          <div className="grid grid-cols-[1.4fr_1fr_1fr] items-center border-b border-border bg-surface/60 px-4 py-3 text-xs sm:px-6 sm:text-sm">
+            <div className="font-semibold">যা গুরুত্বপূর্ণ</div>
+            <div className="text-center font-semibold text-muted-foreground">অন্যরা</div>
+            <div className="text-center font-display font-bold text-gradient">Webtrix</div>
+          </div>
+          {rows.map((row, i) => (
+            <div
+              key={row.point}
+              className={`grid grid-cols-[1.4fr_1fr_1fr] items-center px-4 py-3.5 text-xs sm:px-6 sm:py-4 sm:text-sm ${i % 2 ? "bg-surface/30" : ""}`}
+            >
+              <div className="pr-3 text-foreground">{row.point}</div>
+              <div className="grid place-items-center">
+                {row.them ? <Check className="h-5 w-5 text-muted-foreground" /> : <X className="h-5 w-5 text-muted-foreground/40" />}
+              </div>
+              <div className="grid place-items-center">
+                {row.us ? <Check className="h-5 w-5 text-neon" /> : <X className="h-5 w-5 text-muted-foreground/40" />}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function ServiceFAQ({ subject }: { subject: string }) {
   const faqs = [
     { q: `${subject} বানাতে কত সময় লাগে?`,
