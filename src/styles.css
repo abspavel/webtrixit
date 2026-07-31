@@ -36,48 +36,71 @@
   --color-lavender: var(--lavender);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
-  --font-display: "Hind Siliguri", "Space Grotesk", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Hind Siliguri", "Inter", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Hind Siliguri", "Poppins", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Hind Siliguri", "Poppins", "Noto Sans Bengali", "SolaimanLipi", "Kalpurush", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", "Hind Siliguri", Georgia, serif;
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Webtrix palette */
-  --brand: oklch(0.16 0.04 265);            /* #0A0F1D deep navy */
+  /* Webtrix palette — neon lime on deep black-green */
+  --brand: oklch(0.16 0.03 150);            /* #0A0F0A deep black-green */
   --brand-foreground: oklch(1 0 0);
-  --electric: oklch(0.65 0.19 258);         /* #3B82F6 */
-  --neon: oklch(0.72 0.17 165);             /* #10B981 */
-  --lavender: oklch(0.68 0.18 296);         /* #8B5CF6 */
-  --surface: oklch(0.19 0.04 265);
-  --surface-2: oklch(0.24 0.04 265);
+  --electric: oklch(0.93 0.22 122);         /* #D4FF3D neon lime */
+  --neon: oklch(0.93 0.22 122);
+  --lavender: oklch(0.82 0.16 140);
+  --surface: oklch(0.24 0.05 148);          /* #1A2E1A */
+  --surface-2: oklch(0.3 0.05 148);
 
-  --background: oklch(0.16 0.04 265);
+  --background: oklch(0.16 0.03 150);
   --foreground: oklch(1 0 0);
-  --card: oklch(0.19 0.04 265);
+  --card: oklch(0.22 0.04 148);
   --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.19 0.04 265);
+  --popover: oklch(0.22 0.04 148);
   --popover-foreground: oklch(1 0 0);
-  --primary: oklch(0.65 0.19 258);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.24 0.04 265);
+  --primary: oklch(0.93 0.22 122);
+  --primary-foreground: oklch(0.16 0.03 150);
+  --secondary: oklch(0.3 0.05 148);
   --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.24 0.04 265);
-  --muted-foreground: oklch(0.72 0.03 258);  /* slate #94A3B8 */
-  --accent: oklch(0.72 0.17 165);
-  --accent-foreground: oklch(0.16 0.04 265);
+  --muted: oklch(0.3 0.05 148);
+  --muted-foreground: oklch(0.76 0 0);       /* #B0B0B0 */
+  --accent: oklch(0.93 0.22 122);
+  --accent-foreground: oklch(0.16 0.03 150);
   --destructive: oklch(0.6 0.24 27);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.65 0.19 258);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.93 0.22 122);
 
-  --gradient-hero: linear-gradient(135deg, var(--electric) 0%, var(--lavender) 60%, var(--neon) 100%);
-  --gradient-brand: linear-gradient(180deg, oklch(0.16 0.04 265) 0%, oklch(0.13 0.05 265) 100%);
+  --gradient-hero: linear-gradient(135deg, oklch(0.93 0.22 122) 0%, oklch(0.88 0.19 135) 55%, oklch(0.82 0.16 150) 100%);
+  --gradient-brand: linear-gradient(180deg, #0A0F0A 0%, #1A2E1A 100%);
   --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--electric) 55%, transparent);
-  --shadow-neon: 0 20px 60px -20px color-mix(in oklab, var(--neon) 55%, transparent);
+  --shadow-neon: 0 0 0 1px color-mix(in oklab, var(--electric) 35%, transparent), 0 18px 50px -18px color-mix(in oklab, var(--electric) 60%, transparent);
   --shadow-card: 0 10px 30px -12px oklch(0 0 0 / 0.6);
 }
+
+/* Light sections: override tokens on a wrapper to invert the palette */
+.section-light {
+  --background: oklch(0.985 0 0);            /* #FAFAFA */
+  --foreground: oklch(0.2 0.01 150);         /* dark charcoal */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.01 150);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.01 150);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.96 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.2 0.01 150);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0.01 150);
+  --border: oklch(0.2 0.01 150 / 12%);
+  --input: oklch(0.2 0.01 150 / 14%);
+  --brand-foreground: oklch(0.2 0.01 150);
+  background: var(--background);
+  color: var(--foreground);
+}
+
 
 @layer base {
   * { border-color: var(--color-border); }
