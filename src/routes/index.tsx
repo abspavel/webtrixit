@@ -260,7 +260,16 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <img src={heroBg} alt="" width={1024} height={1024} className="h-full w-full object-cover opacity-40" />
+        <img
+          src={heroBg}
+          alt=""
+          width={1024}
+          height={1024}
+          decoding="async"
+          fetchPriority="high"
+          className="h-full w-full object-cover opacity-40"
+        />
+
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,15,29,0.4) 0%, rgba(10,15,29,0.95) 100%)" }} />
       </div>
       <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
