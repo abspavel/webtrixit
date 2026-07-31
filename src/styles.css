@@ -97,6 +97,12 @@
   --border: oklch(0.2 0.01 150 / 12%);
   --input: oklch(0.2 0.01 150 / 14%);
   --brand-foreground: oklch(0.2 0.01 150);
+  /* darker accents so lime stays legible on off-white */
+  --electric: oklch(0.55 0.15 135);
+  --neon: oklch(0.55 0.15 145);
+  --lavender: oklch(0.5 0.13 150);
+  --gradient-hero: linear-gradient(135deg, oklch(0.55 0.15 135) 0%, oklch(0.48 0.13 148) 100%);
+
   background: var(--background);
   color: var(--foreground);
 }
