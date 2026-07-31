@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import {
   ArrowLeft, ArrowRight, Check, ExternalLink, MessageCircle, ShieldCheck,
   Sparkles, Target, TrendingUp, Wrench, ListChecks, HelpCircle, Plus, Minus, Star,
-  ChevronLeft, ChevronRight, Send,
+  ChevronLeft, ChevronRight, Send, X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
