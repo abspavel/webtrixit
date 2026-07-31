@@ -252,6 +252,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
       </section>
 
       <ReviewsSlider subject={service.subject} />
+      <VersusOthers subject={service.subject} />
       <ServiceFAQ subject={service.subject} />
       <ServiceLeadForm serviceTitle={service.titleBn} />
 
