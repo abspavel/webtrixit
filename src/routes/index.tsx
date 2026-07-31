@@ -738,7 +738,7 @@ function Portfolio() {
 /* ---------- BEFORE & AFTER ---------- */
 function BeforeAfter() {
   return (
-    <section id="results" className="py-14 sm:py-20 md:py-28">
+    <section id="results" className="section-light py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আগে ও পরে" title="প্রিমিয়াম বিল্ড আসলে কী ডেলিভার করে।" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
