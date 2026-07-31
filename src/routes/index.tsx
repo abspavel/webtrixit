@@ -283,7 +283,7 @@ function Hero() {
             <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
           </span>
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
-            প্রিমিয়াম <span className="text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা ভিজিটরকে কাস্টমারে পরিণত করে।
+            প্রিমিয়াম <span className="serif-accent text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা ভিজিটরকে কাস্টমারে পরিণত করে।
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Webtrix IT Solution বানায় ল্যান্ডিং পেজ, ই-কমার্স স্টোর, LMS প্ল্যাটফর্ম, কাস্টম সফটওয়্যার এবং AI-পাওয়ার্ড মার্কেটিং — দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক।
@@ -482,7 +482,7 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
 /* ---------- SERVICES ---------- */
 function Services() {
   return (
-    <section id="services" className="py-14 sm:py-20 md:py-28">
+    <section id="services" className="section-light py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আমাদের সার্ভিস" title="আমাদের সার্ভিস সমূহ" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -738,7 +738,7 @@ function Portfolio() {
 /* ---------- BEFORE & AFTER ---------- */
 function BeforeAfter() {
   return (
-    <section id="results" className="py-14 sm:py-20 md:py-28">
+    <section id="results" className="section-light py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeader eyebrow="আগে ও পরে" title="প্রিমিয়াম বিল্ড আসলে কী ডেলিভার করে।" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -810,7 +810,7 @@ function FinalCTA() {
                 <Zap className="h-3.5 w-3.5 text-neon" /> এই কোয়ার্টারের জন্য বুকিং চলছে
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-                চলুন তৈরি করি আপনার <span className="text-gradient">ডিজিটাল ইঞ্জিন</span>।
+                চলুন তৈরি করি আপনার <span className="serif-accent text-gradient">ডিজিটাল ইঞ্জিন</span>।
               </h2>
               <p className="mt-4 max-w-lg text-muted-foreground">
                 আপনার প্রজেক্ট সম্পর্কে বলুন। ২৪ ঘণ্টার মধ্যে ফ্রি স্ট্র্যাটেজি কল, কোটেশন ও টাইমলাইন পান।

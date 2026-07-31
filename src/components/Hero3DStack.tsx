@@ -114,8 +114,23 @@ export function PopIn({
   delay?: number;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
-  if (reduced) return <div className={className}>{children}</div>;
+  const prefersReduced = useReducedMotion();
+  const isMobile = useIsMobile();
+  if (prefersReduced) return <div className={className}>{children}</div>;
+  // On mobile: opacity-only tween (no transform/spring) to keep FPS stable.
+  if (isMobile) {
+    return (
+      <motion.div
+        className={className}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.35, ease: "easeOut", delay: delay * 0.5 }}
+      >
+        {children}
+      </motion.div>
+    );
+  }
   return (
     <motion.div
       className={className}
@@ -129,3 +144,4 @@ export function PopIn({
     </motion.div>
   );
 }
+
