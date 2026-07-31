@@ -53,6 +53,30 @@ export const Route = createFileRoute("/")({
         content:
           "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
       },
+      { property: "og:url", content: "https://webtrixit.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://webtrixit.lovable.app/" },
+      { rel: "preload", as: "image", href: heroBg, fetchpriority: "high" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Webtrix IT Solution",
+          url: "https://webtrixit.lovable.app/",
+          logo: "https://webtrixit.lovable.app/webtrix-logo.png",
+          email: "webtrixofficial@gmail.com",
+          telephone: "+8801835985730",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "কর্ণফুলী, চট্টগ্রাম",
+            addressCountry: "BD",
+          },
+        }),
+      },
     ],
   }),
   component: HomePage,
