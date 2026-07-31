@@ -810,7 +810,7 @@ function FinalCTA() {
                 <Zap className="h-3.5 w-3.5 text-neon" /> এই কোয়ার্টারের জন্য বুকিং চলছে
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-                চলুন তৈরি করি আপনার <span className="text-gradient">ডিজিটাল ইঞ্জিন</span>।
+                চলুন তৈরি করি আপনার <span className="serif-accent text-gradient">ডিজিটাল ইঞ্জিন</span>।
               </h2>
               <p className="mt-4 max-w-lg text-muted-foreground">
                 আপনার প্রজেক্ট সম্পর্কে বলুন। ২৪ ঘণ্টার মধ্যে ফ্রি স্ট্র্যাটেজি কল, কোটেশন ও টাইমলাইন পান।
