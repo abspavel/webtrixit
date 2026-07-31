@@ -107,6 +107,42 @@
   color: var(--foreground);
 }
 
+/* Services & friends: soft mint→off-white canvas instead of flat dark */
+.section-mint {
+  background:
+    radial-gradient(900px 500px at 12% -10%, color-mix(in oklab, var(--electric) 18%, transparent) 0%, transparent 60%),
+    radial-gradient(800px 480px at 92% 8%, color-mix(in oklab, var(--lavender) 16%, transparent) 0%, transparent 62%),
+    linear-gradient(180deg, oklch(0.99 0.01 150) 0%, oklch(0.955 0.02 150) 55%, oklch(0.985 0.008 150) 100%);
+}
+
+/* Animated background layer */
+.orb {
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.28;
+  background: radial-gradient(circle at 30% 30%, var(--electric), transparent 70%);
+}
+.orb-2 { background: radial-gradient(circle at 60% 40%, var(--lavender), transparent 70%); opacity: 0.22; }
+.orb-3 { background: radial-gradient(circle at 50% 50%, var(--neon), transparent 70%); opacity: 0.18; }
+
+@keyframes orb-a { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(80px,-60px,0) scale(1.12); } }
+@keyframes orb-b { 0%,100% { transform: translate3d(0,0,0) scale(1.05); } 50% { transform: translate3d(-90px,50px,0) scale(0.95); } }
+@keyframes orb-c { 0%,100% { transform: translate3d(0,0,0) scale(0.95); } 50% { transform: translate3d(40px,-80px,0) scale(1.1); } }
+@keyframes grid-drift { from { background-position: 0 0, 0 0; } to { background-position: 48px 48px, 48px 48px; } }
+
+@utility animate-orb-a { animation: orb-a 18s ease-in-out infinite; }
+@utility animate-orb-b { animation: orb-b 22s ease-in-out infinite; }
+@utility animate-orb-c { animation: orb-c 26s ease-in-out infinite; }
+@utility animate-grid-drift { animation: grid-drift 12s linear infinite; }
+
+/* Edge fade mask for marquees */
+@utility marquee-mask {
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+
+
 
 @layer base {
   * { border-color: var(--color-border); }
