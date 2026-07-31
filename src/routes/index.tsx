@@ -164,24 +164,27 @@ const comparison = [
 function HomePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
+      <AnimatedBackground />
       <Nav />
       <Hero />
-      <ClientLogos />
-      <ProblemSolution />
-      <WhatsAppBanner variant="primary" />
-      <Services />
-      <WhatsAppBanner variant="neon" />
-      <SuccessStories />
-      <Portfolio />
-      <BeforeAfter />
-      <VersusOthers />
-      <FinalCTA />
+      <Scroll3DSection depth="soft"><ClientLogos /></Scroll3DSection>
+      <Scroll3DSection depth="medium"><ProblemSolution /></Scroll3DSection>
+      <Scroll3DSection depth="soft"><WhatsAppBanner variant="primary" /></Scroll3DSection>
+      <Scroll3DSection depth="strong"><Services /></Scroll3DSection>
+      <Scroll3DSection depth="soft"><WhatsAppBanner variant="neon" /></Scroll3DSection>
+      <Scroll3DSection depth="medium"><SuccessStories /></Scroll3DSection>
+      <Scroll3DSection depth="strong"><Portfolio /></Scroll3DSection>
+      <Scroll3DSection depth="medium"><BeforeAfter /></Scroll3DSection>
+      <Scroll3DSection depth="medium"><VersusOthers /></Scroll3DSection>
+      <Scroll3DSection depth="soft"><FinalCTA /></Scroll3DSection>
       <Footer />
       <FloatingWhatsApp />
 
     </div>
   );
 }
+
 
 /* ---------- NAV ---------- */
 function Nav() {
