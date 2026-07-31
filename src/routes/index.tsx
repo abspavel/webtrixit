@@ -53,6 +53,30 @@ export const Route = createFileRoute("/")({
         content:
           "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
       },
+      { property: "og:url", content: "https://webtrixit.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://webtrixit.lovable.app/" },
+      { rel: "preload", as: "image", href: heroBg, fetchpriority: "high" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Webtrix IT Solution",
+          url: "https://webtrixit.lovable.app/",
+          logo: "https://webtrixit.lovable.app/webtrix-logo.png",
+          email: "webtrixofficial@gmail.com",
+          telephone: "+8801835985730",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "কর্ণফুলী, চট্টগ্রাম",
+            addressCountry: "BD",
+          },
+        }),
+      },
     ],
   }),
   component: HomePage,
@@ -177,6 +201,10 @@ function Nav() {
           <img
             src={logoAsset.url}
             alt="Webtrixit"
+            width={160}
+            height={160}
+            decoding="async"
+            fetchPriority="high"
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
           <span className="font-display text-lg font-bold tracking-tight text-foreground sm:text-xl">
@@ -236,7 +264,16 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <img src={heroBg} alt="" width={1024} height={1024} className="h-full w-full object-cover opacity-40" />
+        <img
+          src={heroBg}
+          alt=""
+          width={1024}
+          height={1024}
+          decoding="async"
+          fetchPriority="high"
+          className="h-full w-full object-cover opacity-40"
+        />
+
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,15,29,0.4) 0%, rgba(10,15,29,0.95) 100%)" }} />
       </div>
       <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
@@ -870,7 +907,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" width={160} height={160} loading="lazy" decoding="async" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>

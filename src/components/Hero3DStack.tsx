@@ -1,13 +1,18 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * Pure CSS/Tailwind 3D composition of layered "website mockup" panels.
  * Rotation, scale and perspective are bound to scroll progress.
+ * On mobile (and with reduced motion) the heavy 3D transforms and blurs are
+ * skipped so scrolling stays at 60fps.
  */
 export function Hero3DStack() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const reduced = useReducedMotion();
+  const prefersReduced = useReducedMotion();
+  const isMobile = useIsMobile();
+  const reduced = prefersReduced || isMobile;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -26,6 +31,7 @@ export function Hero3DStack() {
   const floatY = useTransform(smooth, [0, 1], [24, -24]);
 
   const still = { rotateX: 0, rotateY: 0, scale: 1 };
+  const blur = reduced ? "" : " backdrop-blur";
 
   return (
     <div ref={ref} className="mx-auto mt-12 w-full max-w-4xl [transform-style:preserve-3d]">
@@ -38,10 +44,11 @@ export function Hero3DStack() {
         {...(reduced ? { animate: still } : {})}
         className="relative mx-auto aspect-[16/10] w-full [transform-style:preserve-3d]"
       >
+
         {/* back panel */}
         <motion.div
           style={reduced ? undefined : { translateZ: zBack, y: floatY }}
-          className="absolute left-[8%] top-0 h-[72%] w-[64%] rounded-2xl border border-border/70 bg-surface/70 p-3 shadow-[var(--shadow-card)] backdrop-blur"
+          className={"absolute left-[8%] top-0 h-[72%] w-[64%] rounded-2xl border border-border/70 bg-surface/70 p-3 shadow-[var(--shadow-card)]" + blur}
         >
           <MockBar />
           <div className="mt-3 grid grid-cols-3 gap-2">
@@ -56,7 +63,7 @@ export function Hero3DStack() {
         {/* mid panel */}
         <motion.div
           style={reduced ? undefined : { translateZ: zMid }}
-          className="absolute right-[6%] top-[14%] h-[70%] w-[52%] rounded-2xl border border-border bg-card/85 p-3 shadow-[var(--shadow-glow)] backdrop-blur"
+          className={"absolute right-[6%] top-[14%] h-[70%] w-[52%] rounded-2xl border border-border bg-card/85 p-3 shadow-[var(--shadow-glow)]" + blur}
         >
           <MockBar />
           <div className="mt-3 space-y-2">
@@ -69,7 +76,7 @@ export function Hero3DStack() {
         {/* front floating card */}
         <motion.div
           style={reduced ? undefined : { translateZ: zFront, y: floatY }}
-          className="absolute bottom-[4%] left-[22%] w-[46%] rounded-2xl border border-primary/30 bg-card/95 p-4 shadow-[var(--shadow-neon)] backdrop-blur"
+          className={"absolute bottom-[4%] left-[22%] w-[46%] rounded-2xl border border-primary/30 bg-card/95 p-4 shadow-[var(--shadow-neon)]" + blur}
         >
           <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
             কনভার্সন রেট

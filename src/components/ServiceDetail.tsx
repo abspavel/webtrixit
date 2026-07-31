@@ -326,6 +326,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
 export function serviceHead(service: ServiceItem) {
   const title = `${service.titleBn} — Webtrix IT Solution`;
+  const url = `https://webtrixit.lovable.app/services/${service.slug}`;
   return {
     meta: [
       { title },
@@ -333,6 +334,29 @@ export function serviceHead(service: ServiceItem) {
       { property: "og:title", content: title },
       { property: "og:description", content: service.desc },
       { property: "og:type", content: "article" },
+      { property: "og:url", content: url },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: service.desc },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.titleBn,
+          description: service.desc,
+          url,
+          provider: {
+            "@type": "Organization",
+            name: "Webtrix IT Solution",
+            url: "https://webtrixit.lovable.app/",
+          },
+          areaServed: "BD",
+        }),
+      },
     ],
   };
 }
