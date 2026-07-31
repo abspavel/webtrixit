@@ -20,6 +20,8 @@ const logoAsset = { url: "/webtrix-logo.png" };
 import { services } from "@/lib/services-data";
 import { useReveal, useActiveSection } from "@/hooks/use-reveal";
 import { Hero3DStack, PopIn } from "@/components/Hero3DStack";
+import { AnimatedBackground, Scroll3DSection, ScrollProgress } from "@/components/ScrollFX";
+
 
 import { submitLead } from "@/lib/leads.functions";
 import { getSupabase } from "@/integrations/supabase/client";
