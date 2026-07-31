@@ -201,6 +201,10 @@ function Nav() {
           <img
             src={logoAsset.url}
             alt="Webtrixit"
+            width={160}
+            height={160}
+            decoding="async"
+            fetchPriority="high"
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
           <span className="font-display text-lg font-bold tracking-tight text-foreground sm:text-xl">
