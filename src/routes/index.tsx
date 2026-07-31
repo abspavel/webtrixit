@@ -907,7 +907,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" width={160} height={160} loading="lazy" decoding="async" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>
