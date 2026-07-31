@@ -492,18 +492,61 @@ function ReviewsSlider({ subject }: { subject: string }) {
   );
 }
 
-/* ---------- অন্যরা vs আমরা ---------- */
+/* ---------- অন্যরা vs আমরা (ট্যাব-ভিত্তিক তুলনা) ---------- */
 function VersusOthers({ subject }: { subject: string }) {
-  const rows = [
-    { point: `${subject}-এর জন্য স্ট্র্যাটেজি ও প্ল্যানিং`, us: true, them: false },
-    { point: "মোবাইল-ফার্স্ট ও দ্রুত লোডিং ডিজাইন", us: true, them: false },
-    { point: "নির্ধারিত সময়ে ডেলিভারি (SLA সহ)", us: true, them: false },
-    { point: "SEO ও কনভার্শন অপ্টিমাইজেশন", us: true, them: false },
-    { point: "ডেলিভারির পর ফ্রি সাপোর্ট ও ট্রেনিং", us: true, them: false },
-    { point: "স্বচ্ছ প্রাইসিং — কোনো hidden চার্জ নেই", us: true, them: false },
-    { point: "সাধারণ টেমপ্লেট কপি-পেস্ট", us: false, them: true },
-    { point: "কাজ শেষে যোগাযোগ বন্ধ", us: false, them: true },
+  const categories = [
+    {
+      id: "price",
+      label: "দাম",
+      icon: Wallet,
+      summary: "স্বচ্ছ প্যাকেজ, কোনো লুকানো চার্জ নেই",
+      rows: [
+        { point: "প্রাইসিং স্বচ্ছতা", them: "কাজের মাঝপথে অতিরিক্ত চার্জ", us: "শুরুতেই লিখিত ফিক্সড কোটেশন" },
+        { point: "পেমেন্ট শর্ত", them: "আগে পুরো টাকা দাবি", us: "৫০% অ্যাডভান্স, বাকি ডেলিভারিতে" },
+        { point: "রিভিশন খরচ", them: "প্রতি রিভিশনে আলাদা বিল", us: "স্কোপের মধ্যে আনলিমিটেড রিভিশন" },
+        { point: "মালিকানা", them: "সোর্স ফাইলের জন্য বাড়তি টাকা", us: "সোর্স কোড ও ফাইল ফ্রি হস্তান্তর" },
+      ],
+    },
+    {
+      id: "timeline",
+      label: "টাইমলাইন",
+      icon: Clock,
+      summary: "নির্ধারিত সময়ে ডেলিভারি, প্রতিদিন আপডেট",
+      rows: [
+        { point: "ডেলিভারি সময়", them: "অনিশ্চিত, বারবার পেছায়", us: `${subject} সাধারণত ৭–২১ কার্যদিবসে` },
+        { point: "কাজের আপডেট", them: "চাইলে তবেই জানানো হয়", us: "প্রতি ধাপে স্ক্রিনশট ও প্রিভিউ লিংক" },
+        { point: "মাইলস্টোন", them: "কোনো নির্দিষ্ট প্ল্যান নেই", us: "লিখিত টাইমলাইন ও SLA" },
+        { point: "জরুরি ডেলিভারি", them: "সম্ভব নয়", us: "ফাস্ট-ট্র্যাক অপশন আছে" },
+      ],
+    },
+    {
+      id: "quality",
+      label: "ডিজাইন ও কোয়ালিটি",
+      icon: Sparkles,
+      summary: "কাস্টম ডিজাইন, দ্রুত লোড, কনভার্শন-ফোকাসড",
+      rows: [
+        { point: "ডিজাইন অ্যাপ্রোচ", them: "রেডিমেড টেমপ্লেট কপি-পেস্ট", us: "ব্র্যান্ড অনুযায়ী কাস্টম ডিজাইন" },
+        { point: "মোবাইল অভিজ্ঞতা", them: "শুধু ডেস্কটপে ঠিক দেখায়", us: "মোবাইল-ফার্স্ট, সব ডিভাইসে পারফেক্ট" },
+        { point: "স্পিড ও SEO", them: "ভারী সাইট, SEO সেটআপ নেই", us: "স্পিড অপ্টিমাইজড + অন-পেজ SEO" },
+        { point: "কনভার্শন", them: "শুধু দেখতে সুন্দর", us: "CTA ও ফানেল কনভার্শনের জন্য সাজানো" },
+      ],
+    },
+    {
+      id: "support",
+      label: "সাপোর্ট",
+      icon: ShieldCheck,
+      summary: "ডেলিভারির পরও পাশে থাকি",
+      rows: [
+        { point: "লঞ্চ-পরবর্তী সাপোর্ট", them: "কাজ শেষে যোগাযোগ বন্ধ", us: "৩০ দিন ফ্রি bug-fix সাপোর্ট" },
+        { point: "রেসপন্স টাইম", them: "দিনের পর দিন উত্তর নেই", us: "WhatsApp-এ গড়ে ১ ঘণ্টায় রিপ্লাই" },
+        { point: "ট্রেনিং", them: "কিছুই শেখানো হয় না", us: "অ্যাডমিন প্যানেল ট্রেনিং ও ভিডিও গাইড" },
+        { point: "দীর্ঘমেয়াদি", them: "নতুন করে আবার টাকা", us: "সাশ্রয়ী মাসিক মেইনটেন্যান্স প্ল্যান" },
+      ],
+    },
   ];
+
+  const [active, setActive] = useState(0);
+  const cat = categories[active];
 
   return (
     <section className="py-16 md:py-20">
@@ -512,31 +555,74 @@ function VersusOthers({ subject }: { subject: string }) {
         <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
           কেন ক্লায়েন্টরা <span className="serif-accent text-gradient">Webtrix</span> বেছে নেন
         </h2>
-        <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card">
-          <div className="grid grid-cols-[1.4fr_1fr_1fr] items-center border-b border-border bg-surface/60 px-4 py-3 text-xs sm:px-6 sm:text-sm">
-            <div className="font-semibold">যা গুরুত্বপূর্ণ</div>
-            <div className="text-center font-semibold text-muted-foreground">অন্যরা</div>
+        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+          ক্যাটাগরি বেছে নিয়ে {subject}-এর ক্ষেত্রে পার্থক্যটা নিজেই দেখে নিন।
+        </p>
+
+        {/* ট্যাব */}
+        <div className="mt-7 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="তুলনার ক্যাটাগরি">
+          {categories.map((c, i) => {
+            const CIcon = c.icon;
+            const on = i === active;
+            return (
+              <button
+                key={c.id}
+                role="tab"
+                aria-selected={on}
+                onClick={() => setActive(i)}
+                className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                  on
+                    ? "btn-lime border-transparent"
+                    : "border-border bg-surface/50 text-muted-foreground hover:bg-surface-2 hover:text-foreground"
+                }`}
+              >
+                <CIcon className="h-4 w-4" />
+                {c.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="mt-4 text-sm text-muted-foreground">{cat.summary}</p>
+
+        <div key={cat.id} className="mt-4 overflow-hidden rounded-3xl border border-border bg-card">
+          <div className="grid grid-cols-[1.1fr_1fr_1fr] items-center border-b border-border bg-surface/60 px-4 py-3 text-xs font-semibold sm:px-6 sm:text-sm">
+            <div>যা গুরুত্বপূর্ণ</div>
+            <div className="text-center text-muted-foreground">অন্যরা</div>
             <div className="text-center font-display font-bold text-gradient">Webtrix</div>
           </div>
-          {rows.map((row, i) => (
+          {cat.rows.map((row, i) => (
             <div
               key={row.point}
-              className={`grid grid-cols-[1.4fr_1fr_1fr] items-center px-4 py-3.5 text-xs sm:px-6 sm:py-4 sm:text-sm ${i % 2 ? "bg-surface/30" : ""}`}
+              className={`grid grid-cols-[1.1fr_1fr_1fr] items-start gap-2 px-4 py-4 text-xs sm:px-6 sm:text-sm ${i % 2 ? "bg-surface/30" : ""}`}
             >
-              <div className="pr-3 text-foreground">{row.point}</div>
-              <div className="grid place-items-center">
-                {row.them ? <Check className="h-5 w-5 text-muted-foreground" /> : <X className="h-5 w-5 text-muted-foreground/40" />}
+              <div className="pr-2 font-medium text-foreground">{row.point}</div>
+              <div className="flex items-start gap-1.5 text-muted-foreground">
+                <X className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/50" />
+                <span>{row.them}</span>
               </div>
-              <div className="grid place-items-center">
-                {row.us ? <Check className="h-5 w-5 text-neon" /> : <X className="h-5 w-5 text-muted-foreground/40" />}
+              <div className="flex items-start gap-1.5 text-foreground">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-neon" />
+                <span>{row.us}</span>
               </div>
             </div>
           ))}
         </div>
+
+        <a
+          href={waUrl(subject)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-lime mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+        >
+          <MessageCircle className="h-4 w-4" />
+          ফ্রি কোটেশন নিন
+        </a>
       </div>
     </section>
   );
 }
+
 
 
 function ServiceFAQ({ subject }: { subject: string }) {
