@@ -3,6 +3,8 @@ import {
   ArrowLeft, ArrowRight, Check, ExternalLink, MessageCircle, HelpCircle, Plus, Minus, ShoppingBag, Star,
 } from "lucide-react";
 import { useState } from "react";
+import { serviceHead } from "@/components/ServiceDetail";
+import { getService } from "@/lib/services-data";
 const logoAsset = { url: "/webtrix-logo.png" };
 
 const WHATSAPP_NUMBER = "8801835985730";
