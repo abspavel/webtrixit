@@ -10,22 +10,7 @@ const waUrl = (msg: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 export const Route = createFileRoute("/services/readymade-ecommerce-website")({
-  head: () => ({
-    meta: [
-      { title: "রেডিমেড ই-কমার্স ওয়েবসাইট — Webtrix IT Solution" },
-      {
-        name: "description",
-        content:
-          "মাত্র ৪৮ ঘণ্টায় লাইভ — Webtrix-এর প্রি-বিল্ট, প্রিমিয়াম রেডিমেড ই-কমার্স টেমপ্লেট থেকে পছন্দমতো একটি বেছে নিন।",
-      },
-      { property: "og:title", content: "রেডিমেড ই-কমার্স ওয়েবসাইট — Webtrix IT Solution" },
-      {
-        property: "og:description",
-        content: "নতুন নতুন প্রি-বিল্ট ই-কমার্স টেমপ্লেট — সাথে সাথেই লাইভ অনলাইন স্টোর।",
-      },
-      { property: "og:type", content: "article" },
-    ],
-  }),
+  head: () => serviceHead(getService("readymade-ecommerce-website")!),
   component: ReadymadePage,
 });
 
