@@ -4,6 +4,8 @@ import {
   Facebook, Clock, Sparkles, ShieldCheck, Send,
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { serviceHead } from "@/components/ServiceDetail";
+import { getService } from "@/lib/services-data";
 const logoAsset = { url: "/webtrix-logo.png" };
 
 const WHATSAPP_NUMBER = "8801835985730";
@@ -11,22 +13,7 @@ const waUrl = (msg: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 export const Route = createFileRoute("/services/facebook-business-page-setup")({
-  head: () => ({
-    meta: [
-      { title: "ফেসবুক বিজনেস পেজ সেটআপ — Webtrix IT Solution" },
-      {
-        name: "description",
-        content:
-          "প্রফেশনাল ফেসবুক বিজনেস পেজ সেটআপ, ব্র্যান্ডিং, অটোমেশন ও Ad-রেডি অপটিমাইজেশন — সাশ্রয়ী প্যাকেজে।",
-      },
-      { property: "og:title", content: "ফেসবুক বিজনেস পেজ সেটআপ — Webtrix IT Solution" },
-      {
-        property: "og:description",
-        content: "৩টি প্যাকেজ, দ্রুত ডেলিভারি ও কমপ্লিট Ad-রেডি সেটআপ।",
-      },
-      { property: "og:type", content: "article" },
-    ],
-  }),
+  head: () => serviceHead(getService("facebook-business-page-setup")!),
   component: FacebookPageSetup,
 });
 

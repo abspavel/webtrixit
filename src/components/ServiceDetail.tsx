@@ -324,18 +324,77 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   );
 }
 
+const SITE_URL = "https://webtrixit.lovable.app";
+const OG_IMAGE =
+  "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785258383263-logo_no_text.webp";
+
 export function serviceHead(service: ServiceItem) {
-  const title = `${service.titleBn} — Webtrix IT Solution`;
+  const title = `${service.titleBn} সার্ভিস বাংলাদেশ | Webtrix IT Solution`;
+  const description = `${service.desc} বাংলাদেশে সাশ্রয়ী মূল্যে ${service.titleBn} — চট্টগ্রাম ও সারা দেশে Webtrix IT Solution-এর প্রফেশনাল সেবা। ফ্রি কনসালটেশনের জন্য যোগাযোগ করুন।`;
+  const url = `${SITE_URL}/services/${service.slug}`;
+  const keywords = [
+    service.titleBn,
+    `${service.titleBn} বাংলাদেশ`,
+    `${service.subject} সার্ভিস`,
+    `${service.subject} খরচ`,
+    "ওয়েবসাইট ডিজাইন বাংলাদেশ",
+    "ওয়েব ডেভেলপমেন্ট কোম্পানি চট্টগ্রাম",
+    "Webtrix IT Solution",
+    service.slug.replace(/-/g, " "),
+  ].join(", ");
+
   return {
     meta: [
       { title },
-      { name: "description", content: service.desc },
+      { name: "description", content: description },
+      { name: "keywords", content: keywords },
       { property: "og:title", content: title },
-      { property: "og:description", content: service.desc },
+      { property: "og:description", content: description },
       { property: "og:type", content: "article" },
+      { property: "og:url", content: url },
+      { property: "og:locale", content: "bn_BD" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.titleBn,
+          serviceType: service.title,
+          description: service.desc,
+          url,
+          areaServed: { "@type": "Country", name: "Bangladesh" },
+          provider: {
+            "@type": "Organization",
+            name: "Webtrix IT Solution",
+            url: SITE_URL,
+            telephone: "+8801835985730",
+            email: "webtrixofficial@gmail.com",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "হোম", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: service.titleBn, item: url },
+          ],
+        }),
+      },
     ],
   };
 }
+
 
 export function ServiceNotFound() {
   return (
