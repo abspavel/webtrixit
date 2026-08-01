@@ -30,33 +30,90 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
   "আসসালামু আলাইকুম, Webtrix — আমি একটি প্রজেক্ট নিয়ে আলোচনা করতে চাই।",
 )}`;
 
+const SITE_URL = "https://webtrixit.lovable.app";
+const OG_IMAGE =
+  "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785258383263-logo_no_text.webp";
+const HOME_TITLE = "ওয়েবসাইট ডিজাইন ও ডেভেলপমেন্ট বাংলাদেশ | Webtrix IT Solution";
+const HOME_DESC =
+  "বাংলাদেশের বিশ্বস্ত ওয়েব এজেন্সি — ল্যান্ডিং পেজ, ই-কমার্স ওয়েবসাইট, LMS, কাস্টম সফটওয়্যার, SMM প্যানেল, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং। চট্টগ্রাম থেকে সারা দেশে সাশ্রয়ী দামে প্রফেশনাল সার্ভিস।";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
       {
-        name: "description",
+        name: "keywords",
         content:
-          "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
+          "ওয়েবসাইট ডিজাইন বাংলাদেশ, ওয়েবসাইট তৈরি খরচ, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ল্যান্ডিং পেজ ডিজাইন, LMS ওয়েবসাইট, কাস্টম সফটওয়্যার ডেভেলপমেন্ট, SMM প্যানেল ওয়েবসাইট, ডিজিটাল মার্কেটিং এজেন্সি চট্টগ্রাম, ফেসবুক পিক্সেল সেটআপ, লোগো ডিজাইন বাংলাদেশ, web design company Bangladesh, website development Chittagong, Webtrix IT Solution",
       },
-      { property: "og:title", content: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
-      {
-        property: "og:description",
-        content:
-          "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
-      },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "geo.region", content: "BD-A" },
+      { name: "geo.placename", content: "Chittagong, Bangladesh" },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL + "/" },
+      { property: "og:locale", content: "bn_BD" },
+      { property: "og:site_name", content: "Webtrix IT Solution" },
+      { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { name: "twitter:title", content: HOME_TITLE },
+      { name: "twitter:description", content: HOME_DESC },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    scripts: [
       {
-        name: "twitter:description",
-        content:
-          "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "Webtrix IT Solution",
+          alternateName: "Webtrixit",
+          url: SITE_URL,
+          image: OG_IMAGE,
+          description: HOME_DESC,
+          telephone: "+8801835985730",
+          email: "webtrixofficial@gmail.com",
+          priceRange: "৳৳",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "কর্ণফুলী",
+            addressLocality: "চট্টগ্রাম",
+            addressCountry: "BD",
+          },
+          areaServed: { "@type": "Country", name: "Bangladesh" },
+          sameAs: ["https://wa.me/8801835985730"],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "ওয়েব ও ডিজিটাল সার্ভিস",
+            itemListElement: services.map((s) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: s.titleBn,
+                url: `${SITE_URL}/services/${s.slug}`,
+              },
+            })),
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Webtrix IT Solution",
+          url: SITE_URL,
+          inLanguage: "bn-BD",
+        }),
       },
     ],
   }),
   component: HomePage,
 });
+
 
 
 /* সন্তুষ্ট ক্লায়েন্ট — বাংলাদেশী মানুষের ছবি ও নাম */
