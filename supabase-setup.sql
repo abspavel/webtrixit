@@ -143,6 +143,7 @@ CREATE TABLE IF NOT EXISTS public.portfolio_projects (
   description text,
   demo_url text NOT NULL,
   image_url text,
+  project_screenshots text[], -- array of image URLs
   sort_order integer NOT NULL DEFAULT 0,
   is_active boolean NOT NULL DEFAULT true,
   created_at timestamptz NOT NULL DEFAULT now(),

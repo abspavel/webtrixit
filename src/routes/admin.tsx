@@ -348,6 +348,7 @@ type PortfolioProject = {
   description: string | null;
   demo_url: string;
   image_url: string | null;
+  project_screenshots: string[] | null;
   sort_order: number | null;
   is_active: boolean;
   created_at: string;
@@ -359,6 +360,7 @@ type PortfolioForm = {
   description: string;
   demo_url: string;
   image_url: string;
+  project_screenshots: string; // stored as comma-separated or JSON in form state
   sort_order: string;
   is_active: boolean;
 };
@@ -369,6 +371,7 @@ const emptyPortfolioForm: PortfolioForm = {
   description: "",
   demo_url: "",
   image_url: "",
+  project_screenshots: "",
   sort_order: "0",
   is_active: true,
 };
@@ -498,7 +501,7 @@ function PortfolioProjectsPanel() {
       const supabase = getSupabase();
       const { data, error } = await supabase
         .from("portfolio_projects")
-        .select("id, title, category, description, demo_url, image_url, sort_order, is_active, created_at")
+        .select("id, title, category, description, demo_url, image_url, project_screenshots, sort_order, is_active, created_at")
         .order("sort_order", { ascending: true })
         .order("created_at", { ascending: false });
       if (error) throw error;
@@ -525,6 +528,7 @@ function PortfolioProjectsPanel() {
       description: project.description ?? "",
       demo_url: project.demo_url,
       image_url: project.image_url ?? "",
+      project_screenshots: Array.isArray(project.project_screenshots) ? project.project_screenshots.join(", ") : "",
       sort_order: String(project.sort_order ?? 0),
       is_active: project.is_active,
     });
@@ -539,12 +543,18 @@ function PortfolioProjectsPanel() {
     try {
       const supabase = getSupabase();
       const order = Number.parseInt(form.sort_order, 10);
+      const screenshots = form.project_screenshots
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+      
       const payload = {
         title: form.title.trim(),
         category: form.category.trim() || null,
         description: form.description.trim() || null,
         demo_url: form.demo_url.trim(),
         image_url: form.image_url.trim() || null,
+        project_screenshots: screenshots.length > 0 ? screenshots : null,
         sort_order: Number.isFinite(order) ? order : 0,
         is_active: form.is_active,
         updated_at: new Date().toISOString(),
@@ -644,6 +654,15 @@ function PortfolioProjectsPanel() {
               />
             </label>
             <label className="block">
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্ট স্ক্রিনশটসমূহ (কমা দিয়ে আলাদা করুন)</span>
+              <textarea
+                value={form.project_screenshots}
+                onChange={(e) => setForm((prev) => ({ ...prev, project_screenshots: e.target.value }))}
+                placeholder="https://.../img1.jpg, https://.../img2.jpg"
+                rows={2}
+                className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-lavender focus:outline-none"
+              />
+            </label>
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ছোট বর্ণনা</span>
               <textarea
                 value={form.description}
@@ -702,9 +721,16 @@ function PortfolioProjectsPanel() {
                         {project.category || "ক্যাটাগরি নেই"} · সিরিয়াল {project.sort_order ?? 0}
                       </p>
                       {project.description && <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>}
-                      <a href={project.demo_url} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1.5 break-all text-xs text-electric hover:opacity-80">
-                        <ExternalLink className="h-3 w-3" /> {project.demo_url}
-                      </a>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <a href={project.demo_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 break-all text-xs text-electric hover:opacity-80">
+                          <ExternalLink className="h-3 w-3" /> {project.demo_url}
+                        </a>
+                        {project.project_screenshots && project.project_screenshots.length > 0 && (
+                          <span className="text-[10px] text-muted-foreground">
+                            · {project.project_screenshots.length}টি স্ক্রিনশট
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <div className="flex shrink-0 gap-2">
                       <Button type="button" variant="outline" size="icon" onClick={() => editProject(project)} aria-label="প্রজেক্ট এডিট" className="rounded-full bg-background">
