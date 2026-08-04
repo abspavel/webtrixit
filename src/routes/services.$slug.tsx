@@ -4,12 +4,12 @@ import { ServiceDetail, serviceHead, ServiceNotFound } from "@/components/Servic
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
-    const service = getService(params.slug);
-    if (!service) throw notFound();
-    return { service };
+    if (!getService(params.slug)) throw notFound();
+    return { slug: params.slug };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) {
+    const service = loaderData ? getService(loaderData.slug) : undefined;
+    if (!service) {
       return {
         meta: [
           { title: "সার্ভিসটি পাওয়া যায়নি — Webtrix IT Solution" },
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/services/$slug")({
         ],
       };
     }
-    return serviceHead(loaderData.service);
+    return serviceHead(service);
   },
   component: RouteComponent,
   notFoundComponent: ServiceNotFound,
@@ -25,7 +25,9 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function RouteComponent() {
-  const { service } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const service = getService(slug);
+  if (!service) throw notFound();
   return <ServiceDetail service={service} />;
 }
 
