@@ -615,6 +615,7 @@ function PortfolioProjectsPanel() {
             )}
           </div>
           <div className="space-y-3">
+
             <label className="block">
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্টের নাম</span>
               <input
@@ -691,6 +692,7 @@ function PortfolioProjectsPanel() {
                 />
                 Active
               </label>
+            </div>
             </div>
             <Button type="button" onClick={saveProject} disabled={saving} className="w-full rounded-full font-semibold">
               {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : editingId ? <Save className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
