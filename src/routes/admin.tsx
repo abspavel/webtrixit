@@ -882,45 +882,6 @@ function StatusPill({ value, onChange }: { value: string; onChange: (s: Status) 
   );
 }
 
-function formatDate(iso: string) {
-  try {
-    return new Intl.DateTimeFormat("bn-BD", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }).format(new Date(iso));
-  } catch {
-    return iso;
-  }
-}
-      </div>
-    </section>
-  );
-}
-      </div>
-    </section>
-  );
-}
-
-function StatusPill({ value, onChange }: { value: string; onChange: (s: Status) => void }) {
-  const cls = STATUS_COLOR[value] ?? "bg-surface text-muted-foreground border-border";
-  return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value as Status)}
-      className={`cursor-pointer rounded-full border px-2.5 py-1 text-xs font-medium focus:outline-none ${cls}`}
-    >
-      {STATUSES.map((s) => (
-        <option key={s} value={s} className="bg-background text-foreground">
-          {STATUS_LABEL[s]}
-        </option>
-      ))}
-    </select>
-  );
-}
-
 function formatDate(iso: string): string {
   try {
     const d = new Date(iso);
