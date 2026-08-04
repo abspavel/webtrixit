@@ -621,6 +621,12 @@ function Portfolio() {
   const [i, setI] = useState(0);
   const [perView, setPerView] = useState(3);
   const [projects, setProjects] = useState<PortfolioProject[]>(fallbackPortfolio);
+  const [lightbox, setLightbox] = useState<{ isOpen: boolean; screenshots: string[]; startIndex: number }>({
+    isOpen: false,
+    screenshots: [],
+    startIndex: 0,
+  });
+
 
   useEffect(() => {
     let cancelled = false;
