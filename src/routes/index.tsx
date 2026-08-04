@@ -791,8 +791,16 @@ function Portfolio() {
             </button>
           </div>
         </div>
+        {lightbox.isOpen && (
+          <Lightbox
+            images={lightbox.screenshots}
+            startIndex={lightbox.startIndex}
+            onClose={() => setLightbox({ ...lightbox, isOpen: false })}
+          />
+        )}
       </div>
     </section>
+
   );
 }
 
