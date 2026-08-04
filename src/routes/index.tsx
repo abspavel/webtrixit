@@ -732,15 +732,30 @@ function Portfolio() {
                     {p.project_screenshots && p.project_screenshots.length > 0 && (
                       <div className="flex gap-2 p-4 pt-0 overflow-x-auto no-scrollbar">
                         {p.project_screenshots.map((ss, ssi) => (
-                          <img 
-                            key={ssi} 
-                            src={ss} 
-                            alt={`${p.title} screenshot ${ssi + 1}`} 
-                            className="h-12 w-20 shrink-0 rounded-lg border border-border object-cover opacity-80 transition hover:opacity-100" 
-                          />
+                          <button
+                            key={ssi}
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setLightbox({
+                                isOpen: true,
+                                screenshots: p.project_screenshots!,
+                                startIndex: ssi,
+                              });
+                            }}
+                            className="h-12 w-20 shrink-0 rounded-lg border border-border object-cover opacity-80 transition hover:opacity-100 overflow-hidden"
+                          >
+                            <img
+                              src={ss}
+                              alt={`${p.title} screenshot ${ssi + 1}`}
+                              className="h-full w-full object-cover"
+                            />
+                          </button>
                         ))}
                       </div>
                     )}
+
                   </a>
                 </div>
               );})}
