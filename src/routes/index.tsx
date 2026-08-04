@@ -199,10 +199,6 @@ function HomePage() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <h2 className="mb-8 text-center font-display text-3xl font-bold text-foreground">আমাদের কাজ (Portfolio)</h2>
-        <Portfolio />
-      </div>
       <ClientLogos />
       <ProblemSolution />
       <WhatsAppBanner variant="primary" />
@@ -215,7 +211,6 @@ function HomePage() {
       <FinalCTA />
       <Footer />
       <FloatingWhatsApp />
-
     </div>
   );
 }
