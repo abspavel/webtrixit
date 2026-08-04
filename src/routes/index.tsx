@@ -625,7 +625,7 @@ function Portfolio() {
         const supabase = getSupabase();
         const { data, error } = await supabase
           .from("portfolio_projects")
-          .select("id, title, category, description, demo_url, image_url, sort_order")
+          .select("id, title, category, description, demo_url, image_url, project_screenshots, sort_order")
           .eq("is_active", true)
           .order("sort_order", { ascending: true })
           .order("created_at", { ascending: false });
