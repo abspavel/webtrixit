@@ -342,6 +342,25 @@ function Hero() {
 }
 
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
+function Statistics() {
+  const stats = [
+    { label: "প্রজেক্ট সম্পন্ন", value: "২৫০+", icon: Zap, color: "text-electric" },
+    { label: "সন্তুষ্ট ক্লায়েন্ট", value: "২০০+", icon: Star, color: "text-neon" },
+    { label: "অভিজ্ঞতা", value: "৫ বছর+", icon: ShieldCheck, color: "text-lavender" },
+  ];
+  return (
+    <div className="mt-12 grid gap-4 sm:grid-cols-3">
+      {stats.map((s) => (
+        <div key={s.label} className="flex flex-col items-center rounded-2xl border border-border bg-card/50 p-6 text-center">
+          <s.icon className={`h-8 w-8 ${s.color}`} />
+          <div className="mt-3 text-3xl font-bold">{s.value}</div>
+          <div className="text-sm text-muted-foreground">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ClientLogos() {
   const row = [...clientPeople, ...clientPeople];
   return (
