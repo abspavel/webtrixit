@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@tanstack/react-router";
 
 /* Smooth page transitions for TanStack Router */
 ::view-transition-old(root),
