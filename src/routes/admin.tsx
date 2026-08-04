@@ -603,10 +603,6 @@ function PortfolioProjectsPanel() {
           <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
         </Button>
       </div>
-        <Button type="button" variant="outline" size="sm" onClick={load} className="rounded-full bg-surface/70 text-foreground hover:bg-surface">
-          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
-        </Button>
-      </div>
 
       <div className="grid gap-5 lg:grid-cols-[minmax(320px,0.8fr)_minmax(0,1.2fr)]">
         <div className="rounded-2xl border border-border bg-surface/50 p-4 sm:p-5">
