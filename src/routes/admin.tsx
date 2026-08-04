@@ -667,6 +667,7 @@ function PortfolioProjectsPanel() {
                 rows={2}
                 className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-lavender focus:outline-none"
               />
+            </label>
             <label className="block">
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ছোট বর্ণনা</span>
               <textarea
@@ -696,7 +697,6 @@ function PortfolioProjectsPanel() {
                 />
                 Active
               </label>
-            </div>
             </div>
             <Button type="button" onClick={saveProject} disabled={saving} className="w-full rounded-full font-semibold">
               {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : editingId ? <Save className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
