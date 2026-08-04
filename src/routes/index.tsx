@@ -1015,3 +1015,70 @@ function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`rounded-2xl border bg-card p-6 md:p-8 ${className}`}>{children}</div>;
 }
+
+/* ---------- LIGHTBOX ---------- */
+function Lightbox({ images, startIndex, onClose }: { images: string[]; startIndex: number; onClose: () => void }) {
+  const [idx, setIdx] = useState(startIndex);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") setIdx((v) => (v === 0 ? images.length - 1 : v - 1));
+      if (e.key === "ArrowRight") setIdx((v) => (v === images.length - 1 ? 0 : v + 1));
+    };
+    window.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "unset";
+    };
+  }, [images.length, onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex flex-col bg-brand/95 backdrop-blur-md">
+      <div className="flex justify-end p-4">
+        <button
+          onClick={onClose}
+          className="rounded-full bg-surface-2 p-3 text-foreground transition hover:bg-surface-3"
+          aria-label="বন্ধ করুন"
+        >
+          <X className="h-6 w-6" />
+        </button>
+      </div>
+      <div className="relative flex flex-1 items-center justify-center p-4">
+        <button
+          onClick={() => setIdx((v) => (v === 0 ? images.length - 1 : v - 1))}
+          className="absolute left-4 z-10 rounded-full bg-brand/40 p-4 text-foreground transition hover:bg-brand/60 sm:left-8"
+          aria-label="আগের ছবি"
+        >
+          <ChevronLeft className="h-8 w-8" />
+        </button>
+        <div className="relative h-full w-full max-w-5xl">
+          <img
+            src={images[idx]}
+            alt={`Screenshot ${idx + 1}`}
+            className="h-full w-full object-contain"
+          />
+        </div>
+        <button
+          onClick={() => setIdx((v) => (v === images.length - 1 ? 0 : v + 1))}
+          className="absolute right-4 z-10 rounded-full bg-brand/40 p-4 text-foreground transition hover:bg-brand/60 sm:right-8"
+          aria-label="পরের ছবি"
+        >
+          <ChevronRight className="h-8 w-8" />
+        </button>
+      </div>
+      <div className="flex justify-center gap-2 pb-8 pt-4">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIdx(i)}
+            className={`h-2 rounded-full transition-all ${i === idx ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
+            aria-label={`ছবি ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
