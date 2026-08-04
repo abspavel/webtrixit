@@ -155,6 +155,7 @@ type PortfolioProject = {
   description?: string | null;
   demo_url: string;
   image_url?: string | null;
+  project_screenshots?: string[] | null;
   sort_order?: number | null;
 };
 
