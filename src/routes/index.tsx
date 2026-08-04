@@ -155,6 +155,7 @@ type PortfolioProject = {
   description?: string | null;
   demo_url: string;
   image_url?: string | null;
+  project_screenshots?: string[] | null;
   sort_order?: number | null;
 };
 
@@ -211,7 +212,6 @@ function HomePage() {
       <FinalCTA />
       <Footer />
       <FloatingWhatsApp />
-
     </div>
   );
 }
@@ -316,18 +316,7 @@ function Hero() {
               আমাদের কাজ দেখুন
             </a>
           </div>
-          <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-            {[
-              { k: "২৫০+", v: "ডেলিভার্ড প্রজেক্ট" },
-              { k: "৪.৯/৫", v: "ক্লায়েন্ট রেটিং" },
-              { k: "১২+", v: "দেশে সার্ভিস" },
-            ].map((s) => (
-              <div key={s.v} className="rounded-2xl border border-border bg-surface/40 p-4 backdrop-blur">
-                <div className="font-display text-2xl font-bold text-gradient sm:text-3xl">{s.k}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{s.v}</div>
-              </div>
-            ))}
-          </div>
+          <Statistics />
         </div>
         <Hero3DStack />
       </div>
@@ -338,6 +327,25 @@ function Hero() {
 }
 
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
+function Statistics() {
+  const stats = [
+    { label: "প্রজেক্ট সম্পন্ন", value: "২৫০+", icon: Zap, color: "text-electric" },
+    { label: "সন্তুষ্ট ক্লায়েন্ট", value: "২০০+", icon: Star, color: "text-neon" },
+    { label: "অভিজ্ঞতা", value: "৫ বছর+", icon: ShieldCheck, color: "text-lavender" },
+  ];
+  return (
+    <div className="mt-12 grid gap-4 sm:grid-cols-3">
+      {stats.map((s) => (
+        <div key={s.label} className="flex flex-col items-center rounded-2xl border border-border bg-card/50 p-6 text-center">
+          <s.icon className={`h-8 w-8 ${s.color}`} />
+          <div className="mt-3 text-3xl font-bold">{s.value}</div>
+          <div className="text-sm text-muted-foreground">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ClientLogos() {
   const row = [...clientPeople, ...clientPeople];
   return (
@@ -621,7 +629,7 @@ function Portfolio() {
         const supabase = getSupabase();
         const { data, error } = await supabase
           .from("portfolio_projects")
-          .select("id, title, category, description, demo_url, image_url, sort_order")
+          .select("id, title, category, description, demo_url, image_url, project_screenshots, sort_order")
           .eq("is_active", true)
           .order("sort_order", { ascending: true })
           .order("created_at", { ascending: false });
@@ -715,6 +723,18 @@ function Portfolio() {
                       </div>
                       <ArrowRight className="h-4 w-4 text-primary transition group-hover:translate-x-1" />
                     </div>
+                    {p.project_screenshots && p.project_screenshots.length > 0 && (
+                      <div className="flex gap-2 p-4 pt-0 overflow-x-auto no-scrollbar">
+                        {p.project_screenshots.map((ss, ssi) => (
+                          <img 
+                            key={ssi} 
+                            src={ss} 
+                            alt={`${p.title} screenshot ${ssi + 1}`} 
+                            className="h-12 w-20 shrink-0 rounded-lg border border-border object-cover opacity-80 transition hover:opacity-100" 
+                          />
+                        ))}
+                      </div>
+                    )}
                   </a>
                 </div>
               );})}
