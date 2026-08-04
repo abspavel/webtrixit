@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@tanstack/react-router";
 
 /* Smooth page transitions for TanStack Router */
 ::view-transition-old(root),
@@ -64,7 +63,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-none;
     scroll-behavior: smooth;
   }
   body {
@@ -99,20 +98,20 @@
 
 @utility nav-link {
   @apply relative py-1 transition-colors;
-}
-
-@utility nav-link::after {
-  content: "";
-  @apply absolute bottom-0 left-0 h-0.5 w-0 scale-x-0 bg-electric transition-transform origin-left;
-}
-
-@utility nav-link:hover::after,
-@utility nav-link[data-active="true"]::after {
-  @apply w-full scale-x-100;
-}
-
-@utility nav-link[data-active="true"] {
-  @apply text-foreground font-semibold;
+  
+  &::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-0.5 w-0 scale-x-0 bg-electric transition-transform origin-left;
+  }
+  
+  &:hover::after,
+  &[data-active="true"]::after {
+    @apply w-full scale-x-100;
+  }
+  
+  &[data-active="true"] {
+    @apply text-foreground font-semibold;
+  }
 }
 
 /* Animations */

@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "ওয়েবসাইট ডিজাইন বাংলাদেশ, ওয়েবসাইট তৈরি খরচ, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ল্যান্ডিং পেজ ডিজাইন, LMS ওয়েবসাইট, কাস্টম সফটওয়্যার ডেভেলপমেন্ট, SMM প্যানেল ওয়েবসাইট, ডিজিটাল মার্কেটিং এজেন্সি চট্টগ্রাম, ফেসবুক পিক্সেল সেটআপ, লোগো ডিজাইন বাংলাদেশ, web design company Bangladesh, website development Chittagong, Webtrix IT Solution",
+          "ওয়েবসাইট ডিজাইন বাংলাদেশ, ওয়েবসাইট তৈরি খরচ, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ল্যান্ডিং পেজ ডিজাইন, LMS ওয়েবসাইট, কাস্টম সফটওয়্যার ডেভেলপমেন্ট, SMM প্যানেল ওয়েবসাইট, ডিজিটাল মার্কেটিং এজেন্সি চট্টগ্রাম, ফেসবুক পিক্সেল সেটআপ, লোগো ডিজাইন বাংলাদেশ, web design company Bangladesh, website development Chittagong, Webtrix IT Solution, webtrixit, #webtrixit, #webdesignBD, #ecommerceBD",
       },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "geo.region", content: "BD-A" },

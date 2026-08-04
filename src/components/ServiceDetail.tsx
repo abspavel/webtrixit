@@ -329,37 +329,27 @@ const OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785258383263-logo_no_text.webp";
 
 export function serviceHead(service: ServiceItem) {
-  const title = `${service.titleBn} সার্ভিস বাংলাদেশ | Webtrix IT Solution`;
-  const description = `${service.desc} বাংলাদেশে সাশ্রয়ী মূল্যে ${service.titleBn} — চট্টগ্রাম ও সারা দেশে Webtrix IT Solution-এর প্রফেশনাল সেবা। ফ্রি কনসালটেশনের জন্য যোগাযোগ করুন।`;
-  const url = `${SITE_URL}/services/${service.slug}`;
-  const keywords = [
-    service.titleBn,
-    `${service.titleBn} বাংলাদেশ`,
-    `${service.subject} সার্ভিস`,
-    `${service.subject} খরচ`,
-    "ওয়েবসাইট ডিজাইন বাংলাদেশ",
-    "ওয়েব ডেভেলপমেন্ট কোম্পানি চট্টগ্রাম",
-    "Webtrix IT Solution",
-    service.slug.replace(/-/g, " "),
-  ].join(", ");
+  const title = `${service.titleBn} | Webtrix IT Solution`;
+  const desc = `${service.titleBn} সার্ভিস — ${service.tagline} দ্রুত লোডিং, SEO-ফ্রেন্ডলি ও প্রিমিয়াম ডিজাইন।`;
+  const keywords = `${service.titleBn}, ${service.subject}, ল্যান্ডিং পেজ ডিজাইন, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ওয়েব ডিজাইন চট্টগ্রাম, web design Bangladesh, ecommerce website development, webtrixit, #webtrixit, #webdesignBD`;
 
   return {
     meta: [
       { title },
-      { name: "description", content: description },
+      { name: "description", content: desc },
       { name: "keywords", content: keywords },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
       { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "article" },
-      { property: "og:url", content: url },
-      { property: "og:locale", content: "bn_BD" },
+      { property: "og:description", content: desc },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/services/${service.slug}` },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: title },
-      { name: "twitter:description", content: description },
+      { name: "twitter:description", content: desc },
       { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: url }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/${service.slug}` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -367,17 +357,13 @@ export function serviceHead(service: ServiceItem) {
           "@context": "https://schema.org",
           "@type": "Service",
           name: service.titleBn,
-          serviceType: service.title,
-          description: service.desc,
-          url,
-          areaServed: { "@type": "Country", name: "Bangladesh" },
+          description: desc,
           provider: {
-            "@type": "Organization",
+            "@type": "ProfessionalService",
             name: "Webtrix IT Solution",
             url: SITE_URL,
-            telephone: "+8801835985730",
-            email: "webtrixofficial@gmail.com",
           },
+          areaServed: "Bangladesh",
         }),
       },
       {
@@ -386,8 +372,24 @@ export function serviceHead(service: ServiceItem) {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "হোম", item: SITE_URL },
-            { "@type": "ListItem", position: 2, name: service.titleBn, item: url },
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "হোম",
+              item: SITE_URL,
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "সার্ভিস",
+              item: `${SITE_URL}/#services`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: service.titleBn,
+              item: `${SITE_URL}/services/${service.slug}`,
+            },
           ],
         }),
       },
