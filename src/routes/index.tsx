@@ -315,18 +315,7 @@ function Hero() {
               আমাদের কাজ দেখুন
             </a>
           </div>
-          <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-            {[
-              { k: "২৫০+", v: "ডেলিভার্ড প্রজেক্ট" },
-              { k: "৪.৯/৫", v: "ক্লায়েন্ট রেটিং" },
-              { k: "১২+", v: "দেশে সার্ভিস" },
-            ].map((s) => (
-              <div key={s.v} className="rounded-2xl border border-border bg-surface/40 p-4 backdrop-blur">
-                <div className="font-display text-2xl font-bold text-gradient sm:text-3xl">{s.k}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{s.v}</div>
-              </div>
-            ))}
-          </div>
+          <Statistics />
         </div>
         <Hero3DStack />
       </div>
