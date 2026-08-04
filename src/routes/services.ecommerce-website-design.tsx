@@ -6,14 +6,22 @@ const SLUG = "ecommerce-website-design";
 
 export const Route = createFileRoute("/services/ecommerce-website-design")({
   loader: () => {
-    const service = getService(SLUG);
-    if (!service) throw notFound();
-    return { service };
+    if (!getService(SLUG)) throw notFound();
+    return { slug: SLUG };
   },
-  head: ({ loaderData }) =>
-    loaderData
-      ? serviceHead(loaderData.service)
-      : { meta: [{ title: "সার্ভিসটি পাওয়া যায়নি" }, { name: "robots", content: "noindex" }] },
-  component: () => <ServiceDetail service={Route.useLoaderData().service} />,
+  head: ({ loaderData }) => {
+    const service = loaderData ? getService(loaderData.slug) : undefined;
+    return service
+      ? serviceHead(service)
+      : { meta: [{ title: "সার্ভিসটি পাওয়া যায়নি" }, { name: "robots", content: "noindex" }] };
+  },
+  component: RouteComponent,
   notFoundComponent: ServiceNotFound,
 });
+
+function RouteComponent() {
+  const { slug } = Route.useLoaderData();
+  const service = getService(slug);
+  if (!service) throw notFound();
+  return <ServiceDetail service={service} />;
+}
