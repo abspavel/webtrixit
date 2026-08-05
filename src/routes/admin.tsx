@@ -377,7 +377,7 @@ const emptyPortfolioForm: PortfolioForm = {
 };
 
 function ServiceLinksPanel() {
-  const [rows, setRows] = useState<Record<string, { demo_url: string; sale_url: string }>>({});
+  const [rows, setRows] = useState<Record<string, { demo_url: string; sale_url: string; demo_image: string }>>({});
   const [loading, setLoading] = useState(false);
   const [savingSlug, setSavingSlug] = useState<string | null>(null);
 
@@ -385,11 +385,12 @@ function ServiceLinksPanel() {
     setLoading(true);
     try {
       const supabase = getSupabase();
-      const { data, error } = await supabase.from("service_links").select("service_slug, demo_url, sale_url");
+      const { data, error } = await supabase.from("service_links").select("service_slug, demo_url, sale_url, demo_image");
       if (error) throw error;
-      const map: Record<string, { demo_url: string; sale_url: string }> = {};
-      for (const s of services) map[s.slug] = { demo_url: "", sale_url: "" };
+      const map: Record<string, { demo_url: string; sale_url: string; demo_image: string }> = {};
+      for (const s of services) map[s.slug] = { demo_url: "", sale_url: "", demo_image: "" };
       for (const r of (data ?? []) as ServiceLinkRow[]) {
+
         map[r.service_slug] = { demo_url: r.demo_url ?? "", sale_url: r.sale_url ?? "" };
       }
       setRows(map);
