@@ -1,5 +1,4 @@
 // Webtrix IT Solution - Home Page
-// মোবাইল এ যেন স্মুথ লি চলে স্মুথ ট্রানজিশন দাও । আর ওয়েবসাইটটি সম্পূর্ণ SEO করে দাও যেনো সার্চ রেংকিং এ প্রথম থাকে
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
