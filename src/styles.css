@@ -69,12 +69,62 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
     line-height: 1.2;
   }
 }
+
+:root, .theme-dark {
+  --color-brand: #0A0F1D;
+  --color-background: #0A0F1D;
+  --color-surface: #121829;
+  --color-surface-2: #1A2238;
+  --color-card: #0F172A;
+  --color-border: #1E293B;
+  --color-muted: #1A2238;
+  --color-muted-foreground: #94A3B8;
+  --color-foreground: #FFFFFF;
+}
+
+.theme-gray {
+  --color-brand: #1F2937;
+  --color-background: #111827;
+  --color-surface: #1F2937;
+  --color-surface-2: #374151;
+  --color-card: #1F2937;
+  --color-border: #374151;
+  --color-muted: #1F2937;
+  --color-muted-foreground: #9CA3AF;
+  --color-foreground: #F9FAFB;
+}
+
+.theme-modern {
+  --color-brand: #0F172A;
+  --color-background: #020617;
+  --color-surface: #0F172A;
+  --color-surface-2: #1E293B;
+  --color-card: #0F172A;
+  --color-border: #334155;
+  --color-muted: #0F172A;
+  --color-muted-foreground: #94A3B8;
+  --color-foreground: #F8FAFC;
+}
+
+.theme-ocean {
+  --color-brand: #082F49;
+  --color-background: #0C4A6E;
+  --color-surface: #082F49;
+  --color-surface-2: #075985;
+  --color-card: #082F49;
+  --color-border: #0EA5E9;
+  --color-muted: #082F49;
+  --color-muted-foreground: #BAE6FD;
+  --color-foreground: #F0F9FF;
+}
+
 
 @utility text-gradient {
   background: linear-gradient(to right, #3B82F6, #8B5CF6, #10B981);

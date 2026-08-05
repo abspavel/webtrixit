@@ -2,10 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
   Phone, Mail, MapPin, TrendingUp, Zap, ChevronLeft, ChevronRight,
-  AlertTriangle, Sparkles, ExternalLink,
+  AlertTriangle, Sparkles, ExternalLink, Palette, Moon, Sun, Monitor
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useTheme, type Theme } from "@/hooks/use-theme";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import heroBg from "@/assets/hero-bg.jpg";
 import client1 from "@/assets/client-1.jpg";
 import client2 from "@/assets/client-2.jpg";
@@ -219,6 +229,15 @@ function HomePage() {
 /* ---------- NAV ---------- */
 function Nav() {
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const themes: { id: Theme; label: string; icon: any }[] = [
+    { id: "dark", label: "ডার্ক মুড (Default)", icon: Moon },
+    { id: "gray", label: "গ্রে মুড", icon: Monitor },
+    { id: "modern", label: "মডার্ন ব্লু", icon: Sparkles },
+    { id: "ocean", label: "ওশান ডিপ", icon: Zap },
+  ];
+
   const links = [
     { href: "services", label: "সার্ভিস" },
     { href: "work", label: "পোর্টফোলিও" },
@@ -227,6 +246,7 @@ function Nav() {
     { href: "contact", label: "যোগাযোগ" },
   ];
   const active = useActiveSection(links.map((l) => l.href));
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
@@ -240,24 +260,94 @@ function Nav() {
             Webtrixit
           </span>
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={`#${l.href}`}
-              data-active={active === l.href}
-              className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              {l.label}
+        <div className="hidden items-center gap-8 md:flex">
+          <nav className="flex items-center gap-8">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={`#${l.href}`}
+                data-active={active === l.href}
+                className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button 
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
+                  aria-label="থিম পরিবর্তন করুন"
+                >
+                  <Palette className="h-5 w-5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
+                <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-border" />
+                {themes.map((t) => (
+                  <DropdownMenuItem
+                    key={t.id}
+                    onClick={() => setTheme(t.id)}
+                    className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition ${
+                      theme === t.id ? "bg-electric/20 text-electric font-semibold" : "hover:bg-white/5"
+                    }`}
+                  >
+                    <t.icon className="h-4 w-4" />
+                    <span>{t.label}</span>
+                    {theme === t.id && <Check className="ml-auto h-4 w-4" />}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
+              ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
             </a>
-          ))}
-          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
-            ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
-          </a>
-        </nav>
-        <button aria-label="মেনু" onClick={() => setOpen(!open)} className="rounded-lg border border-border p-2 md:hidden">
-          <Menu className="h-5 w-5" />
-        </button>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button 
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
+                aria-label="থিম পরিবর্তন করুন"
+              >
+                <Palette className="h-5 w-5" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
+              <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-border" />
+              {themes.map((t) => (
+                <DropdownMenuItem
+                  key={t.id}
+                  onClick={() => setTheme(t.id)}
+                  className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition ${
+                    theme === t.id ? "bg-electric/20 text-electric font-semibold" : "hover:bg-white/5"
+                  }`}
+                >
+                  <t.icon className="h-4 w-4" />
+                  <span>{t.label}</span>
+                  {theme === t.id && <Check className="ml-auto h-4 w-4" />}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <button 
+            aria-label="মেনু" 
+            onClick={() => setOpen(!open)} 
+            className="rounded-lg border border-border p-2"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        </div>
+
+
       </div>
       {open && (
         <div className="border-t border-border/60 md:hidden">
