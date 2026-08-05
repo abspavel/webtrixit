@@ -213,3 +213,12 @@
   --fluid-2xl: clamp(1.5rem, 5vw, 3rem);
   --fluid-3xl: clamp(2rem, 7vw, 4.5rem);
 }
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s infinite ease-in-out;
+}

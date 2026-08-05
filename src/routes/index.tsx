@@ -489,9 +489,13 @@ function ClientLogos() {
     <section className="border-y border-border/60 bg-surface/40 py-7">
       <div className="mx-auto max-w-7xl px-5">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
+          দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর ভরসা রেখেছে
         </p>
-        <div className="mt-6 overflow-hidden">
+        <div className="mt-6 overflow-hidden relative">
+          {/* Left/Right Fading Edge */}
+          <div className="absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+          
           <div className="flex w-max items-center gap-8 animate-marquee hover:[animation-play-state:paused]">
             {row.map((c, i) => (
               <div
@@ -553,10 +557,12 @@ function ProblemSolution() {
           <div
             ref={left.ref}
             data-visible={left.visible}
-            className="reveal-l rounded-3xl border-2 border-destructive bg-card p-6 shadow-[0_0_20px_rgba(239,68,68,0.2)] sm:p-8"
+            className="reveal-l rounded-3xl border-2 border-destructive bg-card p-6 shadow-[0_0_30px_rgba(239,68,68,0.4)] sm:p-8 relative overflow-hidden"
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive px-3 py-1.5 text-xs font-bold text-white uppercase tracking-wider">
-              <AlertTriangle className="h-3.5 w-3.5" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
+            {/* Red Zone Pulse Effect */}
+            <div className="absolute inset-0 bg-destructive/5 animate-pulse pointer-events-none" />
+            <div className="relative z-10 mb-5 inline-flex items-center gap-2 rounded-full bg-destructive px-3 py-1.5 text-xs font-black text-white uppercase tracking-wider animate-bounce-subtle">
+              <AlertTriangle className="h-4 w-4" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
             </div>
             <ul className="space-y-4">
               {problems.map((p, i) => (
