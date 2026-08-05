@@ -218,3 +218,5 @@ export const services: ServiceItem[] = [
     demoLabel: "Clinical Success Cases"
   }
 ];
+
+export const getService = (slug: string) => services.find(s => s.slug === slug);
