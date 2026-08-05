@@ -253,7 +253,7 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
-        <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Webtrixit হোম">
+        <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Bioxin Home">
           <img
             src={logoAsset.url}
             alt="Webtrixit"
