@@ -20,18 +20,16 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page Not Found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">পেজটি খুঁজে পাওয়া যায়নি</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you are looking for does not exist or has been moved.
+          আপনি যে পেজটি খুঁজছেন সেটি নেই অথবা সরানো হয়েছে।
         </p>
-
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Back to Home
-
+            হোমে ফিরে যান
           </Link>
         </div>
       </div>
@@ -50,10 +48,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Something Went Wrong
+          এই পেজটি লোড হয়নি
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          There was an error loading this page. Please try refreshing or return home.
+          আমাদের প্রান্তে কিছু সমস্যা হয়েছে। রিফ্রেশ করে দেখুন অথবা হোমে ফিরে যান।
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -63,13 +61,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try Again
+            আবার চেষ্টা করুন
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Back to Home
+            হোমে ফিরে যান
           </a>
         </div>
       </div>
@@ -82,18 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Bioxin — Premium Skin Care & Health Solutions" },
-      { name: "description", content: "Bioxin provides advanced dermatological products and personalized skin care solutions to help you achieve your health and beauty goals." },
-
-      { name: "author", content: "Bioxin" },
-      { property: "og:title", content: "Bioxin — Premium Skin Care & Health Solutions" },
-      { property: "og:description", content: "Bioxin provides advanced dermatological products and personalized skin care solutions to help you achieve your health and beauty goals." },
-
+      { title: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { name: "description", content: "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।" },
+      { name: "author", content: "Webtrix IT Solution" },
+      { property: "og:title", content: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { property: "og:description", content: "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Bioxin — Premium Skin Care & Health Solutions" },
-      { name: "twitter:description", content: "Bioxin provides advanced dermatological products and personalized skin care solutions to help you achieve your health and beauty goals." },
-
+      { name: "twitter:title", content: "Webtrixit — ওয়েবসাইট, সফটওয়্যার ও ডিজিটাল মার্কেটিং" },
+      { name: "twitter:description", content: "Webtrixit প্রিমিয়াম ওয়েবসাইট, ই-কমার্স, LMS, কাস্টম সফটওয়্যার, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং সার্ভিস তৈরি করে।" },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785556370667-social-image.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785556370667-social-image.webp" },
     ],
@@ -117,7 +112,7 @@ function RootShell({ children }: { children: ReactNode }) {
     anonKey: process.env.MY_SUPABASE_ANON_KEY ?? "",
   };
   return (
-    <html lang="en">
+    <html lang="bn">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

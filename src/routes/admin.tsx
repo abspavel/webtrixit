@@ -7,18 +7,16 @@ import {
   ShieldCheck, Inbox, Link2, Save, BriefcaseBusiness, Plus, Pencil, X, ExternalLink, ImagePlus, Loader
 } from "lucide-react";
 const logoAsset = { url: "/webtrix-logo.png" };
-
 import { services } from "@/lib/services-data";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — Bioxin" },
-      { name: "description", content: "Bioxin admin dashboard for leads, service links, and portfolio projects." },
-      { property: "og:title", content: "Admin Dashboard — Bioxin" },
-      { property: "og:description", content: "Manage Bioxin leads, demo links, sale links, and portfolio projects." },
-
+      { title: "Admin Dashboard — Webtrixit" },
+      { name: "description", content: "Webtrixit admin dashboard for leads, service links, and portfolio projects." },
+      { property: "og:title", content: "Admin Dashboard — Webtrixit" },
+      { property: "og:description", content: "Manage Webtrixit leads, demo links, sale links, and portfolio projects." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -43,7 +41,7 @@ type Lead = {
 type Status = "new" | "contacted" | "won" | "lost";
 const STATUSES: Status[] = ["new", "contacted", "won", "lost"];
 const STATUS_LABEL: Record<string, string> = {
-  new: "New", contacted: "Contacted", won: "Won", lost: "Lost",
+  new: "নতুন", contacted: "যোগাযোগ হয়েছে", won: "জয়ী", lost: "হারানো",
 };
 const STATUS_COLOR: Record<string, string> = {
   new: "bg-electric/15 text-electric border-electric/30",
@@ -68,7 +66,7 @@ function AdminPage() {
       if (error) throw error;
       setLeads((data ?? []) as Lead[]);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Leads could not be loaded";
+      const msg = err instanceof Error ? err.message : "Leads লোড হয়নি";
       toast.error(msg);
     } finally {
       setLoading(false);
@@ -89,7 +87,7 @@ function AdminPage() {
           _user_id: userData.user.id, _role: "admin",
         });
         if (roleErr || !roleData) {
-          toast.error("Access denied — this account does not have admin role.");
+          toast.error("Access denied — এই account-এ admin role নেই।");
           await supabase.auth.signOut();
           navigate({ to: "/auth", replace: true });
           return;
@@ -107,7 +105,7 @@ function AdminPage() {
         return () => { supabase.removeChannel(ch); };
       } catch (err) {
         console.error(err);
-        toast.error(err instanceof Error ? err.message : "An error occurred");
+        toast.error(err instanceof Error ? err.message : "ত্রুটি ঘটেছে");
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,23 +121,21 @@ function AdminPage() {
       const { error } = await supabase.from("leads").update({ status }).eq("id", id);
       if (error) throw error;
       setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
-      toast.success("Status updated");
+      toast.success("স্ট্যাটাস আপডেট হয়েছে");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Update failed");
-
+      toast.error(err instanceof Error ? err.message : "আপডেট ব্যর্থ");
     }
   }
 
   async function deleteLead(id: string) {
-    if (!confirm("Delete this lead?")) return;
+    if (!confirm("এই lead delete করবেন?")) return;
     try {
       const { error } = await supabase.from("leads").delete().eq("id", id);
       if (error) throw error;
       setLeads((prev) => prev.filter((l) => l.id !== id));
-      toast.success("Deleted successfully");
+      toast.success("Delete হয়েছে");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Delete failed");
-
+      toast.error(err instanceof Error ? err.message : "Delete ব্যর্থ");
     }
   }
 
@@ -177,7 +173,7 @@ function AdminPage() {
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoAsset.url} alt="Bioxin" className="h-8 w-auto" />
+            <img src={logoAsset.url} alt="Webtrix" className="h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-2 text-xs sm:text-sm">
             <span className="hidden items-center gap-1.5 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-neon sm:inline-flex">
@@ -188,7 +184,7 @@ function AdminPage() {
               onClick={handleLogout}
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/70 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface"
             >
-              <LogOut className="h-3.5 w-3.5" /> Logout
+              <LogOut className="h-3.5 w-3.5" /> লগআউট
             </button>
           </div>
         </div>
@@ -198,13 +194,13 @@ function AdminPage() {
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Leads Dashboard</h1>
-            <p className="mt-1 text-sm text-muted-foreground">All incoming inquiries in one place.</p>
+            <p className="mt-1 text-sm text-muted-foreground">সব incoming inquiry এক জায়গায়।</p>
           </div>
           <button
             onClick={loadLeads}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-4 py-2 text-sm font-medium text-foreground hover:bg-surface"
           >
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Refresh
+            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
           </button>
         </div>
 
@@ -220,7 +216,7 @@ function AdminPage() {
                   : "border-border bg-surface/60 text-muted-foreground hover:text-foreground"
               }`}
             >
-              {s === "all" ? "All" : STATUS_LABEL[s]}
+              {s === "all" ? "সব" : STATUS_LABEL[s]}
               <span className="rounded-full bg-background px-1.5 py-0.5 text-[10px] text-muted-foreground">
                 {counts[s] ?? 0}
               </span>
@@ -230,7 +226,7 @@ function AdminPage() {
             <Search className="h-4 w-4 text-muted-foreground" />
             <input
               value={q} onChange={(e) => setQ(e.target.value)}
-              placeholder="Name / Phone / Email / Service..."
+              placeholder="নাম / ফোন / ইমেইল / সার্ভিস..."
               className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
           </div>
@@ -242,7 +238,7 @@ function AdminPage() {
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <Inbox className="h-10 w-10 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                {leads.length === 0 ? "No leads yet." : "Nothing in this filter."}
+                {leads.length === 0 ? "এখনো কোনো lead আসেনি।" : "এই ফিল্টারে কিছু নেই।"}
               </p>
             </div>
           ) : (
@@ -252,14 +248,13 @@ function AdminPage() {
                 <table className="w-full text-sm">
                   <thead className="border-b border-border bg-background/40 text-left text-xs uppercase text-muted-foreground">
                     <tr>
-                      <th className="px-4 py-3 font-medium">Name</th>
-                      <th className="px-4 py-3 font-medium">Contact</th>
-                      <th className="px-4 py-3 font-medium">Service</th>
-                      <th className="px-4 py-3 font-medium">Source</th>
-                      <th className="px-4 py-3 font-medium">Date</th>
-                      <th className="px-4 py-3 font-medium">Status</th>
-                      <th className="px-4 py-3 font-medium text-right">Action</th>
-
+                      <th className="px-4 py-3 font-medium">নাম</th>
+                      <th className="px-4 py-3 font-medium">যোগাযোগ</th>
+                      <th className="px-4 py-3 font-medium">সার্ভিস</th>
+                      <th className="px-4 py-3 font-medium">সোর্স</th>
+                      <th className="px-4 py-3 font-medium">তারিখ</th>
+                      <th className="px-4 py-3 font-medium">স্ট্যাটাস</th>
+                      <th className="px-4 py-3 font-medium text-right">অ্যাকশন</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -310,15 +305,15 @@ function AdminPage() {
                     <div className="mt-3 flex flex-wrap gap-2 text-xs">
                       <a href={`tel:${l.phone}`} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-foreground"><Phone className="h-3 w-3" />{l.phone}</a>
                       <a href={`https://wa.me/${l.phone.replace(/\D/g, "")}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-neon/30 bg-neon/10 px-2.5 py-1 text-neon"><MessageCircle className="h-3 w-3" />WhatsApp</a>
-                      {l.email && <a href={`mailto:${l.email}`} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-muted-foreground"><Mail className="h-3 w-3" />Email</a>}
+                      {l.email && <a href={`mailto:${l.email}`} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-muted-foreground"><Mail className="h-3 w-3" />ইমেইল</a>}
                     </div>
                     {(l.service || l.budget) && (
                       <div className="mt-3 text-xs">
-                        {l.service && <div className="text-foreground">Service: <span className="text-muted-foreground">{l.service}</span></div>}
+                        {l.service && <div className="text-foreground">সার্ভিস: <span className="text-muted-foreground">{l.service}</span></div>}
                         {l.budget && <div className="mt-0.5 text-foreground">Budget: <span className="text-muted-foreground">{l.budget}</span></div>}
                       </div>
                     )}
-                    {l.source_page && <div className="mt-2 text-xs text-muted-foreground">Source: {l.source_page}</div>}
+                    {l.source_page && <div className="mt-2 text-xs text-muted-foreground">সোর্স: {l.source_page}</div>}
                     {l.message && <div className="mt-2 rounded-lg border border-border bg-background/40 p-2 text-xs text-muted-foreground">{l.message}</div>}
                     <div className="mt-3 flex justify-end">
                       <button onClick={() => deleteLead(l.id)} className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 px-3 py-1 text-xs text-rose-400">
@@ -398,7 +393,7 @@ function ServiceLinksPanel() {
       }
       setRows(map);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Links could not be loaded");
+      toast.error(err instanceof Error ? err.message : "লিংক লোড হয়নি");
     } finally {
       setLoading(false);
     }
@@ -423,10 +418,9 @@ function ServiceLinksPanel() {
       );
 
       if (error) throw error;
-      toast.success("Link saved successfully");
+      toast.success("লিংক সেভ হয়েছে");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Save failed");
-
+      toast.error(err instanceof Error ? err.message : "সেভ ব্যর্থ");
     } finally {
       setSavingSlug(null);
     }
@@ -437,19 +431,17 @@ function ServiceLinksPanel() {
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-foreground sm:text-2xl">
-            <Link2 className="h-5 w-5 text-electric" /> Service Demo / Sale Links
+            <Link2 className="h-5 w-5 text-electric" /> সার্ভিস ডেমো / সেল লিংক
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Update the Live Demo URL and Buy/Order Page URL for each service. Leave blank to use defaults.
+            প্রতিটি সার্ভিসের জন্য লাইভ ডেমো URL ও কেনার/অর্ডার পেজ URL এখান থেকে আপডেট করুন। খালি রাখলে ডিফল্ট ব্যবহার হবে।
           </p>
-
         </div>
         <button
           onClick={load}
           className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface"
         >
-          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh
-
+          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
         </button>
       </div>
 
@@ -460,7 +452,7 @@ function ServiceLinksPanel() {
             <div key={s.slug} className="border-b border-border/60 p-4 last:border-0 sm:p-5">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <div className="min-w-0">
-                  <div className="font-semibold text-foreground">{s.title}</div>
+                  <div className="font-semibold text-foreground">{s.titleBn}</div>
                   <div className="text-[11px] text-muted-foreground">/services/{s.slug}</div>
                 </div>
                 <button
@@ -468,23 +460,22 @@ function ServiceLinksPanel() {
                   disabled={savingSlug === s.slug}
                   className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition hover:opacity-90 disabled:opacity-60"
                 >
-                  {savingSlug === s.slug ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />} Save
+                  {savingSlug === s.slug ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />} সেভ
                 </button>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="block">
-                  <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Demo URL</span>
+                  <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ডেমো URL</span>
                   <input
                     type="url"
                     value={row.demo_url}
                     onChange={(e) => setRows((prev) => ({ ...prev, [s.slug]: { ...row, demo_url: e.target.value } }))}
-                    placeholder="https://... or /demo/..."
-
+                    placeholder="https://... বা /demo/..."
                     className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Sale / Order URL</span>
+                  <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">সেল / অর্ডার URL</span>
                   <input
                     type="url"
                     value={row.sale_url}
@@ -496,7 +487,7 @@ function ServiceLinksPanel() {
               </div>
               <div className="mt-4">
                 <ImageUpload 
-                  label="Service Demo Image" 
+                  label="সার্ভিস ডেমো ইমেজ" 
                   value={row.demo_image} 
                   onUpload={(url) => setRows((prev) => ({ ...prev, [s.slug]: { ...row, demo_image: url } }))} 
                 />
@@ -528,7 +519,7 @@ function PortfolioProjectsPanel() {
       if (error) throw error;
       setProjects((data ?? []) as PortfolioProject[]);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Projects could not be loaded");
+      toast.error(err instanceof Error ? err.message : "প্রজেক্ট লোড হয়নি");
     } finally {
       setLoading(false);
     }
@@ -557,7 +548,7 @@ function PortfolioProjectsPanel() {
 
   async function saveProject() {
     if (!form.title.trim() || !form.demo_url.trim()) {
-      toast.error("Please provide a project name and demo URL");
+      toast.error("প্রজেক্টের নাম ও ডেমো URL দিন");
       return;
     }
     setSaving(true);
@@ -589,27 +580,26 @@ function PortfolioProjectsPanel() {
 
       const { error } = await query;
       if (error) throw error;
-      toast.success(editingId ? "Project updated" : "New project added");
+      toast.success(editingId ? "প্রজেক্ট আপডেট হয়েছে" : "নতুন প্রজেক্ট যোগ হয়েছে");
       resetForm();
       await load();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Save failed");
+      toast.error(err instanceof Error ? err.message : "সেভ ব্যর্থ");
     } finally {
       setSaving(false);
     }
   }
 
   async function deleteProject(id: string) {
-    if (!confirm("Delete this portfolio project?")) return;
+    if (!confirm("এই portfolio project delete করবেন?")) return;
     try {
       const { error } = await supabase.from("portfolio_projects").delete().eq("id", id);
       if (error) throw error;
       setProjects((prev) => prev.filter((project) => project.id !== id));
       if (editingId === id) resetForm();
-      toast.success("Project deleted");
+      toast.success("প্রজেক্ট ডিলিট হয়েছে");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Delete failed");
-
+      toast.error(err instanceof Error ? err.message : "Delete ব্যর্থ");
     }
   }
 
@@ -618,67 +608,65 @@ function PortfolioProjectsPanel() {
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-foreground sm:text-2xl">
-            <BriefcaseBusiness className="h-5 w-5 text-neon" /> Portfolio / Our Work
+            <BriefcaseBusiness className="h-5 w-5 text-neon" /> পোর্টফোলিও / আমাদের কাজ
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Add, edit, and hide projects or websites to be shown in the "Our Work" section of the homepage.
+            হোমপেজের “আমাদের কাজ” সেকশনে দেখানোর জন্য প্রজেক্ট বা ওয়েবসাইট যোগ, এডিট ও hide করুন।
           </p>
-
         </div>
         <Button type="button" variant="outline" size="sm" onClick={load} className="rounded-full bg-surface/70 text-foreground hover:bg-surface">
-          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh
+          <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
         </Button>
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[minmax(320px,0.8fr)_minmax(0,1.2fr)]">
         <div className="rounded-2xl border border-border bg-surface/50 p-4 sm:p-5">
           <div className="mb-4 flex items-center justify-between gap-2">
-            <h3 className="font-semibold text-foreground">{editingId ? "Edit Project" : "New Project"}</h3>
+            <h3 className="font-semibold text-foreground">{editingId ? "প্রজেক্ট এডিট" : "নতুন প্রজেক্ট"}</h3>
             {editingId && (
               <Button type="button" variant="ghost" size="sm" onClick={resetForm} className="rounded-full text-muted-foreground hover:text-foreground">
-                <X className="h-4 w-4" /> Cancel
-
+                <X className="h-4 w-4" /> বাতিল
               </Button>
             )}
           </div>
           <div className="space-y-4">
             <ImageUpload 
-              label="Project Preview Image" 
+              label="প্রজেক্ট প্রিভিউ ইমেজ" 
               value={form.image_url} 
               onUpload={(url) => setForm(prev => ({ ...prev, image_url: url }))} 
             />
 
 
             <label className="block">
-              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Project Name</span>
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্টের নাম</span>
               <input
                 value={form.title}
                 onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
-                placeholder="e.g. Modern Skin Analysis Tool"
+                placeholder="যেমন: Modern Ecommerce Website"
                 className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
               />
             </label>
             <label className="block">
-              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Category</span>
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ক্যাটাগরি</span>
               <input
                 value={form.category}
                 onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
-                placeholder="Dermatology / Anti-aging / Care"
+                placeholder="ই-কমার্স / LMS / সফটওয়্যার"
                 className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
               />
             </label>
             <label className="block">
-              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Demo / Website URL</span>
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ডেমো / ওয়েবসাইট URL</span>
               <input
                 type="url"
                 value={form.demo_url}
                 onChange={(e) => setForm((prev) => ({ ...prev, demo_url: e.target.value }))}
-                placeholder="https://... or /demo/..."
+                placeholder="https://... বা /demo/..."
                 className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-neon focus:outline-none"
               />
             </label>
             <div className="space-y-1.5">
-              <span className="block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Project Screenshots</span>
+              <span className="block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্ট স্ক্রিনশটসমূহ</span>
               <div className="grid grid-cols-2 gap-2">
                 {form.project_screenshots.split(",").filter(Boolean).map((s, i) => (
                   <div key={i} className="group relative aspect-video overflow-hidden rounded-lg border border-border">
@@ -707,18 +695,18 @@ function PortfolioProjectsPanel() {
             </div>
 
             <label className="block">
-              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Short Description</span>
+              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ছোট বর্ণনা</span>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
-                placeholder="1-2 line description about the project"
+                placeholder="প্রজেক্ট সম্পর্কে ১-২ লাইনের বর্ণনা"
                 rows={3}
                 className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-electric focus:outline-none"
               />
             </label>
             <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
               <label className="block">
-                <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Serial</span>
+                <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">সিরিয়াল</span>
                 <input
                   type="number"
                   value={form.sort_order}
@@ -738,7 +726,7 @@ function PortfolioProjectsPanel() {
             </div>
             <Button type="button" onClick={saveProject} disabled={saving} className="w-full rounded-full font-semibold">
               {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : editingId ? <Save className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-              {editingId ? "Update Project" : "Add Project"}
+              {editingId ? "আপডেট করুন" : "প্রজেক্ট যোগ করুন"}
             </Button>
           </div>
         </div>
@@ -747,7 +735,7 @@ function PortfolioProjectsPanel() {
           {projects.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <Inbox className="h-10 w-10 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">No portfolio projects yet.</p>
+              <p className="text-sm text-muted-foreground">এখনো কোনো portfolio project নেই।</p>
             </div>
           ) : (
             <div className="divide-y divide-border/60">
@@ -762,7 +750,7 @@ function PortfolioProjectsPanel() {
                         </span>
                       </div>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {project.category || "No Category"} · Serial {project.sort_order ?? 0}
+                        {project.category || "ক্যাটাগরি নেই"} · সিরিয়াল {project.sort_order ?? 0}
                       </p>
                       {project.description && <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>}
                       <div className="mt-2 flex flex-wrap gap-2">
@@ -771,17 +759,16 @@ function PortfolioProjectsPanel() {
                         </a>
                         {project.project_screenshots && project.project_screenshots.length > 0 && (
                           <span className="text-[10px] text-muted-foreground">
-                            · {project.project_screenshots.length} Screenshots
+                            · {project.project_screenshots.length}টি স্ক্রিনশট
                           </span>
                         )}
                       </div>
                     </div>
                     <div className="flex shrink-0 gap-2">
-                      <Button type="button" variant="outline" size="icon" onClick={() => editProject(project)} aria-label="Edit Project" className="rounded-full bg-background">
+                      <Button type="button" variant="outline" size="icon" onClick={() => editProject(project)} aria-label="প্রজেক্ট এডিট" className="rounded-full bg-background">
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button type="button" variant="outline" size="icon" onClick={() => deleteProject(project.id)} aria-label="Delete Project" className="rounded-full border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300">
-
+                      <Button type="button" variant="outline" size="icon" onClick={() => deleteProject(project.id)} aria-label="প্রজেক্ট ডিলিট" className="rounded-full border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300">
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -829,10 +816,9 @@ function ImageUpload({
         .getPublicUrl(path);
 
       onUpload(publicUrl);
-      toast.success("Image uploaded successfully");
+      toast.success("ইমেজ আপলোড হয়েছে");
     } catch (err) {
-      toast.error("Upload failed: " + (err instanceof Error ? err.message : "Error"));
-
+      toast.error("আপলোড ব্যর্থ: " + (err instanceof Error ? err.message : "ত্রুটি"));
     } finally {
       setUploading(false);
     }
@@ -862,7 +848,7 @@ function ImageUpload({
           ) : (
             <>
               <ImagePlus className="h-4 w-4 text-muted-foreground" />
-              <span className="text-xs text-muted-foreground">Upload from Gallery</span>
+              <span className="text-xs text-muted-foreground">Gallery থেকে ছবি নিন</span>
             </>
           )}
           <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
@@ -893,7 +879,7 @@ function StatusPill({ value, onChange }: { value: string; onChange: (s: Status) 
 function formatDate(iso: string): string {
   try {
     const d = new Date(iso);
-    return d.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+    return d.toLocaleString("bn-BD", { dateStyle: "medium", timeStyle: "short" });
   } catch {
     return iso;
   }

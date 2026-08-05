@@ -1,4 +1,4 @@
-
+Hiiiii
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
@@ -38,9 +38,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hello Bioxin, I would like to discuss a personalized skin care plan.",
+  "আসসালামু আলাইকুম, Webtrix — আমি একটি প্রজেক্ট নিয়ে আলোচনা করতে চাই।",
 )}`;
-
 
 const SITE_URL = "https://webtrixit.lovable.app";
 const OG_IMAGE =
@@ -57,8 +56,7 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "skin care products, dermatology consultation, anti-aging treatment, clinical skin care, health solutions, bioxin, #bioxin",
-
+          "ওয়েবসাইট ডিজাইন বাংলাদেশ, ওয়েবসাইট তৈরি খরচ, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ল্যান্ডিং পেজ ডিজাইন, LMS ওয়েবসাইট, কাস্টম সফটওয়্যার ডেভেলপমেন্ট, SMM প্যানেল ওয়েবসাইট, ডিজিটাল মার্কেটিং এজেন্সি চট্টগ্রাম, ফেসবুক পিক্সেল সেটআপ, লোগো ডিজাইন বাংলাদেশ, web design company Bangladesh, website development Chittagong, Webtrix IT Solution, webtrixit, #webtrixit, #webdesignBD, #ecommerceBD",
       },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "geo.region", content: "BD-A" },
@@ -67,9 +65,8 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: HOME_DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL + "/" },
-      { property: "og:locale", content: "en_US" },
-      { property: "og:site_name", content: "Bioxin" },
-
+      { property: "og:locale", content: "bn_BD" },
+      { property: "og:site_name", content: "Webtrix IT Solution" },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: HOME_TITLE },
@@ -93,21 +90,20 @@ export const Route = createFileRoute("/")({
           priceRange: "৳৳",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "Karnafully",
-            addressLocality: "Chattogram",
-
+            streetAddress: "কর্ণফুলী",
+            addressLocality: "চট্টগ্রাম",
             addressCountry: "BD",
           },
           areaServed: { "@type": "Country", name: "Bangladesh" },
           sameAs: ["https://wa.me/8801835985730"],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
-            name: "Skin Care & Health Services",
+            name: "ওয়েব ও ডিজিটাল সার্ভিস",
             itemListElement: services.map((s) => ({
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: s.title,
+                name: s.titleBn,
                 url: `${SITE_URL}/services/${s.slug}`,
               },
             })),
@@ -119,10 +115,9 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Bioxin",
+          name: "Webtrix IT Solution",
           url: SITE_URL,
-          inLanguage: "en-US",
-
+          inLanguage: "bn-BD",
         }),
       },
     ],
@@ -132,36 +127,37 @@ export const Route = createFileRoute("/")({
 
 
 
+/* সন্তুষ্ট ক্লায়েন্ট — বাংলাদেশী মানুষের ছবি ও নাম */
 const clientPeople: { name: string; role: string; photo: string }[] = [
-  { name: "Sarah Jenkins", role: "Skin Care Enthusiast", photo: client1 },
-  { name: "Aisha Khan", role: "Dermatology Patient", photo: client2 },
-  { name: "Emily Watson", role: "Model & Influencer", photo: client3 },
-  { name: "Jessica Lee", role: "Lifestyle Blogger", photo: client4 },
-  { name: "Michael Ross", role: "Fitness Coach", photo: client5 },
-  { name: "Linda Brown", role: "Esthetician", photo: client6 },
-  { name: "David Miller", role: "Business Professional", photo: client7 },
-  { name: "Chloe Davis", role: "Student", photo: client8 },
+  { name: "রাকিবুল হাসান", role: "স্বত্বাধিকারী, রাকিব ফ্যাশন", photo: client1 },
+  { name: "সুমাইয়া আক্তার", role: "ফাউন্ডার, নীলাঞ্জনা বুটিক", photo: client2 },
+  { name: "আব্দুল করিম", role: "এমডি, করিম ট্রেডার্স", photo: client3 },
+  { name: "নুসরাত জাহান", role: "ডিরেক্টর, জাহান কসমেটিকস", photo: client4 },
+  { name: "তানভীর আহমেদ", role: "সিইও, টেকভিশন বিডি", photo: client5 },
+  { name: "ফারজানা ইয়াসমিন", role: "প্রিন্সিপাল, ব্রাইট একাডেমি", photo: client6 },
+  { name: "মাহবুব আলম", role: "চেয়ারম্যান, আলম গ্রুপ", photo: client7 },
+  { name: "সাদিয়া রহমান", role: "মার্কেটিং হেড, রহমান মার্ট", photo: client8 },
 ];
+
 
 const stories = [
-  { name: "Sarah Jenkins", role: "Skin Care Enthusiast", quote: "My skin has never felt this hydrated. Bioxin's routine is absolute magic for my dry skin.", rating: 5 },
-  { name: "Aisha Khan", role: "Dermatology Patient", quote: "The consultation changed everything. For the first time in years, my acne is under control.", rating: 5 },
-  { name: "Emily Watson", role: "Model & Influencer", quote: "Bioxin's anti-aging treatments gave me that natural glow I needed for photoshoots. Highly recommended!", rating: 5 },
-  { name: "Jessica Lee", role: "Lifestyle Blogger", quote: "Their products are clean, effective, and look beautiful on my vanity. My skin looks so much clearer now.", rating: 5 },
-  { name: "Michael Ross", role: "Fitness Coach", quote: "I thought skin care was complicated, but Bioxin made it so simple. My skin feels fresh and protected.", rating: 5 },
-  { name: "Linda Brown", role: "Esthetician", quote: "As an esthetician, I'm very picky with ingredients. Bioxin uses the exact actives I recommend to my clients.", rating: 5 },
-  { name: "David Miller", role: "Business Professional", quote: "Professional, effective, and efficient. Exactly what I need for my busy schedule.", rating: 5 },
-  { name: "Chloe Davis", role: "Student", quote: "Budget-friendly but high quality. My skin routine finally feels like self-care rather than a chore.", rating: 5 },
-  { name: "Rachel Green", role: "Photographer", quote: "My skin tone is finally even. The brightening serum is my secret weapon for long shoots.", rating: 5 },
-  { name: "Mark Taylor", role: "Chef", quote: "Bioxin’s recovery balm is a lifesaver after long hours in the kitchen near the stove. No more redness.", rating: 5 },
-  { name: "Sophia Martinez", role: "Yoga Teacher", quote: "I love that they are cruelty-free and natural. It fits my lifestyle perfectly.", rating: 5 },
-  { name: "James Wilson", role: "Software Engineer", quote: "Simple, easy, and works perfectly. My skin looks healthier than it has in years.", rating: 5 },
-  { name: "Olivia King", role: "Designer", quote: "The packaging is beautiful, but the results are even better. My skin is noticeably softer.", rating: 5 },
-  { name: "Daniel Scott", role: "Architect", quote: "I was skeptical about routines, but Bioxin showed me the science. It works.", rating: 5 },
-  { name: "Ava Thompson", role: "Teacher", quote: "Teaching all day can be exhausting, but Bioxin makes me look refreshed and glowing.", rating: 5 },
-  { name: "Ethan White", role: "Writer", quote: "Clean products, clear skin. Bioxin is the real deal.", rating: 5 },
+  { name: "রাশেদ আহমেদ", role: "প্রতিষ্ঠাতা, ShopKart BD", quote: "Webtrix আমাদের স্টোর রিবিল্ড করার পর মাত্র দুই মাসে সেল ৩.২ গুণ বেড়েছে। এদের টিম কনভার্সন ভালো বোঝে।", rating: 5 },
+  { name: "নাদিয়া করিম", role: "ডিরেক্টর, EduPrime LMS", quote: "মাত্র ৩ সপ্তাহে আমাদের LMS launch হয়েছে — স্টুডেন্ট, পেমেন্ট, কোর্স সবকিছু মোবাইলে নিখুঁতভাবে কাজ করছে।", rating: 5 },
+  { name: "তানভীর হোসেন", role: "CEO, GrowMedia", quote: "এদের বানানো AI ভিডিও অ্যাড আমাদের পুরনো ক্রিয়েটিভের চেয়ে CPA-তে ৪ গুণ ভালো পারফর্ম করেছে। সত্যিই প্রিমিয়াম কাজ।", rating: 5 },
+  { name: "সাদিয়া ইসলাম", role: "মালিক, LuxeFash Boutique", quote: "রেডিমেড ই-কমার্স টেমপ্লেট নিয়েছিলাম — মাত্র ৪৮ ঘণ্টায় স্টোর লাইভ, প্রথম সপ্তাহেই ১৭টি অর্ডার এসেছে। bKash/COD সব perfect কাজ করছে।", rating: 5 },
+  { name: "মেহেদী হাসান", role: "ফাউন্ডার, GadgetHub BD", quote: "কাস্টম ই-কমার্স সাইটের স্পিড আর UX দেখে ক্লায়েন্টরা আমাদের ব্র্যান্ডকে অন্যভাবে দেখা শুরু করেছে। ROAS ২× বেড়েছে।", rating: 5 },
+  { name: "ফারহানা রহমান", role: "প্রিন্সিপাল, BrightPath Academy", quote: "LMS সাইটে লাইভ ক্লাস, কুইজ, সার্টিফিকেট সব এক জায়গায়। স্টুডেন্টরা নিজেরাই বলে — আগের সিস্টেমের চেয়ে অনেক সহজ।", rating: 5 },
+  { name: "আবির চৌধুরী", role: "মার্কেটিং হেড, UrbanCart", quote: "Facebook Pixel সেটআপের পর আমাদের অ্যাডের কোয়ালিফায়েড লিড ৩ গুণ বেড়েছে। রিপোর্টিং এখন অনেক পরিষ্কার।", rating: 5 },
+  { name: "রুবাইয়া সুলতানা", role: "মালিক, GlowBox Cosmetics", quote: "লোগো, কভার আর পোস্টার ডিজাইন — সব একসাথে ব্র্যান্ডকিট পেয়ে ব্র্যান্ডিং কমপ্লিটলি প্রিমিয়াম লুক পেয়েছে। ফলোয়ার বেড়েই চলছে।", rating: 5 },
+  { name: "শাহরিয়ার কবির", role: "CEO, Nexlab Software", quote: "আমাদের কাস্টম CRM সফটওয়্যার Webtrix বিল্ড করেছে — টিম প্রোডাক্টিভিটি ৪০% বেড়েছে। কমিউনিকেশন আর ডেলিভারি টাইম on point।", rating: 5 },
+  { name: "মাহমুদা আক্তার", role: "ফাউন্ডার, TinyToes Kids", quote: "ল্যান্ডিং পেজ থেকে যে পরিমাণ কনভার্সন পেয়েছি — নিজেই অবাক। মোবাইলে লোড হয় চোখের পলকে।", rating: 5 },
+  { name: "ইমরান খান", role: "ডিরেক্টর, ClickBoost SMM", quote: "SMM প্যানেল ওয়েবসাইট নিয়েছিলাম — API, পেমেন্ট, অর্ডার ফ্লো সব automated। প্রতিদিন নিজে থেকেই সেল আসছে।", rating: 5 },
+  { name: "তাসনিয়া জাহান", role: "মালিক, Aroma Kitchen", quote: "Facebook Business পেজ প্রোপারলি সেটআপ করার পর অর্গানিক রিচ ৫ গুণ বেড়েছে। প্রফেশনাল লুক পেয়েছি অবশেষে।", rating: 5 },
+  { name: "সাইফুল ইসলাম", role: "প্রতিষ্ঠাতা, MegaMart BD", quote: "মাল্টি-ভেন্ডর ই-কমার্স চাচ্ছিলাম, Webtrix হুবহু আমার আইডিয়া অনুযায়ী বানিয়ে দিয়েছে। সাপোর্টও দ্রুত।", rating: 5 },
+  { name: "নুসরাত জাহান", role: "ফাউন্ডার, Bloom Florist", quote: "ছোট ব্যবসার জন্য সবচেয়ে সাশ্রয়ী প্যাকেজ পেয়েছি। ডিজাইন এত সুন্দর যে ক্লায়েন্ট নিজেই লিংক শেয়ার করে।", rating: 5 },
+  { name: "রায়হান কবির", role: "CEO, PulseAds Media", quote: "AI ভিডিও অ্যাড দিয়ে আমরা এক মাসে ৩ লাখ+ ভিউ পেয়েছি — খরচ আগের চেয়ে অর্ধেক, রেজাল্ট দ্বিগুণ।", rating: 5 },
+  { name: "জান্নাতুল ফেরদৌস", role: "মালিক, StyleNest", quote: "শুরু থেকে ডেলিভারি — পুরো প্রসেসটাই smooth ছিল। প্রথমবার অনলাইন ব্যবসা শুরু করেও কোনো ঝামেলা হয়নি।", rating: 5 },
 ];
-
 
 type PortfolioProject = {
   id?: string;
@@ -175,41 +171,40 @@ type PortfolioProject = {
 };
 
 const fallbackPortfolio: PortfolioProject[] = [
-  { id: "fallback-0", title: "Luminous Skin Analysis", category: "Consultation", demo_url: "/demo/skin-analysis", image_url: null, sort_order: 0 },
-  { id: "fallback-1", title: "Hydra-Glow Kit", category: "Products", demo_url: "/demo/product-range", image_url: null, sort_order: 1 },
-  { id: "fallback-2", title: "Renewal Serum", category: "Products", demo_url: "/demo/product-range", image_url: null, sort_order: 2 },
-  { id: "fallback-3", title: "Youth Restoration", category: "Anti-Aging", demo_url: "/demo/anti-aging-results", image_url: null, sort_order: 3 },
-  { id: "fallback-4", title: "Acne Clear Protocol", category: "Clinical", demo_url: "/demo/clinical-success", image_url: null, sort_order: 4 },
-  { id: "fallback-5", title: "Skin Barrier Shield", category: "Dermatology", demo_url: "/demo/clinical-success", image_url: null, sort_order: 5 },
-  { id: "fallback-6", title: "Botanical Essence", category: "Products", demo_url: "/demo/product-range", image_url: null, sort_order: 6 },
-  { id: "fallback-7", title: "Dermal Care Expert", category: "Clinical", demo_url: "/demo/clinical-success", image_url: null, sort_order: 7 },
+  { id: "fallback-0", title: "Luxe Landing Page", category: "ল্যান্ডিং পেজ", demo_url: "/demo/luxe-landing", image_url: null, sort_order: 0 },
+  { id: "fallback-1", title: "Kart+ E-commerce", category: "ই-কমার্স", demo_url: "/demo/kartplus-ecommerce", image_url: null, sort_order: 1 },
+  { id: "fallback-2", title: "FreshCart Grocery", category: "গ্রোসারি", demo_url: "/demo/freshcart-grocery", image_url: null, sort_order: 2 },
+  { id: "fallback-3", title: "EduPrime LMS", category: "এলএমএস", demo_url: "/demo/eduprime-lms", image_url: null, sort_order: 3 },
+  { id: "fallback-4", title: "PanelPro SMM", category: "এসএমএম প্যানেল", demo_url: "/demo/panelpro-smm", image_url: null, sort_order: 4 },
+  { id: "fallback-5", title: "Orbit CRM", category: "কাস্টম সফটওয়্যার", demo_url: "/demo/orbit-crm", image_url: null, sort_order: 5 },
+  { id: "fallback-6", title: "PulseAds Video", category: "AI ভিডিও", demo_url: "/demo/pulseads-video", image_url: null, sort_order: 6 },
+  { id: "fallback-7", title: "BrandKit Design", category: "লোগো ও পোস্টার", demo_url: "/demo/brandkit-design", image_url: null, sort_order: 7 },
 ];
 
 const portfolioGradients = [
-  "from-blue-100 to-slate-100",
-  "from-slate-50 to-blue-50",
-  "from-blue-50 to-slate-50",
-  "from-slate-100 to-blue-100",
-  "from-blue-100 to-slate-50",
-  "from-slate-50 to-blue-100",
+  "from-electric to-lavender",
+  "from-lavender to-neon",
+  "from-neon to-lavender",
+  "from-neon to-electric",
+  "from-electric to-neon",
+  "from-lavender to-electric",
 ];
 
 const beforeAfter = [
-  { metric: "Hydration Level", before: "18%", after: "74%", up: "+310%" },
-  { metric: "Visible Fine Lines", before: "High", after: "Minimal", up: "82% Reduction" },
-  { metric: "Skin Elasticity", before: "Low", after: "High", up: "+150%" },
-  { metric: "Blemishes & Redness", before: "Severe", after: "Clear", up: "-90%" },
+  { metric: "কনভার্সন রেট", before: "১.২%", after: "৪.৮%", up: "+৩০০%" },
+  { metric: "পেজ লোড টাইম", before: "৬.৪সে", after: "১.১সে", up: "৬× দ্রুত" },
+  { metric: "অ্যাড ROAS", before: "১.৭×", after: "৫.৯×", up: "+২৪৭%" },
+  { metric: "বাউন্স রেট", before: "৭২%", after: "২৮%", up: "−৬১%" },
 ];
 
 const comparison = [
-  { point: "Clinically Proven Formulas", us: true, them: false },
-  { point: "Personalized Dermatologist Review", us: true, them: false },
-  { point: "Sustainable & Clean Ingredients", us: true, them: true },
-  { point: "Visible Results in 28 Days", us: true, them: false },
-  { point: "Generic Mass-Market Fillers", us: false, them: true },
-  { point: "Inconsistent Results", us: false, them: true },
+  { point: "প্রিমিয়াম, কাস্টম ডিজাইন", us: true, them: false },
+  { point: "মোবাইল-ফার্স্ট ও অত্যন্ত দ্রুত", us: true, them: false },
+  { point: "কনভার্সন-ফোকাসড স্ট্রাকচার", us: true, them: false },
+  { point: "লঞ্চের পরেও সাপোর্ট", us: true, them: false },
+  { point: "টেমপ্লেট-নির্ভর সাধারণ লুক", us: false, them: true },
+  { point: "লুকানো ফি ও দেরি", us: false, them: true },
 ];
-
 
 function HomePage() {
   return (
@@ -238,12 +233,11 @@ function Nav() {
   const { theme, setTheme } = useTheme();
 
   const themes: { id: Theme; label: string; icon: any }[] = [
-    { id: "dark", label: "Dark Mode", icon: Moon },
-    { id: "gray", label: "Gray Mode", icon: Monitor },
-    { id: "green", label: "Green Mode", icon: Zap },
-    { id: "orange", label: "Orange Mode", icon: Sparkles },
-    { id: "white", label: "White Mode", icon: Sun },
-
+    { id: "dark", label: "ডার্ক মুড", icon: Moon },
+    { id: "gray", label: "গ্রে মুড", icon: Monitor },
+    { id: "green", label: "গ্রিন মুড", icon: Zap },
+    { id: "orange", label: "অরেঞ্জ মুড", icon: Sparkles },
+    { id: "white", label: "হোয়াইট মুড", icon: Sun },
   ];
 
   const links = [
@@ -258,10 +252,10 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
-        <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Bioxin Home">
+        <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Webtrixit হোম">
           <img
             src={logoAsset.url}
-            alt="Bioxin"
+            alt="Webtrixit"
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
           <span className="font-display text-lg font-bold tracking-tight text-foreground sm:text-xl">
@@ -293,8 +287,7 @@ function Nav() {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
-                <DropdownMenuLabel>Change Theme or Color</DropdownMenuLabel>
-
+                <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-border" />
                 {themes.map((t) => (
                   <DropdownMenuItem
@@ -323,14 +316,13 @@ function Nav() {
             <DropdownMenuTrigger asChild>
               <button 
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
-                aria-label="Change Theme"
-
+                aria-label="থিম পরিবর্তন করুন"
               >
                 <Palette className="h-5 w-5" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
-              <DropdownMenuLabel>Change Theme or Color</DropdownMenuLabel>
+              <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-border" />
               {themes.map((t) => (
                 <DropdownMenuItem
@@ -349,7 +341,7 @@ function Nav() {
           </DropdownMenu>
 
           <button 
-            aria-label="Menu" 
+            aria-label="মেনু" 
             onClick={() => setOpen(!open)} 
             className="rounded-lg border border-border p-2"
           >
@@ -400,7 +392,7 @@ function Hero() {
       <div className="mx-auto max-w-7xl px-5 pt-16 pb-10 md:pt-24 md:pb-14">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-neon" /> Trusted Skin Care Experts Since 2014
+            <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
           </span>
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
             Premium <span className="text-gradient">Skin Care</span> — for your natural glow.
@@ -410,12 +402,11 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
-              Start Routine <ArrowRight className="h-4 w-4" />
+              প্রজেক্ট শুরু করুন <ArrowRight className="h-4 w-4" />
             </a>
             <a href="#work" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-              View Our Work
+              আমাদের কাজ দেখুন
             </a>
-
           </div>
           <Statistics />
         </div>
@@ -539,16 +530,16 @@ function ClientLogos() {
 /* ---------- PROBLEM → SOLUTION ---------- */
 function ProblemSolution() {
   const problems = [
-    { t: "Dull & Dehydrated Skin", d: "Generic products sit on the surface, leaving your skin thirsty and tired." },
-    { t: "Stubborn Blemishes", d: "Inconsistent routines lead to inflammation and long-term scarring." },
-    { t: "Premature Fine Lines", d: "Lack of specific actives and sun protection accelerates aging signs." },
-    { t: "Confusing Routine", d: "Overloading your skin with incompatible ingredients causes irritation." },
+    { t: "পুরনো ডিজাইন, হারানো বিশ্বাস", d: "ভিজিটর ৩ সেকেন্ডেই সাইট দেখে সিদ্ধান্ত নেয় — পুরনো লুক মানেই হারানো কাস্টমার।" },
+    { t: "স্লো লোড, নষ্ট বাজেট", d: "প্রতি ১ সেকেন্ড দেরিতে কনভার্সন ৭% কমে — আপনার অ্যাড বাজেটও তখন গলে যায়।" },
+    { t: "স্কেল করার মতো সিস্টেম নেই", d: "অগোছালো ই-কমার্স, LMS বা অ্যাডমিন প্যানেল — বিজনেস বাড়ালেই ভেঙে পড়ে।" },
+    { t: "ট্র্যাকিং ছাড়া মার্কেটিং", d: "Pixel/CAPI ঠিকমতো বসানো নেই বলেই ফানেল লিক করছে, ROAS পড়ে যাচ্ছে।" },
   ];
   const solutions = [
-    { t: "Deep Cellular Hydration", d: "Bio-available formulas that penetrate deep for a lasting, healthy glow." },
-    { t: "Targeted Clear Care", d: "Active ingredients that treat the root cause of acne and redness." },
-    { t: "Advanced Youth Restore", d: "Peptides and Retinoids that stimulate collagen for firmer skin." },
-    { t: "Personalized Protocol", d: "Expert-reviewed routines designed specifically for your skin type." },
+    { t: "প্রিমিয়াম, কনভার্সন-ফোকাসড ডিজাইন", d: "প্রথম দর্শনেই আস্থা তৈরি করে এমন ব্র্যান্ড-লেভেল UI — যেটা ভিজিটরকে বাটনে ক্লিক করায়।" },
+    { t: "২ সেকেন্ডের নিচে লোড, মোবাইল-ফার্স্ট", d: "লাইটনিং-ফাস্ট বিল্ড, অপ্টিমাইজড ইমেজ ও কোড — SEO ও অ্যাড দুটোই উপকৃত হয়।" },
+    { t: "স্কেলেবল ই-কমার্স, LMS ও সফটওয়্যার", d: "১০০ থেকে ১ লাখ ইউজার পর্যন্ত ভাঙে না — পেমেন্ট, ইনভেন্টরি, রোল, রিপোর্ট সব বিল্ট-ইন।" },
+    { t: "নিখুঁত ট্র্যাকিং ও অ্যানালিটিক্স", d: "Pixel, CAPI, GA4, ইভেন্ট ট্র্যাকিং সঠিকভাবে সেট — প্রতিটি টাকার ROI মাপা যায়।" },
   ];
   const head = useReveal<HTMLDivElement>();
   const left = useReveal<HTMLDivElement>();
@@ -558,12 +549,11 @@ function ProblemSolution() {
       <div className="mx-auto max-w-7xl px-4 sm:px-5">
         <div ref={head.ref} data-visible={head.visible || true} className="reveal">
           <SectionHeader
-            eyebrow="Bridging the Skin Care Gap"
-            title={<span className="text-destructive font-black">Identify the Problem, Embrace the Solution.</span>}
-            description="Our dermatological approach focuses on real results, not just promises."
+            eyebrow="আমরা যে গ্যাপ পূরণ করি"
+            title={<span className="text-destructive font-black">সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।</span>}
+            description="নিচে আমাদের কার্যপদ্ধতি এবং আপনি আমাদের থেকে ঠিক কী কী পাবেন তা বিস্তারিত দেওয়া হলো।"
           />
         </div>
-
         <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
           <div
             ref={left.ref}
@@ -573,7 +563,7 @@ function ProblemSolution() {
             {/* Red Zone Pulse Effect */}
             <div className="absolute inset-0 bg-destructive/5 animate-pulse pointer-events-none" />
             <div className="relative z-10 mb-5 inline-flex items-center gap-2 rounded-full bg-destructive px-3 py-1.5 text-xs font-black text-white uppercase tracking-wider animate-bounce-subtle">
-              <AlertTriangle className="h-4 w-4" /> Barriers to Your Skin Health
+              <AlertTriangle className="h-4 w-4" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
             </div>
             <ul className="space-y-4">
               {problems.map((p, i) => (
@@ -602,7 +592,7 @@ function ProblemSolution() {
             style={{ boxShadow: "var(--shadow-neon)" }}
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1.5 text-xs font-semibold text-neon">
-              <Sparkles className="h-3.5 w-3.5" /> Our Solutions — Real Results
+              <Sparkles className="h-3.5 w-3.5" /> আমাদের সমাধান — যা আপনি আসলেই পাবেন
             </div>
             <ul className="space-y-4">
               {solutions.map((s, i) => (
@@ -643,19 +633,18 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1 text-xs font-semibold text-neon">
-                <MessageCircle className="h-3.5 w-3.5" /> Chat on WhatsApp
+                <MessageCircle className="h-3.5 w-3.5" /> সরাসরি WhatsApp
               </div>
               <h3 className="mt-3 font-display text-xl font-bold sm:text-3xl">
-                Your Skin Journey, Our Expertise — Let's build your routine together.
+                আপনার আইডিয়া, আমাদের এক্সপার্টিজ — চলুন একসাথে বসে আপনার পরবর্তী প্রজেক্টটি সাজিয়ে ফেলি।
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Start with a simple message. Our team provides free skin advice, personalized roadmaps, and expert product recommendations.
+                WhatsApp-এ একটি মেসেজেই শুরু — কোনো ফর্ম, কোনো ঝামেলা নেই। আমাদের টিম আপনার প্রয়োজন বুঝে ফ্রি পরামর্শ, কাস্টম রোডম্যাপ ও ট্রান্সপারেন্ট কোটেশন পাঠাবে।
               </p>
             </div>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90 sm:w-auto">
-              <MessageCircle className="h-4 w-4" /> Start Consultation
+              <MessageCircle className="h-4 w-4" /> WhatsApp-এ চ্যাট করুন
             </a>
-
           </div>
         </div>
       </div>
@@ -668,7 +657,7 @@ function Services() {
   return (
     <section id="services" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
-        <SectionHeader eyebrow="Our Services" title="Dermatological Excellence" />
+        <SectionHeader eyebrow="আমাদের সার্ভিস" title="আমাদের সার্ভিস সমূহ" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
             const Icon = s.icon;
@@ -745,7 +734,7 @@ function SuccessStories() {
   return (
     <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-5">
-        <SectionHeader eyebrow="Success Stories" title="Dermatologically Tested. Patient Approved." />
+        <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
 
         <div 
           className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y focus-within:ring-2 focus-within:ring-electric/20 group/slider"
@@ -763,7 +752,7 @@ function SuccessStories() {
           }}
           role="region"
           aria-roledescription="carousel"
-          aria-label="Client Testimonials"
+          aria-label="ক্লায়েন্ট রিভিউ"
         >
           <div
             className="flex transition-transform duration-700 ease-out"
@@ -808,7 +797,7 @@ function SuccessStories() {
                     setIsAuto(false);
                     setI(k);
                   }}
-                  aria-label={`View story ${k + 1}`}
+                  aria-label={`স্টোরি ${k + 1} দেখুন`}
                   aria-current={k === i ? "true" : "false"}
                   className={`h-2 rounded-full transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-electric ${
                     k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
@@ -817,7 +806,7 @@ function SuccessStories() {
               ))}
             </div>
             <div className="flex gap-2">
-              <button onClick={prev} aria-label="Previous review" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button 
@@ -825,7 +814,7 @@ function SuccessStories() {
                   setIsAuto(false);
                   next();
                 }} 
-                aria-label="Next review" 
+                aria-label="পরের রিভিউ" 
                 className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -898,7 +887,7 @@ function Portfolio() {
   return (
     <section id="work" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
-        <SectionHeader eyebrow="Our Results" title="Real People. Real Transformations." />
+        <SectionHeader eyebrow="আমাদের কাজ" title="ওয়েব, কমার্স ও সফটওয়্যার জুড়ে বাছাইকৃত প্রজেক্ট।" />
 
         <div className="relative mt-12">
           <div className="overflow-hidden">
@@ -938,7 +927,7 @@ function Portfolio() {
                         </span>
                       </div>
                       <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur">
-                        View Details {isExternal && <ExternalLink className="h-3 w-3" />}
+                        ডেমো দেখুন {isExternal && <ExternalLink className="h-3 w-3" />}
                       </span>
                     </div>
                     <div className="flex items-center justify-between p-4">
@@ -986,7 +975,7 @@ function Portfolio() {
           <div className="mt-6 flex items-center justify-center gap-4">
             <button
               onClick={() => go(-1)}
-              aria-label="Previous Project"
+              aria-label="আগের প্রজেক্ট"
               className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:bg-surface-2"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -996,7 +985,7 @@ function Portfolio() {
                 <button
                   key={idx}
                   onClick={() => setI(idx)}
-                  aria-label={`Slide ${idx + 1}`}
+                  aria-label={`স্লাইড ${idx + 1}`}
                   className={`h-2 rounded-full transition-all ${
                     idx === safeI ? "w-6 bg-electric" : "w-2 bg-border"
                   }`}
@@ -1097,30 +1086,27 @@ function FinalCTA() {
           <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 text-xs font-medium text-muted-foreground">
-                <Zap className="h-3.5 w-3.5 text-neon" /> Now accepting new appointments
+                <Zap className="h-3.5 w-3.5 text-neon" /> এই কোয়ার্টারের জন্য বুকিং চলছে
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-                Let's reveal your <span className="text-gradient">Natural Glow</span>.
+                চলুন তৈরি করি আপনার <span className="text-gradient">ডিজিটাল ইঞ্জিন</span>।
               </h2>
               <p className="mt-4 max-w-lg text-muted-foreground">
-                Tell us about your skin goals. Receive a free strategy call, care plan, and quote within 24 hours.
+                আপনার প্রজেক্ট সম্পর্কে বলুন। ২৪ ঘণ্টার মধ্যে ফ্রি স্ট্র্যাটেজি কল, কোটেশন ও টাইমলাইন পান।
               </p>
-
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90">
-                  <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
+                  <MessageCircle className="h-4 w-4" /> WhatsApp করুন
                 </a>
                 <a href="mailto:webtrixofficial@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-                  <Mail className="h-4 w-4" /> Email Us
+                  <Mail className="h-4 w-4" /> ইমেইল করুন
                 </a>
-
               </div>
               <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
-                <a href="tel:+8801835985730" className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4 text-electric" /> Mobile: 01835985730</a>
+                <a href="tel:+8801835985730" className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4 text-electric" /> মোবাইল: 01835985730</a>
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-foreground"><MessageCircle className="h-4 w-4 text-neon" /> WhatsApp: 01835985730</a>
-                <a href="mailto:webtrixofficial@gmail.com" className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4 text-neon" /> bioxin.official@gmail.com</a>
-                <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Bioxin Clinic, Karnafully, Chattogram, Bangladesh</div>
-
+                <a href="mailto:webtrixofficial@gmail.com" className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4 text-neon" /> webtrixofficial@gmail.com</a>
+                <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Karnafully, Chattogram, Bangladesh</div>
               </div>
             </div>
             <ContactForm />
@@ -1152,7 +1138,7 @@ function ContactForm() {
     e.preventDefault();
     if (loading) return;
     if (!name.trim() || !phone.trim()) {
-      toast.error("Please enter your name and phone number.");
+      toast.error("নাম ও ফোন নাম্বার দিন।");
       return;
     }
     setLoading(true);
@@ -1164,10 +1150,10 @@ function ContactForm() {
         },
       });
       if (!res.ok) throw new Error(res.error || "Submit failed");
-      toast.success("Thank you! We'll contact you soon.");
+      toast.success("ধন্যবাদ! আমরা শীঘ্রই যোগাযোগ করব।");
       setName(""); setPhone(""); setEmail(""); setService(""); setMessage("");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Submission failed");
+      toast.error(err instanceof Error ? err.message : "সাবমিট ব্যর্থ হয়েছে");
     } finally {
       setLoading(false);
     }
@@ -1176,19 +1162,18 @@ function ContactForm() {
   return (
     <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-surface/70 p-6 backdrop-blur">
       <div className="grid gap-4">
-        <Field label="Your Name" placeholder="e.g. Sarah Jenkins" value={name} onChange={(e) => setName(e.target.value)} required />
-        <Field label="Phone / WhatsApp" placeholder="+8801XXXXXXXXX" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-        <Field label="Email (Optional)" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Field label="Interest" placeholder="e.g. Skin Care Products" value={service} onChange={(e) => setService(e.target.value)} />
-        <label className="text-xs font-medium text-muted-foreground">Message
-          <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Tell us more about your skin goals..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
+        <Field label="আপনার নাম" placeholder="যেমনঃ রফিকুল ইসলাম" value={name} onChange={(e) => setName(e.target.value)} required />
+        <Field label="ফোন / WhatsApp" placeholder="01XXXXXXXXX" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        <Field label="ইমেইল (ঐচ্ছিক)" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Field label="কী দরকার?" placeholder="যেমনঃ ২০০ প্রোডাক্টের ই-কমার্স সাইট" value={service} onChange={(e) => setService(e.target.value)} />
+        <label className="text-xs font-medium text-muted-foreground">মেসেজ
+          <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="আপনার প্রজেক্ট সম্পর্কে বিস্তারিত লিখুন..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
         </label>
-
         <button type="submit" disabled={loading} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:opacity-90 disabled:opacity-60">
-          {loading ? "Submitting..." : <>Get Free Advice <ArrowRight className="h-4 w-4" /></>}
+          {loading ? "সাবমিট হচ্ছে..." : <>ফ্রি কোটেশন নিন <ArrowRight className="h-4 w-4" /></>}
         </button>
         <p className="flex items-center gap-2 text-xs text-muted-foreground">
-          <ShieldCheck className="h-3.5 w-3.5 text-neon" /> We reply within 24 hours. Your data is private.
+          <ShieldCheck className="h-3.5 w-3.5 text-neon" /> আমরা ২৪ ঘণ্টার মধ্যে উত্তর দিই। আপনার তথ্য গোপন থাকবে।
         </p>
       </div>
     </form>
@@ -1201,11 +1186,11 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Bioxin" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Bioxin. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. সর্বস্বত্ব সংরক্ষিত।</p>
         </div>
       </div>
     </footer>
@@ -1219,7 +1204,7 @@ function FloatingWhatsApp() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label="WhatsApp-এ চ্যাট করুন"
       className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-neon text-brand shadow-[var(--shadow-neon)] transition hover:scale-105"
     >
       <MessageCircle className="h-6 w-6" />
@@ -1266,7 +1251,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <button
           onClick={onClose}
           className="rounded-full bg-surface-2 p-3 text-foreground transition hover:bg-surface-3"
-          aria-label="Close"
+          aria-label="বন্ধ করুন"
         >
           <X className="h-6 w-6" />
         </button>
@@ -1275,7 +1260,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <button
           onClick={() => setIdx((v) => (v === 0 ? images.length - 1 : v - 1))}
           className="absolute left-4 z-10 rounded-full bg-brand/40 p-4 text-foreground transition hover:bg-brand/60 sm:left-8"
-          aria-label="Previous Image"
+          aria-label="আগের ছবি"
         >
           <ChevronLeft className="h-8 w-8" />
         </button>
@@ -1289,7 +1274,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <button
           onClick={() => setIdx((v) => (v === images.length - 1 ? 0 : v + 1))}
           className="absolute right-4 z-10 rounded-full bg-brand/40 p-4 text-foreground transition hover:bg-brand/60 sm:right-8"
-          aria-label="Next Image"
+          aria-label="পরের ছবি"
         >
           <ChevronRight className="h-8 w-8" />
         </button>
@@ -1300,7 +1285,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
             key={i}
             onClick={() => setIdx(i)}
             className={`h-2 rounded-full transition-all ${i === idx ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
-            aria-label={`Image ${i + 1}`}
+            aria-label={`ছবি ${i + 1}`}
           />
         ))}
       </div>

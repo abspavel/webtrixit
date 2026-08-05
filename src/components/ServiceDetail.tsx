@@ -7,16 +7,14 @@ import {
 import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
 const logoAsset = { url: "/webtrix-logo.png" };
-
 import { submitLead } from "@/lib/leads.functions";
 import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Hello Bioxin, I would like to know more about your "${title}" service.`,
+    `আসসালামু আলাইকুম, আমি "${title}" সার্ভিসটি সম্পর্কে জানতে চাই।`,
   )}`;
-
 
 export function ServiceDetail({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
@@ -60,14 +58,13 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
     <div className="min-h-dvh bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
-          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="Home">
-            <img src={logoAsset.url} alt="Bioxin" className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-10" />
-            <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">Bioxin</span>
+          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="হোম">
+            <img src={logoAsset.url} alt="Webtrixit" className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-10" />
+            <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">Webtrixit</span>
           </Link>
           <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-surface-2 sm:text-sm">
-            <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">All Services</span><span className="sm:hidden">Back</span>
+            <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">সব সার্ভিস</span><span className="sm:hidden">ব্যাক</span>
           </Link>
-
         </div>
       </header>
 
@@ -75,39 +72,34 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
         <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
         <div className="mx-auto max-w-5xl px-5 py-16 md:py-24">
           <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-3.5 w-3.5" /> Services
+            <ArrowLeft className="h-3.5 w-3.5" /> সার্ভিস
           </Link>
-
           <div className="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-electric/15 text-electric">
             <Icon className="h-7 w-7" />
           </div>
           <h1 className="mt-5 font-display text-4xl font-bold leading-[1.1] sm:text-5xl">
-            {service.title}
+            {service.titleBn}
           </h1>
-
           <p className="mt-6 max-w-3xl text-base text-muted-foreground sm:text-lg">
             {service.tagline}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href={waUrl(service.title)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
-              <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
+            <a href={waUrl(service.titleBn)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
+              <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
             </a>
-
             {saleUrl && (
               <a href={saleUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:translate-y-[-1px]">
-                Order Now <ArrowRight className="h-4 w-4" />
+                কিনুন / অর্ডার করুন <ArrowRight className="h-4 w-4" />
               </a>
-
             )}
             <a href="#demo" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-              View Live Demo <ArrowRight className="h-4 w-4" />
+              লাইভ ডেমো দেখুন <ArrowRight className="h-4 w-4" />
             </a>
-
           </div>
         </div>
       </section>
 
-      <Section eyebrow="Why You Need This" title={`Why You Should Choose ${service.subject}`} icon={Sparkles} accent="text-electric" bg="bg-electric/10">
+      <Section eyebrow="কেন প্রয়োজন?" title={`${service.subject} কেন ব্যবহার করা উচিত`} icon={Sparkles} accent="text-electric" bg="bg-electric/10">
         <ul className="grid gap-4 md:grid-cols-2">
           {service.why.map((w) => (
             <li key={w} className="flex gap-3 rounded-2xl border border-border bg-card p-5">
@@ -118,7 +110,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
         </ul>
       </Section>
 
-      <Section eyebrow="Effectiveness" title={`The Effectiveness of our ${service.subject}`} icon={Target} accent="text-lavender" bg="bg-lavender/10">
+      <Section eyebrow="কার্যকারিতা" title={`${service.subject}-এর কার্যকারিতা`} icon={Target} accent="text-lavender" bg="bg-lavender/10">
         <ul className="grid gap-4 md:grid-cols-2">
           {service.effectiveness.map((f) => (
             <li key={f} className="flex gap-3 rounded-2xl border border-border bg-card p-5">
@@ -129,7 +121,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
         </ul>
       </Section>
 
-      <Section eyebrow="Benefits" title={`Benefits of our ${service.subject}`} icon={TrendingUp} accent="text-neon" bg="bg-neon/10">
+      <Section eyebrow="উপকারিতা" title={`${service.subject} ব্যবহারের উপকারিতা`} icon={TrendingUp} accent="text-neon" bg="bg-neon/10">
         <ul className="grid gap-4 md:grid-cols-3">
           {service.benefits.map((b) => (
             <li key={b} className="rounded-2xl border border-neon/30 bg-card p-6 shadow-[var(--shadow-card)]">
@@ -148,15 +140,14 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-electric/10 text-electric">
               <Wrench className="h-4 w-4" />
             </span>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Process & Features</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">প্রসেস ও ফিচার</p>
           </div>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-            How We Build Your <span className="text-gradient">{service.subject}</span>
+            আমরা কীভাবে আপনার <span className="text-gradient">{service.subject}</span> তৈরি করি
           </h2>
           <p className="mt-3 max-w-3xl text-muted-foreground">
-            We guide you through every step, ensuring transparency and professional care — so the final result is exactly what you envision.
+            প্রতিটি ধাপে আপনার সাথে আলোচনা করে, স্বচ্ছভাবে কাজ এগিয়ে নিই — যাতে ফাইনাল প্রোডাক্ট ঠিক আপনার কল্পনার মতোই হয়।
           </p>
-
 
           <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {service.process.map((step, i) => (
@@ -176,9 +167,8 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 <ListChecks className="h-4 w-4" />
               </span>
               <h3 className="font-display text-xl font-bold sm:text-2xl">
-                Included Features
+                {service.subject}-এ যে যে ফিচার থাকবে
               </h3>
-
             </div>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {service.features.map((f) => (
@@ -194,9 +184,8 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <section className="border-y border-border/60 bg-surface/40 py-16">
         <div className="mx-auto max-w-5xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Use Cases</p>
-          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Who is this for?</h2>
-
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">ইউজ কেস</p>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">কাদের জন্য উপযুক্ত</h2>
           <div className="mt-8 flex flex-wrap gap-3">
             {service.useCases.map((u) => (
               <span key={u} className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground">
@@ -209,14 +198,13 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <section id="demo" className="py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Live Demo</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">লাইভ ডেমো</p>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-            Experience it <span className="text-gradient">Live</span>
+            আপনার জন্য <span className="text-gradient">লাইভ ডেমো</span>
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Click the link below to see a complete demo. Experience how every element works in real-time.
+            নিচের লিঙ্কে ক্লিক করে আমাদের বানানো একটি সম্পূর্ণ demo দেখুন। প্রতিটি অংশ কীভাবে কাজ করে, তার বাস্তব অভিজ্ঞতা নিতে পারবেন।
           </p>
-
 
           <div
             className="mt-8 overflow-hidden rounded-3xl border border-border"
@@ -225,7 +213,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
             <div className="flex flex-col items-start gap-4 p-6 md:flex-row md:items-center md:justify-between md:p-8">
               <div className="min-w-0">
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-xs font-semibold text-neon">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> Live Preview
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> লাইভ প্রিভিউ
                 </div>
                 <h3 className="font-display text-2xl font-bold sm:text-3xl">{service.demoLabel}</h3>
                 <p className="mt-2 break-all text-xs text-muted-foreground">{demoUrl}</p>
@@ -236,8 +224,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-5 py-2.5 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
               >
-                Open in New Tab <ExternalLink className="h-4 w-4" />
-
+                নতুন ট্যাবে খুলুন <ExternalLink className="h-4 w-4" />
               </a>
             </div>
 
@@ -254,14 +241,13 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 {demoImage ? (
                   <img
                     src={demoImage}
-                    alt={`${service.title} — Preview`}
-
+                    alt={`${service.titleBn} — প্রিভিউ`}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 ) : (
                   <iframe
                     src={demoUrl}
-                    title={`${service.title} — Live Demo`}
+                    title={`${service.titleBn} — লাইভ ডেমো`}
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
@@ -274,8 +260,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
             <p className="flex items-center gap-2 px-6 pb-6 text-xs text-muted-foreground md:px-8 md:pb-8">
               <ShieldCheck className="h-3.5 w-3.5 text-neon" />
-              Some sites may not load in embed for security reasons — please click "Open in New Tab" in that case.
-
+              কিছু সাইট নিরাপত্তার কারণে embed-এ লোড নাও হতে পারে — সেক্ষেত্রে "নতুন ট্যাবে খুলুন" বাটনে ক্লিক করুন।
             </p>
           </div>
         </div>
@@ -283,34 +268,31 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <ReviewsSlider subject={service.subject} />
       <ServiceFAQ subject={service.subject} />
-      <ServiceLeadForm serviceTitle={service.title} />
+      <ServiceLeadForm serviceTitle={service.titleBn} />
 
       <section className="border-t border-border/60 py-16">
         <div className="mx-auto max-w-4xl px-5 text-center">
           <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            Start Your <span className="text-gradient">{service.title}</span> Journey Today
+            আজই শুরু করুন আপনার <span className="text-gradient">{service.titleBn}</span> প্রজেক্ট
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Send us a message on WhatsApp — get free advice, a timeline, and a quote within 24 hours.
+            WhatsApp-এ মেসেজ দিন — ফ্রি কনসালটেশন, টাইমলাইন ও কোটেশন পাবেন ২৪ ঘণ্টার মধ্যে।
           </p>
-
           <a
-            href={waUrl(service.title)}
+            href={waUrl(service.titleBn)}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]"
           >
-            <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
-
+            <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
           </a>
         </div>
       </section>
 
       <section className="border-t border-border/60 bg-surface/40 py-16">
         <div className="mx-auto max-w-6xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">More Services</p>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Other Services</h2>
-
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">আরও সার্ভিস</p>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">অন্যান্য সার্ভিস</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((r) => {
               const RIcon = r.icon;
@@ -324,10 +306,10 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-electric/10 text-electric">
                     <RIcon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold">{r.title}</h3>
+                  <h3 className="mt-4 font-display text-lg font-semibold">{r.titleBn}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{r.desc}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-electric">
-                    View Details <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                    বিস্তারিত দেখুন <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                   </span>
                 </Link>
               );
@@ -338,18 +320,16 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <footer className="border-t border-border bg-surface/40 py-10">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5">
-          <img src={logoAsset.url} alt="Bioxin" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Bioxin</p>
-
+          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution</p>
         </div>
       </footer>
 
       <a
-        href={waUrl(service.title)}
+        href={waUrl(service.titleBn)}
         target="_blank"
         rel="noreferrer"
-        aria-label="Chat on WhatsApp"
-
+        aria-label="WhatsApp-এ চ্যাট করুন"
         className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-neon text-brand shadow-[var(--shadow-neon)] transition hover:scale-105"
       >
         <MessageCircle className="h-6 w-6" />
@@ -360,15 +340,13 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 }
 
 const SITE_URL = "https://webtrixit.lovable.app";
-
 const OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785258383263-logo_no_text.webp";
 
 export function serviceHead(service: ServiceItem) {
-  const title = `${service.title} | Bioxin`;
-  const desc = `${service.title} Service — ${service.tagline} Fast loading, SEO-friendly & Premium Design.`;
-  const keywords = `${service.title}, ${service.subject}, skin care services, dermatological care, clinical skin treatments, bioxin, #bioxin`;
-
+  const title = `${service.titleBn} | Webtrix IT Solution`;
+  const desc = `${service.titleBn} সার্ভিস — ${service.tagline} দ্রুত লোডিং, SEO-ফ্রেন্ডলি ও প্রিমিয়াম ডিজাইন।`;
+  const keywords = `${service.titleBn}, ${service.subject}, ল্যান্ডিং পেজ ডিজাইন, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ওয়েব ডিজাইন চট্টগ্রাম, web design Bangladesh, ecommerce website development, webtrixit, #webtrixit, #webdesignBD`;
 
   return {
     meta: [
@@ -393,13 +371,12 @@ export function serviceHead(service: ServiceItem) {
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Service",
-          name: service.title,
+          name: service.titleBn,
           description: desc,
           provider: {
             "@type": "ProfessionalService",
-            name: "Bioxin",
+            name: "Webtrix IT Solution",
             url: SITE_URL,
-
           },
           areaServed: "Bangladesh",
         }),
@@ -413,21 +390,19 @@ export function serviceHead(service: ServiceItem) {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Home",
+              name: "হোম",
               item: SITE_URL,
-
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "Services",
+              name: "সার্ভিস",
               item: `${SITE_URL}/#services`,
-
             },
             {
               "@type": "ListItem",
               position: 3,
-              name: service.title,
+              name: service.titleBn,
               item: `${SITE_URL}/services/${service.slug}`,
             },
           ],
@@ -442,12 +417,11 @@ export function ServiceNotFound() {
   return (
     <div className="grid min-h-dvh place-items-center bg-background px-5 text-center">
       <div>
-        <h1 className="font-display text-3xl font-bold">Service Not Found</h1>
-        <p className="mt-3 text-muted-foreground">This link may be incorrect or has been moved.</p>
+        <h1 className="font-display text-3xl font-bold">সার্ভিসটি খুঁজে পাওয়া যায়নি</h1>
+        <p className="mt-3 text-muted-foreground">এই লিঙ্কটি সম্ভবত ভুল বা সরানো হয়েছে।</p>
         <Link to="/" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
-          <ArrowLeft className="h-4 w-4" /> Back to Home
+          <ArrowLeft className="h-4 w-4" /> হোমে ফিরে যান
         </Link>
-
       </div>
     </div>
   );
@@ -481,17 +455,16 @@ function Section({
 
 function ReviewsSlider({ subject }: { subject: string }) {
   const reviews = [
-    { name: "Sophia Rahman", role: "Founder, Bloom Boutique", rating: 5,
-      quote: `After starting our ${subject} routine with Bioxin, our results are visible in just weeks. Premium care and expert support.` },
-    { name: "David Miller", role: "CEO, TechNova", rating: 5,
-      quote: `Their ${subject} solutions transformed our clinical approach. Professional communication at every stage.` },
-    { name: "Sarah Khan", role: "Founder, Glow Studio", rating: 5,
-      quote: `I looked everywhere for ${subject} — Bioxin delivered the most premium results and timely care.` },
-    { name: "Michael Chen", role: "Manager, ShopEase", rating: 5,
-      quote: `I saw immediate improvements with my ${subject}. The team understands skin science perfectly.` },
-    { name: "Elena Gilbert", role: "Director, EduSpark", rating: 5,
-      quote: `Since the ${subject} setup, our brand feels more professional and patient trust has grown significantly.` },
-
+    { name: "সাদিয়া রহমান", role: "প্রতিষ্ঠাতা, Bloom Boutique", rating: 5,
+      quote: `Webtrix-এর ${subject} নেওয়ার পর আমাদের অর্ডার আগের চেয়ে ৩ গুণ বেড়েছে। ডিজাইন ও সাপোর্ট — দুটোই দারুণ।` },
+    { name: "আরিফুল ইসলাম", role: "CEO, TechNova BD", rating: 5,
+      quote: `এদের ${subject} সলিউশন নেওয়ার পর আমাদের কাজের গতি ও কনভার্সন দুটোই আকাশছোঁয়া। প্রতিটি ধাপে স্বচ্ছ যোগাযোগ ছিল।` },
+    { name: "মেহনাজ সুলতানা", role: "Founder, Glow Studio", rating: 5,
+      quote: `${subject}-এর জন্য অনেক জায়গায় খোঁজ নিয়েছি — Webtrix-ই সবচেয়ে প্রিমিয়াম কাজ ও সময়মতো ডেলিভারি দিয়েছে।` },
+    { name: "রাকিবুল হাসান", role: "মালিক, ShopEase", rating: 5,
+      quote: `প্রথম দিন থেকেই ${subject}-এ ROI পেয়েছি। টিমটা টেকনিক্যাল ও মার্কেটিং — দুটোই বোঝে, তাই কাজ সহজ হয়েছে।` },
+    { name: "ফারহানা আক্তার", role: "ডিরেক্টর, EduSpark", rating: 5,
+      quote: `${subject} সেটআপের পর আমাদের ব্র্যান্ড আরও প্রফেশনাল লাগছে, কাস্টমার ট্রাস্টও অনেক বেড়েছে।` },
   ];
   const [i, setI] = useState(0);
   useEffect(() => {
@@ -509,12 +482,11 @@ function ReviewsSlider({ subject }: { subject: string }) {
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-lavender/10 text-lavender">
             <Star className="h-4 w-4" />
           </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lavender">Patient Reviews</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lavender">ক্লায়েন্ট রিভিউ</p>
         </div>
         <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-          Real Patient Stories for {subject}
+          {subject}-এর জন্য বাস্তব ক্লায়েন্টদের মতামত
         </h2>
-
 
         <div className="relative mt-8 overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-10">
           <div
@@ -551,19 +523,18 @@ function ReviewsSlider({ subject }: { subject: string }) {
                 <button
                   key={k}
                   onClick={() => setI(k)}
-                  aria-label={`Review ${k + 1}`}
+                  aria-label={`রিভিউ ${k + 1}`}
                   className={`h-2 rounded-full transition-all ${k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
                 />
               ))}
             </div>
             <div className="flex gap-2">
-              <button onClick={prev} aria-label="Previous Review" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={next} aria-label="Next Review" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronRight className="h-4 w-4" />
               </button>
-
             </div>
           </div>
         </div>
@@ -574,19 +545,18 @@ function ReviewsSlider({ subject }: { subject: string }) {
 
 function ServiceFAQ({ subject }: { subject: string }) {
   const faqs = [
-    { q: `How long does the ${subject} process take?`,
-      a: `Depending on the scope, ${subject} plans are typically established within 7–21 days. Immediate concerns can be addressed faster.` },
-    { q: `What is the cost for ${subject}?`,
-      a: `Plans are personalized based on required treatments and duration. Contact us on WhatsApp for a free consultation and quote within 24 hours.` },
-    { q: `Will I receive support after the initial consultation?`,
-      a: `Yes. We provide follow-up care and personalized routine maintenance plans.` },
-    { q: `Can I use my current products with your ${subject}?`,
-      a: `Absolutely. Your ${subject} will be integrated with your existing routine where appropriate.` },
-    { q: `What is the payment process?`,
-      a: `We accept various payment methods including credit cards and digital transfers. Options will be discussed during consultation.` },
-    { q: `Do I own my treatment records?`,
-      a: `Yes, all clinical records and progress reports are available to you at any time.` },
-
+    { q: `${subject} বানাতে কত সময় লাগে?`,
+      a: `স্কোপ অনুযায়ী সাধারণত ৭–২১ কার্যদিবসের মধ্যে ${subject} ডেলিভারি করা হয়। ছোট প্রজেক্ট আরও দ্রুত সম্ভব।` },
+    { q: `${subject}-এর খরচ কেমন হবে?`,
+      a: `প্রয়োজনীয় ফিচার, ডিজাইন লেভেল ও ইন্টিগ্রেশনের উপর নির্ভর করে ${subject}-এর কোটেশন দেওয়া হয়। WhatsApp-এ যোগাযোগ করলে ২৪ ঘণ্টার মধ্যে ফ্রি কোটেশন পাবেন।` },
+    { q: `লঞ্চের পরে সাপোর্ট পাবো?`,
+      a: `হ্যাঁ। প্রথম ৩০ দিন ফ্রি bug-fix সাপোর্ট এবং এরপর ইচ্ছেমতো মাসিক মেইনটেন্যান্স প্ল্যান নেওয়া যাবে।` },
+    { q: `আমার নিজস্ব ব্র্যান্ড কালার ও লোগো ব্যবহার করা যাবে?`,
+      a: `অবশ্যই। ${subject} সম্পূর্ণভাবে আপনার ব্র্যান্ড গাইডলাইন — কালার, ফন্ট, লোগো — অনুযায়ী কাস্টমাইজ করা হবে।` },
+    { q: `পেমেন্ট প্রসেস কীভাবে?`,
+      a: `৫০% অ্যাডভান্স এবং বাকি ৫০% ডেলিভারির আগে। bKash, Nagad, ব্যাংক ট্রান্সফার — সব পেমেন্ট অপশন সাপোর্ট করি।` },
+    { q: `সোর্স কোড / ফাইলের মালিকানা কি আমার থাকবে?`,
+      a: `হ্যাঁ, ফাইনাল ডেলিভারির পর ${subject}-এর সোর্স ফাইল, কোড ও অ্যাডমিন অ্যাক্সেস সম্পূর্ণভাবে আপনার হাতে হস্তান্তর করা হবে।` },
   ];
   const [open, setOpen] = useState<number | null>(0);
 
@@ -597,12 +567,11 @@ function ServiceFAQ({ subject }: { subject: string }) {
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-electric/10 text-electric">
             <HelpCircle className="h-4 w-4" />
           </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Common Questions</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">সচরাচর প্রশ্ন</p>
         </div>
         <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-          Frequently Asked Questions about {subject}
+          {subject} সম্পর্কে যা মানুষ প্রায়ই জিজ্ঞেস করে
         </h2>
-
         <div className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
           {faqs.map((f, k) => {
             const isOpen = open === k;
@@ -662,7 +631,7 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
       setSaving(false);
     }
     const text = encodeURIComponent(
-      `Hello Bioxin,\n\nI am interested in "${serviceTitle}".\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nDetails: ${form.message}`,
+      `আসসালামু আলাইকুম Webtrix,\n\nআমি "${serviceTitle}" সার্ভিসটি নিতে চাই।\n\nনামঃ ${form.name}\nফোনঃ ${form.phone}\nইমেইলঃ ${form.email}\nবাজেটঃ ${form.budget}\n\nবিস্তারিতঃ ${form.message}`,
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
     setSent(true);
@@ -677,61 +646,56 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-neon/10 text-neon">
                 <Send className="h-4 w-4" />
               </span>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Lead Form</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">লিড ফর্ম</p>
             </div>
             <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-              Get a <span className="text-gradient">Free Consultation</span> for {serviceTitle}
+              {serviceTitle}-এর জন্য <span className="text-gradient">ফ্রি কোটেশন</span> নিন
             </h2>
-
             <p className="mt-4 text-muted-foreground">
-              Please fill out the form below — our skin expert will contact you within 24 hours with a custom care plan, timeline, and quote. No hidden fees, no commitment.
+              নিচের ফর্মটি পূরণ করুন — আমাদের স্ট্র্যাটেজিস্ট ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করে কাস্টম প্ল্যান, টাইমলাইন ও কোটেশন পাঠাবেন। কোনো hidden ফি নেই, কমিটমেন্টও নয়।
             </p>
             <ul className="mt-6 space-y-3 text-sm text-foreground">
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> Your information is 100% confidential</li>
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> Free consultation & treatment roadmap</li>
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> Start only after you approve the plan</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> আপনার তথ্য ১০০% গোপন থাকবে</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> ফ্রি কনসালটেশন ও প্রজেক্ট রোডম্যাপ</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> কোটেশনে সম্মতি হলে তবেই কাজ শুরু</li>
             </ul>
-
           </div>
 
           <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-card p-6 md:p-8">
             <div className="grid gap-4">
-              <LeadField label="Your Name *" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="e.g. John Doe" required />
-              <LeadField label="Phone / WhatsApp *" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="+1 XXX XXXXXX" required />
-              <LeadField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} placeholder="you@example.com" />
-
+              <LeadField label="আপনার নাম *" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="যেমনঃ রফিকুল ইসলাম" required />
+              <LeadField label="ফোন / WhatsApp *" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="+৮৮০ ১XXX XXXXXX" required />
+              <LeadField label="ইমেইল" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} placeholder="you@company.com" />
               <label className="text-xs font-medium text-muted-foreground">
-                Budget Range
+                বাজেট রেঞ্জ
                 <select
                   value={form.budget}
                   onChange={(e) => setForm({ ...form, budget: e.target.value })}
                   className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none"
                 >
-                  <option value="">Select a budget</option>
-                  <option>$50 – $200</option>
-                  <option>$200 – $500</option>
-                  <option>$500 – $1,500</option>
-                  <option>$1,500+</option>
+                  <option value="">বাজেট বেছে নিন</option>
+                  <option>৳ ১০,০০০ – ৩০,০০০</option>
+                  <option>৳ ৩০,০০০ – ১,০০,০০০</option>
+                  <option>৳ ১,০০,০০০ – ৫,০০,০০০</option>
+                  <option>৳ ৫,০০,০০০+</option>
                 </select>
-
               </label>
               <label className="text-xs font-medium text-muted-foreground">
-                Tell us more
+                বিস্তারিত বলুন
                 <textarea
                   rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder={`Tell us about your requirements for ${serviceTitle}...`}
+                  placeholder={`${serviceTitle} সম্পর্কে আপনার প্রয়োজন লিখুন...`}
                   className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
                 />
-
               </label>
               <button
                 type="submit"
                 disabled={saving}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px] disabled:opacity-60"
               >
-                <Send className="h-4 w-4" /> {saving ? "Sending..." : "Send Request"}
+                <Send className="h-4 w-4" /> {saving ? "পাঠানো হচ্ছে..." : "কোটেশনের জন্য পাঠান"}
               </button>
               {errorMsg && (
                 <p className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">
@@ -740,7 +704,7 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
               )}
               {sent && !errorMsg && (
                 <p className="rounded-xl border border-neon/30 bg-neon/10 px-4 py-3 text-xs text-neon">
-                  Thank you! Your information has been saved and sent to WhatsApp — we will contact you shortly.
+                  ধন্যবাদ! আপনার তথ্য সেভ হয়েছে এবং WhatsApp-এ পাঠানো হয়েছে — আমরা শীঘ্রই যোগাযোগ করব।
                 </p>
               )}
             </div>
