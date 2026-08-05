@@ -36,7 +36,7 @@ export function Hero3DStack() {
             : { perspective, rotateX, rotateY, scale, transformStyle: "preserve-3d", willChange: "transform" }
         }
         {...(reduced ? { animate: still } : {})}
-        className="relative mx-auto aspect-[16/10] w-full [transform-style:preserve-3d]"
+        className="relative mx-auto aspect-[16/10] w-full min-h-[220px] [transform-style:preserve-3d]"
       >
         {/* back panel */}
         <motion.div

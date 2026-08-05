@@ -293,7 +293,7 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <img src={heroBg} alt="" width={1024} height={1024} className="h-full w-full object-cover opacity-40" />
+        <img src={heroBg} alt="" width={1024} height={1024} className="h-full w-full object-cover opacity-40" loading="eager" fetchPriority="high" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,15,29,0.4) 0%, rgba(10,15,29,0.95) 100%)" }} />
       </div>
       <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
@@ -303,10 +303,10 @@ function Hero() {
             <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
           </span>
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
-            প্রিমিয়াম <span className="text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা ভিজিটরকে কাস্টমারে পরিণত করে।
+            প্রিমিয়াম <span className="text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা আপনার বিজনেসকে করবে স্মার্ট।
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Webtrix IT Solution বানায় ল্যান্ডিং পেজ, ই-কমার্স স্টোর, LMS প্ল্যাটফর্ম, কাস্টম সফটওয়্যার এবং AI-পাওয়ার্ড মার্কেটিং — দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক।
+            Webtrix IT Solution দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক ল্যান্ডিং পেজ, ই-কমার্স স্টোর এবং কাস্টম সফটওয়্যার তৈরি করে আপনার ব্যবসায়িক লক্ষ্য অর্জনে সাহায্য করে।
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
@@ -546,28 +546,58 @@ function Services() {
   );
 }
 
-/* ---------- SUCCESS STORIES (auto-slider) ---------- */
+/* ---------- SUCCESS STORIES (swipe-enabled slider) ---------- */
 function SuccessStories() {
   const [i, setI] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % stories.length), 5000);
+    const t = setInterval(() => setI((v) => (v + 1) % stories.length), 6000);
     return () => clearInterval(t);
   }, []);
+
   const prev = () => setI((v) => (v - 1 + stories.length) % stories.length);
   const next = () => setI((v) => (v + 1) % stories.length);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) next();
+    if (isRightSwipe) prev();
+  };
 
   return (
     <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-5">
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
 
-        <div className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10">
+        <div 
+          className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <div
             className="flex transition-transform duration-700 ease-out"
             style={{ transform: `translateX(-${i * 100}%)` }}
           >
-            {stories.map((s) => (
-              <div key={s.name} className="w-full shrink-0 px-1">
+            {stories.map((s, idx) => (
+              <div key={`${s.name}-${idx}`} className="w-full shrink-0 px-1">
                 <div className="flex gap-1 text-neon">
                   {Array.from({ length: s.rating }).map((_, k) => (
                     <Star key={k} className="h-4 w-4 fill-current" />
