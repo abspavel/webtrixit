@@ -7,16 +7,18 @@ import {
   ShieldCheck, Inbox, Link2, Save, BriefcaseBusiness, Plus, Pencil, X, ExternalLink, ImagePlus, Loader
 } from "lucide-react";
 const logoAsset = { url: "/webtrix-logo.png" };
+
 import { services } from "@/lib/services-data";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — Webtrixit" },
-      { name: "description", content: "Webtrixit admin dashboard for leads, service links, and portfolio projects." },
-      { property: "og:title", content: "Admin Dashboard — Webtrixit" },
-      { property: "og:description", content: "Manage Webtrixit leads, demo links, sale links, and portfolio projects." },
+      { title: "Admin Dashboard — Bioxin" },
+      { name: "description", content: "Bioxin admin dashboard for leads, service links, and portfolio projects." },
+      { property: "og:title", content: "Admin Dashboard — Bioxin" },
+      { property: "og:description", content: "Manage Bioxin leads, demo links, sale links, and portfolio projects." },
+
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -41,7 +43,7 @@ type Lead = {
 type Status = "new" | "contacted" | "won" | "lost";
 const STATUSES: Status[] = ["new", "contacted", "won", "lost"];
 const STATUS_LABEL: Record<string, string> = {
-  new: "নতুন", contacted: "যোগাযোগ হয়েছে", won: "জয়ী", lost: "হারানো",
+  new: "New", contacted: "Contacted", won: "Won", lost: "Lost",
 };
 const STATUS_COLOR: Record<string, string> = {
   new: "bg-electric/15 text-electric border-electric/30",
@@ -66,7 +68,7 @@ function AdminPage() {
       if (error) throw error;
       setLeads((data ?? []) as Lead[]);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Leads লোড হয়নি";
+      const msg = err instanceof Error ? err.message : "Leads could not be loaded";
       toast.error(msg);
     } finally {
       setLoading(false);
@@ -87,7 +89,7 @@ function AdminPage() {
           _user_id: userData.user.id, _role: "admin",
         });
         if (roleErr || !roleData) {
-          toast.error("Access denied — এই account-এ admin role নেই।");
+          toast.error("Access denied — this account does not have admin role.");
           await supabase.auth.signOut();
           navigate({ to: "/auth", replace: true });
           return;
@@ -105,7 +107,7 @@ function AdminPage() {
         return () => { supabase.removeChannel(ch); };
       } catch (err) {
         console.error(err);
-        toast.error(err instanceof Error ? err.message : "ত্রুটি ঘটেছে");
+        toast.error(err instanceof Error ? err.message : "An error occurred");
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,21 +123,23 @@ function AdminPage() {
       const { error } = await supabase.from("leads").update({ status }).eq("id", id);
       if (error) throw error;
       setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
-      toast.success("স্ট্যাটাস আপডেট হয়েছে");
+      toast.success("Status updated");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "আপডেট ব্যর্থ");
+      toast.error(err instanceof Error ? err.message : "Update failed");
+
     }
   }
 
   async function deleteLead(id: string) {
-    if (!confirm("এই lead delete করবেন?")) return;
+    if (!confirm("Delete this lead?")) return;
     try {
       const { error } = await supabase.from("leads").delete().eq("id", id);
       if (error) throw error;
       setLeads((prev) => prev.filter((l) => l.id !== id));
-      toast.success("Delete হয়েছে");
+      toast.success("Deleted successfully");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Delete ব্যর্থ");
+      toast.error(err instanceof Error ? err.message : "Delete failed");
+
     }
   }
 
@@ -173,7 +177,7 @@ function AdminPage() {
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoAsset.url} alt="Webtrix" className="h-8 w-auto" />
+            <img src={logoAsset.url} alt="Bioxin" className="h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-2 text-xs sm:text-sm">
             <span className="hidden items-center gap-1.5 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-neon sm:inline-flex">
@@ -184,7 +188,7 @@ function AdminPage() {
               onClick={handleLogout}
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/70 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface"
             >
-              <LogOut className="h-3.5 w-3.5" /> লগআউট
+              <LogOut className="h-3.5 w-3.5" /> Logout
             </button>
           </div>
         </div>
@@ -194,13 +198,13 @@ function AdminPage() {
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Leads Dashboard</h1>
-            <p className="mt-1 text-sm text-muted-foreground">সব incoming inquiry এক জায়গায়।</p>
+            <p className="mt-1 text-sm text-muted-foreground">All incoming inquiries in one place.</p>
           </div>
           <button
             onClick={loadLeads}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-4 py-2 text-sm font-medium text-foreground hover:bg-surface"
           >
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> রিফ্রেশ
+            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Refresh
           </button>
         </div>
 
@@ -216,7 +220,7 @@ function AdminPage() {
                   : "border-border bg-surface/60 text-muted-foreground hover:text-foreground"
               }`}
             >
-              {s === "all" ? "সব" : STATUS_LABEL[s]}
+              {s === "all" ? "All" : STATUS_LABEL[s]}
               <span className="rounded-full bg-background px-1.5 py-0.5 text-[10px] text-muted-foreground">
                 {counts[s] ?? 0}
               </span>
@@ -226,7 +230,7 @@ function AdminPage() {
             <Search className="h-4 w-4 text-muted-foreground" />
             <input
               value={q} onChange={(e) => setQ(e.target.value)}
-              placeholder="নাম / ফোন / ইমেইল / সার্ভিস..."
+              placeholder="Name / Phone / Email / Service..."
               className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
           </div>
@@ -238,7 +242,7 @@ function AdminPage() {
             <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
               <Inbox className="h-10 w-10 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                {leads.length === 0 ? "এখনো কোনো lead আসেনি।" : "এই ফিল্টারে কিছু নেই।"}
+                {leads.length === 0 ? "No leads yet." : "Nothing in this filter."}
               </p>
             </div>
           ) : (
@@ -248,13 +252,14 @@ function AdminPage() {
                 <table className="w-full text-sm">
                   <thead className="border-b border-border bg-background/40 text-left text-xs uppercase text-muted-foreground">
                     <tr>
-                      <th className="px-4 py-3 font-medium">নাম</th>
-                      <th className="px-4 py-3 font-medium">যোগাযোগ</th>
-                      <th className="px-4 py-3 font-medium">সার্ভিস</th>
-                      <th className="px-4 py-3 font-medium">সোর্স</th>
-                      <th className="px-4 py-3 font-medium">তারিখ</th>
-                      <th className="px-4 py-3 font-medium">স্ট্যাটাস</th>
-                      <th className="px-4 py-3 font-medium text-right">অ্যাকশন</th>
+                      <th className="px-4 py-3 font-medium">Name</th>
+                      <th className="px-4 py-3 font-medium">Contact</th>
+                      <th className="px-4 py-3 font-medium">Service</th>
+                      <th className="px-4 py-3 font-medium">Source</th>
+                      <th className="px-4 py-3 font-medium">Date</th>
+                      <th className="px-4 py-3 font-medium">Status</th>
+                      <th className="px-4 py-3 font-medium text-right">Action</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -305,15 +310,15 @@ function AdminPage() {
                     <div className="mt-3 flex flex-wrap gap-2 text-xs">
                       <a href={`tel:${l.phone}`} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-foreground"><Phone className="h-3 w-3" />{l.phone}</a>
                       <a href={`https://wa.me/${l.phone.replace(/\D/g, "")}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-neon/30 bg-neon/10 px-2.5 py-1 text-neon"><MessageCircle className="h-3 w-3" />WhatsApp</a>
-                      {l.email && <a href={`mailto:${l.email}`} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-muted-foreground"><Mail className="h-3 w-3" />ইমেইল</a>}
+                      {l.email && <a href={`mailto:${l.email}`} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-2.5 py-1 text-muted-foreground"><Mail className="h-3 w-3" />Email</a>}
                     </div>
                     {(l.service || l.budget) && (
                       <div className="mt-3 text-xs">
-                        {l.service && <div className="text-foreground">সার্ভিস: <span className="text-muted-foreground">{l.service}</span></div>}
+                        {l.service && <div className="text-foreground">Service: <span className="text-muted-foreground">{l.service}</span></div>}
                         {l.budget && <div className="mt-0.5 text-foreground">Budget: <span className="text-muted-foreground">{l.budget}</span></div>}
                       </div>
                     )}
-                    {l.source_page && <div className="mt-2 text-xs text-muted-foreground">সোর্স: {l.source_page}</div>}
+                    {l.source_page && <div className="mt-2 text-xs text-muted-foreground">Source: {l.source_page}</div>}
                     {l.message && <div className="mt-2 rounded-lg border border-border bg-background/40 p-2 text-xs text-muted-foreground">{l.message}</div>}
                     <div className="mt-3 flex justify-end">
                       <button onClick={() => deleteLead(l.id)} className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 px-3 py-1 text-xs text-rose-400">
