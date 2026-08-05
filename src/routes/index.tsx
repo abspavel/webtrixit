@@ -1201,7 +1201,7 @@ function Footer() {
     <footer className="border-t border-border bg-surface/40 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 sm:flex sm:justify-between">
         <div className="flex min-w-0 items-center gap-2">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <img src={logoAsset.url} alt="Bioxin" className="h-10 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>
@@ -1266,7 +1266,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <button
           onClick={onClose}
           className="rounded-full bg-surface-2 p-3 text-foreground transition hover:bg-surface-3"
-          aria-label="বন্ধ করুন"
+          aria-label="Close"
         >
           <X className="h-6 w-6" />
         </button>
@@ -1275,7 +1275,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <button
           onClick={() => setIdx((v) => (v === 0 ? images.length - 1 : v - 1))}
           className="absolute left-4 z-10 rounded-full bg-brand/40 p-4 text-foreground transition hover:bg-brand/60 sm:left-8"
-          aria-label="আগের ছবি"
+          aria-label="Previous Image"
         >
           <ChevronLeft className="h-8 w-8" />
         </button>
@@ -1289,7 +1289,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <button
           onClick={() => setIdx((v) => (v === images.length - 1 ? 0 : v + 1))}
           className="absolute right-4 z-10 rounded-full bg-brand/40 p-4 text-foreground transition hover:bg-brand/60 sm:right-8"
-          aria-label="পরের ছবি"
+          aria-label="Next Image"
         >
           <ChevronRight className="h-8 w-8" />
         </button>
@@ -1300,7 +1300,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
             key={i}
             onClick={() => setIdx(i)}
             className={`h-2 rounded-full transition-all ${i === idx ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
-            aria-label={`ছবি ${i + 1}`}
+            aria-label={`Image ${i + 1}`}
           />
         ))}
       </div>
