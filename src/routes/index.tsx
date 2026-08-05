@@ -801,7 +801,14 @@ function SuccessStories() {
               <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button 
+                onClick={() => {
+                  setIsAuto(false);
+                  next();
+                }} 
+                aria-label="পরের রিভিউ" 
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2"
+              >
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
