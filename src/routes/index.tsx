@@ -552,9 +552,9 @@ function ProblemSolution() {
           <div
             ref={left.ref}
             data-visible={left.visible}
-            className="reveal-l rounded-3xl border border-destructive/25 bg-card p-6 sm:p-8"
+            className="reveal-l rounded-3xl border-2 border-destructive bg-card p-6 shadow-[0_0_20px_rgba(239,68,68,0.2)] sm:p-8"
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1.5 text-xs font-semibold text-destructive">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive px-3 py-1.5 text-xs font-bold text-white uppercase tracking-wider">
               <AlertTriangle className="h-3.5 w-3.5" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
             </div>
             <ul className="space-y-4">
