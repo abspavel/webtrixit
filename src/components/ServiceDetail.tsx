@@ -360,13 +360,15 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 }
 
 const SITE_URL = "https://webtrixit.lovable.app";
+
 const OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785258383263-logo_no_text.webp";
 
 export function serviceHead(service: ServiceItem) {
-  const title = `${service.titleBn} | Webtrix IT Solution`;
-  const desc = `${service.titleBn} সার্ভিস — ${service.tagline} দ্রুত লোডিং, SEO-ফ্রেন্ডলি ও প্রিমিয়াম ডিজাইন।`;
-  const keywords = `${service.titleBn}, ${service.subject}, ল্যান্ডিং পেজ ডিজাইন, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ওয়েব ডিজাইন চট্টগ্রাম, web design Bangladesh, ecommerce website development, webtrixit, #webtrixit, #webdesignBD`;
+  const title = `${service.title} | Bioxin`;
+  const desc = `${service.title} Service — ${service.tagline} Fast loading, SEO-friendly & Premium Design.`;
+  const keywords = `${service.title}, ${service.subject}, skin care services, dermatological care, clinical skin treatments, bioxin, #bioxin`;
+
 
   return {
     meta: [
@@ -391,12 +393,13 @@ export function serviceHead(service: ServiceItem) {
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Service",
-          name: service.titleBn,
+          name: service.title,
           description: desc,
           provider: {
             "@type": "ProfessionalService",
-            name: "Webtrix IT Solution",
+            name: "Bioxin",
             url: SITE_URL,
+
           },
           areaServed: "Bangladesh",
         }),
@@ -410,19 +413,21 @@ export function serviceHead(service: ServiceItem) {
             {
               "@type": "ListItem",
               position: 1,
-              name: "হোম",
+              name: "Home",
               item: SITE_URL,
+
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "সার্ভিস",
+              name: "Services",
               item: `${SITE_URL}/#services`,
+
             },
             {
               "@type": "ListItem",
               position: 3,
-              name: service.titleBn,
+              name: service.title,
               item: `${SITE_URL}/services/${service.slug}`,
             },
           ],
@@ -437,11 +442,12 @@ export function ServiceNotFound() {
   return (
     <div className="grid min-h-dvh place-items-center bg-background px-5 text-center">
       <div>
-        <h1 className="font-display text-3xl font-bold">সার্ভিসটি খুঁজে পাওয়া যায়নি</h1>
-        <p className="mt-3 text-muted-foreground">এই লিঙ্কটি সম্ভবত ভুল বা সরানো হয়েছে।</p>
+        <h1 className="font-display text-3xl font-bold">Service Not Found</h1>
+        <p className="mt-3 text-muted-foreground">This link may be incorrect or has been moved.</p>
         <Link to="/" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground">
-          <ArrowLeft className="h-4 w-4" /> হোমে ফিরে যান
+          <ArrowLeft className="h-4 w-4" /> Back to Home
         </Link>
+
       </div>
     </div>
   );
@@ -475,16 +481,17 @@ function Section({
 
 function ReviewsSlider({ subject }: { subject: string }) {
   const reviews = [
-    { name: "সাদিয়া রহমান", role: "প্রতিষ্ঠাতা, Bloom Boutique", rating: 5,
-      quote: `Webtrix-এর ${subject} নেওয়ার পর আমাদের অর্ডার আগের চেয়ে ৩ গুণ বেড়েছে। ডিজাইন ও সাপোর্ট — দুটোই দারুণ।` },
-    { name: "আরিফুল ইসলাম", role: "CEO, TechNova BD", rating: 5,
-      quote: `এদের ${subject} সলিউশন নেওয়ার পর আমাদের কাজের গতি ও কনভার্সন দুটোই আকাশছোঁয়া। প্রতিটি ধাপে স্বচ্ছ যোগাযোগ ছিল।` },
-    { name: "মেহনাজ সুলতানা", role: "Founder, Glow Studio", rating: 5,
-      quote: `${subject}-এর জন্য অনেক জায়গায় খোঁজ নিয়েছি — Webtrix-ই সবচেয়ে প্রিমিয়াম কাজ ও সময়মতো ডেলিভারি দিয়েছে।` },
-    { name: "রাকিবুল হাসান", role: "মালিক, ShopEase", rating: 5,
-      quote: `প্রথম দিন থেকেই ${subject}-এ ROI পেয়েছি। টিমটা টেকনিক্যাল ও মার্কেটিং — দুটোই বোঝে, তাই কাজ সহজ হয়েছে।` },
-    { name: "ফারহানা আক্তার", role: "ডিরেক্টর, EduSpark", rating: 5,
-      quote: `${subject} সেটআপের পর আমাদের ব্র্যান্ড আরও প্রফেশনাল লাগছে, কাস্টমার ট্রাস্টও অনেক বেড়েছে।` },
+    { name: "Sophia Rahman", role: "Founder, Bloom Boutique", rating: 5,
+      quote: `After starting our ${subject} routine with Bioxin, our results are visible in just weeks. Premium care and expert support.` },
+    { name: "David Miller", role: "CEO, TechNova", rating: 5,
+      quote: `Their ${subject} solutions transformed our clinical approach. Professional communication at every stage.` },
+    { name: "Sarah Khan", role: "Founder, Glow Studio", rating: 5,
+      quote: `I looked everywhere for ${subject} — Bioxin delivered the most premium results and timely care.` },
+    { name: "Michael Chen", role: "Manager, ShopEase", rating: 5,
+      quote: `I saw immediate improvements with my ${subject}. The team understands skin science perfectly.` },
+    { name: "Elena Gilbert", role: "Director, EduSpark", rating: 5,
+      quote: `Since the ${subject} setup, our brand feels more professional and patient trust has grown significantly.` },
+
   ];
   const [i, setI] = useState(0);
   useEffect(() => {
@@ -502,11 +509,12 @@ function ReviewsSlider({ subject }: { subject: string }) {
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-lavender/10 text-lavender">
             <Star className="h-4 w-4" />
           </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lavender">ক্লায়েন্ট রিভিউ</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lavender">Patient Reviews</p>
         </div>
         <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-          {subject}-এর জন্য বাস্তব ক্লায়েন্টদের মতামত
+          Real Patient Stories for {subject}
         </h2>
+
 
         <div className="relative mt-8 overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-10">
           <div
@@ -543,18 +551,19 @@ function ReviewsSlider({ subject }: { subject: string }) {
                 <button
                   key={k}
                   onClick={() => setI(k)}
-                  aria-label={`রিভিউ ${k + 1}`}
+                  aria-label={`Review ${k + 1}`}
                   className={`h-2 rounded-full transition-all ${k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
                 />
               ))}
             </div>
             <div className="flex gap-2">
-              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button onClick={prev} aria-label="Previous Review" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button onClick={next} aria-label="Next Review" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronRight className="h-4 w-4" />
               </button>
+
             </div>
           </div>
         </div>
@@ -565,18 +574,19 @@ function ReviewsSlider({ subject }: { subject: string }) {
 
 function ServiceFAQ({ subject }: { subject: string }) {
   const faqs = [
-    { q: `${subject} বানাতে কত সময় লাগে?`,
-      a: `স্কোপ অনুযায়ী সাধারণত ৭–২১ কার্যদিবসের মধ্যে ${subject} ডেলিভারি করা হয়। ছোট প্রজেক্ট আরও দ্রুত সম্ভব।` },
-    { q: `${subject}-এর খরচ কেমন হবে?`,
-      a: `প্রয়োজনীয় ফিচার, ডিজাইন লেভেল ও ইন্টিগ্রেশনের উপর নির্ভর করে ${subject}-এর কোটেশন দেওয়া হয়। WhatsApp-এ যোগাযোগ করলে ২৪ ঘণ্টার মধ্যে ফ্রি কোটেশন পাবেন।` },
-    { q: `লঞ্চের পরে সাপোর্ট পাবো?`,
-      a: `হ্যাঁ। প্রথম ৩০ দিন ফ্রি bug-fix সাপোর্ট এবং এরপর ইচ্ছেমতো মাসিক মেইনটেন্যান্স প্ল্যান নেওয়া যাবে।` },
-    { q: `আমার নিজস্ব ব্র্যান্ড কালার ও লোগো ব্যবহার করা যাবে?`,
-      a: `অবশ্যই। ${subject} সম্পূর্ণভাবে আপনার ব্র্যান্ড গাইডলাইন — কালার, ফন্ট, লোগো — অনুযায়ী কাস্টমাইজ করা হবে।` },
-    { q: `পেমেন্ট প্রসেস কীভাবে?`,
-      a: `৫০% অ্যাডভান্স এবং বাকি ৫০% ডেলিভারির আগে। bKash, Nagad, ব্যাংক ট্রান্সফার — সব পেমেন্ট অপশন সাপোর্ট করি।` },
-    { q: `সোর্স কোড / ফাইলের মালিকানা কি আমার থাকবে?`,
-      a: `হ্যাঁ, ফাইনাল ডেলিভারির পর ${subject}-এর সোর্স ফাইল, কোড ও অ্যাডমিন অ্যাক্সেস সম্পূর্ণভাবে আপনার হাতে হস্তান্তর করা হবে।` },
+    { q: `How long does the ${subject} process take?`,
+      a: `Depending on the scope, ${subject} plans are typically established within 7–21 days. Immediate concerns can be addressed faster.` },
+    { q: `What is the cost for ${subject}?`,
+      a: `Plans are personalized based on required treatments and duration. Contact us on WhatsApp for a free consultation and quote within 24 hours.` },
+    { q: `Will I receive support after the initial consultation?`,
+      a: `Yes. We provide follow-up care and personalized routine maintenance plans.` },
+    { q: `Can I use my current products with your ${subject}?`,
+      a: `Absolutely. Your ${subject} will be integrated with your existing routine where appropriate.` },
+    { q: `What is the payment process?`,
+      a: `We accept various payment methods including credit cards and digital transfers. Options will be discussed during consultation.` },
+    { q: `Do I own my treatment records?`,
+      a: `Yes, all clinical records and progress reports are available to you at any time.` },
+
   ];
   const [open, setOpen] = useState<number | null>(0);
 
@@ -587,11 +597,12 @@ function ServiceFAQ({ subject }: { subject: string }) {
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-electric/10 text-electric">
             <HelpCircle className="h-4 w-4" />
           </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">সচরাচর প্রশ্ন</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Common Questions</p>
         </div>
         <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-          {subject} সম্পর্কে যা মানুষ প্রায়ই জিজ্ঞেস করে
+          Frequently Asked Questions about {subject}
         </h2>
+
         <div className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
           {faqs.map((f, k) => {
             const isOpen = open === k;
@@ -651,7 +662,7 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
       setSaving(false);
     }
     const text = encodeURIComponent(
-      `আসসালামু আলাইকুম Webtrix,\n\nআমি "${serviceTitle}" সার্ভিসটি নিতে চাই।\n\nনামঃ ${form.name}\nফোনঃ ${form.phone}\nইমেইলঃ ${form.email}\nবাজেটঃ ${form.budget}\n\nবিস্তারিতঃ ${form.message}`,
+      `Hello Bioxin,\n\nI am interested in "${serviceTitle}".\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nDetails: ${form.message}`,
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
     setSent(true);
@@ -666,11 +677,12 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-neon/10 text-neon">
                 <Send className="h-4 w-4" />
               </span>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">লিড ফর্ম</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Lead Form</p>
             </div>
             <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-              {serviceTitle}-এর জন্য <span className="text-gradient">ফ্রি কোটেশন</span> নিন
+              Get a <span className="text-gradient">Free Consultation</span> for {serviceTitle}
             </h2>
+
             <p className="mt-4 text-muted-foreground">
               নিচের ফর্মটি পূরণ করুন — আমাদের স্ট্র্যাটেজিস্ট ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করে কাস্টম প্ল্যান, টাইমলাইন ও কোটেশন পাঠাবেন। কোনো hidden ফি নেই, কমিটমেন্টও নয়।
             </p>
