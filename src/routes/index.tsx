@@ -329,9 +329,9 @@ function Hero() {
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function Statistics() {
   const stats = [
-    { label: "প্রজেক্ট সম্পন্ন", value: "২৫০+", icon: Zap, color: "text-electric" },
-    { label: "সন্তুষ্ট ক্লায়েন্ট", value: "২০০+", icon: Star, color: "text-neon" },
-    { label: "অভিজ্ঞতা", value: "৫ বছর+", icon: ShieldCheck, color: "text-lavender" },
+    { label: "প্রজেক্ট সম্পন্ন", value: 250, suffix: "+", icon: Zap, color: "text-electric" },
+    { label: "সন্তুষ্ট ক্লায়েন্ট", value: 200, suffix: "+", icon: Star, color: "text-neon" },
+    { label: "অভিজ্ঞতা", value: 5, suffix: " বছর+", icon: ShieldCheck, color: "text-lavender" },
   ];
   return (
     <div className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-8">
@@ -339,13 +339,42 @@ function Statistics() {
         <div key={s.label} className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-border bg-card/50 p-4 text-left sm:flex-initial sm:p-6">
           <s.icon className={`h-6 w-6 shrink-0 sm:h-8 sm:w-8 ${s.color}`} />
           <div>
-            <div className="text-xl font-bold sm:text-3xl">{s.value}</div>
+            <div className="text-xl font-bold sm:text-3xl">
+              <Counter value={s.value} />{s.suffix}
+            </div>
             <div className="whitespace-nowrap text-xs text-muted-foreground sm:text-sm">{s.label}</div>
           </div>
         </div>
       ))}
     </div>
   );
+}
+
+function Counter({ value }: { value: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useReveal<HTMLDivElement>({ threshold: 0.5 });
+
+  useEffect(() => {
+    if (!ref.visible) return;
+    
+    let start = 0;
+    const duration = 2000; // 2 seconds
+    const increment = value / (duration / 16); // ~60fps
+    
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    
+    return () => clearInterval(timer);
+  }, [ref.visible, value]);
+
+  return <span ref={ref.ref}>{count}</span>;
 }
 
 function ClientLogos() {
