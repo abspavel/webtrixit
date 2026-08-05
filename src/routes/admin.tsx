@@ -762,7 +762,7 @@ function PortfolioProjectsPanel() {
                         </span>
                       </div>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {project.category || "ক্যাটাগরি নেই"} · সিরিয়াল {project.sort_order ?? 0}
+                        {project.category || "No Category"} · Serial {project.sort_order ?? 0}
                       </p>
                       {project.description && <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>}
                       <div className="mt-2 flex flex-wrap gap-2">
@@ -771,16 +771,17 @@ function PortfolioProjectsPanel() {
                         </a>
                         {project.project_screenshots && project.project_screenshots.length > 0 && (
                           <span className="text-[10px] text-muted-foreground">
-                            · {project.project_screenshots.length}টি স্ক্রিনশট
+                            · {project.project_screenshots.length} Screenshots
                           </span>
                         )}
                       </div>
                     </div>
                     <div className="flex shrink-0 gap-2">
-                      <Button type="button" variant="outline" size="icon" onClick={() => editProject(project)} aria-label="প্রজেক্ট এডিট" className="rounded-full bg-background">
+                      <Button type="button" variant="outline" size="icon" onClick={() => editProject(project)} aria-label="Edit Project" className="rounded-full bg-background">
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button type="button" variant="outline" size="icon" onClick={() => deleteProject(project.id)} aria-label="প্রজেক্ট ডিলিট" className="rounded-full border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300">
+                      <Button type="button" variant="outline" size="icon" onClick={() => deleteProject(project.id)} aria-label="Delete Project" className="rounded-full border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 hover:text-rose-300">
+
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -828,9 +829,10 @@ function ImageUpload({
         .getPublicUrl(path);
 
       onUpload(publicUrl);
-      toast.success("ইমেজ আপলোড হয়েছে");
+      toast.success("Image uploaded successfully");
     } catch (err) {
-      toast.error("আপলোড ব্যর্থ: " + (err instanceof Error ? err.message : "ত্রুটি"));
+      toast.error("Upload failed: " + (err instanceof Error ? err.message : "Error"));
+
     } finally {
       setUploading(false);
     }
@@ -860,7 +862,7 @@ function ImageUpload({
           ) : (
             <>
               <ImagePlus className="h-4 w-4 text-muted-foreground" />
-              <span className="text-xs text-muted-foreground">Gallery থেকে ছবি নিন</span>
+              <span className="text-xs text-muted-foreground">Upload from Gallery</span>
             </>
           )}
           <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
