@@ -127,37 +127,36 @@ export const Route = createFileRoute("/")({
 
 
 
-/* সন্তুষ্ট ক্লায়েন্ট — বাংলাদেশী মানুষের ছবি ও নাম */
 const clientPeople: { name: string; role: string; photo: string }[] = [
-  { name: "রাকিবুল হাসান", role: "স্বত্বাধিকারী, রাকিব ফ্যাশন", photo: client1 },
-  { name: "সুমাইয়া আক্তার", role: "ফাউন্ডার, নীলাঞ্জনা বুটিক", photo: client2 },
-  { name: "আব্দুল করিম", role: "এমডি, করিম ট্রেডার্স", photo: client3 },
-  { name: "নুসরাত জাহান", role: "ডিরেক্টর, জাহান কসমেটিকস", photo: client4 },
-  { name: "তানভীর আহমেদ", role: "সিইও, টেকভিশন বিডি", photo: client5 },
-  { name: "ফারজানা ইয়াসমিন", role: "প্রিন্সিপাল, ব্রাইট একাডেমি", photo: client6 },
-  { name: "মাহবুব আলম", role: "চেয়ারম্যান, আলম গ্রুপ", photo: client7 },
-  { name: "সাদিয়া রহমান", role: "মার্কেটিং হেড, রহমান মার্ট", photo: client8 },
+  { name: "Sarah Jenkins", role: "Skin Care Enthusiast", photo: client1 },
+  { name: "Aisha Khan", role: "Dermatology Patient", photo: client2 },
+  { name: "Emily Watson", role: "Model & Influencer", photo: client3 },
+  { name: "Jessica Lee", role: "Lifestyle Blogger", photo: client4 },
+  { name: "Michael Ross", role: "Fitness Coach", photo: client5 },
+  { name: "Linda Brown", role: "Esthetician", photo: client6 },
+  { name: "David Miller", role: "Business Professional", photo: client7 },
+  { name: "Chloe Davis", role: "Student", photo: client8 },
 ];
-
 
 const stories = [
-  { name: "রাশেদ আহমেদ", role: "প্রতিষ্ঠাতা, ShopKart BD", quote: "Webtrix আমাদের স্টোর রিবিল্ড করার পর মাত্র দুই মাসে সেল ৩.২ গুণ বেড়েছে। এদের টিম কনভার্সন ভালো বোঝে।", rating: 5 },
-  { name: "নাদিয়া করিম", role: "ডিরেক্টর, EduPrime LMS", quote: "মাত্র ৩ সপ্তাহে আমাদের LMS launch হয়েছে — স্টুডেন্ট, পেমেন্ট, কোর্স সবকিছু মোবাইলে নিখুঁতভাবে কাজ করছে।", rating: 5 },
-  { name: "তানভীর হোসেন", role: "CEO, GrowMedia", quote: "এদের বানানো AI ভিডিও অ্যাড আমাদের পুরনো ক্রিয়েটিভের চেয়ে CPA-তে ৪ গুণ ভালো পারফর্ম করেছে। সত্যিই প্রিমিয়াম কাজ।", rating: 5 },
-  { name: "সাদিয়া ইসলাম", role: "মালিক, LuxeFash Boutique", quote: "রেডিমেড ই-কমার্স টেমপ্লেট নিয়েছিলাম — মাত্র ৪৮ ঘণ্টায় স্টোর লাইভ, প্রথম সপ্তাহেই ১৭টি অর্ডার এসেছে। bKash/COD সব perfect কাজ করছে।", rating: 5 },
-  { name: "মেহেদী হাসান", role: "ফাউন্ডার, GadgetHub BD", quote: "কাস্টম ই-কমার্স সাইটের স্পিড আর UX দেখে ক্লায়েন্টরা আমাদের ব্র্যান্ডকে অন্যভাবে দেখা শুরু করেছে। ROAS ২× বেড়েছে।", rating: 5 },
-  { name: "ফারহানা রহমান", role: "প্রিন্সিপাল, BrightPath Academy", quote: "LMS সাইটে লাইভ ক্লাস, কুইজ, সার্টিফিকেট সব এক জায়গায়। স্টুডেন্টরা নিজেরাই বলে — আগের সিস্টেমের চেয়ে অনেক সহজ।", rating: 5 },
-  { name: "আবির চৌধুরী", role: "মার্কেটিং হেড, UrbanCart", quote: "Facebook Pixel সেটআপের পর আমাদের অ্যাডের কোয়ালিফায়েড লিড ৩ গুণ বেড়েছে। রিপোর্টিং এখন অনেক পরিষ্কার।", rating: 5 },
-  { name: "রুবাইয়া সুলতানা", role: "মালিক, GlowBox Cosmetics", quote: "লোগো, কভার আর পোস্টার ডিজাইন — সব একসাথে ব্র্যান্ডকিট পেয়ে ব্র্যান্ডিং কমপ্লিটলি প্রিমিয়াম লুক পেয়েছে। ফলোয়ার বেড়েই চলছে।", rating: 5 },
-  { name: "শাহরিয়ার কবির", role: "CEO, Nexlab Software", quote: "আমাদের কাস্টম CRM সফটওয়্যার Webtrix বিল্ড করেছে — টিম প্রোডাক্টিভিটি ৪০% বেড়েছে। কমিউনিকেশন আর ডেলিভারি টাইম on point।", rating: 5 },
-  { name: "মাহমুদা আক্তার", role: "ফাউন্ডার, TinyToes Kids", quote: "ল্যান্ডিং পেজ থেকে যে পরিমাণ কনভার্সন পেয়েছি — নিজেই অবাক। মোবাইলে লোড হয় চোখের পলকে।", rating: 5 },
-  { name: "ইমরান খান", role: "ডিরেক্টর, ClickBoost SMM", quote: "SMM প্যানেল ওয়েবসাইট নিয়েছিলাম — API, পেমেন্ট, অর্ডার ফ্লো সব automated। প্রতিদিন নিজে থেকেই সেল আসছে।", rating: 5 },
-  { name: "তাসনিয়া জাহান", role: "মালিক, Aroma Kitchen", quote: "Facebook Business পেজ প্রোপারলি সেটআপ করার পর অর্গানিক রিচ ৫ গুণ বেড়েছে। প্রফেশনাল লুক পেয়েছি অবশেষে।", rating: 5 },
-  { name: "সাইফুল ইসলাম", role: "প্রতিষ্ঠাতা, MegaMart BD", quote: "মাল্টি-ভেন্ডর ই-কমার্স চাচ্ছিলাম, Webtrix হুবহু আমার আইডিয়া অনুযায়ী বানিয়ে দিয়েছে। সাপোর্টও দ্রুত।", rating: 5 },
-  { name: "নুসরাত জাহান", role: "ফাউন্ডার, Bloom Florist", quote: "ছোট ব্যবসার জন্য সবচেয়ে সাশ্রয়ী প্যাকেজ পেয়েছি। ডিজাইন এত সুন্দর যে ক্লায়েন্ট নিজেই লিংক শেয়ার করে।", rating: 5 },
-  { name: "রায়হান কবির", role: "CEO, PulseAds Media", quote: "AI ভিডিও অ্যাড দিয়ে আমরা এক মাসে ৩ লাখ+ ভিউ পেয়েছি — খরচ আগের চেয়ে অর্ধেক, রেজাল্ট দ্বিগুণ।", rating: 5 },
-  { name: "জান্নাতুল ফেরদৌস", role: "মালিক, StyleNest", quote: "শুরু থেকে ডেলিভারি — পুরো প্রসেসটাই smooth ছিল। প্রথমবার অনলাইন ব্যবসা শুরু করেও কোনো ঝামেলা হয়নি।", rating: 5 },
+  { name: "Sarah Jenkins", role: "Skin Care Enthusiast", quote: "My skin has never felt this hydrated. Bioxin's routine is absolute magic for my dry skin.", rating: 5 },
+  { name: "Aisha Khan", role: "Dermatology Patient", quote: "The consultation changed everything. For the first time in years, my acne is under control.", rating: 5 },
+  { name: "Emily Watson", role: "Model & Influencer", quote: "Bioxin's anti-aging treatments gave me that natural glow I needed for photoshoots. Highly recommended!", rating: 5 },
+  { name: "Jessica Lee", role: "Lifestyle Blogger", quote: "Their products are clean, effective, and look beautiful on my vanity. My skin looks so much clearer now.", rating: 5 },
+  { name: "Michael Ross", role: "Fitness Coach", quote: "I thought skin care was complicated, but Bioxin made it so simple. My skin feels fresh and protected.", rating: 5 },
+  { name: "Linda Brown", role: "Esthetician", quote: "As an esthetician, I'm very picky with ingredients. Bioxin uses the exact actives I recommend to my clients.", rating: 5 },
+  { name: "David Miller", role: "Business Professional", quote: "Professional, effective, and efficient. Exactly what I need for my busy schedule.", rating: 5 },
+  { name: "Chloe Davis", role: "Student", quote: "Budget-friendly but high quality. My skin routine finally feels like self-care rather than a chore.", rating: 5 },
+  { name: "Rachel Green", role: "Photographer", quote: "My skin tone is finally even. The brightening serum is my secret weapon for long shoots.", rating: 5 },
+  { name: "Mark Taylor", role: "Chef", quote: "Bioxin’s recovery balm is a lifesaver after long hours in the kitchen near the stove. No more redness.", rating: 5 },
+  { name: "Sophia Martinez", role: "Yoga Teacher", quote: "I love that they are cruelty-free and natural. It fits my lifestyle perfectly.", rating: 5 },
+  { name: "James Wilson", role: "Software Engineer", quote: "Simple, easy, and works perfectly. My skin looks healthier than it has in years.", rating: 5 },
+  { name: "Olivia King", role: "Designer", quote: "The packaging is beautiful, but the results are even better. My skin is noticeably softer.", rating: 5 },
+  { name: "Daniel Scott", role: "Architect", quote: "I was skeptical about routines, but Bioxin showed me the science. It works.", rating: 5 },
+  { name: "Ava Thompson", role: "Teacher", quote: "Teaching all day can be exhausting, but Bioxin makes me look refreshed and glowing.", rating: 5 },
+  { name: "Ethan White", role: "Writer", quote: "Clean products, clear skin. Bioxin is the real deal.", rating: 5 },
 ];
+
 
 type PortfolioProject = {
   id?: string;
