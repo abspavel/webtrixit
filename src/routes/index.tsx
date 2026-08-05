@@ -352,26 +352,38 @@ function Statistics() {
 
 function Counter({ value }: { value: number }) {
   const [count, setCount] = useState(0);
-  const ref = useReveal<HTMLDivElement>({ threshold: 0.5 });
+  const ref = useReveal<HTMLDivElement>({ threshold: 0.1 }); // lower threshold for better reactivity
 
   useEffect(() => {
     if (!ref.visible) return;
     
-    let start = 0;
-    const duration = 2000; // 2 seconds
-    const increment = value / (duration / 16); // ~60fps
+    let startTimestamp: number | null = null;
+    const duration = 2000;
     
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
+    let animationFrameId: number;
+    
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      
+      // Easing function for smoother start/end
+      const easeOutQuad = (t: number) => t * (2 - t);
+      const currentCount = Math.floor(easeOutQuad(progress) * value);
+      
+      setCount(currentCount);
+      
+      if (progress < 1) {
+        animationFrameId = window.requestAnimationFrame(step);
       } else {
-        setCount(Math.floor(start));
+        setCount(value);
       }
-    }, 16);
+    };
     
-    return () => clearInterval(timer);
+    animationFrameId = window.requestAnimationFrame(step);
+    
+    return () => {
+      if (animationFrameId) window.cancelAnimationFrame(animationFrameId);
+    };
   }, [ref.visible, value]);
 
   return <span ref={ref.ref}>{count}</span>;
