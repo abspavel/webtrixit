@@ -807,7 +807,10 @@ function ImageUpload({
       
       const { error: uploadError } = await supabase.storage
         .from('images')
-        .upload(path, file);
+        .upload(path, file, { 
+          cacheControl: '3600',
+          upsert: false 
+        });
 
       if (uploadError) throw uploadError;
 
