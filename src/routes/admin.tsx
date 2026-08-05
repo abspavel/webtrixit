@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { getSupabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Loader2, LogOut, Search, RefreshCw, Trash2, Phone, MessageCircle, Mail,
   ShieldCheck, Inbox, Link2, Save, BriefcaseBusiness, Plus, Pencil, X, ExternalLink, ImagePlus, Loader
@@ -62,7 +62,6 @@ function AdminPage() {
   const loadLeads = useCallback(async () => {
     setLoading(true);
     try {
-      const supabase = getSupabase();
       const { data, error } = await supabase.from("leads").select("*").order("created_at", { ascending: false });
       if (error) throw error;
       setLeads((data ?? []) as Lead[]);
@@ -77,7 +76,6 @@ function AdminPage() {
   useEffect(() => {
     (async () => {
       try {
-        const supabase = getSupabase();
         const { data: userData } = await supabase.auth.getUser();
         if (!userData.user) {
           navigate({ to: "/auth", replace: true });
@@ -114,14 +112,12 @@ function AdminPage() {
   }, []);
 
   async function handleLogout() {
-    const supabase = getSupabase();
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   }
 
   async function updateStatus(id: string, status: Status) {
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.from("leads").update({ status }).eq("id", id);
       if (error) throw error;
       setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
@@ -134,7 +130,6 @@ function AdminPage() {
   async function deleteLead(id: string) {
     if (!confirm("এই lead delete করবেন?")) return;
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.from("leads").delete().eq("id", id);
       if (error) throw error;
       setLeads((prev) => prev.filter((l) => l.id !== id));
@@ -384,7 +379,6 @@ function ServiceLinksPanel() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const supabase = getSupabase();
       const { data, error } = await supabase.from("service_links").select("service_slug, demo_url, sale_url, demo_image");
       if (error) throw error;
       const map: Record<string, { demo_url: string; sale_url: string; demo_image: string }> = {};
@@ -412,7 +406,6 @@ function ServiceLinksPanel() {
     if (!row) return;
     setSavingSlug(slug);
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.from("service_links").upsert(
         { 
           service_slug: slug, 
@@ -518,7 +511,6 @@ function PortfolioProjectsPanel() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const supabase = getSupabase();
       const { data, error } = await supabase
         .from("portfolio_projects")
         .select("id, title, category, description, demo_url, image_url, project_screenshots, sort_order, is_active, created_at")
@@ -561,7 +553,6 @@ function PortfolioProjectsPanel() {
     }
     setSaving(true);
     try {
-      const supabase = getSupabase();
       const order = Number.parseInt(form.sort_order, 10);
       const screenshots = form.project_screenshots
         .split(",")
@@ -602,7 +593,6 @@ function PortfolioProjectsPanel() {
   async function deleteProject(id: string) {
     if (!confirm("এই portfolio project delete করবেন?")) return;
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.from("portfolio_projects").delete().eq("id", id);
       if (error) throw error;
       setProjects((prev) => prev.filter((project) => project.id !== id));
@@ -812,7 +802,6 @@ function ImageUpload({
 
     setUploading(true);
     try {
-      const supabase = getSupabase();
       const ext = file.name.split('.').pop();
       const path = `${Math.random().toString(36).substring(2)}.${ext}`;
       

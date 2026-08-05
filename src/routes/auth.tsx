@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getSupabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { ShieldCheck, ArrowRight, Loader2 } from "lucide-react";
 const logoAsset = { url: "/webtrix-logo.png" };
 
@@ -26,7 +26,6 @@ function AuthPage() {
   useEffect(() => {
     (async () => {
       try {
-        const supabase = getSupabase();
         const { data } = await supabase.auth.getUser();
         if (data.user) navigate({ to: "/admin", replace: true });
       } catch (e) {
@@ -42,7 +41,6 @@ function AuthPage() {
     if (loading) return;
     setLoading(true);
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
       if (error) throw error;
       toast.success("লগইন সফল হয়েছে");

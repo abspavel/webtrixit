@@ -32,7 +32,7 @@ import { useReveal, useActiveSection } from "@/hooks/use-reveal";
 import { Hero3DStack, PopIn } from "@/components/Hero3DStack";
 
 import { submitLead } from "@/lib/leads.functions";
-import { getSupabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 
 
 const WHATSAPP_NUMBER = "8801835985730";
@@ -842,7 +842,6 @@ function Portfolio() {
     let cancelled = false;
     (async () => {
       try {
-        const supabase = getSupabase();
         const { data, error } = await supabase
           .from("portfolio_projects")
           .select("id, title, category, description, demo_url, image_url, project_screenshots, sort_order")

@@ -1,0 +1,83 @@
+-- 1. Leads table
+CREATE TABLE IF NOT EXISTS public.leads (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  phone text NOT NULL,
+  email text,
+  service text,
+  budget text,
+  message text,
+  source_page text,
+  status text NOT NULL DEFAULT 'new',
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.leads TO authenticated;
+GRANT ALL ON public.leads TO service_role;
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+
+-- 2. User Roles
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'app_role') THEN
+    CREATE TYPE public.app_role AS ENUM ('admin', 'moderator', 'user');
+  END IF;
+END $$;
+
+CREATE TABLE IF NOT EXISTS public.user_roles (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  role public.app_role NOT NULL,
+  UNIQUE (user_id, role)
+);
+GRANT SELECT ON public.user_roles TO authenticated;
+GRANT ALL ON public.user_roles TO service_role;
+ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
+
+-- 3. Security Definer Helper
+CREATE OR REPLACE FUNCTION public.has_role(_user_id uuid, _role public.app_role)
+RETURNS boolean
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = public
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.user_roles
+    WHERE user_id = _user_id AND role = _role
+  );
+$$;
+
+-- 4. Service Links
+CREATE TABLE IF NOT EXISTS public.service_links (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  service_slug text NOT NULL UNIQUE,
+  demo_url text,
+  sale_url text,
+  demo_image text,
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  updated_by uuid REFERENCES auth.users(id) ON DELETE SET NULL
+);
+GRANT SELECT ON public.service_links TO anon, authenticated;
+GRANT INSERT, UPDATE, DELETE ON public.service_links TO authenticated;
+GRANT ALL ON public.service_links TO service_role;
+ALTER TABLE public.service_links ENABLE ROW LEVEL SECURITY;
+
+-- 5. Portfolio Projects
+CREATE TABLE IF NOT EXISTS public.portfolio_projects (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  title text NOT NULL,
+  category text,
+  description text,
+  demo_url text NOT NULL,
+  image_url text,
+  project_screenshots text[],
+  sort_order integer NOT NULL DEFAULT 0,
+  is_active boolean NOT NULL DEFAULT true,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  updated_by uuid REFERENCES auth.users(id) ON DELETE SET NULL
+);
+GRANT SELECT ON public.portfolio_projects TO anon, authenticated;
+GRANT INSERT, UPDATE, DELETE ON public.portfolio_projects TO authenticated;
+GRANT ALL ON public.portfolio_projects TO service_role;
+ALTER TABLE public.portfolio_projects ENABLE ROW LEVEL SECURITY;

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
 const logoAsset = { url: "/webtrix-logo.png" };
 import { submitLead } from "@/lib/leads.functions";
-import { getSupabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
@@ -38,7 +38,6 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
     let cancelled = false;
     (async () => {
       try {
-        const supabase = getSupabase();
         const { data } = await supabase
           .from("service_links")
           .select("demo_url, sale_url, demo_image")
