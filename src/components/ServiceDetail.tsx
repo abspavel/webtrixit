@@ -7,14 +7,16 @@ import {
 import { useEffect, useState } from "react";
 import { services, type ServiceItem } from "@/lib/services-data";
 const logoAsset = { url: "/webtrix-logo.png" };
+
 import { submitLead } from "@/lib/leads.functions";
 import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const waUrl = (title: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `আসসালামু আলাইকুম, আমি "${title}" সার্ভিসটি সম্পর্কে জানতে চাই।`,
+    `Hello Bioxin, I would like to know more about your "${title}" service.`,
   )}`;
+
 
 export function ServiceDetail({ service }: { service: ServiceItem }) {
   const Icon = service.icon;
@@ -58,13 +60,14 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
     <div className="min-h-dvh bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
-          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="হোম">
-            <img src={logoAsset.url} alt="Webtrixit" className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-10" />
-            <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">Webtrixit</span>
+          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="Home">
+            <img src={logoAsset.url} alt="Bioxin" className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-10" />
+            <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">Bioxin</span>
           </Link>
           <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-surface-2 sm:text-sm">
-            <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">সব সার্ভিস</span><span className="sm:hidden">ব্যাক</span>
+            <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">All Services</span><span className="sm:hidden">Back</span>
           </Link>
+
         </div>
       </header>
 
@@ -72,34 +75,39 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
         <div className="grid-bg absolute inset-0 -z-10 opacity-40" />
         <div className="mx-auto max-w-5xl px-5 py-16 md:py-24">
           <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-3.5 w-3.5" /> সার্ভিস
+            <ArrowLeft className="h-3.5 w-3.5" /> Services
           </Link>
+
           <div className="mt-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-electric/15 text-electric">
             <Icon className="h-7 w-7" />
           </div>
           <h1 className="mt-5 font-display text-4xl font-bold leading-[1.1] sm:text-5xl">
-            {service.titleBn}
+            {service.title}
           </h1>
+
           <p className="mt-6 max-w-3xl text-base text-muted-foreground sm:text-lg">
             {service.tagline}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href={waUrl(service.titleBn)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
-              <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
+            <a href={waUrl(service.title)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
+              <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
             </a>
+
             {saleUrl && (
               <a href={saleUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:translate-y-[-1px]">
-                কিনুন / অর্ডার করুন <ArrowRight className="h-4 w-4" />
+                Order Now <ArrowRight className="h-4 w-4" />
               </a>
+
             )}
             <a href="#demo" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-              লাইভ ডেমো দেখুন <ArrowRight className="h-4 w-4" />
+              View Live Demo <ArrowRight className="h-4 w-4" />
             </a>
+
           </div>
         </div>
       </section>
 
-      <Section eyebrow="কেন প্রয়োজন?" title={`${service.subject} কেন ব্যবহার করা উচিত`} icon={Sparkles} accent="text-electric" bg="bg-electric/10">
+      <Section eyebrow="Why You Need This" title={`Why You Should Choose ${service.subject}`} icon={Sparkles} accent="text-electric" bg="bg-electric/10">
         <ul className="grid gap-4 md:grid-cols-2">
           {service.why.map((w) => (
             <li key={w} className="flex gap-3 rounded-2xl border border-border bg-card p-5">
@@ -110,7 +118,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
         </ul>
       </Section>
 
-      <Section eyebrow="কার্যকারিতা" title={`${service.subject}-এর কার্যকারিতা`} icon={Target} accent="text-lavender" bg="bg-lavender/10">
+      <Section eyebrow="Effectiveness" title={`The Effectiveness of our ${service.subject}`} icon={Target} accent="text-lavender" bg="bg-lavender/10">
         <ul className="grid gap-4 md:grid-cols-2">
           {service.effectiveness.map((f) => (
             <li key={f} className="flex gap-3 rounded-2xl border border-border bg-card p-5">
@@ -121,7 +129,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
         </ul>
       </Section>
 
-      <Section eyebrow="উপকারিতা" title={`${service.subject} ব্যবহারের উপকারিতা`} icon={TrendingUp} accent="text-neon" bg="bg-neon/10">
+      <Section eyebrow="Benefits" title={`Benefits of our ${service.subject}`} icon={TrendingUp} accent="text-neon" bg="bg-neon/10">
         <ul className="grid gap-4 md:grid-cols-3">
           {service.benefits.map((b) => (
             <li key={b} className="rounded-2xl border border-neon/30 bg-card p-6 shadow-[var(--shadow-card)]">
@@ -140,14 +148,15 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-electric/10 text-electric">
               <Wrench className="h-4 w-4" />
             </span>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">প্রসেস ও ফিচার</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Process & Features</p>
           </div>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-            আমরা কীভাবে আপনার <span className="text-gradient">{service.subject}</span> তৈরি করি
+            How We Build Your <span className="text-gradient">{service.subject}</span>
           </h2>
           <p className="mt-3 max-w-3xl text-muted-foreground">
-            প্রতিটি ধাপে আপনার সাথে আলোচনা করে, স্বচ্ছভাবে কাজ এগিয়ে নিই — যাতে ফাইনাল প্রোডাক্ট ঠিক আপনার কল্পনার মতোই হয়।
+            We guide you through every step, ensuring transparency and professional care — so the final result is exactly what you envision.
           </p>
+
 
           <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {service.process.map((step, i) => (
@@ -167,8 +176,9 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 <ListChecks className="h-4 w-4" />
               </span>
               <h3 className="font-display text-xl font-bold sm:text-2xl">
-                {service.subject}-এ যে যে ফিচার থাকবে
+                Included Features
               </h3>
+
             </div>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {service.features.map((f) => (
@@ -184,8 +194,9 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <section className="border-y border-border/60 bg-surface/40 py-16">
         <div className="mx-auto max-w-5xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">ইউজ কেস</p>
-          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">কাদের জন্য উপযুক্ত</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">Use Cases</p>
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Who is this for?</h2>
+
           <div className="mt-8 flex flex-wrap gap-3">
             {service.useCases.map((u) => (
               <span key={u} className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground">
@@ -198,13 +209,14 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <section id="demo" className="py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">লাইভ ডেমো</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">Live Demo</p>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-            আপনার জন্য <span className="text-gradient">লাইভ ডেমো</span>
+            Experience it <span className="text-gradient">Live</span>
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            নিচের লিঙ্কে ক্লিক করে আমাদের বানানো একটি সম্পূর্ণ demo দেখুন। প্রতিটি অংশ কীভাবে কাজ করে, তার বাস্তব অভিজ্ঞতা নিতে পারবেন।
+            Click the link below to see a complete demo. Experience how every element works in real-time.
           </p>
+
 
           <div
             className="mt-8 overflow-hidden rounded-3xl border border-border"
@@ -213,7 +225,7 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
             <div className="flex flex-col items-start gap-4 p-6 md:flex-row md:items-center md:justify-between md:p-8">
               <div className="min-w-0">
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-xs font-semibold text-neon">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> লাইভ প্রিভিউ
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-neon" /> Live Preview
                 </div>
                 <h3 className="font-display text-2xl font-bold sm:text-3xl">{service.demoLabel}</h3>
                 <p className="mt-2 break-all text-xs text-muted-foreground">{demoUrl}</p>
@@ -224,7 +236,8 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-neon px-5 py-2.5 text-sm font-semibold text-brand transition hover:translate-y-[-1px]"
               >
-                নতুন ট্যাবে খুলুন <ExternalLink className="h-4 w-4" />
+                Open in New Tab <ExternalLink className="h-4 w-4" />
+
               </a>
             </div>
 
@@ -241,13 +254,14 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 {demoImage ? (
                   <img
                     src={demoImage}
-                    alt={`${service.titleBn} — প্রিভিউ`}
+                    alt={`${service.title} — Preview`}
+
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 ) : (
                   <iframe
                     src={demoUrl}
-                    title={`${service.titleBn} — লাইভ ডেমো`}
+                    title={`${service.title} — Live Demo`}
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
@@ -260,7 +274,8 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
             <p className="flex items-center gap-2 px-6 pb-6 text-xs text-muted-foreground md:px-8 md:pb-8">
               <ShieldCheck className="h-3.5 w-3.5 text-neon" />
-              কিছু সাইট নিরাপত্তার কারণে embed-এ লোড নাও হতে পারে — সেক্ষেত্রে "নতুন ট্যাবে খুলুন" বাটনে ক্লিক করুন।
+              Some sites may not load in embed for security reasons — please click "Open in New Tab" in that case.
+
             </p>
           </div>
         </div>
@@ -268,31 +283,34 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <ReviewsSlider subject={service.subject} />
       <ServiceFAQ subject={service.subject} />
-      <ServiceLeadForm serviceTitle={service.titleBn} />
+      <ServiceLeadForm serviceTitle={service.title} />
 
       <section className="border-t border-border/60 py-16">
         <div className="mx-auto max-w-4xl px-5 text-center">
           <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            আজই শুরু করুন আপনার <span className="text-gradient">{service.titleBn}</span> প্রজেক্ট
+            Start Your <span className="text-gradient">{service.title}</span> Journey Today
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            WhatsApp-এ মেসেজ দিন — ফ্রি কনসালটেশন, টাইমলাইন ও কোটেশন পাবেন ২৪ ঘণ্টার মধ্যে।
+            Send us a message on WhatsApp — get free advice, a timeline, and a quote within 24 hours.
           </p>
+
           <a
-            href={waUrl(service.titleBn)}
+            href={waUrl(service.title)}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]"
           >
-            <MessageCircle className="h-4 w-4" /> WhatsApp-এ কথা বলুন
+            <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
+
           </a>
         </div>
       </section>
 
       <section className="border-t border-border/60 bg-surface/40 py-16">
         <div className="mx-auto max-w-6xl px-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">আরও সার্ভিস</p>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">অন্যান্য সার্ভিস</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">More Services</p>
+          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Other Services</h2>
+
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((r) => {
               const RIcon = r.icon;
@@ -306,10 +324,10 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-electric/10 text-electric">
                     <RIcon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold">{r.titleBn}</h3>
+                  <h3 className="mt-4 font-display text-lg font-semibold">{r.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{r.desc}</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-electric">
-                    বিস্তারিত দেখুন <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                    View Details <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                   </span>
                 </Link>
               );
@@ -320,16 +338,18 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
       <footer className="border-t border-border bg-surface/40 py-10">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5">
-          <img src={logoAsset.url} alt="Webtrix IT Solution" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution</p>
+          <img src={logoAsset.url} alt="Bioxin" className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]" />
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Bioxin</p>
+
         </div>
       </footer>
 
       <a
-        href={waUrl(service.titleBn)}
+        href={waUrl(service.title)}
         target="_blank"
         rel="noreferrer"
-        aria-label="WhatsApp-এ চ্যাট করুন"
+        aria-label="Chat on WhatsApp"
+
         className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-neon text-brand shadow-[var(--shadow-neon)] transition hover:scale-105"
       >
         <MessageCircle className="h-6 w-6" />
