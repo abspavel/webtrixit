@@ -593,7 +593,7 @@ function ProblemSolution() {
             style={{ boxShadow: "var(--shadow-neon)" }}
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1.5 text-xs font-semibold text-neon">
-              <Sparkles className="h-3.5 w-3.5" /> আমাদের সমাধান — যা আপনি আসলেই পাবেন
+              <Sparkles className="h-3.5 w-3.5" /> Our Solutions — Real Results
             </div>
             <ul className="space-y-4">
               {solutions.map((s, i) => (
