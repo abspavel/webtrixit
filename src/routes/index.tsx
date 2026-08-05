@@ -232,10 +232,11 @@ function Nav() {
   const { theme, setTheme } = useTheme();
 
   const themes: { id: Theme; label: string; icon: any }[] = [
-    { id: "dark", label: "ডার্ক মুড (Default)", icon: Moon },
+    { id: "dark", label: "ডার্ক মুড", icon: Moon },
     { id: "gray", label: "গ্রে মুড", icon: Monitor },
-    { id: "modern", label: "মডার্ন ব্লু", icon: Sparkles },
-    { id: "ocean", label: "ওশান ডিপ", icon: Zap },
+    { id: "green", label: "গ্রিন মুড", icon: Zap },
+    { id: "orange", label: "অরেঞ্জ মুড", icon: Sparkles },
+    { id: "white", label: "হোয়াইট মুড", icon: Sun },
   ];
 
   const links = [
