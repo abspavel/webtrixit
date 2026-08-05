@@ -464,7 +464,7 @@ function ProblemSolution() {
                   </span>
                   <div className="min-w-0">
                     <div className="text-sm font-semibold text-foreground">{s.t}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-300">{s.d}</p>
                   </div>
                 </li>
               ))}
