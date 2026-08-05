@@ -309,43 +309,44 @@ function Nav() {
           </div>
         </div>
 
-          <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button 
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
-                  aria-label="থিম পরিবর্তন করুন"
+        <div className="flex items-center gap-2 md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button 
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
+                aria-label="থিম পরিবর্তন করুন"
+              >
+                <Palette className="h-5 w-5" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
+              <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-border" />
+              {themes.map((t) => (
+                <DropdownMenuItem
+                  key={t.id}
+                  onClick={() => setTheme(t.id)}
+                  className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition ${
+                    theme === t.id ? "bg-electric/20 text-electric font-semibold" : "hover:bg-white/5"
+                  }`}
                 >
-                  <Palette className="h-5 w-5" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
-                <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-border" />
-                {themes.map((t) => (
-                  <DropdownMenuItem
-                    key={t.id}
-                    onClick={() => setTheme(t.id)}
-                    className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition ${
-                      theme === t.id ? "bg-electric/20 text-electric font-semibold" : "hover:bg-white/5"
-                    }`}
-                  >
-                    <t.icon className="h-4 w-4" />
-                    <span>{t.label}</span>
-                    {theme === t.id && <Check className="ml-auto h-4 w-4" />}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <t.icon className="h-4 w-4" />
+                  <span>{t.label}</span>
+                  {theme === t.id && <Check className="ml-auto h-4 w-4" />}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-            <button 
-              aria-label="মেনু" 
-              onClick={() => setOpen(!open)} 
-              className="rounded-lg border border-border p-2 md:hidden"
-            >
-              <Menu className="h-5 w-5" />
-            </button>
-          </div>
+          <button 
+            aria-label="মেনু" 
+            onClick={() => setOpen(!open)} 
+            className="rounded-lg border border-border p-2"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        </div>
+
 
       </div>
       {open && (
