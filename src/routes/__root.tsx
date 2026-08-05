@@ -108,8 +108,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   const supabaseConfig = {
-    url: process.env.MY_SUPABASE_URL ?? "",
-    anonKey: process.env.MY_SUPABASE_ANON_KEY ?? "",
+    url: import.meta.env.VITE_SUPABASE_URL ?? "",
+    anonKey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "",
   };
   return (
     <html lang="bn">
