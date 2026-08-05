@@ -544,7 +544,7 @@ function ProblemSolution() {
         <div ref={head.ref} data-visible={head.visible || true} className="reveal">
           <SectionHeader
             eyebrow="আমরা যে গ্যাপ পূরণ করি"
-            title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
+            title={<span className="text-destructive font-black">সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।</span>}
             description="নিচে আমাদের কার্যপদ্ধতি এবং আপনি আমাদের থেকে ঠিক কী কী পাবেন তা বিস্তারিত দেওয়া হলো।"
           />
         </div>
