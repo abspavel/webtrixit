@@ -96,6 +96,8 @@ CREATE TABLE IF NOT EXISTS public.service_links (
   service_slug text NOT NULL UNIQUE,
   demo_url text,
   sale_url text,
+  demo_image text,
+
   updated_at timestamptz NOT NULL DEFAULT now(),
   updated_by uuid REFERENCES auth.users(id) ON DELETE SET NULL
 );

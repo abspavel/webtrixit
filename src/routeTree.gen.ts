@@ -33,6 +33,7 @@ import { Route as DemoKartplusEcommerceRouteImport } from './routes/demo.kartplu
 import { Route as DemoFreshcartGroceryRouteImport } from './routes/demo.freshcart-grocery'
 import { Route as DemoEduprimeLmsRouteImport } from './routes/demo.eduprime-lms'
 import { Route as DemoBrandkitDesignRouteImport } from './routes/demo.brandkit-design'
+import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -162,6 +163,11 @@ const DemoBrandkitDesignRoute = DemoBrandkitDesignRouteImport.update({
   path: '/demo/brandkit-design',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConfigRoute = ApiPublicConfigRouteImport.update({
+  id: '/api/public/config',
+  path: '/api/public/config',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
   '/services/smm-panel-website': typeof ServicesSmmPanelWebsiteRoute
   '/services/software-development': typeof ServicesSoftwareDevelopmentRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -214,6 +221,7 @@ export interface FileRoutesByTo {
   '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
   '/services/smm-panel-website': typeof ServicesSmmPanelWebsiteRoute
   '/services/software-development': typeof ServicesSoftwareDevelopmentRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -241,6 +249,7 @@ export interface FileRoutesById {
   '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
   '/services/smm-panel-website': typeof ServicesSmmPanelWebsiteRoute
   '/services/software-development': typeof ServicesSoftwareDevelopmentRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -269,6 +278,7 @@ export interface FileRouteTypes {
     | '/services/readymade-ecommerce-website'
     | '/services/smm-panel-website'
     | '/services/software-development'
+    | '/api/public/config'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/services/readymade-ecommerce-website'
     | '/services/smm-panel-website'
     | '/services/software-development'
+    | '/api/public/config'
   id:
     | '__root__'
     | '/'
@@ -321,6 +332,7 @@ export interface FileRouteTypes {
     | '/services/readymade-ecommerce-website'
     | '/services/smm-panel-website'
     | '/services/software-development'
+    | '/api/public/config'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -348,6 +360,7 @@ export interface RootRouteChildren {
   ServicesReadymadeEcommerceWebsiteRoute: typeof ServicesReadymadeEcommerceWebsiteRoute
   ServicesSmmPanelWebsiteRoute: typeof ServicesSmmPanelWebsiteRoute
   ServicesSoftwareDevelopmentRoute: typeof ServicesSoftwareDevelopmentRoute
+  ApiPublicConfigRoute: typeof ApiPublicConfigRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -520,6 +533,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoBrandkitDesignRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/config': {
+      id: '/api/public/config'
+      path: '/api/public/config'
+      fullPath: '/api/public/config'
+      preLoaderRoute: typeof ApiPublicConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -550,17 +570,8 @@ const rootRouteChildren: RootRouteChildren = {
     ServicesReadymadeEcommerceWebsiteRoute,
   ServicesSmmPanelWebsiteRoute: ServicesSmmPanelWebsiteRoute,
   ServicesSoftwareDevelopmentRoute: ServicesSoftwareDevelopmentRoute,
+  ApiPublicConfigRoute: ApiPublicConfigRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

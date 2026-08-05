@@ -22,6 +22,8 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
 
   const [demoUrl, setDemoUrl] = useState<string>(service.demoUrl);
   const [saleUrl, setSaleUrl] = useState<string>("");
+  const [demoImage, setDemoImage] = useState<string | null>(null);
+
 
   useEffect(() => {
     // Ensure the service page always opens from the top, not restored/mid-scroll.
@@ -31,18 +33,23 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
   useEffect(() => {
     setDemoUrl(service.demoUrl);
     setSaleUrl("");
+    setDemoImage(null);
+
     let cancelled = false;
     (async () => {
       try {
         const supabase = getSupabase();
         const { data } = await supabase
           .from("service_links")
-          .select("demo_url, sale_url")
+          .select("demo_url, sale_url, demo_image")
+
           .eq("service_slug", service.slug)
           .maybeSingle();
         if (cancelled || !data) return;
         if (data.demo_url) setDemoUrl(data.demo_url);
         if (data.sale_url) setSaleUrl(data.sale_url);
+        if (data.demo_image) setDemoImage(data.demo_image);
+
       } catch { /* silent — fallback to defaults */ }
     })();
     return () => { cancelled = true; };
@@ -232,14 +239,23 @@ export function ServiceDetail({ service }: { service: ServiceItem }) {
                 </div>
               </div>
               <div className="relative aspect-[16/10] w-full bg-background md:aspect-[16/9]">
-                <iframe
-                  src={demoUrl}
-                  title={`${service.titleBn} — লাইভ ডেমো`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                  className="absolute inset-0 h-full w-full border-0"
-                />
+                {demoImage ? (
+                  <img
+                    src={demoImage}
+                    alt={`${service.titleBn} — প্রিভিউ`}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                ) : (
+                  <iframe
+                    src={demoUrl}
+                    title={`${service.titleBn} — লাইভ ডেমো`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                )}
+
               </div>
             </div>
 
