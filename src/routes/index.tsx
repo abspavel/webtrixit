@@ -419,20 +419,23 @@ function Hero() {
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function Statistics() {
   const stats = [
-    { label: "প্রজেক্ট সম্পন্ন", value: 250, suffix: "+", icon: Zap, color: "text-electric" },
+    { label: "অর্ডার সম্পন্ন", value: 250, suffix: "*", icon: Zap, color: "text-electric" },
     { label: "সন্তুষ্ট ক্লায়েন্ট", value: 200, suffix: "+", icon: Star, color: "text-neon" },
     { label: "অভিজ্ঞতা", value: 5, suffix: " বছর+", icon: ShieldCheck, color: "text-lavender" },
   ];
   return (
-    <div className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-8">
+    <div className="mt-8 flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:mt-12 md:gap-8">
       {stats.map((s) => (
-        <div key={s.label} className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-border bg-card/50 p-4 text-left sm:flex-initial sm:p-6">
-          <s.icon className={`h-6 w-6 shrink-0 sm:h-8 sm:w-8 ${s.color}`} />
-          <div>
-            <div className="text-xl font-bold sm:text-3xl">
+        <div 
+          key={s.label} 
+          className="flex flex-1 min-w-0 items-center gap-1.5 rounded-xl border border-border bg-card/50 p-2.5 text-left sm:gap-3 sm:rounded-2xl sm:p-4 md:p-6 lg:flex-initial lg:min-w-[180px]"
+        >
+          <s.icon className={`h-4 w-4 shrink-0 sm:h-6 sm:w-6 md:h-8 md:w-8 ${s.color}`} />
+          <div className="min-w-0 truncate">
+            <div className="text-sm font-bold sm:text-lg md:text-2xl lg:text-3xl">
               <Counter value={s.value} />{s.suffix}
             </div>
-            <div className="whitespace-nowrap text-xs text-muted-foreground sm:text-sm">{s.label}</div>
+            <div className="truncate text-[10px] text-muted-foreground sm:text-xs md:text-sm">{s.label}</div>
           </div>
         </div>
       ))}
@@ -488,11 +491,11 @@ function ClientLogos() {
           দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
         </p>
         <div className="mt-6 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center gap-8">
+          <div className="flex w-max items-center gap-8 animate-marquee hover:[animation-play-state:paused]">
             {row.map((c, i) => (
               <div
                 key={i}
-                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
+                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur transition-transform hover:scale-105"
               >
                 <img
                   src={c.photo}
@@ -541,7 +544,7 @@ function ProblemSolution() {
         <div ref={head.ref} data-visible={head.visible || true} className="reveal">
           <SectionHeader
             eyebrow="আমরা যে গ্যাপ পূরণ করি"
-            title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
+            title={<span className="text-destructive font-black">সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।</span>}
             description="নিচে আমাদের কার্যপদ্ধতি এবং আপনি আমাদের থেকে ঠিক কী কী পাবেন তা বিস্তারিত দেওয়া হলো।"
           />
         </div>
@@ -549,9 +552,9 @@ function ProblemSolution() {
           <div
             ref={left.ref}
             data-visible={left.visible}
-            className="reveal-l rounded-3xl border border-destructive/25 bg-card p-6 sm:p-8"
+            className="reveal-l rounded-3xl border-2 border-destructive bg-card p-6 shadow-[0_0_20px_rgba(239,68,68,0.2)] sm:p-8"
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive/10 px-3 py-1.5 text-xs font-semibold text-destructive">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-destructive px-3 py-1.5 text-xs font-bold text-white uppercase tracking-wider">
               <AlertTriangle className="h-3.5 w-3.5" /> সমস্যা যা আপনার বিজনেসকে আটকে রাখছে
             </div>
             <ul className="space-y-4">
@@ -683,6 +686,7 @@ function Services() {
 /* ---------- SUCCESS STORIES (swipe-enabled slider) ---------- */
 function SuccessStories() {
   const [i, setI] = useState(0);
+  const [isAuto, setIsAuto] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -690,11 +694,15 @@ function SuccessStories() {
   const minSwipeDistance = 50;
 
   useEffect(() => {
-    const t = setInterval(next, 6000);
+    if (!isAuto) return;
+    const t = setInterval(next, 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [isAuto, i]);
 
-  const prev = () => setI((v) => (v - 1 + stories.length) % stories.length);
+  const prev = () => {
+    setIsAuto(false);
+    setI((v) => (v - 1 + stories.length) % stories.length);
+  };
   const next = () => setI((v) => (v + 1) % stories.length);
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -721,13 +729,18 @@ function SuccessStories() {
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
 
         <div 
-          className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y focus-within:ring-2 focus-within:ring-electric/20"
+          className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y focus-within:ring-2 focus-within:ring-electric/20 group/slider"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onMouseEnter={() => setIsAuto(false)}
+          onMouseLeave={() => setIsAuto(true)}
           onKeyDown={(e) => {
             if (e.key === "ArrowLeft") prev();
-            if (e.key === "ArrowRight") next();
+            if (e.key === "ArrowRight") {
+              setIsAuto(false);
+              next();
+            }
           }}
           role="region"
           aria-roledescription="carousel"
@@ -772,7 +785,10 @@ function SuccessStories() {
               {stories.map((_, k) => (
                 <button
                   key={k}
-                  onClick={() => setI(k)}
+                  onClick={() => {
+                    setIsAuto(false);
+                    setI(k);
+                  }}
                   aria-label={`স্টোরি ${k + 1} দেখুন`}
                   aria-current={k === i ? "true" : "false"}
                   className={`h-2 rounded-full transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-electric ${
@@ -785,7 +801,14 @@ function SuccessStories() {
               <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={next} aria-label="পরের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button 
+                onClick={() => {
+                  setIsAuto(false);
+                  next();
+                }} 
+                aria-label="পরের রিভিউ" 
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2"
+              >
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
@@ -1183,7 +1206,7 @@ function FloatingWhatsApp() {
 }
 
 /* ---------- SHARED ---------- */
-function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
+function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: React.ReactNode; description?: string }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">{eyebrow}</span>
