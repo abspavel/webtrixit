@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { getSupabase } from "@/integrations/supabase/client";
 import {
   Loader2, LogOut, Search, RefreshCw, Trash2, Phone, MessageCircle, Mail,
-  ShieldCheck, Inbox, Link2, Save, BriefcaseBusiness, Plus, Pencil, X, ExternalLink,
+  ShieldCheck, Inbox, Link2, Save, BriefcaseBusiness, Plus, Pencil, X, ExternalLink, ImagePlus, Loader
 } from "lucide-react";
 const logoAsset = { url: "/webtrix-logo.png" };
 import { services } from "@/lib/services-data";
@@ -339,7 +339,7 @@ function AdminPage() {
   );
 }
 
-type ServiceLinkRow = { service_slug: string; demo_url: string | null; sale_url: string | null };
+type ServiceLinkRow = { service_slug: string; demo_url: string | null; sale_url: string | null; demo_image: string | null };
 
 type PortfolioProject = {
   id: string;
@@ -409,9 +409,16 @@ function ServiceLinksPanel() {
     try {
       const supabase = getSupabase();
       const { error } = await supabase.from("service_links").upsert(
-        { service_slug: slug, demo_url: row.demo_url || null, sale_url: row.sale_url || null, updated_at: new Date().toISOString() },
+        { 
+          service_slug: slug, 
+          demo_url: row.demo_url || null, 
+          sale_url: row.sale_url || null, 
+          demo_image: row.demo_image || null,
+          updated_at: new Date().toISOString() 
+        },
         { onConflict: "service_slug" },
       );
+
       if (error) throw error;
       toast.success("লিংক সেভ হয়েছে");
     } catch (err) {
@@ -442,7 +449,7 @@ function ServiceLinksPanel() {
 
       <div className="overflow-hidden rounded-2xl border border-border bg-surface/50">
         {services.map((s) => {
-          const row = rows[s.slug] ?? { demo_url: "", sale_url: "" };
+          const row = rows[s.slug] ?? { demo_url: "", sale_url: "", demo_image: "" };
           return (
             <div key={s.slug} className="border-b border-border/60 p-4 last:border-0 sm:p-5">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -480,6 +487,14 @@ function ServiceLinksPanel() {
                   />
                 </label>
               </div>
+              <div className="mt-4">
+                <ImageUpload 
+                  label="সার্ভিস ডেমো ইমেজ" 
+                  value={row.demo_image} 
+                  onUpload={(url) => setRows((prev) => ({ ...prev, [s.slug]: { ...row, demo_image: url } }))} 
+                />
+              </div>
+
             </div>
           );
         })}
@@ -559,9 +574,14 @@ function PortfolioProjectsPanel() {
         is_active: form.is_active,
         updated_at: new Date().toISOString(),
       };
+      
+      const { data: { user } } = await supabase.auth.getUser();
+      const payloadWithUser = { ...payload, updated_by: user?.id };
+
       const query = editingId
-        ? supabase.from("portfolio_projects").update(payload).eq("id", editingId)
-        : supabase.from("portfolio_projects").insert(payload);
+        ? supabase.from("portfolio_projects").update(payloadWithUser).eq("id", editingId)
+        : supabase.from("portfolio_projects").insert([payloadWithUser]);
+
       const { error } = await query;
       if (error) throw error;
       toast.success(editingId ? "প্রজেক্ট আপডেট হয়েছে" : "নতুন প্রজেক্ট যোগ হয়েছে");
@@ -614,7 +634,13 @@ function PortfolioProjectsPanel() {
               </Button>
             )}
           </div>
-          <div className="space-y-3">
+          <div className="space-y-4">
+            <ImageUpload 
+              label="প্রজেক্ট প্রিভিউ ইমেজ" 
+              value={form.image_url} 
+              onUpload={(url) => setForm(prev => ({ ...prev, image_url: url }))} 
+            />
+
 
             <label className="block">
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্টের নাম</span>
@@ -644,26 +670,35 @@ function PortfolioProjectsPanel() {
                 className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-neon focus:outline-none"
               />
             </label>
-            <label className="block">
-              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রিভিউ ইমেজ URL</span>
-              <input
-                type="url"
-                value={form.image_url}
-                onChange={(e) => setForm((prev) => ({ ...prev, image_url: e.target.value }))}
-                placeholder="https://.../screenshot.jpg (optional)"
-                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-lavender focus:outline-none"
-              />
-            </label>
-            <label className="block">
-              <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্ট স্ক্রিনশটসমূহ (কমা দিয়ে আলাদা করুন)</span>
-              <textarea
-                value={form.project_screenshots}
-                onChange={(e) => setForm((prev) => ({ ...prev, project_screenshots: e.target.value }))}
-                placeholder="https://.../img1.jpg, https://.../img2.jpg"
-                rows={2}
-                className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-lavender focus:outline-none"
-              />
-            </label>
+            <div className="space-y-1.5">
+              <span className="block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">প্রজেক্ট স্ক্রিনশটসমূহ</span>
+              <div className="grid grid-cols-2 gap-2">
+                {form.project_screenshots.split(",").filter(Boolean).map((s, i) => (
+                  <div key={i} className="group relative aspect-video overflow-hidden rounded-lg border border-border">
+                    <img src={s.trim()} alt="" className="h-full w-full object-cover" />
+                    <button 
+                      onClick={() => {
+                        const sss = form.project_screenshots.split(",").map(x => x.trim()).filter(Boolean);
+                        sss.splice(i, 1);
+                        setForm(prev => ({ ...prev, project_screenshots: sss.join(", ") }));
+                      }}
+                      className="absolute right-1 top-1 rounded-full bg-rose-500 p-1 text-white opacity-0 transition group-hover:opacity-100"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))}
+                <ImageUpload 
+                  compact 
+                  onUpload={(url) => {
+                    const sss = form.project_screenshots.split(",").map(x => x.trim()).filter(Boolean);
+                    sss.push(url);
+                    setForm(prev => ({ ...prev, project_screenshots: sss.join(", ") }));
+                  }} 
+                />
+              </div>
+            </div>
+
             <label className="block">
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">ছোট বর্ণনা</span>
               <textarea
@@ -753,7 +788,84 @@ function PortfolioProjectsPanel() {
   );
 }
 
+function ImageUpload({ 
+  label, 
+  value, 
+  onUpload, 
+  compact 
+}: { 
+  label?: string; 
+  value?: string; 
+  onUpload: (url: string) => void;
+  compact?: boolean;
+}) {
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const supabase = getSupabase();
+      const ext = file.name.split('.').pop();
+      const path = `${Math.random().toString(36).substring(2)}.${ext}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('images')
+        .upload(path, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(path);
+
+      onUpload(publicUrl);
+      toast.success("ইমেজ আপলোড হয়েছে");
+    } catch (err) {
+      toast.error("আপলোড ব্যর্থ: " + (err instanceof Error ? err.message : "ত্রুটি"));
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  if (compact) {
+    return (
+      <label className="flex aspect-video cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-border bg-background/50 transition hover:bg-background">
+        {uploading ? <Loader className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4 text-muted-foreground" />}
+        <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
+      </label>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      {label && <span className="block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</span>}
+      <div className="flex gap-3">
+        {value && (
+          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-border">
+            <img src={value} alt="" className="h-full w-full object-cover" />
+          </div>
+        )}
+        <label className="flex h-12 flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-background/50 px-4 transition hover:bg-background">
+          {uploading ? (
+            <Loader className="h-4 w-4 animate-spin text-muted-foreground" />
+          ) : (
+            <>
+              <ImagePlus className="h-4 w-4 text-muted-foreground" />
+              <span className="text-xs text-muted-foreground">Gallery থেকে ছবি নিন</span>
+            </>
+          )}
+          <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
+        </label>
+      </div>
+    </div>
+  );
+}
+
 function StatusPill({ value, onChange }: { value: string; onChange: (s: Status) => void }) {
+
   const cls = STATUS_COLOR[value] ?? "bg-surface text-muted-foreground border-border";
   return (
     <select
