@@ -305,7 +305,7 @@ function Hero() {
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
             প্রিমিয়াম <span className="text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা আপনার বিজনেসকে করবে স্মার্ট।
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white sm:text-lg">
             Webtrix IT Solution দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক ল্যান্ডিং পেজ, ই-কমার্স স্টোর এবং কাস্টম সফটওয়্যার তৈরি করে আপনার ব্যবসায়িক লক্ষ্য অর্জনে সাহায্য করে।
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
