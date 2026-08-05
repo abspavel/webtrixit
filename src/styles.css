@@ -120,13 +120,30 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.reveal {
+@keyframes reveal-l {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes reveal-r {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.reveal, .reveal-l, .reveal-r {
   opacity: 0;
 }
 
-.reveal.active,
-.reveal[data-visible="true"] {
+.reveal.active, .reveal[data-visible="true"] {
   animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-l.active, .reveal-l[data-visible="true"] {
+  animation: reveal-l 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-r.active, .reveal-r[data-visible="true"] {
+  animation: reveal-r 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Fluid Typography */
