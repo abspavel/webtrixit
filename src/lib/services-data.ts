@@ -172,9 +172,9 @@ export const services: ServiceItem[] = [
   {
     slug: "lms-site-development",
     icon: GraduationCap,
-    title: "LMS সাইট ডেভেলপমেন্ট",
-    titleBn: "LMS সাইট ডেভেলপমেন্ট",
-    subject: "LMS প্ল্যাটফর্ম",
+    title: "Dermatological Care",
+    titleBn: "ডার্মাটোলজিক্যাল কেয়ার",
+    subject: "ডার্মাটোলজিক্যাল কেয়ার",
     desc: "ফুল-ফিচার লার্নিং প্ল্যাটফর্ম — কোর্স, কুইজ, স্টুডেন্ট ও পেমেন্ট সহ।",
     tagline: "আপনার কোর্স বিক্রি করুন নিজের ব্র্যান্ডে, ১০০% profit নিজে রাখুন।",
     why: [

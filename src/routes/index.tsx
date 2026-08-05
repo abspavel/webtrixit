@@ -369,7 +369,7 @@ function Nav() {
               </a>
             ))}
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground">
-              ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
+              Book Now <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
