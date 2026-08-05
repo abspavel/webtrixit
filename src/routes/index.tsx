@@ -1,4 +1,4 @@
-// Supabase ঠিকভাবে কানেক্ট করা আছে কিনা চেক কর
+// Webtrix IT Solution - Home Page
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
