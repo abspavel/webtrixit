@@ -889,7 +889,7 @@ function Portfolio() {
   return (
     <section id="work" className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5">
-        <SectionHeader eyebrow="আমাদের কাজ" title="ওয়েব, কমার্স ও সফটওয়্যার জুড়ে বাছাইকৃত প্রজেক্ট।" />
+        <SectionHeader eyebrow="Our Results" title="Real People. Real Transformations." />
 
         <div className="relative mt-12">
           <div className="overflow-hidden">
@@ -929,7 +929,7 @@ function Portfolio() {
                         </span>
                       </div>
                       <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur">
-                        ডেমো দেখুন {isExternal && <ExternalLink className="h-3 w-3" />}
+                        View Details {isExternal && <ExternalLink className="h-3 w-3" />}
                       </span>
                     </div>
                     <div className="flex items-center justify-between p-4">
@@ -977,7 +977,7 @@ function Portfolio() {
           <div className="mt-6 flex items-center justify-center gap-4">
             <button
               onClick={() => go(-1)}
-              aria-label="আগের প্রজেক্ট"
+              aria-label="Previous Project"
               className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:bg-surface-2"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -987,7 +987,7 @@ function Portfolio() {
                 <button
                   key={idx}
                   onClick={() => setI(idx)}
-                  aria-label={`স্লাইড ${idx + 1}`}
+                  aria-label={`Slide ${idx + 1}`}
                   className={`h-2 rounded-full transition-all ${
                     idx === safeI ? "w-6 bg-electric" : "w-2 bg-border"
                   }`}
@@ -1140,7 +1140,7 @@ function ContactForm() {
     e.preventDefault();
     if (loading) return;
     if (!name.trim() || !phone.trim()) {
-      toast.error("নাম ও ফোন নাম্বার দিন।");
+      toast.error("Please enter your name and phone number.");
       return;
     }
     setLoading(true);
@@ -1152,10 +1152,10 @@ function ContactForm() {
         },
       });
       if (!res.ok) throw new Error(res.error || "Submit failed");
-      toast.success("ধন্যবাদ! আমরা শীঘ্রই যোগাযোগ করব।");
+      toast.success("Thank you! We'll contact you soon.");
       setName(""); setPhone(""); setEmail(""); setService(""); setMessage("");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "সাবমিট ব্যর্থ হয়েছে");
+      toast.error(err instanceof Error ? err.message : "Submission failed");
     } finally {
       setLoading(false);
     }
@@ -1164,18 +1164,19 @@ function ContactForm() {
   return (
     <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-surface/70 p-6 backdrop-blur">
       <div className="grid gap-4">
-        <Field label="আপনার নাম" placeholder="যেমনঃ রফিকুল ইসলাম" value={name} onChange={(e) => setName(e.target.value)} required />
-        <Field label="ফোন / WhatsApp" placeholder="01XXXXXXXXX" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-        <Field label="ইমেইল (ঐচ্ছিক)" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Field label="কী দরকার?" placeholder="যেমনঃ ২০০ প্রোডাক্টের ই-কমার্স সাইট" value={service} onChange={(e) => setService(e.target.value)} />
-        <label className="text-xs font-medium text-muted-foreground">মেসেজ
-          <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="আপনার প্রজেক্ট সম্পর্কে বিস্তারিত লিখুন..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
+        <Field label="Your Name" placeholder="e.g. Sarah Jenkins" value={name} onChange={(e) => setName(e.target.value)} required />
+        <Field label="Phone / WhatsApp" placeholder="+8801XXXXXXXXX" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        <Field label="Email (Optional)" type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Field label="Interest" placeholder="e.g. Skin Care Products" value={service} onChange={(e) => setService(e.target.value)} />
+        <label className="text-xs font-medium text-muted-foreground">Message
+          <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Tell us more about your skin goals..." className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none" />
         </label>
+
         <button type="submit" disabled={loading} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:opacity-90 disabled:opacity-60">
-          {loading ? "সাবমিট হচ্ছে..." : <>ফ্রি কোটেশন নিন <ArrowRight className="h-4 w-4" /></>}
+          {loading ? "Submitting..." : <>Get Free Advice <ArrowRight className="h-4 w-4" /></>}
         </button>
         <p className="flex items-center gap-2 text-xs text-muted-foreground">
-          <ShieldCheck className="h-3.5 w-3.5 text-neon" /> আমরা ২৪ ঘণ্টার মধ্যে উত্তর দিই। আপনার তথ্য গোপন থাকবে।
+          <ShieldCheck className="h-3.5 w-3.5 text-neon" /> We reply within 24 hours. Your data is private.
         </p>
       </div>
     </form>
@@ -1192,7 +1193,7 @@ function Footer() {
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth" className="text-xs text-muted-foreground hover:text-foreground">Admin</Link>
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Webtrix IT Solution. সর্বস্বত্ব সংরক্ষিত।</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Bioxin. All rights reserved.</p>
         </div>
       </div>
     </footer>
