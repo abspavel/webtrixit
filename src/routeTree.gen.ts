@@ -13,17 +13,6 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesSoftwareDevelopmentRouteImport } from './routes/services.software-development'
-import { Route as ServicesSmmPanelWebsiteRouteImport } from './routes/services.smm-panel-website'
-import { Route as ServicesReadymadeEcommerceWebsiteRouteImport } from './routes/services.readymade-ecommerce-website'
-import { Route as ServicesLogoCoverPosterDesignRouteImport } from './routes/services.logo-cover-poster-design'
-import { Route as ServicesLmsSiteDevelopmentRouteImport } from './routes/services.lms-site-development'
-import { Route as ServicesLandingPageDesignRouteImport } from './routes/services.landing-page-design'
-import { Route as ServicesFacebookPixelSetupRouteImport } from './routes/services.facebook-pixel-setup'
-import { Route as ServicesFacebookBusinessPageSetupRouteImport } from './routes/services.facebook-business-page-setup'
-import { Route as ServicesEcommerceWebsiteDesignRouteImport } from './routes/services.ecommerce-website-design'
-import { Route as ServicesCustomWebsitesRouteImport } from './routes/services.custom-websites'
-import { Route as ServicesAiVideoAdsRouteImport } from './routes/services.ai-video-ads'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as DemoPulseadsVideoRouteImport } from './routes/demo.pulseads-video'
 import { Route as DemoPanelproSmmRouteImport } from './routes/demo.panelpro-smm'
@@ -53,69 +42,6 @@ const AdminRoute = AdminRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesSoftwareDevelopmentRoute =
-  ServicesSoftwareDevelopmentRouteImport.update({
-    id: '/services/software-development',
-    path: '/services/software-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesSmmPanelWebsiteRoute = ServicesSmmPanelWebsiteRouteImport.update({
-  id: '/services/smm-panel-website',
-  path: '/services/smm-panel-website',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesReadymadeEcommerceWebsiteRoute =
-  ServicesReadymadeEcommerceWebsiteRouteImport.update({
-    id: '/services/readymade-ecommerce-website',
-    path: '/services/readymade-ecommerce-website',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesLogoCoverPosterDesignRoute =
-  ServicesLogoCoverPosterDesignRouteImport.update({
-    id: '/services/logo-cover-poster-design',
-    path: '/services/logo-cover-poster-design',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesLmsSiteDevelopmentRoute =
-  ServicesLmsSiteDevelopmentRouteImport.update({
-    id: '/services/lms-site-development',
-    path: '/services/lms-site-development',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesLandingPageDesignRoute =
-  ServicesLandingPageDesignRouteImport.update({
-    id: '/services/landing-page-design',
-    path: '/services/landing-page-design',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesFacebookPixelSetupRoute =
-  ServicesFacebookPixelSetupRouteImport.update({
-    id: '/services/facebook-pixel-setup',
-    path: '/services/facebook-pixel-setup',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesFacebookBusinessPageSetupRoute =
-  ServicesFacebookBusinessPageSetupRouteImport.update({
-    id: '/services/facebook-business-page-setup',
-    path: '/services/facebook-business-page-setup',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesEcommerceWebsiteDesignRoute =
-  ServicesEcommerceWebsiteDesignRouteImport.update({
-    id: '/services/ecommerce-website-design',
-    path: '/services/ecommerce-website-design',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesCustomWebsitesRoute = ServicesCustomWebsitesRouteImport.update({
-  id: '/services/custom-websites',
-  path: '/services/custom-websites',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesAiVideoAdsRoute = ServicesAiVideoAdsRouteImport.update({
-  id: '/services/ai-video-ads',
-  path: '/services/ai-video-ads',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
@@ -183,17 +109,6 @@ export interface FileRoutesByFullPath {
   '/demo/panelpro-smm': typeof DemoPanelproSmmRoute
   '/demo/pulseads-video': typeof DemoPulseadsVideoRoute
   '/services/$slug': typeof ServicesSlugRoute
-  '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
-  '/services/custom-websites': typeof ServicesCustomWebsitesRoute
-  '/services/ecommerce-website-design': typeof ServicesEcommerceWebsiteDesignRoute
-  '/services/facebook-business-page-setup': typeof ServicesFacebookBusinessPageSetupRoute
-  '/services/facebook-pixel-setup': typeof ServicesFacebookPixelSetupRoute
-  '/services/landing-page-design': typeof ServicesLandingPageDesignRoute
-  '/services/lms-site-development': typeof ServicesLmsSiteDevelopmentRoute
-  '/services/logo-cover-poster-design': typeof ServicesLogoCoverPosterDesignRoute
-  '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
-  '/services/smm-panel-website': typeof ServicesSmmPanelWebsiteRoute
-  '/services/software-development': typeof ServicesSoftwareDevelopmentRoute
   '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRoutesByTo {
@@ -210,17 +125,6 @@ export interface FileRoutesByTo {
   '/demo/panelpro-smm': typeof DemoPanelproSmmRoute
   '/demo/pulseads-video': typeof DemoPulseadsVideoRoute
   '/services/$slug': typeof ServicesSlugRoute
-  '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
-  '/services/custom-websites': typeof ServicesCustomWebsitesRoute
-  '/services/ecommerce-website-design': typeof ServicesEcommerceWebsiteDesignRoute
-  '/services/facebook-business-page-setup': typeof ServicesFacebookBusinessPageSetupRoute
-  '/services/facebook-pixel-setup': typeof ServicesFacebookPixelSetupRoute
-  '/services/landing-page-design': typeof ServicesLandingPageDesignRoute
-  '/services/lms-site-development': typeof ServicesLmsSiteDevelopmentRoute
-  '/services/logo-cover-poster-design': typeof ServicesLogoCoverPosterDesignRoute
-  '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
-  '/services/smm-panel-website': typeof ServicesSmmPanelWebsiteRoute
-  '/services/software-development': typeof ServicesSoftwareDevelopmentRoute
   '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRoutesById {
@@ -238,17 +142,6 @@ export interface FileRoutesById {
   '/demo/panelpro-smm': typeof DemoPanelproSmmRoute
   '/demo/pulseads-video': typeof DemoPulseadsVideoRoute
   '/services/$slug': typeof ServicesSlugRoute
-  '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
-  '/services/custom-websites': typeof ServicesCustomWebsitesRoute
-  '/services/ecommerce-website-design': typeof ServicesEcommerceWebsiteDesignRoute
-  '/services/facebook-business-page-setup': typeof ServicesFacebookBusinessPageSetupRoute
-  '/services/facebook-pixel-setup': typeof ServicesFacebookPixelSetupRoute
-  '/services/landing-page-design': typeof ServicesLandingPageDesignRoute
-  '/services/lms-site-development': typeof ServicesLmsSiteDevelopmentRoute
-  '/services/logo-cover-poster-design': typeof ServicesLogoCoverPosterDesignRoute
-  '/services/readymade-ecommerce-website': typeof ServicesReadymadeEcommerceWebsiteRoute
-  '/services/smm-panel-website': typeof ServicesSmmPanelWebsiteRoute
-  '/services/software-development': typeof ServicesSoftwareDevelopmentRoute
   '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRouteTypes {
@@ -267,17 +160,6 @@ export interface FileRouteTypes {
     | '/demo/panelpro-smm'
     | '/demo/pulseads-video'
     | '/services/$slug'
-    | '/services/ai-video-ads'
-    | '/services/custom-websites'
-    | '/services/ecommerce-website-design'
-    | '/services/facebook-business-page-setup'
-    | '/services/facebook-pixel-setup'
-    | '/services/landing-page-design'
-    | '/services/lms-site-development'
-    | '/services/logo-cover-poster-design'
-    | '/services/readymade-ecommerce-website'
-    | '/services/smm-panel-website'
-    | '/services/software-development'
     | '/api/public/config'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -294,17 +176,6 @@ export interface FileRouteTypes {
     | '/demo/panelpro-smm'
     | '/demo/pulseads-video'
     | '/services/$slug'
-    | '/services/ai-video-ads'
-    | '/services/custom-websites'
-    | '/services/ecommerce-website-design'
-    | '/services/facebook-business-page-setup'
-    | '/services/facebook-pixel-setup'
-    | '/services/landing-page-design'
-    | '/services/lms-site-development'
-    | '/services/logo-cover-poster-design'
-    | '/services/readymade-ecommerce-website'
-    | '/services/smm-panel-website'
-    | '/services/software-development'
     | '/api/public/config'
   id:
     | '__root__'
@@ -321,17 +192,6 @@ export interface FileRouteTypes {
     | '/demo/panelpro-smm'
     | '/demo/pulseads-video'
     | '/services/$slug'
-    | '/services/ai-video-ads'
-    | '/services/custom-websites'
-    | '/services/ecommerce-website-design'
-    | '/services/facebook-business-page-setup'
-    | '/services/facebook-pixel-setup'
-    | '/services/landing-page-design'
-    | '/services/lms-site-development'
-    | '/services/logo-cover-poster-design'
-    | '/services/readymade-ecommerce-website'
-    | '/services/smm-panel-website'
-    | '/services/software-development'
     | '/api/public/config'
   fileRoutesById: FileRoutesById
 }
@@ -349,17 +209,6 @@ export interface RootRouteChildren {
   DemoPanelproSmmRoute: typeof DemoPanelproSmmRoute
   DemoPulseadsVideoRoute: typeof DemoPulseadsVideoRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
-  ServicesAiVideoAdsRoute: typeof ServicesAiVideoAdsRoute
-  ServicesCustomWebsitesRoute: typeof ServicesCustomWebsitesRoute
-  ServicesEcommerceWebsiteDesignRoute: typeof ServicesEcommerceWebsiteDesignRoute
-  ServicesFacebookBusinessPageSetupRoute: typeof ServicesFacebookBusinessPageSetupRoute
-  ServicesFacebookPixelSetupRoute: typeof ServicesFacebookPixelSetupRoute
-  ServicesLandingPageDesignRoute: typeof ServicesLandingPageDesignRoute
-  ServicesLmsSiteDevelopmentRoute: typeof ServicesLmsSiteDevelopmentRoute
-  ServicesLogoCoverPosterDesignRoute: typeof ServicesLogoCoverPosterDesignRoute
-  ServicesReadymadeEcommerceWebsiteRoute: typeof ServicesReadymadeEcommerceWebsiteRoute
-  ServicesSmmPanelWebsiteRoute: typeof ServicesSmmPanelWebsiteRoute
-  ServicesSoftwareDevelopmentRoute: typeof ServicesSoftwareDevelopmentRoute
   ApiPublicConfigRoute: typeof ApiPublicConfigRoute
 }
 
@@ -391,83 +240,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/software-development': {
-      id: '/services/software-development'
-      path: '/services/software-development'
-      fullPath: '/services/software-development'
-      preLoaderRoute: typeof ServicesSoftwareDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/smm-panel-website': {
-      id: '/services/smm-panel-website'
-      path: '/services/smm-panel-website'
-      fullPath: '/services/smm-panel-website'
-      preLoaderRoute: typeof ServicesSmmPanelWebsiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/readymade-ecommerce-website': {
-      id: '/services/readymade-ecommerce-website'
-      path: '/services/readymade-ecommerce-website'
-      fullPath: '/services/readymade-ecommerce-website'
-      preLoaderRoute: typeof ServicesReadymadeEcommerceWebsiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/logo-cover-poster-design': {
-      id: '/services/logo-cover-poster-design'
-      path: '/services/logo-cover-poster-design'
-      fullPath: '/services/logo-cover-poster-design'
-      preLoaderRoute: typeof ServicesLogoCoverPosterDesignRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/lms-site-development': {
-      id: '/services/lms-site-development'
-      path: '/services/lms-site-development'
-      fullPath: '/services/lms-site-development'
-      preLoaderRoute: typeof ServicesLmsSiteDevelopmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/landing-page-design': {
-      id: '/services/landing-page-design'
-      path: '/services/landing-page-design'
-      fullPath: '/services/landing-page-design'
-      preLoaderRoute: typeof ServicesLandingPageDesignRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/facebook-pixel-setup': {
-      id: '/services/facebook-pixel-setup'
-      path: '/services/facebook-pixel-setup'
-      fullPath: '/services/facebook-pixel-setup'
-      preLoaderRoute: typeof ServicesFacebookPixelSetupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/facebook-business-page-setup': {
-      id: '/services/facebook-business-page-setup'
-      path: '/services/facebook-business-page-setup'
-      fullPath: '/services/facebook-business-page-setup'
-      preLoaderRoute: typeof ServicesFacebookBusinessPageSetupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/ecommerce-website-design': {
-      id: '/services/ecommerce-website-design'
-      path: '/services/ecommerce-website-design'
-      fullPath: '/services/ecommerce-website-design'
-      preLoaderRoute: typeof ServicesEcommerceWebsiteDesignRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/custom-websites': {
-      id: '/services/custom-websites'
-      path: '/services/custom-websites'
-      fullPath: '/services/custom-websites'
-      preLoaderRoute: typeof ServicesCustomWebsitesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/ai-video-ads': {
-      id: '/services/ai-video-ads'
-      path: '/services/ai-video-ads'
-      fullPath: '/services/ai-video-ads'
-      preLoaderRoute: typeof ServicesAiVideoAdsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$slug': {
@@ -557,19 +329,6 @@ const rootRouteChildren: RootRouteChildren = {
   DemoPanelproSmmRoute: DemoPanelproSmmRoute,
   DemoPulseadsVideoRoute: DemoPulseadsVideoRoute,
   ServicesSlugRoute: ServicesSlugRoute,
-  ServicesAiVideoAdsRoute: ServicesAiVideoAdsRoute,
-  ServicesCustomWebsitesRoute: ServicesCustomWebsitesRoute,
-  ServicesEcommerceWebsiteDesignRoute: ServicesEcommerceWebsiteDesignRoute,
-  ServicesFacebookBusinessPageSetupRoute:
-    ServicesFacebookBusinessPageSetupRoute,
-  ServicesFacebookPixelSetupRoute: ServicesFacebookPixelSetupRoute,
-  ServicesLandingPageDesignRoute: ServicesLandingPageDesignRoute,
-  ServicesLmsSiteDevelopmentRoute: ServicesLmsSiteDevelopmentRoute,
-  ServicesLogoCoverPosterDesignRoute: ServicesLogoCoverPosterDesignRoute,
-  ServicesReadymadeEcommerceWebsiteRoute:
-    ServicesReadymadeEcommerceWebsiteRoute,
-  ServicesSmmPanelWebsiteRoute: ServicesSmmPanelWebsiteRoute,
-  ServicesSoftwareDevelopmentRoute: ServicesSoftwareDevelopmentRoute,
   ApiPublicConfigRoute: ApiPublicConfigRoute,
 }
 export const routeTree = rootRouteImport
