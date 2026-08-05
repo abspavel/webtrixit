@@ -411,6 +411,7 @@ function ProblemSolution() {
           <SectionHeader
             eyebrow="আমরা যে গ্যাপ পূরণ করি"
             title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
+            description="নিচে আমাদের কার্যপদ্ধতি এবং আপনি আমাদের থেকে ঠিক কী কী পাবেন তা বিস্তারিত দেওয়া হলো।"
           />
         </div>
         <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
@@ -1051,11 +1052,12 @@ function FloatingWhatsApp() {
 }
 
 /* ---------- SHARED ---------- */
-function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
+function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">{eyebrow}</span>
       <h2 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">{title}</h2>
+      {description && <p className="mt-4 text-slate-300">{description}</p>}
     </div>
   );
 }
