@@ -842,7 +842,6 @@ function Portfolio() {
     let cancelled = false;
     (async () => {
       try {
-        const supabase = getSupabase();
         const { data, error } = await supabase
           .from("portfolio_projects")
           .select("id, title, category, description, demo_url, image_url, project_screenshots, sort_order")

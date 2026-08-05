@@ -406,7 +406,6 @@ function ServiceLinksPanel() {
     if (!row) return;
     setSavingSlug(slug);
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.from("service_links").upsert(
         { 
           service_slug: slug, 
