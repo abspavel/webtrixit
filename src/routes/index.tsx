@@ -491,11 +491,11 @@ function ClientLogos() {
           দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর আস্থা রেখেছে
         </p>
         <div className="mt-6 overflow-hidden">
-          <div className="animate-marquee flex w-max items-center gap-8">
+          <div className="flex w-max items-center gap-8 animate-marquee hover:[animation-play-state:paused]">
             {row.map((c, i) => (
               <div
                 key={i}
-                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur"
+                className="flex shrink-0 items-center gap-3 rounded-2xl border border-border/60 bg-card/60 px-5 py-3 backdrop-blur transition-transform hover:scale-105"
               >
                 <img
                   src={c.photo}
