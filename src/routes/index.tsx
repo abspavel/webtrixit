@@ -686,6 +686,7 @@ function Services() {
 /* ---------- SUCCESS STORIES (swipe-enabled slider) ---------- */
 function SuccessStories() {
   const [i, setI] = useState(0);
+  const [isAuto, setIsAuto] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -693,11 +694,15 @@ function SuccessStories() {
   const minSwipeDistance = 50;
 
   useEffect(() => {
-    const t = setInterval(next, 6000);
+    if (!isAuto) return;
+    const t = setInterval(next, 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [isAuto, i]);
 
-  const prev = () => setI((v) => (v - 1 + stories.length) % stories.length);
+  const prev = () => {
+    setIsAuto(false);
+    setI((v) => (v - 1 + stories.length) % stories.length);
+  };
   const next = () => setI((v) => (v + 1) % stories.length);
 
   const onTouchStart = (e: React.TouchEvent) => {
