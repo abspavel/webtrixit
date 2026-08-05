@@ -419,20 +419,23 @@ function Hero() {
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function Statistics() {
   const stats = [
-    { label: "প্রজেক্ট সম্পন্ন", value: 250, suffix: "+", icon: Zap, color: "text-electric" },
+    { label: "অর্ডার সম্পন্ন", value: 250, suffix: "*", icon: Zap, color: "text-electric" },
     { label: "সন্তুষ্ট ক্লায়েন্ট", value: 200, suffix: "+", icon: Star, color: "text-neon" },
     { label: "অভিজ্ঞতা", value: 5, suffix: " বছর+", icon: ShieldCheck, color: "text-lavender" },
   ];
   return (
-    <div className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-8">
+    <div className="mt-8 flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:mt-12 md:gap-8">
       {stats.map((s) => (
-        <div key={s.label} className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-border bg-card/50 p-4 text-left sm:flex-initial sm:p-6">
-          <s.icon className={`h-6 w-6 shrink-0 sm:h-8 sm:w-8 ${s.color}`} />
-          <div>
-            <div className="text-xl font-bold sm:text-3xl">
+        <div 
+          key={s.label} 
+          className="flex flex-1 min-w-0 items-center gap-1.5 rounded-xl border border-border bg-card/50 p-2.5 text-left sm:gap-3 sm:rounded-2xl sm:p-4 md:p-6 lg:flex-initial lg:min-w-[180px]"
+        >
+          <s.icon className={`h-4 w-4 shrink-0 sm:h-6 sm:w-6 md:h-8 md:w-8 ${s.color}`} />
+          <div className="min-w-0 truncate">
+            <div className="text-sm font-bold sm:text-lg md:text-2xl lg:text-3xl">
               <Counter value={s.value} />{s.suffix}
             </div>
-            <div className="whitespace-nowrap text-xs text-muted-foreground sm:text-sm">{s.label}</div>
+            <div className="truncate text-[10px] text-muted-foreground sm:text-xs md:text-sm">{s.label}</div>
           </div>
         </div>
       ))}
