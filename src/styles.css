@@ -41,8 +41,9 @@
   --color-card: #0F172A;
   --color-primary: #3B82F6;
   --color-primary-foreground: #FFFFFF;
-  --font-display: "Space Grotesk", "Hind Siliguri", sans-serif;
-  --font-sans: "Inter", "Hind Siliguri", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
