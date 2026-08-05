@@ -261,7 +261,7 @@ function Nav() {
         <a href="#top" className="flex min-w-0 items-center gap-2" aria-label="Bioxin Home">
           <img
             src={logoAsset.url}
-            alt="Webtrixit"
+            alt="Bioxin"
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
           <span className="font-display text-lg font-bold tracking-tight text-foreground sm:text-xl">
@@ -1097,27 +1097,30 @@ function FinalCTA() {
           <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 text-xs font-medium text-muted-foreground">
-                <Zap className="h-3.5 w-3.5 text-neon" /> এই কোয়ার্টারের জন্য বুকিং চলছে
+                <Zap className="h-3.5 w-3.5 text-neon" /> Now accepting new appointments
               </span>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-                চলুন তৈরি করি আপনার <span className="text-gradient">ডিজিটাল ইঞ্জিন</span>।
+                Let's reveal your <span className="text-gradient">Natural Glow</span>.
               </h2>
               <p className="mt-4 max-w-lg text-muted-foreground">
-                আপনার প্রজেক্ট সম্পর্কে বলুন। ২৪ ঘণ্টার মধ্যে ফ্রি স্ট্র্যাটেজি কল, কোটেশন ও টাইমলাইন পান।
+                Tell us about your skin goals. Receive a free strategy call, care plan, and quote within 24 hours.
               </p>
+
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp করুন
+                  <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
                 </a>
                 <a href="mailto:webtrixofficial@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-                  <Mail className="h-4 w-4" /> ইমেইল করুন
+                  <Mail className="h-4 w-4" /> Email Us
                 </a>
+
               </div>
               <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
-                <a href="tel:+8801835985730" className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4 text-electric" /> মোবাইল: 01835985730</a>
+                <a href="tel:+8801835985730" className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4 text-electric" /> Mobile: 01835985730</a>
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-foreground"><MessageCircle className="h-4 w-4 text-neon" /> WhatsApp: 01835985730</a>
-                <a href="mailto:webtrixofficial@gmail.com" className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4 text-neon" /> webtrixofficial@gmail.com</a>
-                <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Karnafully, Chattogram, Bangladesh</div>
+                <a href="mailto:webtrixofficial@gmail.com" className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4 text-neon" /> bioxin.official@gmail.com</a>
+                <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-lavender" /> Bioxin Clinic, Karnafully, Chattogram, Bangladesh</div>
+
               </div>
             </div>
             <ContactForm />
