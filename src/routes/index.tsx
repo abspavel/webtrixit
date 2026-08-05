@@ -785,7 +785,10 @@ function SuccessStories() {
               {stories.map((_, k) => (
                 <button
                   key={k}
-                  onClick={() => setI(k)}
+                  onClick={() => {
+                    setIsAuto(false);
+                    setI(k);
+                  }}
                   aria-label={`স্টোরি ${k + 1} দেখুন`}
                   aria-current={k === i ? "true" : "false"}
                   className={`h-2 rounded-full transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-electric ${
