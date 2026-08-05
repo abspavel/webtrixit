@@ -233,11 +233,12 @@ function Nav() {
   const { theme, setTheme } = useTheme();
 
   const themes: { id: Theme; label: string; icon: any }[] = [
-    { id: "dark", label: "ডার্ক মুড", icon: Moon },
-    { id: "gray", label: "গ্রে মুড", icon: Monitor },
-    { id: "green", label: "গ্রিন মুড", icon: Zap },
-    { id: "orange", label: "অরেঞ্জ মুড", icon: Sparkles },
-    { id: "white", label: "হোয়াইট মুড", icon: Sun },
+    { id: "dark", label: "Dark Mode", icon: Moon },
+    { id: "gray", label: "Gray Mode", icon: Monitor },
+    { id: "green", label: "Green Mode", icon: Zap },
+    { id: "orange", label: "Orange Mode", icon: Sparkles },
+    { id: "white", label: "White Mode", icon: Sun },
+
   ];
 
   const links = [
@@ -287,7 +288,8 @@ function Nav() {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
-                <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
+                <DropdownMenuLabel>Change Theme or Color</DropdownMenuLabel>
+
                 <DropdownMenuSeparator className="bg-border" />
                 {themes.map((t) => (
                   <DropdownMenuItem
@@ -316,13 +318,14 @@ function Nav() {
             <DropdownMenuTrigger asChild>
               <button 
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
-                aria-label="থিম পরিবর্তন করুন"
+                aria-label="Change Theme"
+
               >
                 <Palette className="h-5 w-5" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
-              <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
+              <DropdownMenuLabel>Change Theme or Color</DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-border" />
               {themes.map((t) => (
                 <DropdownMenuItem
@@ -341,7 +344,7 @@ function Nav() {
           </DropdownMenu>
 
           <button 
-            aria-label="মেনু" 
+            aria-label="Menu" 
             onClick={() => setOpen(!open)} 
             className="rounded-lg border border-border p-2"
           >
@@ -392,7 +395,7 @@ function Hero() {
       <div className="mx-auto max-w-7xl px-5 pt-16 pb-10 md:pt-24 md:pb-14">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
+            <span className="h-2 w-2 rounded-full bg-neon" /> Trusted Skin Care Experts Since 2014
           </span>
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
             Premium <span className="text-gradient">Skin Care</span> — for your natural glow.
@@ -402,11 +405,12 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
-              প্রজেক্ট শুরু করুন <ArrowRight className="h-4 w-4" />
+              Start Routine <ArrowRight className="h-4 w-4" />
             </a>
             <a href="#work" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-surface-2">
-              আমাদের কাজ দেখুন
+              View Our Work
             </a>
+
           </div>
           <Statistics />
         </div>
