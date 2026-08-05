@@ -407,7 +407,7 @@ function ProblemSolution() {
   return (
     <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-5">
-        <div ref={head.ref} data-visible={head.visible} className="reveal">
+        <div ref={head.ref} data-visible={head.visible || true} className="reveal">
           <SectionHeader
             eyebrow="আমরা যে গ্যাপ পূরণ করি"
             title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
@@ -427,7 +427,7 @@ function ProblemSolution() {
                 <li
                   key={p.t}
                   className="reveal flex gap-3 rounded-2xl border border-destructive/10 bg-destructive/5 p-3.5 sm:p-4"
-                  data-visible={left.visible}
+                  data-visible={left.visible || true}
                   style={{ animationDelay: `${120 + i * 90}ms` }}
                 >
                   <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-destructive/15 text-destructive">
@@ -456,7 +456,7 @@ function ProblemSolution() {
                 <li
                   key={s.t}
                   className="reveal flex gap-3 rounded-2xl border border-neon/15 bg-neon/5 p-3.5 sm:p-4"
-                  data-visible={right.visible}
+                  data-visible={right.visible || true}
                   style={{ animationDelay: `${120 + i * 90}ms` }}
                 >
                   <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-neon/20 text-neon">
