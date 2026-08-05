@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export type Theme = "dark" | "gray" | "modern" | "ocean";
+export type Theme = "dark" | "gray" | "green" | "orange" | "white";
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -13,7 +13,7 @@ export function useTheme() {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove("theme-dark", "theme-gray", "theme-modern", "theme-ocean");
+    root.classList.remove("theme-dark", "theme-gray", "theme-green", "theme-orange", "theme-white");
     root.classList.add(`theme-${theme}`);
     localStorage.setItem("webtrix-theme", theme);
   }, [theme]);
