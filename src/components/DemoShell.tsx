@@ -20,7 +20,7 @@ export function DemoShell({
         background: bg,
         color: fg,
         fontFamily:
-          '"Hind Siliguri", "Noto Sans Bengali", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+          '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
         minHeight: "100vh",
       }}
     >
@@ -39,7 +39,7 @@ export function DemoShell({
           textTransform: "uppercase",
         }}
       >
-        ✦ Demo Preview by Webtrix IT Solution — শুধু প্রদর্শনের জন্য
+        ✦ Demo Preview by Bioxin — For Display Purposes Only
       </div>
       {children}
     </div>
