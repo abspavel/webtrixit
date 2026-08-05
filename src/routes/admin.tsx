@@ -391,7 +391,11 @@ function ServiceLinksPanel() {
       for (const s of services) map[s.slug] = { demo_url: "", sale_url: "", demo_image: "" };
       for (const r of (data ?? []) as ServiceLinkRow[]) {
 
-        map[r.service_slug] = { demo_url: r.demo_url ?? "", sale_url: r.sale_url ?? "" };
+        map[r.service_slug] = { 
+          demo_url: r.demo_url ?? "", 
+          sale_url: r.sale_url ?? "",
+          demo_image: r.demo_image ?? ""
+        };
       }
       setRows(map);
     } catch (err) {
