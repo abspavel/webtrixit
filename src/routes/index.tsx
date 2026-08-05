@@ -38,8 +38,9 @@ import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "8801835985730";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "আসসালামু আলাইকুম, Webtrix — আমি একটি প্রজেক্ট নিয়ে আলোচনা করতে চাই।",
+  "Hello Bioxin, I would like to discuss a personalized skin care plan.",
 )}`;
+
 
 const SITE_URL = "https://webtrixit.lovable.app";
 const OG_IMAGE =
@@ -56,7 +57,8 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "ওয়েবসাইট ডিজাইন বাংলাদেশ, ওয়েবসাইট তৈরি খরচ, ই-কমার্স ওয়েবসাইট বাংলাদেশ, ল্যান্ডিং পেজ ডিজাইন, LMS ওয়েবসাইট, কাস্টম সফটওয়্যার ডেভেলপমেন্ট, SMM প্যানেল ওয়েবসাইট, ডিজিটাল মার্কেটিং এজেন্সি চট্টগ্রাম, ফেসবুক পিক্সেল সেটআপ, লোগো ডিজাইন বাংলাদেশ, web design company Bangladesh, website development Chittagong, Webtrix IT Solution, webtrixit, #webtrixit, #webdesignBD, #ecommerceBD",
+          "skin care products, dermatology consultation, anti-aging treatment, clinical skin care, health solutions, bioxin, #bioxin",
+
       },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "geo.region", content: "BD-A" },
@@ -65,8 +67,9 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: HOME_DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL + "/" },
-      { property: "og:locale", content: "bn_BD" },
-      { property: "og:site_name", content: "Webtrix IT Solution" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:site_name", content: "Bioxin" },
+
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: HOME_TITLE },
@@ -90,20 +93,21 @@ export const Route = createFileRoute("/")({
           priceRange: "৳৳",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "কর্ণফুলী",
-            addressLocality: "চট্টগ্রাম",
+            streetAddress: "Karnafully",
+            addressLocality: "Chattogram",
+
             addressCountry: "BD",
           },
           areaServed: { "@type": "Country", name: "Bangladesh" },
           sameAs: ["https://wa.me/8801835985730"],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
-            name: "ওয়েব ও ডিজিটাল সার্ভিস",
+            name: "Skin Care & Health Services",
             itemListElement: services.map((s) => ({
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
-                name: s.titleBn,
+                name: s.title,
                 url: `${SITE_URL}/services/${s.slug}`,
               },
             })),
@@ -115,9 +119,10 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Webtrix IT Solution",
+          name: "Bioxin",
           url: SITE_URL,
-          inLanguage: "bn-BD",
+          inLanguage: "en-US",
+
         }),
       },
     ],
