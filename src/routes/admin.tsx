@@ -893,8 +893,11 @@ function StatusPill({ value, onChange }: { value: string; onChange: (s: Status) 
 function formatDate(iso: string): string {
   try {
     const d = new Date(iso);
-    return d.toLocaleString("bn-BD", { dateStyle: "medium", timeStyle: "short" });
+    return d.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
   } catch {
     return iso;
+  }
+}
+
   }
 }
