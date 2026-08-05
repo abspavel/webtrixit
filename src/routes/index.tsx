@@ -2,10 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
   Phone, Mail, MapPin, TrendingUp, Zap, ChevronLeft, ChevronRight,
-  AlertTriangle, Sparkles, ExternalLink,
+  AlertTriangle, Sparkles, ExternalLink, Palette, Moon, Sun, Monitor
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useTheme, type Theme } from "@/hooks/use-theme";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import heroBg from "@/assets/hero-bg.jpg";
 import client1 from "@/assets/client-1.jpg";
 import client2 from "@/assets/client-2.jpg";
