@@ -684,50 +684,54 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
             </h2>
 
             <p className="mt-4 text-muted-foreground">
-              নিচের ফর্মটি পূরণ করুন — আমাদের স্ট্র্যাটেজিস্ট ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করে কাস্টম প্ল্যান, টাইমলাইন ও কোটেশন পাঠাবেন। কোনো hidden ফি নেই, কমিটমেন্টও নয়।
+              Please fill out the form below — our skin expert will contact you within 24 hours with a custom care plan, timeline, and quote. No hidden fees, no commitment.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-foreground">
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> আপনার তথ্য ১০০% গোপন থাকবে</li>
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> ফ্রি কনসালটেশন ও প্রজেক্ট রোডম্যাপ</li>
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> কোটেশনে সম্মতি হলে তবেই কাজ শুরু</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> Your information is 100% confidential</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> Free consultation & treatment roadmap</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-neon" /> Start only after you approve the plan</li>
             </ul>
+
           </div>
 
           <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-card p-6 md:p-8">
             <div className="grid gap-4">
-              <LeadField label="আপনার নাম *" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="যেমনঃ রফিকুল ইসলাম" required />
-              <LeadField label="ফোন / WhatsApp *" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="+৮৮০ ১XXX XXXXXX" required />
-              <LeadField label="ইমেইল" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} placeholder="you@company.com" />
+              <LeadField label="Your Name *" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="e.g. John Doe" required />
+              <LeadField label="Phone / WhatsApp *" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="+1 XXX XXXXXX" required />
+              <LeadField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} placeholder="you@example.com" />
+
               <label className="text-xs font-medium text-muted-foreground">
-                বাজেট রেঞ্জ
+                Budget Range
                 <select
                   value={form.budget}
                   onChange={(e) => setForm({ ...form, budget: e.target.value })}
                   className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none"
                 >
-                  <option value="">বাজেট বেছে নিন</option>
-                  <option>৳ ১০,০০০ – ৩০,০০০</option>
-                  <option>৳ ৩০,০০০ – ১,০০,০০০</option>
-                  <option>৳ ১,০০,০০০ – ৫,০০,০০০</option>
-                  <option>৳ ৫,০০,০০০+</option>
+                  <option value="">Select a budget</option>
+                  <option>$50 – $200</option>
+                  <option>$200 – $500</option>
+                  <option>$500 – $1,500</option>
+                  <option>$1,500+</option>
                 </select>
+
               </label>
               <label className="text-xs font-medium text-muted-foreground">
-                বিস্তারিত বলুন
+                Tell us more
                 <textarea
                   rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder={`${serviceTitle} সম্পর্কে আপনার প্রয়োজন লিখুন...`}
+                  placeholder={`Tell us about your requirements for ${serviceTitle}...`}
                   className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
                 />
+
               </label>
               <button
                 type="submit"
                 disabled={saving}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px] disabled:opacity-60"
               >
-                <Send className="h-4 w-4" /> {saving ? "পাঠানো হচ্ছে..." : "কোটেশনের জন্য পাঠান"}
+                <Send className="h-4 w-4" /> {saving ? "Sending..." : "Send Request"}
               </button>
               {errorMsg && (
                 <p className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">
@@ -736,7 +740,7 @@ function ServiceLeadForm({ serviceTitle }: { serviceTitle: string }) {
               )}
               {sent && !errorMsg && (
                 <p className="rounded-xl border border-neon/30 bg-neon/10 px-4 py-3 text-xs text-neon">
-                  ধন্যবাদ! আপনার তথ্য সেভ হয়েছে এবং WhatsApp-এ পাঠানো হয়েছে — আমরা শীঘ্রই যোগাযোগ করব।
+                  Thank you! Your information has been saved and sent to WhatsApp — we will contact you shortly.
                 </p>
               )}
             </div>
