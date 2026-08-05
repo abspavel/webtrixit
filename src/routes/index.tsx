@@ -334,12 +334,14 @@ function Statistics() {
     { label: "অভিজ্ঞতা", value: "৫ বছর+", icon: ShieldCheck, color: "text-lavender" },
   ];
   return (
-    <div className="mt-12 grid gap-4 sm:grid-cols-3">
+    <div className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-8">
       {stats.map((s) => (
-        <div key={s.label} className="flex flex-col items-center rounded-2xl border border-border bg-card/50 p-6 text-center">
-          <s.icon className={`h-8 w-8 ${s.color}`} />
-          <div className="mt-3 text-3xl font-bold">{s.value}</div>
-          <div className="text-sm text-muted-foreground">{s.label}</div>
+        <div key={s.label} className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-border bg-card/50 p-4 text-left sm:flex-initial sm:p-6">
+          <s.icon className={`h-6 w-6 shrink-0 sm:h-8 sm:w-8 ${s.color}`} />
+          <div>
+            <div className="text-xl font-bold sm:text-3xl">{s.value}</div>
+            <div className="whitespace-nowrap text-xs text-muted-foreground sm:text-sm">{s.label}</div>
+          </div>
         </div>
       ))}
     </div>
