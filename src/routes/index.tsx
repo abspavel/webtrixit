@@ -170,40 +170,41 @@ type PortfolioProject = {
 };
 
 const fallbackPortfolio: PortfolioProject[] = [
-  { id: "fallback-0", title: "Luxe Landing Page", category: "ল্যান্ডিং পেজ", demo_url: "/demo/luxe-landing", image_url: null, sort_order: 0 },
-  { id: "fallback-1", title: "Kart+ E-commerce", category: "ই-কমার্স", demo_url: "/demo/kartplus-ecommerce", image_url: null, sort_order: 1 },
-  { id: "fallback-2", title: "FreshCart Grocery", category: "গ্রোসারি", demo_url: "/demo/freshcart-grocery", image_url: null, sort_order: 2 },
-  { id: "fallback-3", title: "EduPrime LMS", category: "এলএমএস", demo_url: "/demo/eduprime-lms", image_url: null, sort_order: 3 },
-  { id: "fallback-4", title: "PanelPro SMM", category: "এসএমএম প্যানেল", demo_url: "/demo/panelpro-smm", image_url: null, sort_order: 4 },
-  { id: "fallback-5", title: "Orbit CRM", category: "কাস্টম সফটওয়্যার", demo_url: "/demo/orbit-crm", image_url: null, sort_order: 5 },
-  { id: "fallback-6", title: "PulseAds Video", category: "AI ভিডিও", demo_url: "/demo/pulseads-video", image_url: null, sort_order: 6 },
-  { id: "fallback-7", title: "BrandKit Design", category: "লোগো ও পোস্টার", demo_url: "/demo/brandkit-design", image_url: null, sort_order: 7 },
+  { id: "fallback-0", title: "Luminous Skin Analysis", category: "Consultation", demo_url: "/demo/skin-analysis", image_url: null, sort_order: 0 },
+  { id: "fallback-1", title: "Hydra-Glow Kit", category: "Products", demo_url: "/demo/product-range", image_url: null, sort_order: 1 },
+  { id: "fallback-2", title: "Renewal Serum", category: "Products", demo_url: "/demo/product-range", image_url: null, sort_order: 2 },
+  { id: "fallback-3", title: "Youth Restoration", category: "Anti-Aging", demo_url: "/demo/anti-aging-results", image_url: null, sort_order: 3 },
+  { id: "fallback-4", title: "Acne Clear Protocol", category: "Clinical", demo_url: "/demo/clinical-success", image_url: null, sort_order: 4 },
+  { id: "fallback-5", title: "Skin Barrier Shield", category: "Dermatology", demo_url: "/demo/clinical-success", image_url: null, sort_order: 5 },
+  { id: "fallback-6", title: "Botanical Essence", category: "Products", demo_url: "/demo/product-range", image_url: null, sort_order: 6 },
+  { id: "fallback-7", title: "Dermal Care Expert", category: "Clinical", demo_url: "/demo/clinical-success", image_url: null, sort_order: 7 },
 ];
 
 const portfolioGradients = [
-  "from-electric to-lavender",
-  "from-lavender to-neon",
-  "from-neon to-lavender",
-  "from-neon to-electric",
-  "from-electric to-neon",
-  "from-lavender to-electric",
+  "from-blue-100 to-slate-100",
+  "from-slate-50 to-blue-50",
+  "from-blue-50 to-slate-50",
+  "from-slate-100 to-blue-100",
+  "from-blue-100 to-slate-50",
+  "from-slate-50 to-blue-100",
 ];
 
 const beforeAfter = [
-  { metric: "কনভার্সন রেট", before: "১.২%", after: "৪.৮%", up: "+৩০০%" },
-  { metric: "পেজ লোড টাইম", before: "৬.৪সে", after: "১.১সে", up: "৬× দ্রুত" },
-  { metric: "অ্যাড ROAS", before: "১.৭×", after: "৫.৯×", up: "+২৪৭%" },
-  { metric: "বাউন্স রেট", before: "৭২%", after: "২৮%", up: "−৬১%" },
+  { metric: "Hydration Level", before: "18%", after: "74%", up: "+310%" },
+  { metric: "Visible Fine Lines", before: "High", after: "Minimal", up: "82% Reduction" },
+  { metric: "Skin Elasticity", before: "Low", after: "High", up: "+150%" },
+  { metric: "Blemishes & Redness", before: "Severe", after: "Clear", up: "-90%" },
 ];
 
 const comparison = [
-  { point: "প্রিমিয়াম, কাস্টম ডিজাইন", us: true, them: false },
-  { point: "মোবাইল-ফার্স্ট ও অত্যন্ত দ্রুত", us: true, them: false },
-  { point: "কনভার্সন-ফোকাসড স্ট্রাকচার", us: true, them: false },
-  { point: "লঞ্চের পরেও সাপোর্ট", us: true, them: false },
-  { point: "টেমপ্লেট-নির্ভর সাধারণ লুক", us: false, them: true },
-  { point: "লুকানো ফি ও দেরি", us: false, them: true },
+  { point: "Clinically Proven Formulas", us: true, them: false },
+  { point: "Personalized Dermatologist Review", us: true, them: false },
+  { point: "Sustainable & Clean Ingredients", us: true, them: true },
+  { point: "Visible Results in 28 Days", us: true, them: false },
+  { point: "Generic Mass-Market Fillers", us: false, them: true },
+  { point: "Inconsistent Results", us: false, them: true },
 ];
+
 
 function HomePage() {
   return (
