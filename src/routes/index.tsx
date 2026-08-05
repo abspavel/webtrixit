@@ -1206,7 +1206,7 @@ function FloatingWhatsApp() {
 }
 
 /* ---------- SHARED ---------- */
-function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
+function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: React.ReactNode; description?: string }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">{eyebrow}</span>
