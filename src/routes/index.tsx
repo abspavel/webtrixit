@@ -634,18 +634,19 @@ function WhatsAppBanner({ variant }: { variant: "primary" | "neon" }) {
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full bg-neon/15 px-3 py-1 text-xs font-semibold text-neon">
-                <MessageCircle className="h-3.5 w-3.5" /> সরাসরি WhatsApp
+                <MessageCircle className="h-3.5 w-3.5" /> Chat on WhatsApp
               </div>
               <h3 className="mt-3 font-display text-xl font-bold sm:text-3xl">
-                আপনার আইডিয়া, আমাদের এক্সপার্টিজ — চলুন একসাথে বসে আপনার পরবর্তী প্রজেক্টটি সাজিয়ে ফেলি।
+                Your Skin Journey, Our Expertise — Let's build your routine together.
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                WhatsApp-এ একটি মেসেজেই শুরু — কোনো ফর্ম, কোনো ঝামেলা নেই। আমাদের টিম আপনার প্রয়োজন বুঝে ফ্রি পরামর্শ, কাস্টম রোডম্যাপ ও ট্রান্সপারেন্ট কোটেশন পাঠাবে।
+                Start with a simple message. Our team provides free skin advice, personalized roadmaps, and expert product recommendations.
               </p>
             </div>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-neon px-6 py-3 text-sm font-semibold text-brand transition hover:opacity-90 sm:w-auto">
-              <MessageCircle className="h-4 w-4" /> WhatsApp-এ চ্যাট করুন
+              <MessageCircle className="h-4 w-4" /> Start Consultation
             </a>
+
           </div>
         </div>
       </div>
