@@ -260,21 +260,55 @@ function Nav() {
             Webtrixit
           </span>
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={`#${l.href}`}
-              data-active={active === l.href}
-              className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              {l.label}
+        <div className="hidden items-center gap-8 md:flex">
+          <nav className="flex items-center gap-8">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={`#${l.href}`}
+                data-active={active === l.href}
+                className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button 
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface/40 text-muted-foreground transition hover:bg-surface-2 hover:text-foreground"
+                  aria-label="থিম পরিবর্তন করুন"
+                >
+                  <Palette className="h-5 w-5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 border-border bg-surface-2 text-foreground">
+                <DropdownMenuLabel>থিম বা কালার পরিবর্তন</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-border" />
+                {themes.map((t) => (
+                  <DropdownMenuItem
+                    key={t.id}
+                    onClick={() => setTheme(t.id)}
+                    className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition ${
+                      theme === t.id ? "bg-electric/20 text-electric font-semibold" : "hover:bg-white/5"
+                    }`}
+                  >
+                    <t.icon className="h-4 w-4" />
+                    <span>{t.label}</span>
+                    {theme === t.id && <Check className="ml-auto h-4 w-4" />}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
+              ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
             </a>
-          ))}
-          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
-            ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
-          </a>
-        </nav>
+          </div>
+        </div>
+
           <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
