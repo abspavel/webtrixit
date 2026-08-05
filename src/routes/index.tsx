@@ -229,6 +229,15 @@ function HomePage() {
 /* ---------- NAV ---------- */
 function Nav() {
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const themes: { id: Theme; label: string; icon: any }[] = [
+    { id: "dark", label: "ডার্ক মুড (Default)", icon: Moon },
+    { id: "gray", label: "গ্রে মুড", icon: Monitor },
+    { id: "modern", label: "মডার্ন ব্লু", icon: Sparkles },
+    { id: "ocean", label: "ওশান ডিপ", icon: Zap },
+  ];
+
   const links = [
     { href: "services", label: "সার্ভিস" },
     { href: "work", label: "পোর্টফোলিও" },
@@ -237,6 +246,7 @@ function Nav() {
     { href: "contact", label: "যোগাযোগ" },
   ];
   const active = useActiveSection(links.map((l) => l.href));
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-brand/80 backdrop-blur-xl">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-5 sm:py-4 md:flex md:justify-between">
