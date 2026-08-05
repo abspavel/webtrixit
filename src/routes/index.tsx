@@ -736,7 +736,7 @@ function SuccessStories() {
   return (
     <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-5">
-        <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
+        <SectionHeader eyebrow="Success Stories" title="Dermatologically Tested. Patient Approved." />
 
         <div 
           className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y focus-within:ring-2 focus-within:ring-electric/20 group/slider"
@@ -754,7 +754,7 @@ function SuccessStories() {
           }}
           role="region"
           aria-roledescription="carousel"
-          aria-label="ক্লায়েন্ট রিভিউ"
+          aria-label="Client Testimonials"
         >
           <div
             className="flex transition-transform duration-700 ease-out"
@@ -799,7 +799,7 @@ function SuccessStories() {
                     setIsAuto(false);
                     setI(k);
                   }}
-                  aria-label={`স্টোরি ${k + 1} দেখুন`}
+                  aria-label={`View story ${k + 1}`}
                   aria-current={k === i ? "true" : "false"}
                   className={`h-2 rounded-full transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-electric ${
                     k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
@@ -808,7 +808,7 @@ function SuccessStories() {
               ))}
             </div>
             <div className="flex gap-2">
-              <button onClick={prev} aria-label="আগের রিভিউ" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
+              <button onClick={prev} aria-label="Previous review" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2">
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button 
@@ -816,7 +816,7 @@ function SuccessStories() {
                   setIsAuto(false);
                   next();
                 }} 
-                aria-label="পরের রিভিউ" 
+                aria-label="Next review" 
                 className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface/60 transition hover:bg-surface-2"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -1206,7 +1206,7 @@ function FloatingWhatsApp() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="WhatsApp-এ চ্যাট করুন"
+      aria-label="Chat on WhatsApp"
       className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-neon text-brand shadow-[var(--shadow-neon)] transition hover:scale-105"
     >
       <MessageCircle className="h-6 w-6" />
