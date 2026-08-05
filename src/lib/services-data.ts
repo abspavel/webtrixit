@@ -29,8 +29,8 @@ export const services: ServiceItem[] = [
   {
     slug: "landing-page-design",
     icon: Rocket,
-    title: "ল্যান্ডিং পেজ ডিজাইন",
-    titleBn: "ল্যান্ডিং পেজ ডিজাইন",
+    title: "Skin Consultation",
+    titleBn: "স্কিন কনসালটেশন",
     subject: "ল্যান্ডিং পেজ",
     desc: "লঞ্চ, অ্যাড ও লিড ক্যাপচারের জন্য হাই-কনভার্টিং সিঙ্গেল পেজ।",
     tagline: "একটি স্মার্ট ল্যান্ডিং পেজই আপনার অ্যাডের ROI কয়েকগুণ বাড়িয়ে দিতে পারে।",
@@ -77,8 +77,8 @@ export const services: ServiceItem[] = [
   {
     slug: "ecommerce-website-design",
     icon: ShoppingCart,
-    title: "ই-কমার্স ওয়েবসাইট ডিজাইন",
-    titleBn: "ই-কমার্স ওয়েবসাইট ডিজাইন",
+    title: "Skin Care Products",
+    titleBn: "স্কিন কেয়ার প্রোডাক্টস",
     subject: "ই-কমার্স ওয়েবসাইট",
     desc: "কাস্টম অনলাইন স্টোর — কার্ট, চেকআউট ও পেমেন্ট গেটওয়ে সঠিকভাবে সেটআপ।",
     tagline: "আপনার ব্যবসাকে ২৪/৭ চলমান একটি অনলাইন স্টোরে রূপান্তর করুন।",
@@ -126,8 +126,8 @@ export const services: ServiceItem[] = [
   {
     slug: "readymade-ecommerce-website",
     icon: Layers,
-    title: "রেডিমেড ই-কমার্স ওয়েবসাইট",
-    titleBn: "রেডিমেড ই-কমার্স ওয়েবসাইট",
+    title: "Anti-Aging Treatment",
+    titleBn: "এন্টি-এজিং ট্রিটমেন্ট",
     subject: "রেডিমেড ই-কমার্স ওয়েবসাইট",
     desc: "প্রস্তুত, প্রমাণিত টেমপ্লেটে দ্রুত অনলাইন স্টোর লঞ্চ — আপনার জন্য কনফিগার করে দেওয়া।",
     tagline: "মাত্র ৪৮ ঘণ্টায় আপনার পুরোপুরি প্রস্তুত অনলাইন স্টোর।",
@@ -172,9 +172,9 @@ export const services: ServiceItem[] = [
   {
     slug: "lms-site-development",
     icon: GraduationCap,
-    title: "LMS সাইট ডেভেলপমেন্ট",
-    titleBn: "LMS সাইট ডেভেলপমেন্ট",
-    subject: "LMS প্ল্যাটফর্ম",
+    title: "Dermatological Care",
+    titleBn: "ডার্মাটোলজিক্যাল কেয়ার",
+    subject: "ডার্মাটোলজিক্যাল কেয়ার",
     desc: "ফুল-ফিচার লার্নিং প্ল্যাটফর্ম — কোর্স, কুইজ, স্টুডেন্ট ও পেমেন্ট সহ।",
     tagline: "আপনার কোর্স বিক্রি করুন নিজের ব্র্যান্ডে, ১০০% profit নিজে রাখুন।",
     why: [

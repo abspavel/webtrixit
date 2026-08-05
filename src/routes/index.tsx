@@ -43,9 +43,9 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 const SITE_URL = "https://webtrixit.lovable.app";
 const OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/XoKKKE5uTDWSw8MRim4BZzbm9YF3/social-images/social-1785258383263-logo_no_text.webp";
-const HOME_TITLE = "ওয়েবসাইট ডিজাইন ও ডেভেলপমেন্ট বাংলাদেশ | Webtrix IT Solution";
+const HOME_TITLE = "Bioxin — Skin Care & Health | Premium Solutions";
 const HOME_DESC =
-  "বাংলাদেশের বিশ্বস্ত ওয়েব এজেন্সি — ল্যান্ডিং পেজ, ই-কমার্স ওয়েবসাইট, LMS, কাস্টম সফটওয়্যার, SMM প্যানেল, AI ভিডিও অ্যাড ও ডিজিটাল মার্কেটিং। চট্টগ্রাম থেকে সারা দেশে সাশ্রয়ী দামে প্রফেশনাল সার্ভিস।";
+  "Experience premium skin care with Bioxin. We provide dermatologically tested products and health solutions tailored to your needs.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,8 +79,8 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: "Webtrix IT Solution",
-          alternateName: "Webtrixit",
+          name: "Bioxin",
+          alternateName: "Bioxin Health",
           url: SITE_URL,
           image: OG_IMAGE,
           description: HOME_DESC,
@@ -240,11 +240,11 @@ function Nav() {
   ];
 
   const links = [
-    { href: "services", label: "সার্ভিস" },
-    { href: "work", label: "পোর্টফোলিও" },
-    { href: "results", label: "রেজাল্ট" },
-    { href: "compare", label: "কেন আমরা" },
-    { href: "contact", label: "যোগাযোগ" },
+    { href: "services", label: "Products" },
+    { href: "work", label: "Results" },
+    { href: "results", label: "About" },
+    { href: "compare", label: "Why Us" },
+    { href: "contact", label: "Contact" },
   ];
   const active = useActiveSection(links.map((l) => l.href));
 
@@ -258,7 +258,7 @@ function Nav() {
             className="h-9 w-auto shrink-0 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] sm:h-11"
           />
           <span className="font-display text-lg font-bold tracking-tight text-foreground sm:text-xl">
-            Webtrixit
+            Bioxin
           </span>
         </a>
         <div className="hidden items-center gap-8 md:flex">
@@ -305,7 +305,7 @@ function Nav() {
             </DropdownMenu>
 
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
-              ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
+              Book Now <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -369,7 +369,7 @@ function Nav() {
               </a>
             ))}
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground">
-              ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
+              Book Now <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -394,10 +394,10 @@ function Hero() {
             <span className="h-2 w-2 rounded-full bg-neon" /> ২০১৯ সাল থেকে বিশ্বস্ত ডিজিটাল পার্টনার
           </span>
           <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
-            প্রিমিয়াম <span className="text-gradient">ওয়েবসাইট ও সফটওয়্যার</span> — যা আপনার বিজনেসকে করবে স্মার্ট।
+            Premium <span className="text-gradient">Skin Care</span> — for your natural glow.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white sm:text-lg">
-            Webtrix IT Solution দ্রুত, মোবাইল-ফার্স্ট ও কনভার্সন-কেন্দ্রিক ল্যান্ডিং পেজ, ই-কমার্স স্টোর এবং কাস্টম সফটওয়্যার তৈরি করে আপনার ব্যবসায়িক লক্ষ্য অর্জনে সাহায্য করে।
+          <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
+            Bioxin provides advanced dermatological products and personalized skin care solutions to help you achieve your health and beauty goals.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground glow-ring transition hover:translate-y-[-1px]">
@@ -420,9 +420,9 @@ function Hero() {
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function Statistics() {
   const stats = [
-    { label: "অর্ডার সম্পন্ন", value: 250, suffix: "*", icon: Zap, color: "text-electric" },
-    { label: "সন্তুষ্ট ক্লায়েন্ট", value: 200, suffix: "+", icon: Star, color: "text-neon" },
-    { label: "অভিজ্ঞতা", value: 5, suffix: " বছর+", icon: ShieldCheck, color: "text-lavender" },
+    { label: "Products Sold", value: 5000, suffix: "+", icon: Zap, color: "text-electric" },
+    { label: "Happy Customers", value: 12000, suffix: "+", icon: Star, color: "text-neon" },
+    { label: "Years Experience", value: 10, suffix: "+", icon: ShieldCheck, color: "text-lavender" },
   ];
   return (
     <div className="mt-8 flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:mt-12 md:gap-8">
@@ -489,7 +489,7 @@ function ClientLogos() {
     <section className="border-y border-border/60 bg-surface/40 py-7">
       <div className="mx-auto max-w-7xl px-5">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর ভরসা রেখেছে
+          Thousands of people trust Bioxin for their skin health
         </p>
         <div className="mt-6 overflow-hidden relative">
           {/* Left/Right Fading Edge */}
