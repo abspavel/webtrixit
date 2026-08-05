@@ -1,3 +1,4 @@
+// Supabase ঠিকভাবে কানেক্ট করা আছে কিনা চেক কর
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, MessageCircle, Star, ShieldCheck, Menu,
