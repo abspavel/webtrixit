@@ -240,11 +240,11 @@ function Nav() {
   ];
 
   const links = [
-    { href: "services", label: "সার্ভিস" },
-    { href: "work", label: "পোর্টফোলিও" },
-    { href: "results", label: "রেজাল্ট" },
-    { href: "compare", label: "কেন আমরা" },
-    { href: "contact", label: "যোগাযোগ" },
+    { href: "services", label: "Products" },
+    { href: "work", label: "Results" },
+    { href: "results", label: "About" },
+    { href: "compare", label: "Why Us" },
+    { href: "contact", label: "Contact" },
   ];
   const active = useActiveSection(links.map((l) => l.href));
 
@@ -305,7 +305,7 @@ function Nav() {
             </DropdownMenu>
 
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
-              ফ্রি কোটেশন <ArrowRight className="h-4 w-4" />
+              Book Now <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
@@ -420,9 +420,9 @@ function Hero() {
 /* ---------- সন্তুষ্ট ক্লায়েন্ট (ছবি ও নাম) ---------- */
 function Statistics() {
   const stats = [
-    { label: "অর্ডার সম্পন্ন", value: 250, suffix: "*", icon: Zap, color: "text-electric" },
-    { label: "সন্তুষ্ট ক্লায়েন্ট", value: 200, suffix: "+", icon: Star, color: "text-neon" },
-    { label: "অভিজ্ঞতা", value: 5, suffix: " বছর+", icon: ShieldCheck, color: "text-lavender" },
+    { label: "Products Sold", value: 5000, suffix: "+", icon: Zap, color: "text-electric" },
+    { label: "Happy Customers", value: 12000, suffix: "+", icon: Star, color: "text-neon" },
+    { label: "Years Experience", value: 10, suffix: "+", icon: ShieldCheck, color: "text-lavender" },
   ];
   return (
     <div className="mt-8 flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:mt-12 md:gap-8">
@@ -489,7 +489,7 @@ function ClientLogos() {
     <section className="border-y border-border/60 bg-surface/40 py-7">
       <div className="mx-auto max-w-7xl px-5">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          দেশ-বিদেশের ১০০+ ব্র্যান্ড আমাদের ওপর ভরসা রেখেছে
+          Thousands of people trust Bioxin for their skin health
         </p>
         <div className="mt-6 overflow-hidden relative">
           {/* Left/Right Fading Edge */}
