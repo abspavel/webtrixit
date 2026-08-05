@@ -1,6 +1,8 @@
+
 import {
   Rocket, ShoppingCart, GraduationCap, Code2, Layers, Cpu, Server,
   Video, Facebook, Target, Palette, type LucideIcon,
+  Search, ShieldCheck, Heart, Sparkles, UserCheck, Stethoscope
 } from "lucide-react";
 
 export type ServiceItem = {
@@ -8,7 +10,6 @@ export type ServiceItem = {
   icon: LucideIcon;
   title: string;
   titleBn: string;
-  /** ছোট নাম, বাক্যে বসানোর জন্য — যেমন "ল্যান্ডিং পেজ", "ওয়েবসাইট", "LMS" */
   subject: string;
   desc: string;
   tagline: string;
@@ -16,538 +17,204 @@ export type ServiceItem = {
   effectiveness: string[];
   benefits: string[];
   useCases: string[];
-  /** আমরা কীভাবে তৈরি করি — ধাপে ধাপে */
   process: { title: string; desc: string }[];
-  /** কী কী ফিচার থাকবে */
   features: string[];
-  /** আপনার লাইভ ডেমো ওয়েবসাইটের URL এখানে দিন। */
   demoUrl: string;
   demoLabel: string;
 };
 
 export const services: ServiceItem[] = [
   {
-    slug: "landing-page-design",
-    icon: Rocket,
+    slug: "skin-consultation",
+    icon: Search,
     title: "Skin Consultation",
     titleBn: "স্কিন কনসালটেশন",
-    subject: "ল্যান্ডিং পেজ",
-    desc: "লঞ্চ, অ্যাড ও লিড ক্যাপচারের জন্য হাই-কনভার্টিং সিঙ্গেল পেজ।",
-    tagline: "একটি স্মার্ট ল্যান্ডিং পেজই আপনার অ্যাডের ROI কয়েকগুণ বাড়িয়ে দিতে পারে।",
+    subject: "Skin Consultation",
+    desc: "Expert dermatological analysis to identify your skin's unique needs and concerns.",
+    tagline: "The first step toward a radiant glow starts with understanding your skin.",
     why: [
-      "Facebook / Google অ্যাড চালালে ট্রাফিক নষ্ট না করে সরাসরি কনভার্শনে নিতে ল্যান্ডিং পেজ অপরিহার্য।",
-      "একটি ফোকাসড ল্যান্ডিং পেজ ভিজিটরের মনোযোগ ধরে রাখে এবং সরাসরি অ্যাকশনে (Buy / Call / Signup) নিয়ে যায়।",
-      "নতুন প্রোডাক্ট বা অফার লঞ্চের জন্য দ্রুত এবং টার্গেটেড উপস্থিতি তৈরি করে।",
+      "Generic products often fail because they don't target your specific skin type or underlying issues.",
+      "A professional consultation identifies sensitivity, dehydration, or conditions you might miss.",
+      "Receive a data-driven routine that saves you time and money on ineffective products."
     ],
     effectiveness: [
-      "কনভার্শন-ফোকাসড স্ট্রাকচার — Hero, Problem, Solution, Social Proof, CTA।",
-      "মোবাইল-ফার্স্ট, ২ সেকেন্ডে লোড হয় এমন লাইটওয়েট বিল্ড।",
-      "A/B টেস্টিং রেডি এবং Facebook Pixel + GA4 ইন্টিগ্রেটেড।",
+      "Visual assessment using high-definition imaging technology.",
+      "Personalized history review covering lifestyle, diet, and environment.",
+      "Diagnostic approach to identify acne, hyperpigmentation, or early signs of aging."
     ],
     benefits: [
-      "৩–৫× বেশি লিড / সেল, একই অ্যাড বাজেটে।",
-      "Bounce rate কমে, Ad Quality Score বেড়ে CPC কমে।",
-      "প্রফেশনাল ব্র্যান্ড ইমেজ, যা ট্রাস্ট বাড়ায়।",
+      "Customized roadmap for long-term skin health.",
+      "Prevention of irreversible damage through early detection.",
+      "Expert guidance on ingredient compatibility and usage."
     ],
     useCases: [
-      "প্রোডাক্ট / কোর্স লঞ্চ",
-      "লিড জেনারেশন ক্যাম্পেইন",
-      "ইভেন্ট রেজিস্ট্রেশন",
-      "অ্যাপ ডাউনলোড প্রোমোশন",
+      "Stubborn acne concerns",
+      "Signs of premature aging",
+      "Chronic skin sensitivity",
+      "Establishing a base routine"
     ],
     process: [
-      { title: "রিকোয়ারমেন্ট ও অফার অ্যানালাইসিস", desc: "আপনার প্রোডাক্ট, টার্গেট অডিয়েন্স ও গোল বুঝে কনটেন্ট স্ট্রাকচার প্ল্যান করি।" },
-      { title: "কপি ও ওয়্যারফ্রেম", desc: "কনভার্শন-ফোকাসড হেডলাইন, বেনিফিট, CTA লিখে ব্লক-বাই-ব্লক লে-আউট সাজাই।" },
-      { title: "UI ডিজাইন", desc: "আপনার ব্র্যান্ড কালার ও ফন্টে মোবাইল-ফার্স্ট, প্রিমিয়াম ডিজাইন তৈরি করি।" },
-      { title: "ডেভেলপমেন্ট ও অপটিমাইজেশন", desc: "দ্রুত-লোডিং কোড, SEO ও অ্যানিমেশন সহ ডেভেলপ করি।" },
-      { title: "Pixel, অ্যানালিটিক্স ও লঞ্চ", desc: "Facebook Pixel, GA4, ইভেন্ট সেটআপ করে ডোমেইনে লাইভ করি।" },
+      { title: "Deep Scan", desc: "We use clinical imaging to look beneath the surface of your skin." },
+      { title: "Personal History", desc: "Our specialists discuss your lifestyle and current product usage." },
+      { title: "Goal Setting", desc: "We define realistic milestones for your skin transformation." },
+      { title: "Prescription", desc: "Receive a curated list of products and treatments specifically for you." },
+      { title: "Follow-up Plan", desc: "A 3-month roadmap to track progress and adjust your routine." }
     ],
     features: [
-      "মোবাইল-ফার্স্ট রেসপন্সিভ ডিজাইন",
-      "দ্রুত লোডিং (< 2s) ও SEO অপটিমাইজড",
-      "লিড ফর্ম + WhatsApp / কল বাটন",
-      "Facebook Pixel + Google Analytics",
-      "স্মুথ স্ক্রল অ্যানিমেশন ও মাইক্রো-ইন্টার‍্যাকশন",
-      "A/B টেস্টিং রেডি স্ট্রাকচার",
-      "ফ্রি SSL ও হোস্টিং গাইড",
+      "HD Skin Analysis",
+      "Certified Dermatologist Review",
+      "Personalized Routine Builder",
+      "Ingredient Sensitivity Report",
+      "3-Month Progress Tracker",
+      "Priority Treatment Booking",
+      "Direct Specialist Chat"
     ],
-    demoUrl: "/demo/luxe-landing",
-    demoLabel: "লাইভ ল্যান্ডিং পেজ ডেমো",
+    demoUrl: "/demo/skin-analysis",
+    demoLabel: "View Sample Analysis"
   },
   {
-    slug: "ecommerce-website-design",
+    slug: "skin-care-products",
     icon: ShoppingCart,
     title: "Skin Care Products",
     titleBn: "স্কিন কেয়ার প্রোডাক্টস",
-    subject: "ই-কমার্স ওয়েবসাইট",
-    desc: "কাস্টম অনলাইন স্টোর — কার্ট, চেকআউট ও পেমেন্ট গেটওয়ে সঠিকভাবে সেটআপ।",
-    tagline: "আপনার ব্যবসাকে ২৪/৭ চলমান একটি অনলাইন স্টোরে রূপান্তর করুন।",
+    subject: "Skin Care Products",
+    desc: "Premium, clinically-tested formulas designed to nourish, protect, and rejuvenate.",
+    tagline: "Science-backed formulas for the skin you deserve.",
     why: [
-      "ফেসবুক পেজে অর্ডার নেওয়ার চেয়ে নিজের ই-কমার্স ওয়েবসাইটে বহুগুণ বেশি অর্ডার এবং কম manual ঝামেলা।",
-      "কাস্টমার নিজেই প্রোডাক্ট দেখে, ভ্যারিয়েন্ট বেছে, পেমেন্ট করে অর্ডার সম্পন্ন করতে পারে।",
-      "Retargeting, Upsell, Discount — সবই automation-এ চলে।",
+      "Mass-market products often contain harsh fillers that damage the skin barrier over time.",
+      "Our products use high-potency actives like stabilized Vitamin C, Niacinamide, and Peptides.",
+      "Every formula is pH-balanced and dermatologically tested for maximum safety."
     ],
     effectiveness: [
-      "Product catalogue, cart, checkout, order management — সব built-in।",
-      "bKash, Nagad, SSLCommerz, Stripe সহ সব পেমেন্ট গেটওয়ে ইন্টিগ্রেশন।",
-      "Inventory, coupon, shipping zone, invoice — full admin panel।",
+      "Bio-available ingredients that penetrate deeper into the epidermis.",
+      "Synergistic formulations where ingredients enhance each other's performance.",
+      "Rigorous clinical trials showing visible results in 28 days."
     ],
     benefits: [
-      "manual অর্ডার নেওয়ার ঝামেলা শেষ — সব automated।",
-      "একই ভিজিটর থেকে বেশি সেল (upsell, related products)।",
-      "Analytics ও Pixel দিয়ে সঠিক ROAS ট্র্যাক করা যায়।",
+      "Visible improvement in texture and tone.",
+      "Stronger skin barrier resistant to environmental stressors.",
+      "Healthy, natural glow without reliance on heavy makeup."
     ],
     useCases: [
-      "ফ্যাশন / ক্লোদিং ব্র্যান্ড",
-      "ইলেকট্রনিক্স স্টোর",
-      "গ্রোসারি / ফুড ডেলিভারি",
-      "ডিজিটাল প্রোডাক্ট",
+      "Daily maintenance routines",
+      "Targeted spot treatments",
+      "Sun protection and recovery",
+      "Post-procedural healing"
     ],
     process: [
-      { title: "বিজনেস ও প্রোডাক্ট প্ল্যানিং", desc: "ক্যাটাগরি, ভ্যারিয়েন্ট, শিপিং ও পেমেন্ট মডেল ঠিক করি।" },
-      { title: "UI/UX ডিজাইন", desc: "হোম, ক্যাটাগরি, প্রোডাক্ট, কার্ট, চেকআউট — প্রতিটি স্ক্রিনের কনভার্শন-ফোকাসড ডিজাইন।" },
-      { title: "ডেভেলপমেন্ট", desc: "কার্ট, চেকআউট, অ্যাডমিন প্যানেল, ইনভেন্টরি — full-stack ডেভেলপমেন্ট।" },
-      { title: "পেমেন্ট ও শিপিং ইন্টিগ্রেশন", desc: "bKash, Nagad, SSLCommerz ও কুরিয়ার API যুক্ত করি।" },
-      { title: "টেস্টিং ও লঞ্চ", desc: "অর্ডার ফ্লো, পেমেন্ট, নোটিফিকেশন টেস্ট করে লাইভ করি।" },
+      { title: "R&D Formulation", desc: "Years of laboratory research go into every single drop." },
+      { title: "Ingredient Sourcing", desc: "We only use premium, sustainable ingredients from ethical sources." },
+      { title: "Clinical Testing", desc: "Independent dermatologists verify every claim we make." },
+      { title: "Fresh Batch Production", desc: "Small-batch manufacturing ensures maximum potency when it reaches you." },
+      { title: "Eco-Friendly Packaging", desc: "Sustainable glass and airless pumps to protect active ingredients." }
     ],
     features: [
-      "আনলিমিটেড প্রোডাক্ট ও ক্যাটাগরি",
-      "ভ্যারিয়েন্ট (সাইজ / কালার), স্টক ম্যানেজমেন্ট",
-      "bKash / Nagad / COD / কার্ড পেমেন্ট",
-      "কুপন, ডিসকাউন্ট, ফ্ল্যাশ সেল",
-      "শিপিং জোন ও কুরিয়ার API",
-      "অর্ডার SMS / ইমেইল নোটিফিকেশন",
-      "অ্যাডমিন ড্যাশবোর্ড ও রিপোর্ট",
-      "Facebook Pixel + GA4 + Catalog",
+      "Paraben & Sulfate Free",
+      "Cruelty-Free Formulas",
+      "Airless Pump Technology",
+      "Stabilized Actives",
+      "pH-Balanced 5.5",
+      "Recyclable Packaging",
+      "Subscription Savings",
+      "Free Nationwide Shipping"
     ],
-    demoUrl: "/demo/kartplus-ecommerce",
-    demoLabel: "লাইভ ই-কমার্স ডেমো",
+    demoUrl: "/demo/product-range",
+    demoLabel: "Browse Collection"
   },
   {
-    slug: "readymade-ecommerce-website",
-    icon: Layers,
+    slug: "anti-aging-treatment",
+    icon: Sparkles,
     title: "Anti-Aging Treatment",
     titleBn: "এন্টি-এজিং ট্রিটমেন্ট",
-    subject: "রেডিমেড ই-কমার্স ওয়েবসাইট",
-    desc: "প্রস্তুত, প্রমাণিত টেমপ্লেটে দ্রুত অনলাইন স্টোর লঞ্চ — আপনার জন্য কনফিগার করে দেওয়া।",
-    tagline: "মাত্র ৪৮ ঘণ্টায় আপনার পুরোপুরি প্রস্তুত অনলাইন স্টোর।",
+    subject: "Anti-Aging Treatment",
+    desc: "Non-invasive, advanced procedures to restore elasticity and smooth out fine lines.",
+    tagline: "Age gracefully with technology that turns back the clock.",
     why: [
-      "কাস্টম ডেভেলপমেন্টের সময় ও খরচ ছাড়াই দ্রুত ব্যবসা শুরু করা যায়।",
-      "Proven, tested টেমপ্লেটে কনভার্শন ও UX আগে থেকেই optimized।",
-      "শুধু প্রোডাক্ট আর ব্র্যান্ডিং যোগ করলেই রেডিমেড ই-কমার্স ওয়েবসাইট লাইভ।",
+      "Collagen production drops by 1% every year after 25; our treatments stimulate natural regrowth.",
+      "Topical creams can only do so much; clinical treatments reach the dermis layer.",
+      "Safe, quick, and effective with minimal to no downtime."
     ],
     effectiveness: [
-      "Pre-built layout, category, checkout — শুধু কনটেন্ট বসিয়ে launch।",
-      "bKash / Nagad / COD সহ Bangladesh-ready payment।",
-      "Mobile responsive, fast, SEO-friendly।",
+      "Micro-needling and Radio Frequency to stimulate deep collagen synthesis.",
+      "Laser resurfacing to remove sun damage and uneven pigmentation.",
+      "Hydra-facial technology to deep-clean and plump the skin simultaneously."
     ],
     benefits: [
-      "কম খরচে দ্রুত অনলাইনে আসতে পারবেন।",
-      "প্রথম দিন থেকেই অর্ডার নিতে পারবেন।",
-      "পরবর্তীতে সহজে upgrade / customize করা যায়।",
+      "Smoother, firmer skin texture.",
+      "Reduction in fine lines and deep wrinkles.",
+      "Lifted appearance without the need for surgery."
     ],
     useCases: [
-      "নতুন উদ্যোক্তা / startup",
-      "Facebook থেকে website-এ shift",
-      "সিজনাল / ক্যাম্পেইন স্টোর",
+      "Loss of skin elasticity",
+      "Crows feet and forehead lines",
+      "Age spots and sun damage",
+      "Prevention for late 20s"
     ],
     process: [
-      { title: "টেমপ্লেট সিলেকশন", desc: "আপনার নিশ অনুযায়ী proven টেমপ্লেট থেকে সেরাটি বেছে দিই।" },
-      { title: "ব্র্যান্ডিং কাস্টমাইজেশন", desc: "লোগো, কালার, ফন্ট ও ব্যানার আপনার ব্র্যান্ডে সেট করি।" },
-      { title: "প্রোডাক্ট আপলোড", desc: "প্রথম ২০–৫০টি প্রোডাক্ট ছবি ও ডেসক্রিপশনসহ আপলোড।" },
-      { title: "পেমেন্ট ও শিপিং সেটআপ", desc: "bKash, Nagad, COD ও কুরিয়ার কনফিগার।" },
-      { title: "লঞ্চ ও ট্রেনিং", desc: "ডোমেইনে লাইভ করে অ্যাডমিন প্যানেল ব্যবহারের ট্রেনিং।" },
+      { title: "Clinical Assessment", desc: "We map your facial structure and identify areas needing lifting." },
+      { title: "Deep Cleansing", desc: "Preparation to ensure maximum treatment efficacy." },
+      { title: "Advanced Procedure", desc: "Administered by certified medical professionals using state-of-the-art tools." },
+      { title: "Soothing Recovery", desc: "Post-treatment masks and LED therapy to accelerate healing." },
+      { title: "Home Care Support", desc: "Specific products to maintain and enhance clinical results." }
     ],
     features: [
-      "রেডি হোম, ক্যাটাগরি, প্রোডাক্ট পেজ",
-      "কার্ট, চেকআউট, অর্ডার ট্র্যাকিং",
-      "bKash / Nagad / COD ইন্টিগ্রেশন",
-      "মোবাইল রেসপন্সিভ",
-      "অ্যাডমিন প্যানেল",
-      "ফ্রি সেটআপ ও ট্রেনিং",
+      "FDA-Approved Technology",
+      "Certified Medical Staff",
+      "Zero-Downtime Options",
+      "Painless Procedures",
+      "Collagen Mapping",
+      "Customized Treatment Cycles",
+      "LED Photo-Therapy Included"
     ],
-    demoUrl: "/demo/kartplus-ecommerce",
-    demoLabel: "রেডিমেড স্টোর ডেমো",
+    demoUrl: "/demo/anti-aging-results",
+    demoLabel: "See Before/After"
   },
   {
-    slug: "lms-site-development",
-    icon: GraduationCap,
+    slug: "dermatological-care",
+    icon: Stethoscope,
     title: "Dermatological Care",
     titleBn: "ডার্মাটোলজিক্যাল কেয়ার",
-    subject: "ডার্মাটোলজিক্যাল কেয়ার",
-    desc: "ফুল-ফিচার লার্নিং প্ল্যাটফর্ম — কোর্স, কুইজ, স্টুডেন্ট ও পেমেন্ট সহ।",
-    tagline: "আপনার কোর্স বিক্রি করুন নিজের ব্র্যান্ডে, ১০০% profit নিজে রাখুন।",
+    subject: "Dermatological Care",
+    desc: "Medical-grade solutions for complex skin conditions like acne, eczema, and psoriasis.",
+    tagline: "Your health is our priority. Expert care for complex skin.",
     why: [
-      "Facebook group বা YouTube-এ কোর্স চালানোর সীমাবদ্ধতা থেকে মুক্তি — LMS প্ল্যাটফর্ম দেয় পূর্ণ নিয়ন্ত্রণ।",
-      "স্টুডেন্ট ট্র্যাকিং, কুইজ, সার্টিফিকেট — একটি LMS প্ল্যাটফর্মে সব।",
-      "Course sell থেকে subscription — সব monetization model support করে।",
+      "Chronic conditions require medical expertise, not just cosmetic products.",
+      "Our dermatologists treat the root cause, not just the symptoms.",
+      "Evidence-based medicine tailored to your body's specific response."
     ],
     effectiveness: [
-      "Course, module, lesson, video, quiz, assignment management।",
-      "Student dashboard, progress tracking, certificate generation।",
-      "Payment gateway ইন্টিগ্রেশন — one-time বা subscription।",
+      "Prescription-strength ingredients combined with clinical protocols.",
+      "Holistic approach addressing inflammation from the inside out.",
+      "Continuous monitoring to manage flare-ups and maintain remission."
     ],
     benefits: [
-      "নিজের ব্র্যান্ডে scalable কোর্স ব্যবসা।",
-      "স্টুডেন্ট ডেটা ও কমিউনিটি নিজের হাতে।",
-      "সময়ের সাথে recurring revenue বাড়তে থাকে।",
+      "Relief from chronic pain and irritation.",
+      "Improved self-confidence through clearer skin.",
+      "Reduced scarring and long-term damage."
     ],
     useCases: [
-      "একাডেমিক কোচিং",
-      "স্কিল-বেসড অনলাইন কোর্স (Freelancing, Design, IT)",
-      "কর্পোরেট ট্রেনিং প্ল্যাটফর্ম",
+      "Severe cystic acne",
+      "Eczema and Psoriasis flare-ups",
+      "Rosacea and redness",
+      "Unidentified skin rashes"
     ],
     process: [
-      { title: "কোর্স স্ট্রাকচার প্ল্যানিং", desc: "কোর্স, মডিউল, লেসন ও অ্যাসেসমেন্টের মডেল ডিজাইন করি।" },
-      { title: "UI/UX ডিজাইন", desc: "স্টুডেন্ট, ইন্সট্রাক্টর ও অ্যাডমিন — সবার জন্য ইন্টুইটিভ ইন্টারফেস।" },
-      { title: "প্ল্যাটফর্ম ডেভেলপমেন্ট", desc: "ভিডিও প্লেয়ার, কুইজ, প্রগ্রেস ট্র্যাকিং সহ ফুল বিল্ড।" },
-      { title: "পেমেন্ট ও সিকিউরিটি", desc: "পেমেন্ট গেটওয়ে, DRM, ভিডিও প্রোটেকশন সেটআপ।" },
-      { title: "লঞ্চ ও সাপোর্ট", desc: "প্রথম কোর্স আপলোড করে লাইভ, এরপর ট্রেনিং ও সাপোর্ট।" },
+      { title: "Medical Diagnosis", desc: "Thorough examination to identify the specific dermatological condition." },
+      { title: "Laboratory Tests", desc: "If needed, we perform allergy or biopsy tests for absolute certainty." },
+      { title: "Targeted Therapy", desc: "Personalized medical plan including prescriptions and in-clinic care." },
+      { title: "Bi-Weekly Monitoring", desc: "Closely tracking response to medication and adjusting dosages." },
+      { title: "Maintenance Phase", desc: "Developing a long-term strategy to prevent recurrence." }
     ],
     features: [
-      "আনলিমিটেড কোর্স, মডিউল, লেসন",
-      "সিকিউর ভিডিও প্লেয়ার (ডাউনলোড ব্লক)",
-      "কুইজ, অ্যাসাইনমেন্ট, সার্টিফিকেট",
-      "স্টুডেন্ট প্রগ্রেস ও রিপোর্ট",
-      "One-time ও সাবস্ক্রিপশন পেমেন্ট",
-      "ইন্সট্রাক্টর ড্যাশবোর্ড",
-      "ডিসকাশন ও Q&A সেকশন",
-      "মোবাইল রেসপন্সিভ",
+      "Medical Grade Prescriptions",
+      "Expert Dermatologists",
+      "Emergency Appointment Slots",
+      "Scar Management Programs",
+      "Dietary Guidance Integration",
+      "Family Skin History Review",
+      "Safe for Sensitive Skin"
     ],
-    demoUrl: "/demo/eduprime-lms",
-    demoLabel: "LMS প্ল্যাটফর্ম ডেমো",
-  },
-  {
-    slug: "custom-websites",
-    icon: Code2,
-    title: "কাস্টম ওয়েবসাইট",
-    titleBn: "কাস্টম ওয়েবসাইট",
-    subject: "কাস্টম ওয়েবসাইট",
-    desc: "পোর্টফোলিও, বিজনেস সাইট, ডিরেক্টরি, বুকিং সিস্টেম — আপনার প্রয়োজন অনুযায়ী তৈরি।",
-    tagline: "আপনার ইউনিক আইডিয়ার জন্য সম্পূর্ণ কাস্টম, স্কেলেবল ওয়েবসাইট।",
-    why: [
-      "Template দিয়ে যা সম্ভব নয়, সেসব ফিচার ও ডিজাইন কাস্টম ওয়েবসাইটে পাওয়া যায়।",
-      "আপনার ব্যবসার unique workflow অনুযায়ী কাস্টম ওয়েবসাইট তৈরি হয়।",
-      "Long-term scalability এবং সম্পূর্ণ ownership।",
-    ],
-    effectiveness: [
-      "Requirement analysis → design → development → launch।",
-      "Modern tech stack — fast, secure, SEO-optimized।",
-      "Full admin panel, content management ও analytics।",
-    ],
-    benefits: [
-      "প্রতিযোগীদের থেকে সম্পূর্ণ আলাদা identity।",
-      "যেকোনো ফিচার / integration যোগ করা যায়।",
-      "নিজের ডেটা ও কোডের সম্পূর্ণ মালিকানা।",
-    ],
-    useCases: [
-      "কর্পোরেট / এজেন্সি ওয়েবসাইট",
-      "পোর্টফোলিও / পার্সোনাল ব্র্যান্ড",
-      "ডিরেক্টরি / লিস্টিং সাইট",
-      "বুকিং / অ্যাপয়েন্টমেন্ট সিস্টেম",
-    ],
-    process: [
-      { title: "ডিসকভারি ও রিকোয়ারমেন্ট", desc: "আপনার গোল, ইউজার ফ্লো ও ফিচার লিস্ট বিশ্লেষণ করি।" },
-      { title: "ওয়্যারফ্রেম ও UI ডিজাইন", desc: "প্রতিটি পেজের ইন্টার‍্যাকটিভ ডিজাইন আপনার অনুমোদন নিয়ে ফাইনাল করি।" },
-      { title: "ফুল-স্ট্যাক ডেভেলপমেন্ট", desc: "Modern framework-এ ফাস্ট, সিকিউর কোড লিখি।" },
-      { title: "CMS ও অ্যাডমিন প্যানেল", desc: "নিজে কনটেন্ট আপডেট করার জন্য সহজ প্যানেল সেটআপ।" },
-      { title: "টেস্টিং ও ডিপ্লয়মেন্ট", desc: "ব্রাউজার / ডিভাইস টেস্ট শেষে লাইভ ও SEO সাবমিশন।" },
-    ],
-    features: [
-      "সম্পূর্ণ কাস্টম UI/UX",
-      "অ্যাডমিন প্যানেল ও CMS",
-      "SEO অপটিমাইজড",
-      "যেকোনো API / থার্ড-পার্টি ইন্টিগ্রেশন",
-      "মাল্টি-ল্যাংগুয়েজ সাপোর্ট (Bangla / English)",
-      "সিকিউর অথেন্টিকেশন",
-      "স্কেলেবল ক্লাউড হোস্টিং",
-    ],
-    demoUrl: "/demo/orbit-crm",
-    demoLabel: "কাস্টম ওয়েবসাইট ডেমো",
-  },
-  {
-    slug: "software-development",
-    icon: Cpu,
-    title: "সফটওয়্যার ডেভেলপমেন্ট",
-    titleBn: "সফটওয়্যার ডেভেলপমেন্ট",
-    subject: "কাস্টম সফটওয়্যার",
-    desc: "আপনার ওয়ার্কফ্লো অনুযায়ী ওয়েব অ্যাপ, ড্যাশবোর্ড ও ইন্টারনাল টুল।",
-    tagline: "আপনার ম্যানুয়াল কাজগুলোকে automation-এ রূপান্তর করুন।",
-    why: [
-      "Excel / Google Sheet-এ manual কাজ scale করার সীমা আছে — কাস্টম সফটওয়্যার সেই সীমা ভাঙে।",
-      "টিম, ইনভেন্টরি, sales, HR — সব একটি সফটওয়্যারে থাকলে ভুল কমে।",
-      "Data-driven decision-এর জন্য central ড্যাশবোর্ড লাগে।",
-    ],
-    effectiveness: [
-      "Custom web app, ERP, CRM, POS, dashboard — full-stack development।",
-      "User role, permission, security — enterprise-grade।",
-      "Cloud-hosted, scalable, mobile responsive।",
-    ],
-    benefits: [
-      "কাজের গতি ও accuracy বহুগুণ বাড়ে।",
-      "কর্মী ও অপারেশনাল খরচ কমে।",
-      "Real-time reporting ও visibility।",
-    ],
-    useCases: [
-      "ইনভেন্টরি / স্টক ম্যানেজমেন্ট",
-      "CRM / লিড ম্যানেজমেন্ট",
-      "POS / বিলিং সিস্টেম",
-      "HR / অ্যাটেনডেন্স সিস্টেম",
-    ],
-    process: [
-      { title: "বিজনেস প্রসেস অ্যানালাইসিস", desc: "আপনার বর্তমান ওয়ার্কফ্লো ম্যাপ করে অটোমেশনের সুযোগ চিহ্নিত করি।" },
-      { title: "সিস্টেম আর্কিটেকচার", desc: "ডাটাবেজ, মডিউল ও রোল ডিজাইন করি।" },
-      { title: "UI/UX ও ডেভেলপমেন্ট", desc: "সহজ ইন্টারফেসে ফিচার-বাই-ফিচার বিল্ড।" },
-      { title: "টেস্টিং ও ডেটা মাইগ্রেশন", desc: "পুরনো ডেটা নতুন সিস্টেমে সেফভাবে সরিয়ে নিয়ে টেস্ট।" },
-      { title: "ডিপ্লয়মেন্ট ও ট্রেনিং", desc: "ক্লাউডে লাইভ করে টিমকে ট্রেনিং দিই।" },
-    ],
-    features: [
-      "কাস্টম ড্যাশবোর্ড ও রিপোর্ট",
-      "ইউজার রোল ও পারমিশন",
-      "রিয়েল-টাইম নোটিফিকেশন",
-      "API ইন্টিগ্রেশন",
-      "ডেটা ব্যাকআপ ও সিকিউরিটি",
-      "মোবাইল রেসপন্সিভ / PWA",
-      "স্কেলেবল ক্লাউড ইনফ্রা",
-    ],
-    demoUrl: "/demo/orbit-crm",
-    demoLabel: "সফটওয়্যার ডেমো",
-  },
-  {
-    slug: "smm-panel-website",
-    icon: Server,
-    title: "SMM প্যানেল ওয়েবসাইট",
-    titleBn: "SMM প্যানেল ওয়েবসাইট",
-    subject: "SMM প্যানেল",
-    desc: "সম্পূর্ণ SMM প্যানেল — সার্ভিস, অর্ডার, API প্রোভাইডার ও পেমেন্ট ইন্টিগ্রেশন সহ।",
-    tagline: "নিজের SMM প্যানেল চালিয়ে recurring income তৈরি করুন।",
-    why: [
-      "Reseller ব্যবসার একটি লাভজনক ও দ্রুত বর্ধনশীল model — SMM প্যানেল সেই সুযোগ দেয়।",
-      "একবার সেটআপ করলে SMM প্যানেল automation-এ চলে, কম হাত লাগে।",
-      "API-এর মাধ্যমে বড় provider-দের সার্ভিস নিজের ব্র্যান্ডে বিক্রি।",
-    ],
-    effectiveness: [
-      "User panel, admin panel, service list, order automation।",
-      "Multiple provider API ইন্টিগ্রেশন।",
-      "bKash, Nagad, crypto সহ payment gateway।",
-    ],
-    benefits: [
-      "24/7 automated order processing।",
-      "Passive recurring revenue।",
-      "নিজের ব্র্যান্ডে সম্পূর্ণ business ownership।",
-    ],
-    useCases: [
-      "সোশ্যাল মিডিয়া রিসেলার",
-      "ডিজিটাল মার্কেটিং এজেন্সি অ্যাড-অন",
-      "ফ্রিল্যান্সার সার্ভিস প্ল্যাটফর্ম",
-    ],
-    process: [
-      { title: "প্রোভাইডার ও সার্ভিস প্ল্যানিং", desc: "কোন কোন provider ও সার্ভিস অফার করবেন তা ঠিক করি।" },
-      { title: "প্যানেল সেটআপ ও ব্র্যান্ডিং", desc: "আপনার ডোমেইন, লোগো ও কালারে প্যানেল কাস্টমাইজ।" },
-      { title: "API ও অর্ডার অটোমেশন", desc: "Provider API যুক্ত করে অটো অর্ডার ফরওয়ার্ডিং সেট।" },
-      { title: "পেমেন্ট ইন্টিগ্রেশন", desc: "bKash, Nagad, ক্রিপ্টো ও কার্ড পেমেন্ট চালু।" },
-      { title: "লঞ্চ ও সাপোর্ট", desc: "লাইভ করে টেকনিক্যাল সাপোর্ট।" },
-    ],
-    features: [
-      "ইউজার রেজিস্ট্রেশন ও ড্যাশবোর্ড",
-      "অ্যাডমিন প্যানেল ও রিপোর্ট",
-      "সার্ভিস ও ক্যাটাগরি ম্যানেজমেন্ট",
-      "মাল্টি-প্রোভাইডার API",
-      "অটো অর্ডার প্রসেসিং",
-      "bKash / Nagad / ক্রিপ্টো পেমেন্ট",
-      "টিকিট ও সাপোর্ট সিস্টেম",
-    ],
-    demoUrl: "/demo/panelpro-smm",
-    demoLabel: "SMM প্যানেল ডেমো",
-  },
-  {
-    slug: "ai-video-ads",
-    icon: Video,
-    title: "AI ভিডিও ক্রিয়েশন / অ্যাড",
-    titleBn: "AI ভিডিও ক্রিয়েশন / অ্যাড",
-    subject: "AI ভিডিও অ্যাড",
-    desc: "Facebook, Instagram ও TikTok-এর জন্য scroll থামানো AI-generated ভিডিও অ্যাড।",
-    tagline: "কম খরচে হাই-কোয়ালিটি ভিডিও অ্যাড, যা scroll থামায়।",
-    why: [
-      "AI ভিডিও অ্যাড static image-এর তুলনায় ৩–৫× বেশি engagement আনে।",
-      "AI দিয়ে কম সময়ে অনেকগুলো ভ্যারিয়েন্ট তৈরি করে A/B টেস্ট করা যায়।",
-      "শুটিং, মডেল, ভয়েস আর্টিস্টের খরচ ছাড়াই প্রফেশনাল AI ভিডিও অ্যাড।",
-    ],
-    effectiveness: [
-      "AI script + voiceover + visual — end-to-end production।",
-      "Bangla ও English voiceover, brand-matched visual style।",
-      "Multiple aspect ratio (9:16, 1:1, 16:9) — Facebook / Reels / TikTok।",
-    ],
-    benefits: [
-      "Ad creative খরচ ৭০%+ কমে।",
-      "দ্রুত iterate করা যায় — winning ad খুঁজে পাওয়া সহজ।",
-      "উচ্চ CTR ও কম CPC।",
-    ],
-    useCases: [
-      "প্রোডাক্ট অ্যাড / ডেমো",
-      "ব্র্যান্ড অ্যাওয়ারনেস ভিডিও",
-      "এক্সপ্লেইনার / টেস্টিমোনিয়াল ভিডিও",
-    ],
-    process: [
-      { title: "ব্রিফ ও স্ক্রিপ্ট", desc: "প্রোডাক্ট ও টার্গেট অডিয়েন্স বুঝে কনভার্শন-ফোকাসড স্ক্রিপ্ট লিখি।" },
-      { title: "AI ভিজ্যুয়াল জেনারেশন", desc: "AI দিয়ে সিন-বাই-সিন ভিজ্যুয়াল ও B-roll তৈরি।" },
-      { title: "ভয়েসওভার ও মিউজিক", desc: "Bangla / English AI ভয়েস ও ম্যাচিং ব্যাকগ্রাউন্ড মিউজিক।" },
-      { title: "এডিট ও ভ্যারিয়েন্ট", desc: "9:16, 1:1, 16:9 — একাধিক ভ্যারিয়েন্ট এডিট করি।" },
-      { title: "ডেলিভারি", desc: "MP4 ফাইল + অ্যাড কপি সহ হ্যান্ডওভার।" },
-    ],
-    features: [
-      "কাস্টম স্ক্রিপ্ট রাইটিং",
-      "AI-জেনারেটেড ভিজ্যুয়াল",
-      "Bangla + English ভয়েসওভার",
-      "৩টি অ্যাসপেক্ট রেশিও",
-      "সাবটাইটেল / ক্যাপশন",
-      "২–৩টি ভ্যারিয়েন্ট",
-      "অ্যাড কপি সাজেশন",
-    ],
-    demoUrl: "/demo/pulseads-video",
-    demoLabel: "AI ভিডিও স্যাম্পল",
-  },
-  {
-    slug: "facebook-business-page-setup",
-    icon: Facebook,
-    title: "ফেসবুক বিজনেস পেজ সেটআপ",
-    titleBn: "ফেসবুক বিজনেস পেজ সেটআপ",
-    subject: "ফেসবুক বিজনেস পেজ",
-    desc: "শূন্য থেকে প্রফেশনাল পেজ সেটআপ, ব্র্যান্ডিং, সেকশন ও অপটিমাইজেশন।",
-    tagline: "প্রথম দর্শনেই কাস্টমারের ট্রাস্ট তৈরি করে এমন পেজ।",
-    why: [
-      "একটি ভালো ফেসবুক বিজনেস পেজ = brand-এর first impression।",
-      "সঠিক সেটআপ ছাড়া Ad approval, verification, monetization কঠিন।",
-      "Professional ফেসবুক বিজনেস পেজ = higher conversion।",
-    ],
-    effectiveness: [
-      "Business Manager, Page, category, contact — সঠিকভাবে সেটআপ।",
-      "Cover, profile, CTA button, Shop, About — brand-consistent।",
-      "Response automation, message template ও review setup।",
-    ],
-    benefits: [
-      "Ad চালানোর জন্য পেজ ready ও optimized।",
-      "কাস্টমারের ট্রাস্ট ও credibility বাড়ে।",
-      "Organic reach বাড়ার সুযোগ।",
-    ],
-    useCases: [
-      "নতুন ব্যবসা / ব্র্যান্ড লঞ্চ",
-      "পুরনো পেজ রিব্র্যান্ডিং",
-      "ভেরিফিকেশন-রেডি পেজ",
-    ],
-    process: [
-      { title: "Business Manager সেটআপ", desc: "Meta Business Suite ও অ্যাসেট স্ট্রাকচার তৈরি।" },
-      { title: "পেজ ক্রিয়েশন ও ক্যাটাগরি", desc: "সঠিক ক্যাটাগরি, নাম, ইউজারনেম ও কন্টাক্ট সেটআপ।" },
-      { title: "ব্র্যান্ডিং", desc: "প্রফেশনাল কভার, প্রোফাইল, About, CTA বাটন।" },
-      { title: "সেকশন ও অটোমেশন", desc: "Shop, Services, রিভিউ, অটো-রিপ্লাই সেট।" },
-      { title: "অপটিমাইজেশন ও হ্যান্ডওভার", desc: "SEO, ট্যাগ ও অ্যাক্সেস আপনার নামে ট্রান্সফার।" },
-    ],
-    features: [
-      "সম্পূর্ণ পেজ সেটআপ ও ব্র্যান্ডিং",
-      "Business Manager কনফিগারেশন",
-      "কভার, প্রোফাইল ও CTA বাটন",
-      "Shop / Services সেকশন",
-      "অটো-রিপ্লাই ও মেসেজ টেমপ্লেট",
-      "রিভিউ ও রেটিং সেটআপ",
-      "SEO ও ট্যাগিং",
-    ],
-    demoUrl: "https://facebook.com/",
-    demoLabel: "স্যাম্পল পেজ",
-  },
-  {
-    slug: "facebook-pixel-setup",
-    icon: Target,
-    title: "ফেসবুক পিক্সেল সেটআপ",
-    titleBn: "ফেসবুক পিক্সেল সেটআপ",
-    subject: "ফেসবুক পিক্সেল",
-    desc: "Pixel, event, Conversions API ও অডিয়েন্স ট্র্যাকিং — সঠিকভাবে ইনস্টল।",
-    tagline: "ভুল পিক্সেল সেটআপ = আপনার অ্যাড বাজেটের অর্ধেক নষ্ট।",
-    why: [
-      "সঠিক ফেসবুক পিক্সেল ছাড়া Facebook AI আপনার customer খুঁজে দিতে পারে না।",
-      "iOS 14+ update-এর পর CAPI ছাড়া ফেসবুক পিক্সেল tracking অসম্পূর্ণ।",
-      "Retargeting ও Lookalike audience তৈরির ভিত্তি।",
-    ],
-    effectiveness: [
-      "Pixel + Conversions API (CAPI) — server-side tracking।",
-      "Standard event (View, AddToCart, Purchase) + custom event।",
-      "Event Match Quality optimization ও domain verification।",
-    ],
-    benefits: [
-      "CPA কমে, ROAS বাড়ে।",
-      "সঠিক audience-এ অ্যাড পৌঁছায়।",
-      "Retargeting-এ higher accuracy।",
-    ],
-    useCases: [
-      "ই-কমার্স স্টোর ট্র্যাকিং",
-      "লিড ফর্ম কনভার্শন",
-      "কাস্টম ফানেল ট্র্যাকিং",
-    ],
-    process: [
-      { title: "অডিট ও প্ল্যানিং", desc: "আপনার ফানেল ও ইভেন্ট ম্যাপ করে ট্র্যাকিং প্ল্যান।" },
-      { title: "Pixel ইনস্টলেশন", desc: "সাইটে base pixel ও Google Tag Manager সেটআপ।" },
-      { title: "ইভেন্ট কনফিগারেশন", desc: "View, AddToCart, Purchase সহ কাস্টম ইভেন্ট।" },
-      { title: "Conversions API (CAPI)", desc: "সার্ভার-সাইড ট্র্যাকিং যুক্ত করে iOS 14+ ইস্যু সমাধান।" },
-      { title: "টেস্টিং ও অপটিমাইজেশন", desc: "Event Match Quality, ডোমেইন ভেরিফিকেশন ও রিপোর্ট।" },
-    ],
-    features: [
-      "Pixel + CAPI সেটআপ",
-      "স্ট্যান্ডার্ড + কাস্টম ইভেন্ট",
-      "Google Tag Manager ইন্টিগ্রেশন",
-      "ডোমেইন ভেরিফিকেশন",
-      "Event Match Quality অপটিমাইজেশন",
-      "কাস্টম অডিয়েন্স সেটআপ",
-      "টেস্টিং রিপোর্ট",
-    ],
-    demoUrl: "/demo/orbit-crm",
-    demoLabel: "স্যাম্পল পিক্সেল রিপোর্ট",
-  },
-  {
-    slug: "logo-cover-poster-design",
-    icon: Palette,
-    title: "লোগো, কভার ও পোস্টার ডিজাইন",
-    titleBn: "লোগো, কভার ও পোস্টার ডিজাইন",
-    subject: "ব্র্যান্ড ডিজাইন",
-    desc: "বিজনেস লোগো, ফেসবুক কভার ও সোশ্যাল মিডিয়া পোস্টার ডিজাইন — যা আলাদা করে দেখায়।",
-    tagline: "আপনার ব্র্যান্ডের visual identity — যা মানুষ মনে রাখে।",
-    why: [
-      "প্রথম ৩ সেকেন্ডে ব্র্যান্ড চেনা যায় ভালো ব্র্যান্ড ডিজাইন দিয়ে।",
-      "Consistent ব্র্যান্ড ডিজাইন = professional ও trustworthy image।",
-      "ভালো creative = higher engagement।",
-    ],
-    effectiveness: [
-      "Concept + multiple revision + final vector files।",
-      "Logo, cover, poster, ad creative — brand-guideline সহ।",
-      "Print + digital দুই ফরম্যাটেই delivery।",
-    ],
-    benefits: [
-      "Strong, memorable brand identity।",
-      "Social media-এ ধারাবাহিক professional look।",
-      "কাস্টমারের চোখে বিশ্বাসযোগ্যতা।",
-    ],
-    useCases: [
-      "নতুন ব্র্যান্ড আইডেন্টিটি",
-      "Facebook / IG ক্রিয়েটিভ প্যাক",
-      "ইভেন্ট / ক্যাম্পেইন পোস্টার",
-    ],
-    process: [
-      { title: "ব্র্যান্ড ডিসকভারি", desc: "আপনার ব্যবসা, অডিয়েন্স ও পছন্দ বুঝি।" },
-      { title: "কনসেপ্ট স্কেচ", desc: "২–৩টি ইউনিক কনসেপ্ট প্রস্তাব করি।" },
-      { title: "ডিজাইন ও রিভিশন", desc: "আপনার ফিডব্যাক অনুযায়ী রিফাইন করি।" },
-      { title: "ব্র্যান্ড গাইডলাইন", desc: "কালার, ফন্ট ও ব্যবহারের নিয়ম ডকুমেন্ট।" },
-      { title: "ফাইনাল ডেলিভারি", desc: "AI, PNG, JPG, PDF — সব ফরম্যাটে সোর্স ফাইল।" },
-    ],
-    features: [
-      "ইউনিক কনসেপ্ট",
-      "আনলিমিটেড রিভিশন",
-      "ভেক্টর সোর্স ফাইল (AI, SVG)",
-      "প্রিন্ট + ডিজিটাল ফরম্যাট",
-      "ব্র্যান্ড কালার ও ফন্ট গাইড",
-      "সোশ্যাল মিডিয়া টেমপ্লেট",
-      "দ্রুত ডেলিভারি",
-    ],
-    demoUrl: "/demo/brandkit-design",
-    demoLabel: "ডিজাইন পোর্টফোলিও",
-  },
+    demoUrl: "/demo/clinical-success",
+    demoLabel: "Clinical Success Cases"
+  }
 ];
-
-export const getService = (slug: string) => services.find((s) => s.slug === slug);
