@@ -530,16 +530,16 @@ function ClientLogos() {
 /* ---------- PROBLEM → SOLUTION ---------- */
 function ProblemSolution() {
   const problems = [
-    { t: "পুরনো ডিজাইন, হারানো বিশ্বাস", d: "ভিজিটর ৩ সেকেন্ডেই সাইট দেখে সিদ্ধান্ত নেয় — পুরনো লুক মানেই হারানো কাস্টমার।" },
-    { t: "স্লো লোড, নষ্ট বাজেট", d: "প্রতি ১ সেকেন্ড দেরিতে কনভার্সন ৭% কমে — আপনার অ্যাড বাজেটও তখন গলে যায়।" },
-    { t: "স্কেল করার মতো সিস্টেম নেই", d: "অগোছালো ই-কমার্স, LMS বা অ্যাডমিন প্যানেল — বিজনেস বাড়ালেই ভেঙে পড়ে।" },
-    { t: "ট্র্যাকিং ছাড়া মার্কেটিং", d: "Pixel/CAPI ঠিকমতো বসানো নেই বলেই ফানেল লিক করছে, ROAS পড়ে যাচ্ছে।" },
+    { t: "Dull & Dehydrated Skin", d: "Generic products sit on the surface, leaving your skin thirsty and tired." },
+    { t: "Stubborn Blemishes", d: "Inconsistent routines lead to inflammation and long-term scarring." },
+    { t: "Premature Fine Lines", d: "Lack of specific actives and sun protection accelerates aging signs." },
+    { t: "Confusing Routine", d: "Overloading your skin with incompatible ingredients causes irritation." },
   ];
   const solutions = [
-    { t: "প্রিমিয়াম, কনভার্সন-ফোকাসড ডিজাইন", d: "প্রথম দর্শনেই আস্থা তৈরি করে এমন ব্র্যান্ড-লেভেল UI — যেটা ভিজিটরকে বাটনে ক্লিক করায়।" },
-    { t: "২ সেকেন্ডের নিচে লোড, মোবাইল-ফার্স্ট", d: "লাইটনিং-ফাস্ট বিল্ড, অপ্টিমাইজড ইমেজ ও কোড — SEO ও অ্যাড দুটোই উপকৃত হয়।" },
-    { t: "স্কেলেবল ই-কমার্স, LMS ও সফটওয়্যার", d: "১০০ থেকে ১ লাখ ইউজার পর্যন্ত ভাঙে না — পেমেন্ট, ইনভেন্টরি, রোল, রিপোর্ট সব বিল্ট-ইন।" },
-    { t: "নিখুঁত ট্র্যাকিং ও অ্যানালিটিক্স", d: "Pixel, CAPI, GA4, ইভেন্ট ট্র্যাকিং সঠিকভাবে সেট — প্রতিটি টাকার ROI মাপা যায়।" },
+    { t: "Deep Cellular Hydration", d: "Bio-available formulas that penetrate deep for a lasting, healthy glow." },
+    { t: "Targeted Clear Care", d: "Active ingredients that treat the root cause of acne and redness." },
+    { t: "Advanced Youth Restore", d: "Peptides and Retinoids that stimulate collagen for firmer skin." },
+    { t: "Personalized Protocol", d: "Expert-reviewed routines designed specifically for your skin type." },
   ];
   const head = useReveal<HTMLDivElement>();
   const left = useReveal<HTMLDivElement>();
@@ -549,11 +549,12 @@ function ProblemSolution() {
       <div className="mx-auto max-w-7xl px-4 sm:px-5">
         <div ref={head.ref} data-visible={head.visible || true} className="reveal">
           <SectionHeader
-            eyebrow="আমরা যে গ্যাপ পূরণ করি"
-            title={<span className="text-destructive font-black">সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।</span>}
-            description="নিচে আমাদের কার্যপদ্ধতি এবং আপনি আমাদের থেকে ঠিক কী কী পাবেন তা বিস্তারিত দেওয়া হলো।"
+            eyebrow="Bridging the Skin Care Gap"
+            title={<span className="text-destructive font-black">Identify the Problem, Embrace the Solution.</span>}
+            description="Our dermatological approach focuses on real results, not just promises."
           />
         </div>
+
         <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
           <div
             ref={left.ref}
