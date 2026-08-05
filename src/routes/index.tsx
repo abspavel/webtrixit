@@ -407,10 +407,11 @@ function ProblemSolution() {
   return (
     <section className="py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-5">
-        <div ref={head.ref} data-visible={head.visible} className="reveal">
+        <div ref={head.ref} data-visible={head.visible || true} className="reveal">
           <SectionHeader
             eyebrow="আমরা যে গ্যাপ পূরণ করি"
             title="সমস্যা যেখানে, সমাধান সেখানেই — আপনার বিজনেসের জন্য ডিজিটাল ইঞ্জিন।"
+            description="নিচে আমাদের কার্যপদ্ধতি এবং আপনি আমাদের থেকে ঠিক কী কী পাবেন তা বিস্তারিত দেওয়া হলো।"
           />
         </div>
         <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
@@ -427,14 +428,14 @@ function ProblemSolution() {
                 <li
                   key={p.t}
                   className="reveal flex gap-3 rounded-2xl border border-destructive/10 bg-destructive/5 p-3.5 sm:p-4"
-                  data-visible={left.visible}
+                  data-visible={left.visible || true}
                   style={{ animationDelay: `${120 + i * 90}ms` }}
                 >
                   <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-destructive/15 text-destructive">
                     <X className="h-4 w-4" />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-sm font-semibold text-foreground">{p.t}</div>
+                    <div className="text-sm font-semibold text-white">{p.t}</div>
                     <p className="mt-1 text-sm leading-relaxed text-slate-300">{p.d}</p>
                   </div>
                 </li>
@@ -456,14 +457,14 @@ function ProblemSolution() {
                 <li
                   key={s.t}
                   className="reveal flex gap-3 rounded-2xl border border-neon/15 bg-neon/5 p-3.5 sm:p-4"
-                  data-visible={right.visible}
+                  data-visible={right.visible || true}
                   style={{ animationDelay: `${120 + i * 90}ms` }}
                 >
                   <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-neon/20 text-neon">
                     <Check className="h-4 w-4" />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-sm font-semibold text-foreground">{s.t}</div>
+                    <div className="text-sm font-semibold text-white">{s.t}</div>
                     <p className="mt-1 text-sm leading-relaxed text-slate-300">{s.d}</p>
                   </div>
                 </li>
@@ -558,7 +559,7 @@ function SuccessStories() {
   const minSwipeDistance = 50;
 
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % stories.length), 6000);
+    const t = setInterval(next, 6000);
     return () => clearInterval(t);
   }, []);
 
@@ -589,17 +590,30 @@ function SuccessStories() {
         <SectionHeader eyebrow="ক্লায়েন্ট সাকসেস স্টোরি" title="বাস্তব টিম। বাস্তব রেভিনিউ। বাস্তব ফলাফল।" />
 
         <div 
-          className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y"
+          className="relative mt-12 overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)] md:p-10 touch-pan-y focus-within:ring-2 focus-within:ring-electric/20"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowLeft") prev();
+            if (e.key === "ArrowRight") next();
+          }}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="ক্লায়েন্ট রিভিউ"
         >
           <div
             className="flex transition-transform duration-700 ease-out"
             style={{ transform: `translateX(-${i * 100}%)` }}
           >
             {stories.map((s, idx) => (
-              <div key={`${s.name}-${idx}`} className="w-full shrink-0 px-1">
+              <div 
+                key={`${s.name}-${idx}`} 
+                className="w-full shrink-0 px-1"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${idx + 1} of ${stories.length}`}
+              >
                 <div className="flex gap-1 text-neon">
                   {Array.from({ length: s.rating }).map((_, k) => (
                     <Star key={k} className="h-4 w-4 fill-current" />
@@ -628,8 +642,11 @@ function SuccessStories() {
                 <button
                   key={k}
                   onClick={() => setI(k)}
-                  aria-label={`স্টোরি ${k + 1}`}
-                  className={`h-2 rounded-full transition-all ${k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40"}`}
+                  aria-label={`স্টোরি ${k + 1} দেখুন`}
+                  aria-current={k === i ? "true" : "false"}
+                  className={`h-2 rounded-full transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-electric ${
+                    k === i ? "w-8 bg-electric" : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
+                  }`}
                 />
               ))}
             </div>
@@ -1035,11 +1052,12 @@ function FloatingWhatsApp() {
 }
 
 /* ---------- SHARED ---------- */
-function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
+function SectionHeader({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-electric">{eyebrow}</span>
       <h2 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">{title}</h2>
+      {description && <p className="mt-4 text-slate-300">{description}</p>}
     </div>
   );
 }
